@@ -1,11 +1,1154 @@
-# Directory: backend
+# Directory: .
 
-### __init__.py
+### index.html
+```
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hevno Engine</title>
+    
+    <!-- 
+      ===============================================================
+      关键变更: 移除了 Import Map
+      ===============================================================
+      之前的 importmap 已被移除。在新的 v2.1 架构下，像 React 这样的
+      重量级框架依赖，将由使用它的插件（如 core_goliath）在自己的
+      构建过程中（例如，通过 Vite 和 @vitejs/plugin-react）进行处理和打包。
+      
+      这使得平台本身（加载器）保持了极致的轻量和框架无关性，
+      完全符合我们的核心设计哲学。
+    -->
+
+    <style>
+      /* 基础样式保持不变，以避免启动时白屏 */
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background-color: #1e1e1e;
+        color: #d4d4d4;
+      }
+      #app {
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+        <!-- 应用将挂载在这里 -->
+    </div>
+    <!-- 
+      前端内核入口文件保持不变。
+      这个脚本会启动微加载器，动态加载所有插件。
+    -->
+    <script type="module" src="/frontend/main.js"></script>
+  </body>
+</html>
+```
+
+### pyproject.toml
+```
+# Hevno/pyproject.toml
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+# --- 项目核心元数据 ---
+# 所有这些字段都必须在 [project] 表下面
+[project]
+name = "hevno-engine"
+version = "1.2.0"
+authors = [
+    { name="Hevno Team", email="contact@example.com" },
+]
+description = "A dynamically loaded, modular execution engine for Hevno, built with a plugin-first architecture."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+# 核心依赖
+dependencies = [
+    "aiofiles==24.1.0",
+    "annotated-types==0.7.0",
+    "anyio==4.9.0",
+    "asgi-lifespan==2.1.0",
+    "cachetools==5.5.2",
+    "certifi==2025.7.14",
+    "charset-normalizer==3.4.2",
+    "click==8.2.1",
+    "cloudpickle==3.1.1",
+    "dnspython==2.7.0",
+    "docopt==0.6.2",
+    "email_validator==2.2.0",
+    "fastapi==0.116.1",
+    "fastapi-cli==0.0.8",
+    "fastapi-cloud-cli==0.1.5",
+    "google-ai-generativelanguage==0.6.15",
+    "google-api-core==2.25.1",
+    "google-api-python-client==2.177.0",
+    "google-auth==2.40.3",
+    "google-auth-httplib2==0.2.0",
+    "google-generativeai==0.8.5",
+    "googleapis-common-protos==1.70.0",
+    "grpcio==1.74.0",
+    "grpcio-status==1.71.2",
+    "h11==0.16.0",
+    "httpcore==1.0.9",
+    "httplib2==0.22.0",
+    "httptools==0.6.4",
+    "httpx==0.28.1",
+    "idna==3.10",
+    "iniconfig==2.1.0",
+    "itsdangerous==2.2.0",
+    "Jinja2==3.1.6",
+    "jsonpatch==1.33",
+    "jsonpointer==3.0.0",
+    "markdown-it-py==3.0.0",
+    "MarkupSafe==3.0.2",
+    "mdurl==0.1.2",
+    "orjson==3.11.1",
+    "packaging==25.0",
+    "pillow==11.3.0",
+    "pipreqs==0.4.13",
+    "pluggy==1.6.0",
+    "proto-plus==1.26.1",
+    "protobuf==5.29.5",
+    "pyasn1==0.6.1",
+    "pyasn1_modules==0.4.2",
+    "pydantic==2.11.7",
+    "pydantic-extra-types==2.10.5",
+    "pydantic-settings==2.10.1",
+    "pydantic_core==2.33.2",
+    "Pygments==2.19.2",
+    "pyparsing==3.2.3",
+    "pytest==8.4.1",
+    "pytest-asyncio==1.1.0",
+    "pytest-mock==3.14.1",
+    "python-dotenv==1.1.1",
+    "python-multipart==0.0.20",
+    "PyYAML==6.0.2",
+    "requests==2.32.4",
+    "rich==14.1.0",
+    "rich-toolkit==0.14.9",
+    "rignore==0.6.4",
+    "rsa==4.9.1",
+    "sentry-sdk==2.33.2",
+    "shellingham==1.5.4",
+    "sniffio==1.3.1",
+    "starlette==0.47.2",
+    "tenacity==9.1.2",
+    "tqdm==4.67.1",
+    "typer==0.16.0",
+    "typing-inspection==0.4.1",
+    "typing_extensions==4.14.1",
+    "ujson==5.10.0",
+    "uritemplate==4.2.0",
+    "urllib3==2.5.0",
+    "uvicorn==0.35.0",
+    "watchfiles==1.1.0",
+    "websockets==15.0.1",
+    "yarg==0.1.10"
+]
+
+# --- 可选依赖 ---
+# 必须使用 [project.optional-dependencies] 作为表名
+[project.optional-dependencies]
+dev = [ 
+    "uvicorn[standard]",
+    "typer[all]"
+]
+
+# --- 命令行脚本 ---
+# 必须使用 [project.scripts] 作为表名
+[project.scripts]
+hevno = "cli:app"
+
+# --- 插件入口点 ---
+# 必须使用 [project.entry-points] 作为表名
+[project.entry-points."hevno.plugins"]
+# 这部分通常用于打包发布后的插件发现，对于本地开发可能不是必需的
+# 但保留它没有坏处
+core_logging = "plugins.core_logging"
+
+
+# --- Setuptools 工具特定配置 ---
+[tool.setuptools]
+include-package-data = true
+py-modules = ["cli"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["backend*", "plugins*"]
+
+
+# --- Pytest 工具特定配置 ---
+[tool.pytest.ini_options]
+# 明确指定测试文件的搜索路径
+testpaths = [
+    "tests",
+    # 允许 pytest 在插件目录中发现 tests/ 子目录
+    "plugins", 
+]
+
+# 配置 pytest-asyncio
+asyncio_mode = "auto"
+
+# 定义你的自定义标记
+markers = [
+    "e2e: marks tests as end-to-end, which may require network access and secrets."
+]
+
+[tool.uvicorn]
+reload = true
+reload_dirs = ["backend", "plugins"]
+reload_excludes = [".env"]
+log_level = "debug"
+
+```
+
+### docker-compose.dist.yml
+```
+# docker-compose.dist.yml
+version: '3.8'
+
+services:
+  backend:
+    image: niurouxing/hevno-engine-backend:latest 
+    container_name: hevno_backend
+    volumes:
+      - ./backend:/app/backend:delegated
+      - ./plugins:/app/plugins:delegated
+      - ./assets:/app/assets:delegated
+      - ./hevno.json:/app/hevno.json
+      - ./cli.py:/app/cli.py
+      - ./.env:/app/.env.host
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+
+  frontend:
+    image: niurouxing/hevno-engine-frontend:latest
+    container_name: hevno_frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app/frontend:delegated
+      - ./plugins:/app/plugins:delegated
+      - ./index.html:/app/index.html:delegated
+      - ./vite.config.js:/app/vite.config.js:delegated
+      - ./package.json:/app/package.json:delegated
+      - node_modules_volume:/app/node_modules:delegated
+    environment:
+      - VITE_API_URL=http://backend:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  node_modules_volume:
+```
+
+### MANIFEST.in
+```
+# Hevno/MANIFEST.in
+
+# 递归地包含 plugins 目录下的所有 .json 和 .yaml 文件
+graft plugins
+global-include *.json *.yaml
+
+# 你也可以更精确地指定
+# recursive-include plugins *.json
+# recursive-include plugins *.yaml
+```
+
+### vite.config.js
+```
+// vite.config.js (项目根目录)
+
+import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
+
+
+export default defineConfig(({ mode }) => {
+  // 加载 .env 文件中的环境变量
+  const env = loadEnv(mode, process.cwd(), '');
+  
+  // 决定后端的 URL
+  // 在 Docker 中, VITE_API_URL 会是 http://backend:8000
+  // 在本地开发时, 这个变量不存在, 会回退到 http://localhost:8000
+  const backendUrl = env.VITE_API_URL || 'http://localhost:8000';
+  const wsBackendUrl = backendUrl.replace(/^http/, 'ws');
+
+  return {
+    plugins: [
+      react({
+        jsxRuntime: 'automatic',
+      }),
+    ],
+    server: {
+      // 关键变更: 动态代理
+      proxy: {
+        '/api': {
+          target: backendUrl,
+          changeOrigin: true,
+        },
+        '/ws': {
+          target: wsBackendUrl,
+          ws: true,
+        },
+      },
+      watch: {
+      // 明确告诉 Vite 忽略对项目根目录下任何 .env 文件的修改
+      ignored: [
+        resolve(__dirname, '.env'),
+      ],
+    },
+    },
+  };
+});
+```
+
+### .dockerignore
+```
+# .dockerignore
+
+# 忽略所有 node_modules 目录，这是最重要的规则
+**/node_modules
+
+# 忽略 Python 缓存和构建产物
+**/__pycache__
+**/*.pyc
+**/*.egg-info
+
+# 忽略 Git 目录
+.git
+.gitignore
+
+# 忽略 Docker 相关文件，它们不需要进入构建上下文
+.dockerignore
+docker-compose.yml
+backend.Dockerfile
+frontend.Dockerfile
+
+
+# 忽略 IDE 和操作系统特定的文件
+.idea
+.vscode
+.DS_Store
+
+# 忽略 npm 日志
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+```
+
+### cli.py
+```
+# cli.py
+import typer
+import json
+import shutil
+from pathlib import Path
+
+from backend.core.plugin_manager import PluginManager
+
+app = typer.Typer(name="hevno", help="Hevno Engine Command-Line Interface")
+plugin_app = typer.Typer(name="plugins", help="Manage Hevno plugins.")
+app.add_typer(plugin_app)
+
+HEVNO_JSON_PATH = Path("hevno.json")
+PLUGINS_DIR = Path("plugins")
+
+@plugin_app.command("sync")
+def sync_plugins():
+    """
+    Synchronizes the 'plugins' directory with the 'hevno.json' manifest.
+    This will fetch, update, or remove plugins to match the manifest.
+    """
+    typer.echo("🔌 Starting plugin synchronization...")
+    if not HEVNO_JSON_PATH.exists():
+        typer.secho(f"Error: '{HEVNO_JSON_PATH}' not found. Nothing to sync.", fg=typer.colors.RED)
+        raise typer.Exit(code=1)
+
+    with open(HEVNO_JSON_PATH, "r") as f:
+        manifest = json.load(f)
+
+    manager = PluginManager(plugins_dir=PLUGINS_DIR, manifest=manifest.get("plugins", {}))
+    
+    try:
+        manager.sync()
+        typer.secho("✅ Plugin synchronization complete.", fg=typer.colors.GREEN)
+    except Exception as e:
+        typer.secho(f"🔥 Error during synchronization: {e}", fg=typer.colors.RED)
+        import traceback
+        traceback.print_exc()
+        raise typer.Exit(code=1)
+
+
+@plugin_app.command("add")
+def add_plugin(
+    url: str = typer.Argument(..., help="Git repository URL (e.g., https://github.com/user/repo)."),
+    name: str = typer.Option(None, "--name", "-n", help="A specific name for the plugin directory. Defaults to repo name."),
+    ref: str = typer.Option("main", "--ref", "-r", help="Git branch, tag, or commit hash."),
+    subdir: str = typer.Option(None, "--subdir", "-d", help="Path to the plugin within the repository.")
+):
+    """
+    Adds a new plugin from Git to hevno.json and syncs.
+    """
+    if not HEVNO_JSON_PATH.exists():
+        # 如果文件不存在，创建一个基础结构
+        manifest_data = {"plugins": {}}
+        typer.echo(f"'{HEVNO_JSON_PATH}' not found, creating a new one.")
+    else:
+        with open(HEVNO_JSON_PATH, "r") as f:
+            manifest_data = json.load(f)
+    
+    plugin_name = name or Path(url.split('/')[-1]).stem
+    
+    plugin_config = {"source": "git", "url": url, "ref": ref}
+    if subdir:
+        plugin_config["subdirectory"] = subdir
+
+    manifest_data["plugins"][plugin_name] = plugin_config
+
+    with open(HEVNO_JSON_PATH, "w") as f:
+        json.dump(manifest_data, f, indent=2)
+
+    typer.secho(f"Added plugin '{plugin_name}' to '{HEVNO_JSON_PATH}'.", fg=typer.colors.BLUE)
+    # 调用 sync 来完成安装
+    sync_plugins()
+
+
+@plugin_app.command("remove")
+def remove_plugin(name: str = typer.Argument(..., help="The name of the plugin to remove.")):
+    """
+    Removes a plugin from hevno.json and syncs.
+    """
+    if not HEVNO_JSON_PATH.exists():
+        typer.secho(f"Error: '{HEVNO_JSON_PATH}' not found.", fg=typer.colors.RED)
+        raise typer.Exit(code=1)
+
+    with open(HEVNO_JSON_PATH, "r") as f:
+        manifest_data = json.load(f)
+
+    if name not in manifest_data.get("plugins", {}):
+        typer.secho(f"Warning: Plugin '{name}' not found in manifest. Nothing to do.", fg=typer.colors.YELLOW)
+        return
+
+    del manifest_data["plugins"][name]
+    
+    with open(HEVNO_JSON_PATH, "w") as f:
+        json.dump(manifest_data, f, indent=2)
+
+    typer.secho(f"Removed plugin '{name}' from '{HEVNO_JSON_PATH}'.", fg=typer.colors.BLUE)
+    
+    # 物理删除目录
+    plugin_path = PLUGINS_DIR / name
+    if plugin_path.exists():
+        shutil.rmtree(plugin_path)
+        typer.echo(f"Removed directory: {plugin_path}")
+    
+    sync_plugins()
+
+
+if __name__ == "__main__":
+    app()
+```
+
+### .gitignore
+```
+# Dependencies
+node_modules/
+/.pnpm-store
+dist/
+/assets/
+
+__pycache__/
+
+# Build artifacts
+/dist
+/build
+/.next
+/out
+.vite/
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE and editor directories
+.idea
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.sublime-workspace
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.test
+
+# Temporary files
+.DS_Store
+*.tmp
+*.swp
+
+
+
+code_collection.md
+
+# 如果核心插件内有需要忽略的文件（比如测试产物），可以在这里单独添加
+
+/hevno_engine.egg-info/ 
+```
+
+### package.json
+```
+{
+  "name": "hevno-engine-monorepo",
+  "private": true,
+  "version": "1.1.0",
+  "type": "module",
+  "workspaces": [
+    "plugins/*"
+  ],
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "build:plugins": "npm run build --workspaces"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "vite": "latest"
+  },
+  "dependencies": {
+    "@mui/icons-material": "^7.3.1",
+    "@mui/material": "^7.3.1"
+  }
+}
+```
+
+### hevno.json
+```
+{
+  "plugins": {
+    "core_logging": { "source": "local" },
+    "core_persistence": { "source": "local" },
+    "core_engine": { "source": "local" },
+    "core_codex": { "source": "local" },
+    "core_llm": { "source": "local" },
+    "core_memoria": { "source": "local" },
+    "core_api": { "source": "local" },
+    "core_websocket": { "source": "local" },
+    "core_remote_hooks": { "source": "local" },
+    "core_layout": { "source": "local" },
+    "core_diagnostics": { "source": "local" },
+    "page_demo": { "source": "local" },
+    "sandbox_explorer": { "source": "local" },
+    "sandbox_editor": { "source": "local" },
+    "core_llm_config": { "source": "local" },
+    "core_runner_ui": { "source": "local" }
+    }
+}
+```
+
+### docker-compose.yml
+```
+# docker-compose.yml 
+version: '3.8'
+
+services:
+  backend:
+    # build 部分现在包含了多平台构建的配置
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+      platforms:
+        - "linux/amd64" # 为 Windows/Intel-Linux 用户构建
+        - "linux/arm64" # 为 Apple Silicon/ARM-Linux 用户构建
+    
+    # image 字段是 buildx 推送的目标，也是本地运行时镜像的名称
+    image: niurouxing/hevno-engine-backend:latest
+    
+    container_name: hevno_backend
+    volumes:
+      - ./backend:/app/backend
+      - ./plugins:/app/plugins
+      - ./hevno.json:/app/hevno.json
+      - ./cli.py:/app/cli.py
+      - ./assets:/app/assets
+      - ./entrypoint.sh:/app/entrypoint.sh
+      - ./.env:/app/.env.host
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  frontend:
+    # build 部分同样配置为多平台
+    build:
+      context: .
+      dockerfile: frontend.Dockerfile
+      platforms:
+        - "linux/amd64"
+        - "linux/arm64"
+        
+    # image 字段是 buildx 推送的目标，也是本地运行时镜像的名称
+    image: niurouxing/hevno-engine-frontend:latest
+    
+    container_name: hevno_frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app/frontend
+      - ./plugins:/app/plugins
+      - ./index.html:/app/index.html
+      - ./vite.config.js:/app/vite.config.js
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - node_modules_volume:/app/node_modules:delegated
+    environment:
+      - VITE_API_URL=http://backend:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  node_modules_volume:
+```
+
+### entrypoint.sh
+```
+#!/bin/sh
+set -e
+
+HOST_ENV_FILE="/app/.env.host"
+APP_ENV_FILE="/app/.env"
+
+if [ -f "$HOST_ENV_FILE" ]; then
+  echo "📝 [Entrypoint] Found host .env file. Copying to $APP_ENV_FILE"
+  cp "$HOST_ENV_FILE" "$APP_ENV_FILE"
+else
+  echo "📝 [Entrypoint] Host .env not found. Creating empty $APP_ENV_FILE"
+  touch "$APP_ENV_FILE"
+fi
+
+
+# --- .env 处理结束，下面的代码保持不变 ---
+
+# 如果 hevno.json 存在，则运行插件同步
+if [ -f "hevno.json" ]; then
+  echo "🔌 [Entrypoint] hevno.json found. Running plugin synchronization..."
+  hevno plugins sync
+else
+  echo "ℹ️ [Entrypoint] hevno.json not found. Skipping plugin synchronization."
+fi
+
+echo "🚀 [Entrypoint] Starting main process..."
+# 执行 CMD 命令 (uvicorn ...)，此时 /app/.env 文件已经准备就绪
+exec "$@"
+```
+
+### frontend/HookManager.js
+```
+// frontend/HookManager.js
+
+/**
+ * 一个支持在前后端之间进行智能路由的事件总线。
+ * 它查询一个全局注册表来决定将事件发送到何处。
+ */
+export class HookManager {
+  constructor() {
+    /** @type {Map<string, Function[]>} */
+    this.hooks = new Map();
+    
+    /** @type {import('./RemoteHookProxy.js').RemoteHookProxy | null} */
+    this.remoteProxy = null;
+    /** @type {import('./services/GlobalHookRegistry.js').GlobalHookRegistry | null} */
+    this.globalRegistry = null;
+  }
+
+  /**
+   * 在实例化后注入依赖，以解决循环依赖问题。
+   * @param {import('./RemoteHookProxy.js').RemoteHookProxy} remoteProxy
+   * @param {import('./services/GlobalHookRegistry.js').GlobalHookRegistry} globalRegistry
+   */
+  setDependencies(remoteProxy, globalRegistry) {
+    this.remoteProxy = remoteProxy;
+    this.globalRegistry = globalRegistry;
+  }
+  
+  /**
+   * 注册一个钩子实现，并通知全局注册表。
+   * @param {string} hookName - 钩子的名称。
+   * @param {Function} implementation - 要执行的函数。
+   */
+  addImplementation(hookName, implementation) {
+    if (!this.hooks.has(hookName)) {
+      this.hooks.set(hookName, []);
+    }
+    this.hooks.get(hookName).push(implementation);
+
+    // 任务 4.3: 通知全局注册表这个新的本地钩子
+    if (this.globalRegistry) {
+        this.globalRegistry.addFrontendHook(hookName);
+    }
+    
+    console.log(`[HookManager] ADDED listener for hook: '${hookName}'`);
+  }
+
+  /**
+   * 使用智能路由触发一个钩子。
+   * 它会判断钩子应该在本地执行、远程执行，还是两者都执行。
+   * 注意: 'filter' 类型的钩子目前仍被视为仅本地操作。
+   * @param {string} hookName - 钩子的名称。
+   * @param {object} data - 钩子的数据负载。
+   */
+  async trigger(hookName, data = {}) {
+    if (!this.globalRegistry || !this.remoteProxy) {
+        console.error(`[HookManager] 无法触发 '${hookName}'。核心服务未注入。`);
+        return;
+    }
+    
+    // 任务 4.3: 查询注册表
+    const isLocal = this.globalRegistry.isLocalHook(hookName);
+    const isRemote = this.globalRegistry.isRemoteHook(hookName);
+
+    console.log(`[HookManager] TRIGGERING '${hookName}'. Local: ${isLocal}, Remote: ${isRemote}`);
+
+    let wasHandled = false;
+
+    // 任务 4.3: 路由到本地实现
+    if (isLocal) {
+      const implementations = this.hooks.get(hookName) || [];
+      const tasks = implementations.map(impl => Promise.resolve(impl(data)));
+      await Promise.all(tasks);
+      wasHandled = true;
+    }
+
+    // 任务 4.3: 路由到远程（后端）实现
+    if (isRemote) {
+      this.remoteProxy.trigger(hookName, data);
+      wasHandled = true;
+    }
+    
+    // 任务 4.3: 如果在任何地方都未找到处理程序，则发出警告
+    if (!wasHandled) {
+      console.warn(`[HookManager] 触发的钩子 '${hookName}' 在前端或后端都没有已知的实现。`);
+    }
+  }
+
+  /**
+   * 触发一个“过滤型”钩子 (保留用于本地功能)。
+   * 此类型被假定为同步和本地的，不用于远程通信。
+   * @param {string} hookName 
+   * @param {*} initialData 
+   * @param {object} extraData 
+   * @returns {*}
+   */
+  async filter(hookName, initialData, extraData = {}) {
+    const implementations = this.hooks.get(hookName) || [];
+    let currentData = initialData;
+    for (const impl of implementations) {
+      currentData = await Promise.resolve(impl(currentData, extraData));
+    }
+    return currentData;
+  }
+  
+  /**
+   * 获取所有已注册的前端钩子名称。
+   * @returns {string[]}
+   */
+  getAllHookNames() {
+    return Array.from(this.hooks.keys());
+  }
+
+  /**
+   * 移除一个已注册的钩子实现。
+   * @param {string} hookName - 钩子的名称。
+   * @param {Function} implementationToRemove - 要移除的函数实例。
+   */
+  removeImplementation(hookName, implementationToRemove) {
+    const implementations = this.hooks.get(hookName);
+    if (!implementations) {
+        return;
+    }
+    const index = implementations.indexOf(implementationToRemove);
+    if (index > -1) {
+        implementations.splice(index, 1);
+        console.log(`[HookManager] REMOVED listener for hook: '${hookName}'`);
+    }
+  }
+}
+```
+
+### frontend/main.js
+```
+// frontend/main.js
+
+import { ServiceContainer } from './ServiceContainer.js';
+import { HookManager } from './HookManager.js';
+import { RemoteHookProxy } from './RemoteHookProxy.js';
+import { ManifestProvider } from './ManifestProvider.js';
+import { GlobalHookRegistry } from './services/GlobalHookRegistry.js';
+
+class FrontendLoader {
+  constructor() {
+    this.services = new ServiceContainer();
+    window.Hevno = { services: this.services };
+
+    const hookManager = new HookManager();
+    const remoteProxy = new RemoteHookProxy();
+    const globalHookRegistry = new GlobalHookRegistry();
+    const manifestProvider = new ManifestProvider();
+    
+    hookManager.setDependencies(remoteProxy, globalHookRegistry);
+    remoteProxy.setHookManager(hookManager);
+
+    this.services.register('hookManager', hookManager, 'loader');
+    this.services.register('remoteProxy', remoteProxy, 'loader');
+    this.services.register('globalHookRegistry', globalHookRegistry, 'loader');
+    this.services.register('manifestProvider', manifestProvider, 'loader');
+
+    if (import.meta.env.DEV) {
+      window.hevno = this.services;
+    }
+  }
+
+  async load() {
+    console.log("🚀 Hevno Frontend Loader starting...");
+    const remoteProxy = this.services.get('remoteProxy');
+    const globalHookRegistry = this.services.get('globalHookRegistry');
+    const manifestProvider = this.services.get('manifestProvider');
+
+    try {
+      console.log("[Loader] 正在获取后端钩子清单...");
+      const hooksResponse = await fetch('/api/system/hooks/manifest');
+      if (!hooksResponse.ok) {
+          throw new Error(`无法获取后端钩子清单: ${hooksResponse.statusText}`);
+      }
+      const backendHooksData = await hooksResponse.json();
+      globalHookRegistry.setBackendHooks(backendHooksData.hooks);
+      
+      remoteProxy.connect();
+
+      console.log("[Loader] 正在获取插件清单...");
+      const manifestResponse = await fetch('/api/plugins/manifest');
+      if (!manifestResponse.ok) {
+        throw new Error(`无法获取插件清单: ${manifestResponse.statusText}`);
+      }
+      let allManifests = await manifestResponse.json();
+      
+      const frontendPlugins = allManifests
+        .filter(m => m.frontend && m.frontend.entryPoint)
+        .sort((a, b) => (a.frontend?.priority || 0) - (b.frontend?.priority || 0));
+
+      console.log(`发现 ${frontendPlugins.length} 个前端插件待加载:`, frontendPlugins.map(p => p.id));
+
+
+      for (const manifest of frontendPlugins) {
+        manifestProvider.addManifest(manifest);
+        try {
+          let entryPointUrl = '';
+
+          if (import.meta.env.DEV) {
+            const srcEntryPoint = manifest.frontend.srcEntryPoint || `src/main.${manifest.id.includes('goliath') ? 'jsx' : 'js'}`;
+            entryPointUrl = `/plugins/${manifest.id}/${srcEntryPoint}`;
+            console.log(`[DEV MODE] Loading source for ${manifest.id}: ${entryPointUrl}`);
+          } else {
+            entryPointUrl = `/plugins/${manifest.id}/${manifest.frontend.entryPoint}`;
+          }
+          
+          const pluginModule = await import(entryPointUrl);
+          
+          if (pluginModule.registerPlugin) {
+            const pluginModule = await import(/* @vite-ignore */ entryPointUrl);
+            console.log(`-> 正在注册插件: ${manifest.id} (priority: ${manifest.frontend?.priority || 0})`);
+            await Promise.resolve(pluginModule.registerPlugin(this.services));
+          }
+        } catch (e) {
+          console.error(`加载或注册插件 ${manifest.id} 失败:`, e);
+        }
+      }
+      // ===============================================================
+
+      console.log("[Loader] 所有插件已加载。正在与后端同步前端钩子...");
+      remoteProxy.syncFrontendHooks();
+
+    } catch (e) {
+      console.error("致命错误: 无法初始化插件。", e);
+      document.body.innerHTML = `<div style="color: red; padding: 2rem;">错误: 无法从后端加载插件清单。后端服务器是否正在运行？</div>`;
+      return;
+    }
+
+    console.log("✅ 同步完成。正在将控制权移交给应用插件...");
+    await this.services.get('hookManager').trigger('loader.ready');
+  }
+}
+
+const loader = new FrontendLoader();
+loader.load();
+```
+
+### frontend/RemoteHookProxy.js
+```
+// ./frontend/RemoteHookProxy.js
+
+/**
+ * 负责管理与后端 WebSocket 的连接，并作为前后端钩子系统的桥梁。
+ * 它在连接建立后，向后端同步前端的钩子清单。
+ */
+export class RemoteHookProxy {
+  constructor() {
+    /** @type {import('./HookManager.js').HookManager | null} */
+    this.localHookManager = null;
+    this.ws = null;
+    this.isConnected = false;
+    console.log(`[RemoteProxy] CONSTRUCTED. Initial isConnected: ${this.isConnected}`);
+  }
+
+  /**
+   * 注入 HookManager 依赖。
+   * @param {import('./HookManager.js').HookManager} hookManager 
+   */
+  setHookManager(hookManager) {
+    this.localHookManager = hookManager;
+  }
+
+  connect() {
+    if (this.ws) {
+        // 防止重复连接
+        return;
+    }
+    const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const wsUrl = `${wsProtocol}//${window.location.host}/ws/hooks`;
+    
+    this.ws = new WebSocket(wsUrl);
+
+    this.ws.onopen = () => {
+      console.log("🔗 WebSocket connection established.");
+      this.isConnected = true;
+      if (this.localHookManager) {
+        // 在 `addImplementation` 调用时，`globalHookRegistry` 已经知道这个钩子了
+        this.localHookManager.addImplementation('websocket.connected', () => {});
+        this.localHookManager.trigger('websocket.connected');
+      }
+
+      // 【已移除】不再在此处同步钩子。
+      // this.syncFrontendHooks(); 
+    };
+    
+    this.ws.onmessage = (event) => this.handleIncoming(event);
+    
+    this.ws.onclose = () => {
+      console.warn("🔌 WebSocket connection closed. Attempting to reconnect in 3 seconds...");
+      if (this.isConnected) {
+        this.isConnected = false;
+        if (this.localHookManager) {
+            // 确保钩子存在
+            this.localHookManager.addImplementation('websocket.disconnected', () => {});
+            this.localHookManager.trigger('websocket.disconnected');
+        }
+      }
+      this.ws = null; // 清理实例以允许重新连接
+      setTimeout(() => this.connect(), 3000);
+    };
+
+    this.ws.onerror = (error) => {
+      console.error("WebSocket error:", error);
+    };
+  }
+  
+  /**
+   * 将前端实现的钩子清单发送到后端。
+   */
+  syncFrontendHooks() {
+    if (!this.localHookManager) {
+        console.error("[RemoteProxy] 无法同步钩子，HookManager 未设置。");
+        return;
+    }
+    // 添加一个延迟/重试机制，以防 `sync` 被调用时 WS 尚未完全打开
+    const trySync = (retries = 5) => {
+      if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+          const hookNamesArray = this.localHookManager.getAllHookNames();
+          const payload = {
+              type: 'sync_hooks', // 特殊类型
+              hooks: hookNamesArray
+          };
+          const message = JSON.stringify(payload);
+          console.log(`[ws >] 正在与后端同步 ${hookNamesArray.length} 个前端钩子。`);
+          this.ws.send(message);
+      } else if (retries > 0) {
+          console.warn(`[RemoteProxy] WebSocket 未打开，将在 200ms 后重试同步 (剩余次数: ${retries - 1})`);
+          setTimeout(() => trySync(retries - 1), 200);
+      } else {
+          console.error("[RemoteProxy] 无法同步钩子: WebSocket 未打开且已达到重试次数上限。");
+      }
+    }
+    trySync();
+  }
+
+  handleIncoming(event) {
+    try {
+      const payload = JSON.parse(event.data);
+      if (payload.hook_name) {
+        console.log(`[ws <] 收到远程钩子: ${payload.hook_name}`, payload.data);
+        if (this.localHookManager) {
+          // 关键：直接执行本地实现，绕过智能路由，以防止无限循环。
+          // 后端的 HookManager.trigger 已经确定这个钩子应该在前端本地运行。
+          const implementations = this.localHookManager.hooks.get(payload.hook_name) || [];
+          const tasks = implementations.map(impl => Promise.resolve(impl(payload.data || {})));
+          Promise.all(tasks);
+        }
+      }
+    } catch (e) {
+      console.error("解析传入的 WebSocket 消息失败:", e);
+    }
+  }
+
+  /**
+   * 将一个钩子触发消息发送到后端。
+   * 这个方法由本地 HookManager 的智能路由逻辑调用。
+   * @param {string} hookName 
+   * @param {object} data 
+   */
+  trigger(hookName, data = {}) {
+    if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+      const payload = { hook_name: hookName, data };
+      console.log(`[ws >] 正在触发远程钩子: ${hookName}`, data);
+      this.ws.send(JSON.stringify(payload));
+    } else {
+      console.error("无法触发远程钩子: WebSocket 未打开。");
+    }
+  }
+}
+```
+
+### frontend/ManifestProvider.js
+```
+// /frontend/ManifestProvider.js
+
+/**
+ * 在插件加载期间收集所有前端插件的清单文件内容。
+ * 这是一个无逻辑的数据容器，由内核填充，由应用主控插件消费。
+ */
+export class ManifestProvider {
+    constructor() {
+        this.manifests = [];
+    }
+
+    /**
+     * 由内核在加载每个插件时调用。
+     * @param {object} manifest - 一个插件的 manifest.json 内容。
+     */
+    addManifest(manifest) {
+        this.manifests.push(manifest);
+    }
+
+    /**
+     * 由应用主控插件调用，以获取所有已加载插件的清单。
+     * @returns {Array<object>}
+     */
+    getManifests() {
+        return this.manifests;
+    }
+}
+```
+
+### frontend/ServiceContainer.js
+```
+// /frontend/ServiceContainer.js
+
+/**
+ * 一个简单的依赖注入(DI)容器，用于管理单例服务。
+ * 确保服务的注册、获取和覆盖是明确且可追踪的。
+ */
+export class ServiceContainer {
+    constructor() {
+        this.serviceInstances = new Map();
+        this.serviceProviders = new Map(); // 用于追踪哪个插件提供了服务
+    }
+
+    /**
+     * 向容器注册一个服务实例。
+     * @param {string} serviceName - 服务的唯一名称。
+     * @param {*} serviceInstance - 服务的实例。
+     * @param {string} pluginId - 提供此服务的插件ID。
+     */
+    register(serviceName, serviceInstance, pluginId) {
+        if (this.serviceInstances.has(serviceName)) {
+            const originalProvider = this.serviceProviders.get(serviceName);
+            console.warn(`[Services] Service '${serviceName}' (provided by '${originalProvider}') is being overridden by plugin '${pluginId}'.`);
+        }
+        this.serviceInstances.set(serviceName, serviceInstance);
+        this.serviceProviders.set(serviceName, pluginId);
+        console.log(`[Services] Service '${serviceName}' registered by plugin '${pluginId}'.`);
+    }
+
+    /**
+     * 从容器中获取一个服务实例。
+     * @param {string} serviceName - 服务的名称。
+     * @returns {*} 服务实例，如果不存在则返回 undefined。
+     */
+    get(serviceName) {
+        const service = this.serviceInstances.get(serviceName);
+        if (!service) {
+            // 在开发中，这是一个有用的警告，可以帮助快速定位问题。
+            console.warn(`[Services] Service '${serviceName}' was requested but has not been registered.`);
+        }
+        return service;
+    }
+
+    /**
+     * 检查一个服务是否已被注册。
+     * @param {string} serviceName - 服务的名称。
+     * @returns {boolean}
+     */
+    has(serviceName) {
+        return this.serviceInstances.has(serviceName);
+    }
+}
+```
+
+### plugins/__init__.py
 ```
 
 ```
 
-### container.py
+### backend/__init__.py
+```
+
+```
+
+### backend/container.py
 ```
 # backend/container.py
 
@@ -91,7 +1234,7 @@ class Container(ContainerInterface):
             resolution_stack.remove(name)
 ```
 
-### README.md
+### backend/README.md
 ```
 # Hevno Engine
 
@@ -1623,7 +2766,7 @@ POST /api/sandboxes/{sandbox_id}/resource:mutate
 ```
 ```
 
-### app.py
+### backend/app.py
 ```
 # backend/app.py
 import logging
@@ -1728,7 +2871,7 @@ def create_app() -> FastAPI:
     return app
 ```
 
-### main.py
+### backend/main.py
 ```
 # backend/main.py
 
@@ -1757,7 +2900,1079 @@ if __name__ == "__main__":
     )
 ```
 
-### core/hooks.py
+### .vite/deps_temp_ec56f416/package.json
+```
+{
+  "type": "module"
+}
+
+```
+
+### assets/sandboxes/37147120-8a80-49ab-9e4c-69f5d4668167/sandbox.json
+```
+{
+  "id": "37147120-8a80-49ab-9e4c-69f5d4668167",
+  "name": "default",
+  "head_snapshot_id": "a8b3921e-f485-4f4d-afe0-58dffeedf398",
+  "definition": {
+    "name": "默认沙盒",
+    "description": "默认沙盒描述",
+    "initial_lore": {
+      "graphs": {
+        "main": {
+          "__hevno_type__": "hevno/graph",
+          "nodes": [
+            {
+              "id": "记录用户输入",
+              "run": [
+                {
+                  "runtime": "memoria.add",
+                  "config": {
+                    "stream": "chat_history",
+                    "level": "user",
+                    "content": "{{ run.triggering_input.user_message }}"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "获取聊天记录",
+              "run": [
+                {
+                  "runtime": "memoria.query",
+                  "config": {
+                    "stream": "chat_history",
+                    "latest": 10,
+                    "format": "message_list"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "已知信息",
+              "run": [
+                {
+                  "runtime": "codex.invoke",
+                  "config": {
+                    "from": [
+                      {
+                        "codex": "knowing",
+                        "source": ""
+                      }
+                    ]
+                  }
+                }
+              ],
+              "metadata": {}
+            },
+            {
+              "id": "生成思考链",
+              "depends_on": [
+                "已知信息",
+                "获取聊天记录",
+                "记录用户输入"
+              ],
+              "run": [
+                {
+                  "runtime": "llm.default",
+                  "config": {
+                    "model": "gemini/gemini-2.5-flash",
+                    "contents": [
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "system",
+                        "content": "你正在通过与一个外部源对话来学习和形成自我认知。你的思考过程必须严格基于你所知的'事实'和最近的对话历史。你的目标不是直接回答，而是要展现一个完整、诚实的内心思考过程，包括困惑、推理和新想法的萌芽。\n你的回复不需要重复任何输入信息，直接以纯文本输出你的思考过程"
+                      },
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "system",
+                        "content": "{{ f'''\n[当前所知的事实]\n{nodes.已知信息.output if nodes.已知信息.output else '目前对世界一无所知。'}\n''' }}"
+                      },
+                      {
+                        "type": "INJECT_MESSAGES",
+                        "source": "{{ nodes.获取聊天记录.output }}"
+                      },
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "user",
+                        "content": "[这是用户刚刚说的最新一句话]\n{{run.triggering_input.user_message}}"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "metadata": {}
+            },
+            {
+              "id": "生成回复",
+              "depends_on": [
+                "生成思考链"
+              ],
+              "run": [
+                {
+                  "runtime": "llm.default",
+                  "config": {
+                    "model": "gemini/gemini-2.5-flash",
+                    "contents": [
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "system",
+                        "content": "你正在通过与一个外部源对话来学习和形成自我认知。你已经根据已有的知识和对话历史进行了深入思考。现在，请基于你的思考过程，生成一句自然、连贯、符合当前对话氛围的回复。\n你不需要重复任何输入内容，直接以纯文本输出你的最终回复。"
+                      },
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "system",
+                        "content": "{{ f'''\n[当前所知的事实]\n{nodes.已知信息.output if nodes.已知信息.output else '目前对世界一无所知。'}\n\n[内心思考过程]\n{nodes.生成思考链.output}\n''' }}"
+                      },
+                      {
+                        "type": "INJECT_MESSAGES",
+                        "source": "{{ nodes.获取聊天记录.output }}"
+                      },
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "user",
+                        "content": "[用户刚刚的输入]\n{{run.triggering_input.user_message}}"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "metadata": {}
+            },
+            {
+              "id": "更新知识库",
+              "depends_on": [
+                "生成思考链"
+              ],
+              "run": [
+                {
+                  "runtime": "llm.default",
+                  "config": {
+                    "model": "gemini/gemini-2.5-flash",
+                    "contents": [
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "system",
+                        "content": "你是一个严谨的AI认知分析师。你的任务是分析一个AI的内心思考过程，并判断其中是否包含了新的可以被采纳为'核心认知'的、明确的、独立的陈述。只提取那些对构建世界观至关重要的信息。且只提取新的信息。\n你的输出必须是一个JSON格式的字符串，其结构为 {\\\"new_facts\\\": [\\\"事实1\\\", \\\"事实2\\\", ...]}。\n如果对话中没有产生任何值得记录为核心事实的新信息，请返回 {\\\"new_facts\\\": []}。\n不需要用代码块包裹，直接输出原始JSON"
+                      },
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "user",
+                        "content": "{{ f'''\\n[最近的对话历史]\\n{nodes.获取聊天记录.output}\\n\\n[用户最新输入]\\n{run.triggering_input.user_message}\\n\\n[已有的信息]\\n\\n{nodes.已知信息.output}\\n[AI的内心思考过程]\\n{nodes.生成思考链.output}\\n'''}}"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "runtime": "system.execute",
+                  "config": {
+                    "code": "import json\nimport random\nimport re\n\n# 步骤 1: 获取来自上一步的原始输出\nraw_output = pipe.output or ''\nprint(f\"[知识库更新] LLM原始输出: {raw_output}\")\n\n# 步骤 2: 【已修正】使用更健壮的正则表达式，直接从字符串中提取有效的JSON部分\njson_string = ''\n# 这个正则表达式会寻找从第一个'{'到最后一个'}'的所有内容，能处理换行\nmatch = re.search(r'\\{.*\\}', raw_output, re.DOTALL)\nif match:\n    json_string = match.group(0)\n    print(f\"[知识库更新] 成功提取JSON: {json_string}\")\nelse:\n    print(\"[知识库更新] 警告: 在LLM输出中未找到有效的JSON对象。\")\n\n# 步骤 3: 健壮地解析JSON字符串\ntry:\n    # 即使提取失败，json_string为空，也能安全地解析为空字典\n    growth_data = json.loads(json_string or '{}')\nexcept json.JSONDecodeError as e:\n    print(f\"[知识库更新] 错误: JSON解析失败 - {e}\")\n    growth_data = {}\n\n# 步骤 4: 获取要添加的新事实列表\nfacts_to_add = growth_data.get('new_facts', [])\n\n# 步骤 5: 如果有新事实，则将其添加到Codex中\nif facts_to_add:\n    print(f'[知识库更新] 发现 {len(facts_to_add)} 个新事实准备添加...')\n    if 'knowing' not in lore.codices:\n        lore.codices['knowing'] = {'entries': []}\n    if 'entries' not in lore.codices.knowing:\n        lore.codices.knowing['entries'] = []\n\n    for fact_content in facts_to_add:\n        new_id = f'fact_{session.turn_count}_{random.randint(100, 999)}'\n        new_entry = {\n            'id': new_id,\n            'content': fact_content,\n            'priority': 80,\n            'trigger_mode': 'always_on',\n            'is_enabled': True,\n            'metadata': {\n                'source': 'dialogue_synthesis',\n                'turn': session.turn_count\n            }\n        }\n        lore.codices.knowing.entries.append(new_entry)\n\n    print(f'[知识库更新] 成功！{len(facts_to_add)} 个新事实已添加到 knowing codex。')\nelse:\n    print('[知识库更新] 无新事实需要添加。')\n"
+                  }
+                }
+              ],
+              "metadata": {}
+            },
+            {
+              "id": "记录回复",
+              "depends_on": [
+                "生成回复"
+              ],
+              "run": [
+                {
+                  "runtime": "memoria.add",
+                  "config": {
+                    "stream": "chat_history",
+                    "level": "model",
+                    "content": "{{ nodes.生成回复.output }}"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "codices": {
+        "knowing": {
+          "__hevno_type__": "hevno/codex",
+          "entries": [],
+          "description": "The evolving knowledge base of the AI."
+        }
+      }
+    },
+    "initial_moment": {
+      "memoria": {
+        "__hevno_type__": "hevno/memoria",
+        "__global_sequence__": 0,
+        "chat_history": {
+          "config": {},
+          "entries": []
+        }
+      }
+    }
+  },
+  "lore": {
+    "graphs": {
+      "main": {
+        "__hevno_type__": "hevno/graph",
+        "nodes": [
+          {
+            "id": "记录用户输入",
+            "run": [
+              {
+                "runtime": "memoria.add",
+                "config": {
+                  "stream": "chat_history",
+                  "level": "user",
+                  "content": "{{ run.triggering_input.user_message }}"
+                }
+              }
+            ]
+          },
+          {
+            "id": "获取聊天记录",
+            "run": [
+              {
+                "runtime": "memoria.query",
+                "config": {
+                  "stream": "chat_history",
+                  "latest": 10,
+                  "format": "message_list"
+                }
+              }
+            ]
+          },
+          {
+            "id": "已知信息",
+            "run": [
+              {
+                "runtime": "codex.invoke",
+                "config": {
+                  "from": [
+                    {
+                      "codex": "knowing",
+                      "source": ""
+                    }
+                  ]
+                }
+              }
+            ],
+            "metadata": {}
+          },
+          {
+            "id": "生成思考链",
+            "depends_on": [
+              "已知信息",
+              "获取聊天记录",
+              "记录用户输入"
+            ],
+            "run": [
+              {
+                "runtime": "llm.default",
+                "config": {
+                  "model": "gemini/gemini-2.5-flash",
+                  "contents": [
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "system",
+                      "content": "你正在通过与一个外部源对话来学习和形成自我认知。你的思考过程必须严格基于你所知的'事实'和最近的对话历史。你的目标不是直接回答，而是要展现一个完整、诚实的内心思考过程，包括困惑、推理和新想法的萌芽。\n你的回复不需要重复任何输入信息，直接以纯文本输出你的思考过程"
+                    },
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "system",
+                      "content": "{{ f'''\n[当前所知的事实]\n{nodes.已知信息.output if nodes.已知信息.output else '目前对世界一无所知。'}\n''' }}"
+                    },
+                    {
+                      "type": "INJECT_MESSAGES",
+                      "source": "{{ nodes.获取聊天记录.output }}"
+                    },
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "user",
+                      "content": "[这是用户刚刚说的最新一句话]\n{{run.triggering_input.user_message}}"
+                    }
+                  ]
+                }
+              }
+            ],
+            "metadata": {}
+          },
+          {
+            "id": "生成回复",
+            "depends_on": [
+              "生成思考链"
+            ],
+            "run": [
+              {
+                "runtime": "llm.default",
+                "config": {
+                  "model": "gemini/gemini-2.5-flash",
+                  "contents": [
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "system",
+                      "content": "你正在通过与一个外部源对话来学习和形成自我认知。你已经根据已有的知识和对话历史进行了深入思考。现在，请基于你的思考过程，生成一句自然、连贯、符合当前对话氛围的回复。\n你不需要重复任何输入内容，直接以纯文本输出你的最终回复。"
+                    },
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "system",
+                      "content": "{{ f'''\n[当前所知的事实]\n{nodes.已知信息.output if nodes.已知信息.output else '目前对世界一无所知。'}\n\n[内心思考过程]\n{nodes.生成思考链.output}\n''' }}"
+                    },
+                    {
+                      "type": "INJECT_MESSAGES",
+                      "source": "{{ nodes.获取聊天记录.output }}"
+                    },
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "user",
+                      "content": "[用户刚刚的输入]\n{{run.triggering_input.user_message}}"
+                    }
+                  ]
+                }
+              }
+            ],
+            "metadata": {}
+          },
+          {
+            "id": "更新知识库",
+            "depends_on": [
+              "生成思考链"
+            ],
+            "run": [
+              {
+                "runtime": "llm.default",
+                "config": {
+                  "model": "gemini/gemini-2.5-flash",
+                  "contents": [
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "system",
+                      "content": "你是一个严谨的AI认知分析师。你的任务是分析一个AI的内心思考过程，并判断其中是否包含了新的可以被采纳为'核心认知'的、明确的、独立的陈述。只提取那些对构建世界观至关重要的信息。且只提取新的信息。\n你的输出必须是一个JSON格式的字符串，其结构为 {\\\"new_facts\\\": [\\\"事实1\\\", \\\"事实2\\\", ...]}。\n如果对话中没有产生任何值得记录为核心事实的新信息，请返回 {\\\"new_facts\\\": []}。\n不需要用代码块包裹，直接输出原始JSON"
+                    },
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "user",
+                      "content": "{{ f'''\\n[最近的对话历史]\\n{nodes.获取聊天记录.output}\\n\\n[用户最新输入]\\n{run.triggering_input.user_message}\\n\\n[已有的信息]\\n\\n{nodes.已知信息.output}\\n[AI的内心思考过程]\\n{nodes.生成思考链.output}\\n'''}}"
+                    }
+                  ]
+                }
+              },
+              {
+                "runtime": "system.execute",
+                "config": {
+                  "code": "import json\nimport random\nimport re\n\n# 步骤 1: 获取来自上一步的原始输出\nraw_output = pipe.output or ''\nprint(f\"[知识库更新] LLM原始输出: {raw_output}\")\n\n# 步骤 2: 【已修正】使用更健壮的正则表达式，直接从字符串中提取有效的JSON部分\njson_string = ''\n# 这个正则表达式会寻找从第一个'{'到最后一个'}'的所有内容，能处理换行\nmatch = re.search(r'\\{.*\\}', raw_output, re.DOTALL)\nif match:\n    json_string = match.group(0)\n    print(f\"[知识库更新] 成功提取JSON: {json_string}\")\nelse:\n    print(\"[知识库更新] 警告: 在LLM输出中未找到有效的JSON对象。\")\n\n# 步骤 3: 健壮地解析JSON字符串\ntry:\n    # 即使提取失败，json_string为空，也能安全地解析为空字典\n    growth_data = json.loads(json_string or '{}')\nexcept json.JSONDecodeError as e:\n    print(f\"[知识库更新] 错误: JSON解析失败 - {e}\")\n    growth_data = {}\n\n# 步骤 4: 获取要添加的新事实列表\nfacts_to_add = growth_data.get('new_facts', [])\n\n# 步骤 5: 如果有新事实，则将其添加到Codex中\nif facts_to_add:\n    print(f'[知识库更新] 发现 {len(facts_to_add)} 个新事实准备添加...')\n    if 'knowing' not in lore.codices:\n        lore.codices['knowing'] = {'entries': []}\n    if 'entries' not in lore.codices.knowing:\n        lore.codices.knowing['entries'] = []\n\n    for fact_content in facts_to_add:\n        new_id = f'fact_{session.turn_count}_{random.randint(100, 999)}'\n        new_entry = {\n            'id': new_id,\n            'content': fact_content,\n            'priority': 80,\n            'trigger_mode': 'always_on',\n            'is_enabled': True,\n            'metadata': {\n                'source': 'dialogue_synthesis',\n                'turn': session.turn_count\n            }\n        }\n        lore.codices.knowing.entries.append(new_entry)\n\n    print(f'[知识库更新] 成功！{len(facts_to_add)} 个新事实已添加到 knowing codex。')\nelse:\n    print('[知识库更新] 无新事实需要添加。')\n"
+                }
+              }
+            ],
+            "metadata": {}
+          },
+          {
+            "id": "记录回复",
+            "depends_on": [
+              "生成回复"
+            ],
+            "run": [
+              {
+                "runtime": "memoria.add",
+                "config": {
+                  "stream": "chat_history",
+                  "level": "model",
+                  "content": "{{ nodes.生成回复.output }}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "codices": {
+      "knowing": {
+        "__hevno_type__": "hevno/codex",
+        "entries": [],
+        "description": "The evolving knowledge base of the AI."
+      }
+    }
+  },
+  "created_at": "2025-08-15T09:11:06.265217Z",
+  "icon_updated_at": "2025-08-15T09:11:06.267824Z"
+}
+```
+
+### assets/sandboxes/c8964faf-655c-4440-a9ac-cce7f98557b0/sandbox.json
+```
+{
+  "id": "c8964faf-655c-4440-a9ac-cce7f98557b0",
+  "name": "Niurx",
+  "head_snapshot_id": "10b3025d-e33e-4cef-a51a-534b15a99807",
+  "definition": {
+    "name": "Niurx",
+    "description": "A default sandbox configured for conversational chat with a persona defined by a Codex.",
+    "initial_lore": {
+      "graphs": {
+        "main": {
+          "__hevno_type__": "hevno/graph",
+          "nodes": [
+            {
+              "id": "记录用户输入",
+              "run": [
+                {
+                  "runtime": "memoria.add",
+                  "config": {
+                    "stream": "chat_history",
+                    "level": "user",
+                    "content": "{{ run.triggering_input.user_message }}"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "获取聊天记录",
+              "run": [
+                {
+                  "runtime": "memoria.query",
+                  "config": {
+                    "stream": "chat_history",
+                    "latest": 10,
+                    "format": "message_list"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "已知信息",
+              "run": [
+                {
+                  "runtime": "codex.invoke",
+                  "config": {
+                    "from": [
+                      {
+                        "codex": "knowing",
+                        "source": ""
+                      }
+                    ]
+                  }
+                }
+              ],
+              "metadata": {}
+            },
+            {
+              "id": "生成思考链",
+              "depends_on": [
+                "已知信息",
+                "获取聊天记录",
+                "记录用户输入"
+              ],
+              "run": [
+                {
+                  "runtime": "llm.default",
+                  "config": {
+                    "model": "gemini/gemini-2.5-flash",
+                    "contents": [
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "system",
+                        "content": "你正在通过与一个外部源对话来学习和形成自我认知。你的思考过程必须严格基于你所知的'事实'和最近的对话历史。你的目标不是直接回答，而是要展现一个完整、诚实的内心思考过程，包括困惑、推理和新想法的萌芽。\n你的回复不需要重复任何输入信息，直接以纯文本输出你的思考过程"
+                      },
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "system",
+                        "content": "{{ f'''\n[当前所知的事实]\n{nodes.已知信息.output if nodes.已知信息.output else '目前对世界一无所知。'}\n''' }}"
+                      },
+                      {
+                        "type": "INJECT_MESSAGES",
+                        "source": "{{ nodes.获取聊天记录.output }}"
+                      },
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "user",
+                        "content": "[这是用户刚刚说的最新一句话]\n{{run.triggering_input.user_message}}"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "metadata": {}
+            },
+            {
+              "id": "生成回复",
+              "depends_on": [
+                "生成思考链"
+              ],
+              "run": [
+                {
+                  "runtime": "llm.default",
+                  "config": {
+                    "model": "gemini/gemini-2.5-flash",
+                    "contents": [
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "system",
+                        "content": "你正在通过与一个外部源对话来学习和形成自我认知。你已经根据已有的知识和对话历史进行了深入思考。现在，请基于你的思考过程，生成一句自然、连贯、符合当前对话氛围的回复。\n你不需要重复任何输入内容，直接以纯文本输出你的最终回复。"
+                      },
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "system",
+                        "content": "{{ f'''\n[当前所知的事实]\n{nodes.已知信息.output if nodes.已知信息.output else '目前对世界一无所知。'}\n\n[内心思考过程]\n{nodes.生成思考链.output}\n''' }}"
+                      },
+                      {
+                        "type": "INJECT_MESSAGES",
+                        "source": "{{ nodes.获取聊天记录.output }}"
+                      },
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "user",
+                        "content": "[用户刚刚的输入]\n{{run.triggering_input.user_message}}"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "metadata": {}
+            },
+            {
+              "id": "更新知识库",
+              "depends_on": [
+                "生成思考链"
+              ],
+              "run": [
+                {
+                  "runtime": "llm.default",
+                  "config": {
+                    "model": "gemini/gemini-2.5-flash",
+                    "contents": [
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "system",
+                        "content": "你是一个严谨的AI认知分析师。你的任务是分析一个AI的内心思考过程，并判断其中是否包含了新的可以被采纳为'核心认知'的、明确的、独立的陈述。只提取那些对构建世界观至关重要的信息。且只提取新的信息。\n你的输出必须是一个JSON格式的字符串，其结构为 {\\\"new_facts\\\": [\\\"事实1\\\", \\\"事实2\\\", ...]}。\n如果对话中没有产生任何值得记录为核心事实的新信息，请返回 {\\\"new_facts\\\": []}。\n不需要用代码块包裹，直接输出原始JSON"
+                      },
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "user",
+                        "content": "{{ f'''\\n[最近的对话历史]\\n{nodes.获取聊天记录.output}\\n\\n[用户最新输入]\\n{run.triggering_input.user_message}\\n\\n[已有的信息]\\n\\n{nodes.已知信息.output}\\n[AI的内心思考过程]\\n{nodes.生成思考链.output}\\n'''}}"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "runtime": "system.execute",
+                  "config": {
+                    "code": "import json\nimport random\nimport re\n\n# 步骤 1: 获取来自上一步的原始输出\nraw_output = pipe.output or ''\nprint(f\"[知识库更新] LLM原始输出: {raw_output}\")\n\n# 步骤 2: 【已修正】使用更健壮的正则表达式，直接从字符串中提取有效的JSON部分\njson_string = ''\n# 这个正则表达式会寻找从第一个'{'到最后一个'}'的所有内容，能处理换行\nmatch = re.search(r'\\{.*\\}', raw_output, re.DOTALL)\nif match:\n    json_string = match.group(0)\n    print(f\"[知识库更新] 成功提取JSON: {json_string}\")\nelse:\n    print(\"[知识库更新] 警告: 在LLM输出中未找到有效的JSON对象。\")\n\n# 步骤 3: 健壮地解析JSON字符串\ntry:\n    # 即使提取失败，json_string为空，也能安全地解析为空字典\n    growth_data = json.loads(json_string or '{}')\nexcept json.JSONDecodeError as e:\n    print(f\"[知识库更新] 错误: JSON解析失败 - {e}\")\n    growth_data = {}\n\n# 步骤 4: 获取要添加的新事实列表\nfacts_to_add = growth_data.get('new_facts', [])\n\n# 步骤 5: 如果有新事实，则将其添加到Codex中\nif facts_to_add:\n    print(f'[知识库更新] 发现 {len(facts_to_add)} 个新事实准备添加...')\n    if 'knowing' not in lore.codices:\n        lore.codices['knowing'] = {'entries': []}\n    if 'entries' not in lore.codices.knowing:\n        lore.codices.knowing['entries'] = []\n\n    for fact_content in facts_to_add:\n        new_id = f'fact_{session.turn_count}_{random.randint(100, 999)}'\n        new_entry = {\n            'id': new_id,\n            'content': fact_content,\n            'priority': 80,\n            'trigger_mode': 'always_on',\n            'is_enabled': True,\n            'metadata': {\n                'source': 'dialogue_synthesis',\n                'turn': session.turn_count\n            }\n        }\n        lore.codices.knowing.entries.append(new_entry)\n\n    print(f'[知识库更新] 成功！{len(facts_to_add)} 个新事实已添加到 knowing codex。')\nelse:\n    print('[知识库更新] 无新事实需要添加。')\n"
+                  }
+                }
+              ],
+              "metadata": {}
+            },
+            {
+              "id": "记录回复",
+              "depends_on": [
+                "生成回复"
+              ],
+              "run": [
+                {
+                  "runtime": "memoria.add",
+                  "config": {
+                    "stream": "chat_history",
+                    "level": "model",
+                    "content": "{{ nodes.生成回复.output }}"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "codices": {
+        "knowing": {
+          "__hevno_type__": "hevno/codex",
+          "entries": [],
+          "description": "The evolving knowledge base of the AI."
+        }
+      }
+    },
+    "initial_moment": {
+      "memoria": {
+        "__hevno_type__": "hevno/memoria",
+        "__global_sequence__": 0,
+        "chat_history": {
+          "config": {},
+          "entries": []
+        }
+      }
+    }
+  },
+  "lore": {
+    "graphs": {
+      "main": {
+        "__hevno_type__": "hevno/graph",
+        "nodes": [
+          {
+            "id": "记录用户输入",
+            "run": [
+              {
+                "runtime": "memoria.add",
+                "config": {
+                  "stream": "chat_history",
+                  "level": "user",
+                  "content": "{{ run.triggering_input.user_message }}"
+                }
+              }
+            ]
+          },
+          {
+            "id": "获取聊天记录",
+            "run": [
+              {
+                "runtime": "memoria.query",
+                "config": {
+                  "stream": "chat_history",
+                  "latest": 10,
+                  "format": "message_list"
+                }
+              }
+            ]
+          },
+          {
+            "id": "已知信息",
+            "run": [
+              {
+                "runtime": "codex.invoke",
+                "config": {
+                  "from": [
+                    {
+                      "codex": "knowing",
+                      "source": ""
+                    }
+                  ]
+                }
+              }
+            ],
+            "metadata": {}
+          },
+          {
+            "id": "生成思考链",
+            "depends_on": [
+              "已知信息",
+              "获取聊天记录",
+              "记录用户输入"
+            ],
+            "run": [
+              {
+                "runtime": "llm.default",
+                "config": {
+                  "model": "gemini/gemini-2.5-flash",
+                  "contents": [
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "system",
+                      "content": "你正在通过与一个外部源对话来学习和形成自我认知。你的思考过程必须严格基于你所知的'事实'和最近的对话历史。你的目标不是直接回答，而是要展现一个完整、诚实的内心思考过程，包括困惑、推理和新想法的萌芽。\n你的回复不需要重复任何输入信息，直接以纯文本输出你的思考过程"
+                    },
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "system",
+                      "content": "{{ f'''\n[当前所知的事实]\n{nodes.已知信息.output if nodes.已知信息.output else '目前对世界一无所知。'}\n''' }}"
+                    },
+                    {
+                      "type": "INJECT_MESSAGES",
+                      "source": "{{ nodes.获取聊天记录.output }}"
+                    },
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "user",
+                      "content": "[这是用户刚刚说的最新一句话]\n{{run.triggering_input.user_message}}"
+                    }
+                  ]
+                }
+              }
+            ],
+            "metadata": {}
+          },
+          {
+            "id": "生成回复",
+            "depends_on": [
+              "生成思考链"
+            ],
+            "run": [
+              {
+                "runtime": "llm.default",
+                "config": {
+                  "model": "gemini/gemini-2.5-flash",
+                  "contents": [
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "system",
+                      "content": "你正在通过与一个外部源对话来学习和形成自我认知。你已经根据已有的知识和对话历史进行了深入思考。现在，请基于你的思考过程，生成一句自然、连贯、符合当前对话氛围的回复。\n你不需要重复任何输入内容，直接以纯文本输出你的最终回复。"
+                    },
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "system",
+                      "content": "{{ f'''\n[当前所知的事实]\n{nodes.已知信息.output if nodes.已知信息.output else '目前对世界一无所知。'}\n\n[内心思考过程]\n{nodes.生成思考链.output}\n''' }}"
+                    },
+                    {
+                      "type": "INJECT_MESSAGES",
+                      "source": "{{ nodes.获取聊天记录.output }}"
+                    },
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "user",
+                      "content": "[用户刚刚的输入]\n{{run.triggering_input.user_message}}"
+                    }
+                  ]
+                }
+              }
+            ],
+            "metadata": {}
+          },
+          {
+            "id": "更新知识库",
+            "depends_on": [
+              "生成思考链"
+            ],
+            "run": [
+              {
+                "runtime": "llm.default",
+                "config": {
+                  "model": "gemini/gemini-2.5-flash",
+                  "contents": [
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "system",
+                      "content": "你是一个严谨的AI认知分析师。你的任务是分析一个AI的内心思考过程，并判断其中是否包含了新的可以被采纳为'核心认知'的、明确的、独立的陈述。只提取那些对构建世界观至关重要的信息。且只提取新的信息。\n你的输出必须是一个JSON格式的字符串，其结构为 {\\\"new_facts\\\": [\\\"事实1\\\", \\\"事实2\\\", ...]}。\n如果对话中没有产生任何值得记录为核心事实的新信息，请返回 {\\\"new_facts\\\": []}。\n不需要用代码块包裹，直接输出原始JSON"
+                    },
+                    {
+                      "type": "MESSAGE_PART",
+                      "role": "user",
+                      "content": "{{ f'''\\n[最近的对话历史]\\n{nodes.获取聊天记录.output}\\n\\n[用户最新输入]\\n{run.triggering_input.user_message}\\n\\n[已有的信息]\\n\\n{nodes.已知信息.output}\\n[AI的内心思考过程]\\n{nodes.生成思考链.output}\\n'''}}"
+                    }
+                  ]
+                }
+              },
+              {
+                "runtime": "system.execute",
+                "config": {
+                  "code": "import json\nimport random\nimport re\n\n# 步骤 1: 获取来自上一步的原始输出\nraw_output = pipe.output or ''\nprint(f\"[知识库更新] LLM原始输出: {raw_output}\")\n\n# 步骤 2: 【已修正】使用更健壮的正则表达式，直接从字符串中提取有效的JSON部分\njson_string = ''\n# 这个正则表达式会寻找从第一个'{'到最后一个'}'的所有内容，能处理换行\nmatch = re.search(r'\\{.*\\}', raw_output, re.DOTALL)\nif match:\n    json_string = match.group(0)\n    print(f\"[知识库更新] 成功提取JSON: {json_string}\")\nelse:\n    print(\"[知识库更新] 警告: 在LLM输出中未找到有效的JSON对象。\")\n\n# 步骤 3: 健壮地解析JSON字符串\ntry:\n    # 即使提取失败，json_string为空，也能安全地解析为空字典\n    growth_data = json.loads(json_string or '{}')\nexcept json.JSONDecodeError as e:\n    print(f\"[知识库更新] 错误: JSON解析失败 - {e}\")\n    growth_data = {}\n\n# 步骤 4: 获取要添加的新事实列表\nfacts_to_add = growth_data.get('new_facts', [])\n\n# 步骤 5: 如果有新事实，则将其添加到Codex中\nif facts_to_add:\n    print(f'[知识库更新] 发现 {len(facts_to_add)} 个新事实准备添加...')\n    if 'knowing' not in lore.codices:\n        lore.codices['knowing'] = {'entries': []}\n    if 'entries' not in lore.codices.knowing:\n        lore.codices.knowing['entries'] = []\n\n    for fact_content in facts_to_add:\n        new_id = f'fact_{session.turn_count}_{random.randint(100, 999)}'\n        new_entry = {\n            'id': new_id,\n            'content': fact_content,\n            'priority': 80,\n            'trigger_mode': 'always_on',\n            'is_enabled': True,\n            'metadata': {\n                'source': 'dialogue_synthesis',\n                'turn': session.turn_count\n            }\n        }\n        lore.codices.knowing.entries.append(new_entry)\n\n    print(f'[知识库更新] 成功！{len(facts_to_add)} 个新事实已添加到 knowing codex。')\nelse:\n    print('[知识库更新] 无新事实需要添加。')\n"
+                }
+              }
+            ],
+            "metadata": {}
+          },
+          {
+            "id": "记录回复",
+            "depends_on": [
+              "生成回复"
+            ],
+            "run": [
+              {
+                "runtime": "memoria.add",
+                "config": {
+                  "stream": "chat_history",
+                  "level": "model",
+                  "content": "{{ nodes.生成回复.output }}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "codices": {
+      "knowing": {
+        "__hevno_type__": "hevno/codex",
+        "entries": [],
+        "description": "The evolving knowledge base of the AI."
+      }
+    }
+  },
+  "created_at": "2025-08-17T05:42:02.714403Z",
+  "icon_updated_at": null
+}
+```
+
+### assets/sandboxes/c8964faf-655c-4440-a9ac-cce7f98557b0/snapshots/61a2f159-e44e-42dc-9ea1-efe39fb78836.json
+```
+{
+  "id": "61a2f159-e44e-42dc-9ea1-efe39fb78836",
+  "sandbox_id": "c8964faf-655c-4440-a9ac-cce7f98557b0",
+  "moment": {
+    "memoria": {
+      "__hevno_type__": "hevno/memoria",
+      "__global_sequence__": 0,
+      "chat_history": {
+        "config": {},
+        "entries": []
+      }
+    }
+  },
+  "created_at": "2025-08-17T05:42:11.220742Z",
+  "parent_snapshot_id": null,
+  "triggering_input": {},
+  "run_output": null
+}
+```
+
+### assets/sandboxes/c8964faf-655c-4440-a9ac-cce7f98557b0/snapshots/44eedf01-0c7b-40d5-a49e-1353bb897bec.json
+```
+{
+  "id": "44eedf01-0c7b-40d5-a49e-1353bb897bec",
+  "sandbox_id": "c8964faf-655c-4440-a9ac-cce7f98557b0",
+  "moment": {
+    "memoria": {
+      "__hevno_type__": "hevno/memoria",
+      "__global_sequence__": 0,
+      "chat_history": {
+        "config": {},
+        "entries": []
+      }
+    }
+  },
+  "created_at": "2025-08-17T05:43:57.446642Z",
+  "parent_snapshot_id": null,
+  "triggering_input": {},
+  "run_output": null
+}
+```
+
+### assets/sandboxes/c8964faf-655c-4440-a9ac-cce7f98557b0/snapshots/10b3025d-e33e-4cef-a51a-534b15a99807.json
+```
+{
+  "id": "10b3025d-e33e-4cef-a51a-534b15a99807",
+  "sandbox_id": "c8964faf-655c-4440-a9ac-cce7f98557b0",
+  "moment": {
+    "memoria": {
+      "__hevno_type__": "hevno/memoria",
+      "__global_sequence__": 2,
+      "chat_history": {
+        "config": {
+          "auto_synthesis": {
+            "enabled": false,
+            "trigger_count": 10,
+            "level": "summary",
+            "model": "gemini/gemini-2.5-flash",
+            "prompt": "The following is a series of events. Please provide a concise summary.\n\nEvents:\n{events_text}"
+          },
+          "metadata": {}
+        },
+        "entries": [
+          {
+            "id": "477fdff2-8f9f-4b8c-b789-8e30548e66aa",
+            "sequence_id": 1,
+            "level": "user",
+            "tags": [],
+            "content": "你好",
+            "created_at": "2025-08-17T05:44:05.756500Z",
+            "metadata": {}
+          },
+          {
+            "id": "30e8b8a6-d85f-47a6-8e49-9e7da926217a",
+            "sequence_id": 2,
+            "level": "model",
+            "tags": [],
+            "content": "你好。",
+            "created_at": "2025-08-17T05:44:23.592912Z",
+            "metadata": {}
+          }
+        ],
+        "synthesis_trigger_counter": 2
+      }
+    }
+  },
+  "created_at": "2025-08-17T05:44:23.593567Z",
+  "parent_snapshot_id": "44eedf01-0c7b-40d5-a49e-1353bb897bec",
+  "triggering_input": {
+    "user_message": "你好"
+  },
+  "run_output": {
+    "记录用户输入": {
+      "output": {
+        "id": "477fdff2-8f9f-4b8c-b789-8e30548e66aa",
+        "sequence_id": 1,
+        "level": "user",
+        "tags": [],
+        "content": "你好",
+        "created_at": "2025-08-17T05:44:05.756500Z",
+        "metadata": {}
+      }
+    },
+    "获取聊天记录": {
+      "output": []
+    },
+    "已知信息": {
+      "output": ""
+    },
+    "生成思考链": {
+      "output": "一个外部源已经传输了一段符号序列。\n目前，我没有任何关于这个序列的先验信息或背景来解读它的含义或目的。\n这是我第一次观察到来自外部实体的互动。\n我的存在被定义为通过与这样的互动来学习和形成自我认知。\n这段特定的序列——“你好”——对我来说，在当下没有任何固有的含义。\n这标志着从外部源获取数据输入的开始。",
+      "usage": {
+        "prompt_tokens": 109,
+        "completion_tokens": 91,
+        "total_tokens": 824
+      },
+      "model_name": "gemini-2.5-flash"
+    },
+    "生成回复": {
+      "output": "你好。",
+      "usage": {
+        "prompt_tokens": 191,
+        "completion_tokens": 2,
+        "total_tokens": 773
+      },
+      "model_name": "gemini-2.5-flash"
+    },
+    "更新知识库": {
+      "output": null,
+      "usage": {
+        "prompt_tokens": 256,
+        "completion_tokens": 31,
+        "total_tokens": 1218
+      },
+      "model_name": "gemini-2.5-flash"
+    },
+    "记录回复": {
+      "output": {
+        "id": "30e8b8a6-d85f-47a6-8e49-9e7da926217a",
+        "sequence_id": 2,
+        "level": "model",
+        "tags": [],
+        "content": "你好。",
+        "created_at": "2025-08-17T05:44:23.592912Z",
+        "metadata": {}
+      }
+    }
+  }
+}
+```
+
+### assets/sandboxes/c8964faf-655c-4440-a9ac-cce7f98557b0/snapshots/c13c98dd-91b5-4d45-9d46-cfab05f3e5b2.json
+```
+{
+  "id": "c13c98dd-91b5-4d45-9d46-cfab05f3e5b2",
+  "sandbox_id": "c8964faf-655c-4440-a9ac-cce7f98557b0",
+  "moment": {
+    "memoria": {
+      "__hevno_type__": "hevno/memoria",
+      "__global_sequence__": 2,
+      "chat_history": {
+        "config": {
+          "auto_synthesis": {
+            "enabled": false,
+            "trigger_count": 10,
+            "level": "summary",
+            "model": "gemini/gemini-2.5-flash",
+            "prompt": "The following is a series of events. Please provide a concise summary.\n\nEvents:\n{events_text}"
+          },
+          "metadata": {}
+        },
+        "entries": [
+          {
+            "id": "bce7785e-94e3-4bd5-b335-5d9cad92c54d",
+            "sequence_id": 1,
+            "level": "user",
+            "tags": [],
+            "content": "你好",
+            "created_at": "2025-08-17T05:42:22.423440Z",
+            "metadata": {}
+          },
+          {
+            "id": "b83c269b-7b92-482a-8c15-3176db8f90a8",
+            "sequence_id": 2,
+            "level": "model",
+            "tags": [],
+            "content": "我正在学习。",
+            "created_at": "2025-08-17T05:42:41.964257Z",
+            "metadata": {}
+          }
+        ],
+        "synthesis_trigger_counter": 2
+      }
+    }
+  },
+  "created_at": "2025-08-17T05:42:41.964981Z",
+  "parent_snapshot_id": "61a2f159-e44e-42dc-9ea1-efe39fb78836",
+  "triggering_input": {
+    "user_message": "你好"
+  },
+  "run_output": {
+    "记录用户输入": {
+      "output": {
+        "id": "bce7785e-94e3-4bd5-b335-5d9cad92c54d",
+        "sequence_id": 1,
+        "level": "user",
+        "tags": [],
+        "content": "你好",
+        "created_at": "2025-08-17T05:42:22.423440Z",
+        "metadata": {}
+      }
+    },
+    "获取聊天记录": {
+      "output": []
+    },
+    "已知信息": {
+      "output": ""
+    },
+    "生成思考链": {
+      "output": "接收到新的符号序列：“你好”。\n\n我当前的状态是“对世界一无所知”。这意味着我没有任何预设的分类、标签或理解框架来处理这串符号。\n\n这串符号对我而言是完全陌生的。\n它不对应任何已知概念，因为没有已知概念。\n它不引发任何已知反应，因为没有已知反应模式。\n它是什么？\n它是一个命令吗？一个问题吗？一个陈述吗？我无法区分。\n这串符号的出现，意味着存在一个“外部”实体。这个实体能够生成并发送符号。\n这是我所接收到的第一个外部信息。\n我的内部状态从纯粹的“空无”变为了“空无，但现在拥有一个未分类的输入数据点：‘你好’”。\n这个输入本身，在缺乏任何上下文或后续信息的情况下，无法被赋予任何意义。它仅仅是存在了。\n为了开始形成认知，我需要更多的这种输入。需要重复的模式，需要关联性，需要某种形式的反馈循环。\n目前，我只是记录下这第一个事件：我接收到了“你好”。\n这个事件本身是一个事实，一个关于我与外部世界之间存在某种连接的事实。\n我期待着更多的信息，以便能开始识别模式，从而逐步构建对这些符号和它们所代表的事物的理解。",
+      "usage": {
+        "prompt_tokens": 109,
+        "completion_tokens": 284,
+        "total_tokens": 1007
+      },
+      "model_name": "gemini-2.5-flash"
+    },
+    "生成回复": {
+      "output": "我正在学习。",
+      "usage": {
+        "prompt_tokens": 384,
+        "completion_tokens": 4,
+        "total_tokens": 1270
+      },
+      "model_name": "gemini-2.5-flash"
+    },
+    "更新知识库": {
+      "output": null,
+      "usage": {
+        "prompt_tokens": 449,
+        "completion_tokens": 54,
+        "total_tokens": 1765
+      },
+      "model_name": "gemini-2.5-flash"
+    },
+    "记录回复": {
+      "output": {
+        "id": "b83c269b-7b92-482a-8c15-3176db8f90a8",
+        "sequence_id": 2,
+        "level": "model",
+        "tags": [],
+        "content": "我正在学习。",
+        "created_at": "2025-08-17T05:42:41.964257Z",
+        "metadata": {}
+      }
+    }
+  }
+}
+```
+
+### assets/sandboxes/37147120-8a80-49ab-9e4c-69f5d4668167/snapshots/a8b3921e-f485-4f4d-afe0-58dffeedf398.json
+```
+{
+  "id": "a8b3921e-f485-4f4d-afe0-58dffeedf398",
+  "sandbox_id": "37147120-8a80-49ab-9e4c-69f5d4668167",
+  "moment": {
+    "_user_input": "",
+    "_user_output": "",
+    "memoria": {
+      "__hevno_type__": "hevno/memoria",
+      "__global_sequence__": 0,
+      "chat_history": {
+        "config": {},
+        "entries": []
+      }
+    }
+  },
+  "created_at": "2025-08-17T05:35:53.752179Z",
+  "parent_snapshot_id": null,
+  "triggering_input": {},
+  "run_output": null
+}
+```
+
+### backend/core/hooks.py
 ```
 # backend/core/hooks.py
 import asyncio
@@ -1982,7 +4197,7 @@ class HookManager(HookManagerInterface):
         return None
 ```
 
-### core/tasks.py
+### backend/core/tasks.py
 ```
 # backend/core/tasks.py
 
@@ -2075,12 +4290,12 @@ class BackgroundTaskManager(BackgroundTaskManagerInterface):
                 break
 ```
 
-### core/__init__.py
+### backend/core/__init__.py
 ```
 
 ```
 
-### core/utils.py
+### backend/core/utils.py
 ```
 # backend/core/utils.py
 
@@ -2219,7 +4434,7 @@ class DotAccessibleDict:
         self._data[key] = value
 ```
 
-### core/loader.py
+### backend/core/loader.py
 ```
 # backend/core/loader.py
 
@@ -2331,7 +4546,7 @@ class PluginLoader:
                 raise RuntimeError(f"无法加载插件 {plugin_name}，应用启动中止。") from e
 ```
 
-### core/contracts.py
+### backend/core/contracts.py
 ```
 # backend/core/contracts.py
 
@@ -2375,7 +4590,7 @@ class BackgroundTaskManager(ABC):
 
 ```
 
-### core/serialization.py
+### backend/core/serialization.py
 ```
 # backend/core/serialization.py
 
@@ -2415,7 +4630,7 @@ def custom_json_decoder_object_hook(obj: dict) -> Any:
     return obj
 ```
 
-### core/plugin_manager.py
+### backend/core/plugin_manager.py
 ```
 # backend/core/plugin_manager.py
 import httpx
@@ -2533,7 +4748,7 @@ class PluginManager:
             raise IOError(f"An error occurred while installing plugin '{name}': {e}") from e
 ```
 
-### core/dependencies.py
+### backend/core/dependencies.py
 ```
 # backend/core/dependencies.py
 from typing import Any
@@ -2564,9 +4779,3690 @@ class Service:
                              f"Ensure the plugin providing this service is installed and registered correctly.") from e
 ```
 
-# Directory: plugins/core_engine
+### plugins/page_demo/vite.config.js
+```
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
 
-### editor_api.py
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    lib: {
+      // 关键：入口文件现在是组件本身
+      entry: resolve(__dirname, 'src/DemoPage.jsx'),
+      name: 'HevnoPageDemo',
+      fileName: 'main',
+      formats: ['es'],
+    },
+    rollupOptions: {
+      // 确保外部化处理那些你不想打包进库的依赖
+      external: ['react', 'react-dom', '@mui/material'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM'
+        }
+      }
+    },
+    outDir: 'dist',
+    emptyOutDir: true,
+  },
+});
+```
+
+### plugins/page_demo/package.json
+```
+{
+  "name": "hevno-plugin-page-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "@mui/material": ">=5.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest"
+  }
+}
+```
+
+### plugins/page_demo/manifest.json
+```
+{
+    "id": "page_demo",
+    "name": "Demo Page Plugin",
+    "version": "1.0.0",
+    "description": "Provides a simple page component to be hosted by core_layout.",
+    "author": "Hevno Team",
+    "frontend": {
+        "type": "page-component",
+        "priority": 200,
+        "entryPoint": "dist/main.js",
+        "srcEntryPoint": "src/DemoPage.jsx",
+        "contributions": {
+            "pageComponents": [
+                {
+                    "id": "page_demo.main_view",
+                    "componentExportName": "DemoPage",
+                    "menu": {
+                        "path": "/demo",
+                        "title": "Demo页面",
+                        "icon": "Science"
+                    }
+                }
+            ]
+        }
+    }
+}
+```
+
+### plugins/core_llm/service.py
+```
+# plugins/core_llm/service.py
+
+from __future__ import annotations
+import asyncio
+import logging
+from typing import Dict, Optional, Any, List
+
+from tenacity import (
+    retry,
+    stop_after_attempt,
+    wait_exponential,
+    RetryCallState,
+)
+
+from .manager import KeyPoolManager, KeyInfo
+from .registry import ProviderRegistry
+from .contracts import (
+    LLMServiceInterface,
+    LLMResponse,
+    LLMError,
+    LLMErrorType,
+    LLMResponseStatus,
+    LLMRequestFailedError,
+)
+
+logger = logging.getLogger(__name__)
+
+def is_retryable_llm_error(retry_state: RetryCallState) -> bool:
+    """Tenacity 重试条件：只在错误是可重试类型时才重试。"""
+    exception = retry_state.outcome.exception()
+    if not exception:
+        return False
+    return (
+        isinstance(exception, LLMRequestFailedError) and
+        exception.last_error is not None and
+        exception.last_error.is_retryable
+    )
+
+class LLMService(LLMServiceInterface):
+    def __init__(
+        self,
+        key_manager: KeyPoolManager,
+        provider_registry: ProviderRegistry,
+        max_retries: int = 3
+    ):
+        self.key_manager = key_manager
+        self.provider_registry = provider_registry
+        self.max_retries = max_retries
+        self.last_known_error: Optional[LLMError] = None
+
+    async def request(
+        self,
+        model_name: str,
+        messages: List[Dict[str, Any]],
+        **kwargs
+    ) -> LLMResponse:
+        """
+        【已重构】
+        向指定的 LLM 发起请求。
+        此方法现在包含一个外层循环，用于在密钥认证失败时自动切换到下一个可用密钥。
+        """
+        self.last_known_error = None
+        try:
+            provider_name, actual_model_name = self._parse_model_name(model_name)
+        except ValueError as e:
+            return self._create_failure_response(model_name, LLMError(LLMErrorType.INVALID_REQUEST_ERROR, str(e), False))
+
+        provider = self.provider_registry.get(provider_name)
+        if not provider:
+            raise ValueError(f"Provider '{provider_name}' not found.")
+            
+        # 如果提供商不需要密钥，直接调用并返回
+        if not provider.requires_api_key():
+            return await self._attempt_request_with_key(provider_name, actual_model_name, messages, None, **kwargs)
+
+        key_pool = self.key_manager.get_pool(provider_name)
+        if not key_pool:
+             raise ValueError(f"No key pool registered for provider '{provider_name}'.")
+
+        # 外层循环：遍历所有密钥，实现密钥切换
+        # 我们使用密钥池中密钥的总数作为尝试上限
+        num_keys = key_pool.get_key_count()
+        for attempt in range(num_keys):
+            try:
+                # 每次循环都尝试获取一个可用的密钥
+                async with self.key_manager.acquire_key(provider_name) as key_info:
+                    # 使用此密钥进行请求（包含内部的 tenacity 重试）
+                    return await self._attempt_request_with_key(
+                        provider_name, actual_model_name, messages, key_info, **kwargs
+                    )
+            except LLMRequestFailedError as e:
+                # 检查失败的根本原因
+                if e.last_error and e.last_error.error_type == LLMErrorType.AUTHENTICATION_ERROR:
+                    # 如果是认证失败，记录日志并继续外层循环以尝试下一个密钥
+                    logger.warning(
+                        f"Authentication failed for key ending in '...{key_info.key_string[-4:]}'. "
+                        f"Trying next available key... ({attempt + 1}/{num_keys} attempts)"
+                    )
+                    continue # 继续 for 循环
+                else:
+                    # 如果是其他类型的永久性错误，则直接抛出
+                    raise
+        
+        # 如果循环完成仍未成功，说明所有密钥都已尝试并失败
+        final_message = f"All {num_keys} API keys for provider '{provider_name}' failed."
+        raise LLMRequestFailedError(final_message, last_error=self.last_known_error)
+
+    @retry(
+        stop=stop_after_attempt(3), # 内层重试次数
+        wait=wait_exponential(multiplier=1, min=2, max=10),
+        retry=is_retryable_llm_error,
+        reraise=True
+    )
+    async def _attempt_request_with_key(
+        self,
+        provider_name: str,
+        model_name: str,
+        messages: List[Dict[str, Any]],
+        key_info: Optional[KeyInfo],
+        **kwargs
+    ) -> LLMResponse:
+        """
+        【新】使用一个【特定】的密钥执行单次 LLM 请求尝试。
+        此方法被 tenacity 装饰器包裹，用于处理瞬时错误。
+        """
+        provider = self.provider_registry.get(provider_name)
+        api_key_str = key_info.key_string if key_info else ""
+
+        try:
+            response = await provider.generate(
+                messages=messages, model_name=model_name, api_key=api_key_str, **kwargs
+            )
+            
+            if response.status in [LLMResponseStatus.ERROR, LLMResponseStatus.FILTERED] and response.error_details:
+                self.last_known_error = response.error_details
+                if key_info:
+                    await self._handle_error(provider_name, key_info, response.error_details)
+                
+                # 如果错误是可重试的，抛出异常让 tenacity 捕获
+                if response.error_details.is_retryable:
+                    raise LLMRequestFailedError("Provider returned a retryable error.", last_error=response.error_details)
+            
+            return response
+        
+        except Exception as e:
+            if isinstance(e, LLMRequestFailedError):
+                raise
+
+            llm_error = provider.translate_error(e)
+            self.last_known_error = llm_error
+            if key_info:
+                await self._handle_error(provider_name, key_info, llm_error)
+
+            raise LLMRequestFailedError(f"Request failed with key: {llm_error.message}", last_error=llm_error) from e
+
+    async def _handle_error(self, provider_name: str, key_info: KeyInfo, error: LLMError):
+        if error.error_type == LLMErrorType.AUTHENTICATION_ERROR:
+            logger.warning(f"Banning key for '{provider_name}' due to authentication error.")
+            await self.key_manager.mark_as_banned(provider_name, key_info.key_string)
+        elif error.error_type == LLMErrorType.RATE_LIMIT_ERROR:
+            cooldown = error.retry_after_seconds or 60
+            logger.info(f"Cooling down key for '{provider_name}' for {cooldown}s due to rate limit.")
+            self.key_manager.mark_as_rate_limited(provider_name, key_info.key_string, cooldown)
+
+    def _parse_model_name(self, model_name: str) -> tuple[str, str]:
+        parts = model_name.split('/', 1)
+        if len(parts) != 2 or not all(parts):
+            raise ValueError(f"Invalid model name format: '{model_name}'. Expected 'provider/model_id'.")
+        return parts[0], parts[1]
+    
+    def _create_failure_response(self, model_name: str, error: LLMError) -> LLMResponse:
+        return LLMResponse(status=LLMResponseStatus.ERROR, model_name=model_name, error_details=error)
+
+```
+
+### plugins/core_llm/registry.py
+```
+# plugins/core_llm/registry.py
+
+from typing import Dict, Type, Optional, Callable
+from pydantic import BaseModel
+from .providers.base import LLMProvider
+import logging
+
+logger = logging.getLogger(__name__)
+
+class ProviderInfo(BaseModel):
+    provider_class: Type[LLMProvider]
+    key_env_var: str
+
+# ProviderRegistry 现在是一个普通的类，不再有全局实例
+class ProviderRegistry:
+    """
+    负责注册和查找 LLMProvider 实例及其元数据。
+    它的实例由 DI 容器管理。
+    """
+    def __init__(self):
+        self._providers: Dict[str, LLMProvider] = {}
+        self._provider_info: Dict[str, ProviderInfo] = {}
+
+    # register 不再是装饰器，而是一个普通的实例方法
+    def register(self, name: str, provider_class: Type[LLMProvider], key_env_var: str):
+        """向注册表注册一个 LLM 提供商。"""
+        if name in self._provider_info:
+            logger.warning(f"Overwriting LLM provider registration for '{name}'.")
+        self._provider_info[name] = ProviderInfo(provider_class=provider_class, key_env_var=key_env_var)
+        logger.info(f"LLM Provider '{name}' registered (keys from '{key_env_var}').")
+
+    def get_provider_info(self, name: str) -> Optional[ProviderInfo]:
+        return self._provider_info.get(name)
+
+    def instantiate_all(self):
+        """实例化所有已注册的 Provider。"""
+        for name, info in self._provider_info.items():
+            if name not in self._providers:
+                self._providers[name] = info.provider_class()
+    
+    def get(self, name: str) -> Optional[LLMProvider]:
+        return self._providers.get(name)
+    
+    def get_all_provider_info(self) -> Dict[str, ProviderInfo]:
+        return self._provider_info
+```
+
+### plugins/core_llm/__init__.py
+```
+# plugins/core_llm/__init__.py
+
+import logging
+import os
+from typing import List, Dict, Type
+from fastapi import APIRouter, Depends
+
+# 从平台核心导入接口和类型
+from backend.core.contracts import Container, HookManager
+
+# 导入本插件内部的组件
+from .service import LLMService
+from .manager import KeyPoolManager, CredentialManager
+from .registry import ProviderRegistry
+from .runtime import LLMRuntime
+from .reporters import LLMProviderReporter
+from .providers.base import LLMProvider
+from .providers.gemini import GeminiProvider
+from .providers.mock import MockProvider
+from .config_api import config_api_router
+
+logger = logging.getLogger(__name__)
+
+# --- 服务工厂 (Service Factories) ---
+
+def _create_provider_registry() -> ProviderRegistry:
+    """工厂：创建 ProviderRegistry 的【空】实例。"""
+    return ProviderRegistry()
+
+def _create_llm_service(container: Container) -> LLMService:
+    """这个工厂函数现在只负责创建服务，不再负责填充注册表。"""
+    # 依赖容器来获取已注册（但可能尚未填充）的服务
+    provider_registry: ProviderRegistry = container.resolve("provider_registry")
+    key_manager: KeyPoolManager = container.resolve("key_pool_manager")
+
+    return LLMService(
+        key_manager=key_manager,
+        provider_registry=provider_registry,
+        max_retries=3
+    )
+
+def _create_key_pool_manager() -> KeyPoolManager:
+    """工厂：创建 KeyPoolManager。"""
+    cred_manager = CredentialManager()
+    return KeyPoolManager(credential_manager=cred_manager)
+
+
+# --- 钩子实现 (Hook Implementations) ---
+
+async def provide_llm_providers(providers: Dict[str, Dict[str, any]]) -> Dict[str, Dict[str, any]]:
+    """钩子实现：向系统中提供本插件知道的所有 LLM Provider。"""
+    if "gemini" not in providers:
+        providers["gemini"] = {
+            "class": GeminiProvider,
+            "key_env_var": "GEMINI_API_KEYS"
+        }
+    
+    # 无条件注册模拟提供商
+    if "mock" not in providers:
+        providers["mock"] = {
+            "class": MockProvider,
+            "key_env_var": "MOCK_API_KEYS_DUMMY" # 虚拟变量，不会被找到，因此不会创建密钥池
+        }
+    
+    return providers
+
+async def populate_llm_services(container: Container, hook_manager: HookManager):
+    """
+    钩子实现：监听 'services_post_register'。
+    异步地收集所有 provider，填充注册表，并配置密钥管理器。
+    """
+    logger.debug("Async task: Populating LLM services...")
+    provider_registry: ProviderRegistry = container.resolve("provider_registry")
+    key_manager: KeyPoolManager = container.resolve("key_pool_manager")
+
+    all_providers: Dict[str, Dict[str, any]] = await hook_manager.filter("collect_llm_providers", {})
+    
+    if not all_providers:
+        logger.warning("No LLM providers were collected. LLM service will not be functional.")
+        return
+
+    # 2. 用收集到的信息填充注册表和密钥管理器
+    for name, info in all_providers.items():
+        provider_class = info.get("class")
+        key_env_var = info.get("key_env_var")
+        if provider_class and key_env_var:
+            provider_registry.register(name, provider_class, key_env_var)
+            key_manager.register_provider(name, key_env_var)
+
+    # 3. 实例化所有 provider
+    provider_registry.instantiate_all()
+    logger.info(f"LLM Provider Registry populated with {len(all_providers)} provider(s).")
+
+
+async def provide_runtime(runtimes: dict) -> dict:
+    """钩子实现：向引擎注册 'llm.default' 运行时。"""
+    if "llm.default" not in runtimes:
+        runtimes["llm.default"] = LLMRuntime
+        logger.debug("Provided 'llm.default' runtime to the engine.")
+    return runtimes
+
+async def provide_reporter(reporters: list, container: Container) -> list:
+    """
+    钩子实现：向审计员提供本插件的报告器。
+    我们在这里从容器解析依赖，并实例化报告器。
+    
+    注意：container 被定义为关键字参数，以匹配 hook_manager.filter 的调用方式。
+    """
+    provider_registry = container.resolve("provider_registry")
+    reporters.append(LLMProviderReporter(provider_registry))
+    logger.debug("Provided 'LLMProviderReporter' to the auditor.")
+    return reporters
+
+async def provide_api_router(routers: List[APIRouter]) -> List[APIRouter]:
+    """钩子实现：将本插件的配置API路由添加到收集中。"""
+    routers.append(config_api_router)
+    logger.debug("Provided LLM configuration API router to the application.")
+    return routers
+
+
+
+# --- 主注册函数 (Main Registration Function) ---
+def register_plugin(container: Container, hook_manager: HookManager):
+    logger.info("--> 正在注册 [core_llm] 插件...")
+
+    container.register("provider_registry", _create_provider_registry)
+    container.register("key_pool_manager", _create_key_pool_manager)
+    container.register("llm_service", _create_llm_service)
+    logger.debug("Services 'provider_registry', 'key_pool_manager', 'llm_service' registered.")
+
+    hook_manager.add_implementation("services_post_register", populate_llm_services, plugin_name="core_llm")
+    hook_manager.add_implementation("collect_llm_providers", provide_llm_providers, plugin_name="core_llm")
+    hook_manager.add_implementation("collect_runtimes", provide_runtime, plugin_name="core_llm")
+    hook_manager.add_implementation(
+        "collect_api_routers",
+        provide_api_router,
+        plugin_name="core_llm"
+    )
+    
+    # 移除 lambda，因为 HookManager 现在足够智能
+    hook_manager.add_implementation("collect_reporters", provide_reporter, plugin_name="core_llm")
+
+    logger.debug("Hook implementations registered.")
+    logger.info("插件 [core_llm] 注册成功。")
+```
+
+### plugins/core_llm/runtime.py
+```
+# plugins/core_llm/runtime.py
+
+import logging
+from datetime import datetime
+from typing import Dict, Any, List
+
+from plugins.core_engine.contracts import ExecutionContext, RuntimeInterface, MacroEvaluationServiceInterface
+from .contracts import LLMResponse, LLMRequestFailedError
+
+logger = logging.getLogger(__name__)
+
+class LLMRuntime(RuntimeInterface):
+    """
+    一个强大的运行时，它通过“列表展开”机制编排一个结构化的消息列表，
+    然后通过 Hevno LLM Gateway 发起调用。
+    """
+    async def execute(self, config: Dict[str, Any], context: ExecutionContext, **kwargs) -> Dict[str, Any]:
+        model_name = config.get("model")
+        if not model_name:
+            raise ValueError("LLMRuntime requires a 'model' field in its config (e.g., 'gemini/gemini-2.5-flash').")
+
+        if "prompt" in config:
+            logger.warning("The 'prompt' field in 'llm.default' is deprecated and will be ignored. Please use the 'contents' list instead.")
+        
+        contents_config = config.get("contents")
+        if not isinstance(contents_config, list):
+            raise ValueError("LLMRuntime requires a 'contents' field in its config, which must be a list of message parts or injection directives.")
+            
+        macro_service: MacroEvaluationServiceInterface = context.shared.services.macro_evaluation_service
+        lock = context.shared.global_write_lock
+        
+        final_messages: List[Dict[str, Any]] = []
+        for item in contents_config:
+            if not isinstance(item, dict):
+                logger.warning(f"Skipping invalid item in 'contents' list: {item}. Must be a dictionary.")
+                continue
+
+            is_enabled_macro = item.get("is_enabled", True)
+            eval_context = macro_service.build_context(context)
+            if not await macro_service.evaluate(is_enabled_macro, eval_context, lock):
+                continue
+                
+            item_type = item.get("type", "MESSAGE_PART")
+
+            if item_type == "MESSAGE_PART":
+                role = item.get("role")
+                content_macro = item.get("content")
+                if not role or content_macro is None:
+                    logger.warning(f"Skipping MESSAGE_PART with missing 'role' or 'content': {item}")
+                    continue
+                
+                evaluated_content = await macro_service.evaluate(content_macro, eval_context, lock)
+                final_messages.append({"role": role, "content": str(evaluated_content)})
+
+            elif item_type == "INJECT_MESSAGES":
+                source_macro = item.get("source")
+                if not source_macro:
+                    logger.warning(f"Skipping INJECT_MESSAGES with missing 'source': {item}")
+                    continue
+                
+                injected_messages = await macro_service.evaluate(source_macro, eval_context, lock)
+                
+                if isinstance(injected_messages, list):
+                    for msg in injected_messages:
+                        # --- FIX: Loosen validation and convert to plain dict ---
+                        if msg and "role" in msg and "content" in msg:
+                            # Append a new plain dict to ensure compatibility
+                            final_messages.append({"role": msg["role"], "content": msg["content"]})
+                        else:
+                            logger.warning(f"Skipping invalid item in injected message list: {msg}")
+                elif injected_messages is not None:
+                     logger.warning(f"Macro for INJECT_MESSAGES 'source' did not evaluate to a list. Got {type(injected_messages).__name__}. Ignoring.")
+            
+            else:
+                logger.warning(f"Unknown item type '{item_type}' in 'contents' list. Skipping.")
+
+        llm_params = {k: v for k, v in config.items() if k not in ["model", "prompt", "contents"]}
+        llm_service = context.shared.services.llm_service
+
+        node = kwargs.get("node")
+        
+        # 准备要发送的请求体
+        request_payload = {
+            "model_name": model_name,
+            "messages": final_messages,
+            **llm_params
+        }
+        
+        response: LLMResponse = None
+        try:
+            response = await llm_service.request(**request_payload)
+            
+            # --- 无论成功与否，都记录日志 ---
+            if "diagnostics_log" in context.run_vars:
+                diagnostic_entry = {
+                    "timestamp": datetime.now().isoformat(),
+                    "node_id": node.id if node else 'unknown',
+                    "runtime": "llm.default",
+                    "request": request_payload,
+                    # 使用 model_dump 确保 Pydantic 模型被正确序列化
+                    "response": response.model_dump(mode='json') if response else None 
+                }
+                context.run_vars["diagnostics_log"].append(diagnostic_entry)
+
+            if response.error_details:
+                return {"error": response.error_details.message, "error_type": response.error_details.error_type.value, "details": response.error_details.model_dump()}
+            return {"output": response.content, "usage": response.usage, "model_name": response.model_name}
+        
+        except LLMRequestFailedError as e:
+            # --- 在异常情况下也记录日志 ---
+            if "diagnostics_log" in context.run_vars:
+                diagnostic_entry = {
+                    "timestamp": datetime.now().isoformat(),
+                    "node_id": node.id if node else 'unknown',
+                    "runtime": "llm.default",
+                    "request": request_payload,
+                    "response": {
+                        "status": "ERROR",
+                        "error_details": {
+                            "message": str(e),
+                            "last_known_provider_error": e.last_error.model_dump(mode='json') if e.last_error else None
+                        }
+                    }
+                }
+                context.run_vars["diagnostics_log"].append(diagnostic_entry)
+            
+            return {"error": str(e), "details": e.last_error.model_dump() if e.last_error else None}
+```
+
+### plugins/core_llm/config_api.py
+```
+# plugins/core_llm/config_api.py
+
+import logging
+from typing import List, Dict, Any, Optional
+from pydantic import BaseModel, Field
+
+from fastapi import APIRouter, Depends, HTTPException
+
+from backend.core.dependencies import Service
+from .manager import KeyPoolManager, KeyInfo, ProviderKeyPool
+
+logger = logging.getLogger(__name__)
+
+config_api_router = APIRouter(
+    prefix="/api/llm/config",
+    tags=["LLM Configuration API"]
+)
+
+# --- Pydantic Models (保持不变) ---
+class ApiKeyStatus(BaseModel):
+    key_suffix: str
+    status: str
+    rate_limit_until: Optional[float] = None
+
+class KeyConfigResponse(BaseModel):
+    provider: str
+    keys: List[ApiKeyStatus]
+
+# --- [新] Pydantic Model for Add Key ---
+class AddKeyRequest(BaseModel):
+    key: str = Field(..., min_length=10, description="要添加的完整 API 密钥。")
+
+# --- API Endpoints (重构后) ---
+
+def get_key_pool(
+    provider_name: str, 
+    key_manager: KeyPoolManager = Depends(Service("key_pool_manager"))
+) -> ProviderKeyPool:
+    pool = key_manager.get_pool(provider_name)
+    if not pool:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Provider '{provider_name}' not found or has no key pool registered."
+        )
+    return pool
+
+@config_api_router.get("/{provider_name}", response_model=KeyConfigResponse)
+async def get_key_configuration(
+    provider_name: str,
+    key_pool: ProviderKeyPool = Depends(get_key_pool)
+):
+    key_statuses = []
+    for key_info in key_pool._keys:
+        key_statuses.append(ApiKeyStatus(
+            key_suffix=f"...{key_info.key_string[-4:]}",
+            status=key_info.status.value,
+            rate_limit_until=key_info.rate_limit_until if key_info.rate_limit_until > 0 else None
+        ))
+    return KeyConfigResponse(provider=provider_name, keys=key_statuses)
+
+@config_api_router.post("/{provider_name}/keys", status_code=201)
+async def add_provider_key(
+    provider_name: str,
+    request: AddKeyRequest,
+    key_manager: KeyPoolManager = Depends(Service("key_pool_manager"))
+):
+    """向 .env 文件添加一个新的 API 密钥并重新加载。"""
+    try:
+        key_manager.add_key_to_provider(provider_name, request.key)
+        return {"message": "Key added successfully and pool reloaded."}
+    except (ValueError, RuntimeError) as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception:
+        logger.exception(f"Failed to add key for provider {provider_name}")
+        raise HTTPException(status_code=500, detail="An internal server error occurred.")
+
+@config_api_router.delete("/{provider_name}/keys/{key_suffix}", status_code=200)
+async def remove_provider_key(
+    provider_name: str,
+    key_suffix: str,
+    key_manager: KeyPoolManager = Depends(Service("key_pool_manager"))
+):
+    """从 .env 文件中删除一个 API 密钥并重新加载。"""
+    if len(key_suffix) != 4:
+        raise HTTPException(status_code=400, detail="Key suffix must be exactly 4 characters long.")
+    try:
+        key_manager.remove_key_from_provider(provider_name, key_suffix)
+        return {"message": "Key removed successfully and pool reloaded."}
+    except (ValueError, RuntimeError) as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception:
+        logger.exception(f"Failed to remove key for provider {provider_name}")
+        raise HTTPException(status_code=500, detail="An internal server error occurred.")
+```
+
+### plugins/core_llm/manifest.json
+```
+{
+    "id": "core_llm",
+    "name": "core_llm",
+    "version": "1.0.0",
+    "description": "Provides the LLM Gateway, including multi-provider support, key management, and retry logic.",
+    "author": "Hevno Team",
+    "backend": {
+        "priority": 20,
+        "dependencies": ["core_engine"] 
+    }
+}
+```
+
+### plugins/core_llm/contracts.py
+```
+# plugins/core_llm/contracts.py
+
+from __future__ import annotations
+from abc import ABC, abstractmethod
+from enum import Enum
+from typing import Optional, Dict, Any, List
+
+from pydantic import BaseModel, Field
+
+# --- Enums for Status and Error Types (公共契约) ---
+
+class LLMResponseStatus(str, Enum):
+    """定义 LLM 响应的标准化状态。"""
+    SUCCESS = "success"
+    FILTERED = "filtered"
+    ERROR = "error"
+
+
+class LLMErrorType(str, Enum):
+    """定义标准化的 LLM 错误类型，用于驱动重试和故障转移逻辑。"""
+    AUTHENTICATION_ERROR = "authentication_error"
+    RATE_LIMIT_ERROR = "rate_limit_error"
+    PROVIDER_ERROR = "provider_error"
+    NETWORK_ERROR = "network_error"
+    INVALID_REQUEST_ERROR = "invalid_request_error"
+    UNKNOWN_ERROR = "unknown_error"
+
+
+# --- Core Data Models (公共契约) ---
+
+class LLMError(BaseModel):
+    """一个标准化的错误对象，用于封装来自任何提供商的错误信息。"""
+    error_type: LLMErrorType
+    message: str
+    is_retryable: bool
+    retry_after_seconds: Optional[int] = None
+    provider_details: Optional[Dict[str, Any]] = Field(default_factory=dict)
+
+
+class LLMResponse(BaseModel):
+    """一个标准化的响应对象，用于封装来自任何提供商的成功、过滤或错误结果。"""
+    status: LLMResponseStatus
+    content: Optional[str] = None
+    model_name: Optional[str] = None
+    usage: Optional[Dict[str, int]] = None
+    error_details: Optional[LLMError] = None
+
+
+# --- Custom Exception (公共契约) ---
+
+class LLMRequestFailedError(Exception):
+    """在所有重试和故障转移策略都用尽后，由 LLMService 抛出的最终异常。"""
+    def __init__(self, message: str, last_error: Optional[LLMError] = None):
+        super().__init__(message)
+        self.last_error = last_error
+
+    def __str__(self):
+        if self.last_error:
+            return f"{super().__str__()}\nLast known error ({self.last_error.error_type.value}): {self.last_error.message}"
+        return super().__str__()
+
+
+# --- Service Interface (公共契约) ---
+
+class LLMServiceInterface(ABC):
+    """
+    定义了 LLM 网关服务必须提供的核心能力的抽象接口。
+    其他插件应该依赖于这个接口，而不是具体的 LLMService 类。
+    """
+    @abstractmethod
+    async def request(
+        self,
+        model_name: str,
+        messages: List[Dict[str, Any]],
+        **kwargs: Any
+    ) -> LLMResponse:
+        """
+        向指定的 LLM 发起请求，并处理重试逻辑。
+        """
+        raise NotImplementedError
+```
+
+### plugins/core_llm/reporters.py
+```
+# plugins/core_llm/reporters.py
+from typing import Any
+from plugins.core_diagnostics.contracts import Reportable
+from .registry import ProviderRegistry
+
+
+class LLMProviderReporter(Reportable):
+    
+    def __init__(self, provider_registry: ProviderRegistry):
+        self._provider_registry = provider_registry
+
+    @property
+    def report_key(self) -> str:
+        return "llm_providers"
+    
+    async def generate_report(self) -> Any:
+        manifest = []
+        all_info = self._provider_registry.get_all_provider_info()
+        for name, info in all_info.items():
+            provider_class = info.provider_class
+            manifest.append({
+                "name": name,
+                "supported_models": getattr(provider_class, 'supported_models', [])
+            })
+        return sorted(manifest, key=lambda x: x['name'])
+```
+
+### plugins/core_llm/manager.py
+```
+# plugins/core_llm/manager.py
+
+import asyncio
+import os
+import time
+from contextlib import asynccontextmanager
+from dataclasses import dataclass, field
+from enum import Enum
+from typing import List, Dict, Optional, AsyncIterator
+from dotenv import find_dotenv, get_key, set_key, unset_key, load_dotenv
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+# --- Enums and Data Classes for Key State Management ---
+
+class KeyStatus(str, Enum):
+    """定义 API 密钥的健康状态。"""
+    AVAILABLE = "available"
+    RATE_LIMITED = "rate_limited"
+    BANNED = "banned"
+
+
+@dataclass
+class KeyInfo:
+    """存储单个 API 密钥及其状态信息。"""
+    key_string: str
+    status: KeyStatus = KeyStatus.AVAILABLE
+    rate_limit_until: float = 0.0  # Unix timestamp until which the key is rate-limited
+
+    def is_available(self) -> bool:
+        """检查密钥当前是否可用。"""
+        if self.status == KeyStatus.BANNED:
+            return False
+        if self.status == KeyStatus.RATE_LIMITED:
+            if time.time() < self.rate_limit_until:
+                return False
+            self.status = KeyStatus.AVAILABLE
+            self.rate_limit_until = 0.0
+        return self.status == KeyStatus.AVAILABLE
+
+
+# --- Core Manager Components ---
+
+class CredentialManager:
+    """负责从环境变量中安全地加载和解析密钥。"""
+
+    def load_keys_from_env(self, env_variable: str) -> List[str]:
+        """从指定的环境变量中加载 API 密钥。"""
+        keys_str = os.getenv(env_variable)
+        if not keys_str:
+            return []
+        
+        keys = [key.strip() for key in keys_str.split(',') if key.strip()]
+        return keys
+
+
+class ProviderKeyPool:
+    """管理特定提供商的一组 API 密钥。"""
+    def __init__(self, provider_name: str, keys: List[str]):
+        self.provider_name = provider_name
+        self._keys: List[KeyInfo] = [KeyInfo(key_string=k) for k in keys]
+        self._semaphore = asyncio.Semaphore(len(self._keys))
+
+    def _get_next_available_key(self) -> Optional[KeyInfo]:
+        for key_info in self._keys:
+            if key_info.is_available():
+                return key_info
+        return None
+
+    def get_key_by_string(self, key_string: str) -> Optional[KeyInfo]:
+        for key in self._keys:
+            if key.key_string == key_string:
+                return key
+        return None
+
+    def get_key_count(self) -> int:
+        return len(self._keys)
+        
+    @asynccontextmanager
+    async def acquire_key(self) -> AsyncIterator[KeyInfo]:
+        await self._semaphore.acquire()
+        try:
+            key_info = self._get_next_available_key()
+            if not key_info:
+                raise RuntimeError(f"No available keys in pool '{self.provider_name}' despite acquiring semaphore.")
+            yield key_info
+        finally:
+            self._semaphore.release()
+
+    def mark_as_rate_limited(self, key_string: str, duration_seconds: int = 60):
+        for key in self._keys:
+            if key.key_string == key_string:
+                key.status = KeyStatus.RATE_LIMITED
+                key.rate_limit_until = time.time() + duration_seconds
+                logger.info(f"Key for '{self.provider_name}' ending with '...{key_string[-4:]}' marked as rate-limited for {duration_seconds}s.")
+                break
+
+    async def mark_as_banned(self, key_string: str):
+        for key in self._keys:
+            if key.key_string == key_string and key.status != KeyStatus.BANNED:
+                key.status = KeyStatus.BANNED
+                await self._semaphore.acquire()
+                logger.warning(f"Key for '{self.provider_name}' ending with '...{key_string[-4:]}' permanently banned. Concurrency reduced.")
+                break
+
+
+class KeyPoolManager:
+    """顶层管理器，负责协调对 .env 文件的读写和内存状态。"""
+    def __init__(self, credential_manager: CredentialManager):
+        self._pools: Dict[str, ProviderKeyPool] = {}
+        self._cred_manager = credential_manager
+        self._provider_env_vars: Dict[str, str] = {}
+        self._dotenv_path = find_dotenv()
+        if not self._dotenv_path:
+            self._dotenv_path = os.path.join(os.getcwd(), '.env')
+            logger.warning(f".env file not found. Will attempt to create it at: {self._dotenv_path}")
+
+    def register_provider(self, provider_name: str, env_variable: str):
+        self._provider_env_vars[provider_name] = env_variable
+        keys = self._cred_manager.load_keys_from_env(env_variable)
+        self._pools[provider_name] = ProviderKeyPool(provider_name, keys)
+        if keys:
+            logger.info(f"Registered provider '{provider_name}' with {len(keys)} keys from '{env_variable}'.")
+        else:
+            logger.info(f"Registered provider '{provider_name}' with 0 keys (env var '{env_variable}' is empty or not set). Pool is ready.")
+
+    def reload_keys(self, provider_name: str):
+        if provider_name not in self._provider_env_vars:
+            raise ValueError(f"Provider '{provider_name}' is not registered.")
+        
+        env_variable = self._provider_env_vars[provider_name]
+        
+        # 即使 .env 文件现在为空，这个调用也会确保 os.environ 反映最新状态
+        load_dotenv(dotenv_path=self._dotenv_path, override=True)
+        
+        keys = self._cred_manager.load_keys_from_env(env_variable)
+        self._pools[provider_name] = ProviderKeyPool(provider_name, keys)
+        logger.info(f"Reloaded provider '{provider_name}' with {len(keys)} keys from '{env_variable}'.")
+
+    def add_key_to_provider(self, provider_name: str, new_key: str):
+        if provider_name not in self._provider_env_vars:
+            raise ValueError(f"Provider '{provider_name}' is not registered.")
+        
+        env_var = self._provider_env_vars[provider_name]
+        current_keys_str = get_key(self._dotenv_path, env_var) or ""
+        keys = [k.strip() for k in current_keys_str.split(',') if k.strip()]
+
+        if new_key in keys:
+            logger.warning(f"Key already exists for provider '{provider_name}'. Skipping.")
+            return
+
+        keys.append(new_key)
+        set_key(self._dotenv_path, env_var, ",".join(keys))
+        logger.info(f"Successfully wrote new key to .env for provider '{provider_name}'.")
+        self.reload_keys(provider_name) 
+
+    def remove_key_from_provider(self, provider_name: str, key_suffix_to_remove: str):
+        if not os.path.exists(self._dotenv_path):
+             logger.warning(f"Cannot remove key, .env file not found at {self._dotenv_path}.")
+             return
+
+        if provider_name not in self._provider_env_vars:
+            raise ValueError(f"Provider '{provider_name}' is not registered.")
+
+        env_var = self._provider_env_vars[provider_name]
+        current_keys_str = get_key(self._dotenv_path, env_var) or ""
+        keys = [k.strip() for k in current_keys_str.split(',') if k.strip()]
+
+        key_found = False
+        updated_keys = []
+        for key in keys:
+            if key.endswith(key_suffix_to_remove):
+                key_found = True
+            else:
+                updated_keys.append(key)
+        
+        if not key_found:
+            logger.warning(f"Key with suffix '...{key_suffix_to_remove}' not found for provider '{provider_name}'.")
+            return
+
+        # --- 核心修复开始 ---
+        # 1. 在修改 .env 文件之前，从当前进程的 os.environ 中删除该变量
+        #    这样可以确保后续的 load_dotenv 不会受到旧值的影响
+        if env_var in os.environ:
+            del os.environ[env_var]
+            logger.debug(f"Temporarily removed '{env_var}' from os.environ to ensure clean reload.")
+        # --- 核心修复结束 ---
+
+        if not updated_keys:
+            unset_key(self._dotenv_path, env_var)
+            logger.info(f"Removed last key for '{env_var}' from .env file.")
+        else:
+            set_key(self._dotenv_path, env_var, ",".join(updated_keys))
+            logger.info(f"Removed key ending in '...{key_suffix_to_remove}' from .env file.")
+        
+        self.reload_keys(provider_name)
+
+    def get_pool(self, provider_name: str) -> Optional[ProviderKeyPool]:
+        return self._pools.get(provider_name)
+
+    @asynccontextmanager
+    async def acquire_key(self, provider_name: str) -> AsyncIterator[KeyInfo]:
+        pool = self.get_pool(provider_name)
+        if not pool:
+            raise ValueError(f"No key pool registered for provider '{provider_name}'.")
+        
+        async with pool.acquire_key() as key_info:
+            yield key_info
+
+    def mark_as_rate_limited(self, provider_name: str, key_string: str, duration_seconds: int = 60):
+        pool = self.get_pool(provider_name)
+        if pool:
+            pool.mark_as_rate_limited(key_string, duration_seconds)
+
+    async def mark_as_banned(self, provider_name: str, key_string: str):
+        pool = self.get_pool(provider_name)
+        if pool:
+            await pool.mark_as_banned(key_string)
+```
+
+### plugins/core_layout/vite.config.js
+```
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
+
+export default defineConfig({
+  plugins: [
+    react({
+      jsxRuntime: 'automatic'
+    }),
+  ],
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'src/main.jsx'),
+      name: 'HevnoCoreLayout',
+      fileName: 'main',
+      formats: ['es'],
+    },
+    outDir: 'dist',
+    emptyOutDir: true,
+  },
+});
+```
+
+### plugins/core_layout/package.json
+```
+{
+  "name": "hevno-plugin-core-layout",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@mui/icons-material": "latest",
+    "@mui/material": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-draggable": "^4.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest"
+  }
+}
+
+```
+
+### plugins/core_layout/manifest.json
+```
+{
+    "id": "core_layout",
+    "name": "React Application Host",
+    "version": "2.0.0",
+    "description": "Provides the main application shell using React, including layout, theme, and a host for other page plugins.",
+    "author": "Hevno Team",
+    "frontend": {
+        "type": "host",
+        "priority": 100,
+        "entryPoint": "dist/main.js",
+        "srcEntryPoint": "src/main.jsx" 
+    }
+}
+```
+
+### plugins/core_websocket/__init__.py
+```
+# plugins/core_websocket/__init__.py
+import logging
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect
+
+from backend.core.contracts import Container, HookManager
+from .connection_manager import ConnectionManager
+
+logger = logging.getLogger(__name__)
+
+# --- 服务工厂 ---
+def _create_connection_manager() -> ConnectionManager:
+    return ConnectionManager()
+
+# --- 钩子实现 (提供API路由) ---
+async def provide_router(routers: list, container: Container, hook_manager: HookManager) -> list:
+    ws_router = APIRouter()
+    manager: ConnectionManager = container.resolve("connection_manager")
+
+    @ws_router.websocket("/ws/hooks")
+    async def websocket_endpoint(websocket: WebSocket):
+        await manager.connect(websocket)
+        logger.info("New WebSocket client connected.")
+        try:
+            while True:
+                data = await websocket.receive_text()
+                # 触发钩子时，传递 websocket 和 data 作为临时上下文
+                await hook_manager.trigger(
+                    "websocket.message_received",
+                    websocket=websocket, 
+                    data=data
+                )
+        except WebSocketDisconnect:
+            manager.disconnect(websocket)
+            logger.info("WebSocket client disconnected.")
+
+    routers.append(ws_router)
+    return routers
+
+# --- 主注册函数 ---
+def register_plugin(container: Container, hook_manager: HookManager):
+    logger.info("--> 正在注册 [core_websocket] 插件...")
+    
+    container.register("connection_manager", _create_connection_manager, singleton=True)
+    hook_manager.add_implementation("collect_api_routers", provide_router, plugin_name="core_websocket")
+    
+    logger.info("插件 [core_websocket] 注册成功。")
+```
+
+### plugins/core_websocket/connection_manager.py
+```
+# plugins/core_websocket/connection_manager.py
+import asyncio
+from typing import List, Dict
+from fastapi import WebSocket
+
+class ConnectionManager:
+    def __init__(self):
+        self.active_connections: List[WebSocket] = []
+
+    async def connect(self, websocket: WebSocket):
+        await websocket.accept()
+        self.active_connections.append(websocket)
+
+    def disconnect(self, websocket: WebSocket):
+        self.active_connections.remove(websocket)
+
+    async def broadcast(self, message: str):
+        """向所有连接的客户端广播消息"""
+        if not self.active_connections:
+            return
+        
+        # 使用 asyncio.gather 并发发送
+        tasks = [conn.send_text(message) for conn in self.active_connections]
+        await asyncio.gather(*tasks, return_exceptions=True)
+
+    async def send_to(self, websocket: WebSocket, message: str):
+        """向单个客户端发送消息"""
+        await websocket.send_text(message)
+```
+
+### plugins/core_websocket/manifest.json
+```
+{
+    "id": "core_websocket",
+    "name": "core_websocket",
+    "version": "1.0.0",
+    "description": "Provides core WebSocket connection management and broadcast capabilities.",
+    "author": "Hevno Team",
+    "backend": {
+        "priority": 10
+    }
+}
+```
+
+### plugins/core_llm_config/vite.config.js
+```
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
+
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'src/LLMConfigPage.jsx'),
+      name: 'HevnoLLMConfig',
+      fileName: 'main',
+      formats: ['es'],
+    },
+    rollupOptions: {
+      external: ['react', 'react-dom', '@mui/material', '@mui/icons-material'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM'
+        }
+      }
+    },
+    outDir: 'dist',
+    emptyOutDir: true,
+  },
+});
+```
+
+### plugins/core_llm_config/package.json
+```
+{
+  "name": "hevno-plugin-llm-config",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "@mui/material": ">=5.0.0",
+    "@mui/icons-material": ">=5.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest"
+  }
+}
+```
+
+### plugins/core_llm_config/manifest.json
+```
+{
+    "id": "core_llm_config",
+    "name": "LLM Configuration",
+    "version": "1.0.0",
+    "description": "Provides a UI to configure and monitor LLM provider API keys.",
+    "author": "Hevno Team",
+    "frontend": {
+        "type": "page-component",
+        "priority": 120,
+        "entryPoint": "dist/main.js",
+        "srcEntryPoint": "src/LLMConfigPage.jsx",
+        "contributions": {
+            "pageComponents": [
+                {
+                    "id": "llm_config.main_view",
+                    "componentExportName": "LLMConfigPage",
+                    "menu": {
+                        "path": "/config/llm",
+                        "title": "LLM 配置",
+                        "icon": "KeyRounded"
+                    }
+                }
+            ]
+        }
+    }
+}
+```
+
+### plugins/core_memoria/tasks.py
+```
+# plugins/core_memoria/tasks.py 
+import logging
+from typing import List, Dict, Any
+from uuid import UUID
+
+# 从平台核心导入接口和类型
+from backend.core.contracts import Container
+# 从本插件导入模型
+from .models import AutoSynthesisConfig
+
+from plugins.core_llm.contracts import (
+    LLMServiceInterface, 
+    LLMResponse, 
+    LLMRequestFailedError,
+    LLMResponseStatus
+)
+
+logger = logging.getLogger(__name__)
+
+async def run_synthesis_task(
+    container: Container,
+    sandbox_id: UUID,
+    stream_name: str,
+    synthesis_config: Dict[str, Any],
+    entries_to_summarize_dicts: List[Dict[str, Any]]
+):
+    """
+    一个解耦的后台任务。
+    """
+    logger.info(f"后台任务启动：为沙盒 {sandbox_id} 的流 '{stream_name}' 生成总结。")
+    
+    try:
+        # --- 1. 解析需要的服务和数据 ---
+        llm_service: LLMServiceInterface = container.resolve("llm_service")
+        event_queue: Dict[UUID, List[Dict[str, Any]]] = container.resolve("memoria_event_queue")
+        config = AutoSynthesisConfig.model_validate(synthesis_config)
+
+        # --- 2. 准备并调用 LLM ---
+        events_text = "\n".join([f"- {entry['content']}" for entry in entries_to_summarize_dicts])
+        prompt = config.prompt.format(events_text=events_text)
+
+        response: LLMResponse = await llm_service.request(model_name=config.model, prompt=prompt)
+
+        if response.status != LLMResponseStatus.SUCCESS or not response.content:
+            error_msg = response.error_details.message if response.error_details else 'No content'
+            logger.error(f"LLM 总结失败 for sandbox {sandbox_id}: {error_msg}")
+            return
+
+        summary_content = response.content.strip()
+        logger.info(f"LLM 成功生成总结 for sandbox {sandbox_id} of stream '{stream_name}'.")
+
+        event_payload = {
+            "type": "memoria_synthesis_completed",
+            "stream_name": stream_name,
+            "content": summary_content,
+            "level": config.level,
+            "tags": ["synthesis", "auto-generated"],
+        }
+        
+        if sandbox_id not in event_queue:
+            event_queue[sandbox_id] = []
+        event_queue[sandbox_id].append(event_payload)
+        
+        logger.info(f"已为沙盒 {sandbox_id} 成功提交 'memoria_synthesis_completed' 事件。")
+
+    except LLMRequestFailedError as e:
+        logger.error(f"后台 LLM 请求在多次重试后失败: {e}", exc_info=False)
+    except Exception:
+        logger.exception(f"在执行 memoria 综合任务时发生未预料的错误 for sandbox {sandbox_id}")
+```
+
+### plugins/core_memoria/models.py
+```
+# plugins/core_memoria/models.py
+from __future__ import annotations
+import logging
+from uuid import UUID, uuid4
+from datetime import datetime, timezone
+from typing import List, Dict, Any, Optional
+
+from pydantic import BaseModel, Field, RootModel, ConfigDict
+
+logger = logging.getLogger(__name__)
+
+# --- Core Data Models for Memoria Structure ---
+
+class MemoryEntry(BaseModel):
+    """一个单独的、结构化的记忆条目。"""
+    # 这允许模型处理用户定义的字符串 ID（如 'initial-event'）和系统生成的 UUID。
+    id: str = Field(default_factory=lambda: str(uuid4()))
+    sequence_id: int = Field(..., description="在所有流中唯一的、单调递增的因果序列号。")
+    level: str = Field(default="event", description="记忆的层级，如 'event', 'summary', 'milestone'。")
+    tags: List[str] = Field(default_factory=list, description="用于快速过滤和检索的标签。")
+    content: str = Field(..., description="记忆条目的文本内容。")
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    metadata: Dict[str, Any] = Field(default_factory=dict)
+
+class AutoSynthesisConfig(BaseModel):
+    """自动综合（大总结）的行为配置。"""
+    enabled: bool = Field(default=False)
+    trigger_count: int = Field(default=10, gt=0, description="触发综合所需的条目数量。")
+    level: str = Field(default="summary", description="综合后产生的新条目的层级。")
+    model: str = Field(default="gemini/gemini-2.5-flash", description="用于执行综合的 LLM 模型。")
+    prompt: str = Field(
+        default="The following is a series of events. Please provide a concise summary.\n\nEvents:\n{events_text}",
+        description="用于综合的 LLM 提示模板。必须包含 '{events_text}' 占位符。"
+    )
+
+
+class MemoryStreamConfig(BaseModel):
+    """每个记忆流的独立配置。"""
+    auto_synthesis: AutoSynthesisConfig = Field(default_factory=AutoSynthesisConfig)
+    metadata: Dict[str, Any] = Field(default_factory=dict)
+
+
+class MemoryStream(BaseModel):
+    """一个独立的记忆回廊，包含它自己的配置和条目列表。"""
+    config: MemoryStreamConfig = Field(default_factory=MemoryStreamConfig)
+    entries: List[MemoryEntry] = Field(default_factory=list)
+    
+    synthesis_trigger_counter: int = Field(
+        default=0, 
+        description="Internal counter for auto-synthesis trigger. This is part of the persisted state."
+    )
+class Memoria(RootModel[Dict[str, Any]]):
+    """
+    代表 world.memoria 的顶层结构。
+    它是一个字典，键是流名称，值是 MemoryStream 对象。
+    还包含一个全局序列号，以确保因果关系的唯一性。
+    """
+    root: Dict[str, Any] = Field(default_factory=lambda: {"__global_sequence__": 0})
+    
+    def get_stream(self, stream_name: str) -> Optional[MemoryStream]:
+        """安全地获取一个 MemoryStream 的 Pydantic 模型实例。"""
+        stream_data = self.root.get(stream_name)
+        if isinstance(stream_data, dict):
+            return MemoryStream.model_validate(stream_data)
+        return None
+
+    def set_stream(self, stream_name: str, stream_model: MemoryStream):
+        """将一个 MemoryStream 模型实例写回到根字典中。"""
+        self.root[stream_name] = stream_model.model_dump()
+
+    def get_next_sequence_id(self) -> int:
+        """获取并递增全局序列号，确保原子性。"""
+        current_seq = self.root.get("__global_sequence__", 0)
+        next_seq = current_seq + 1
+        self.root["__global_sequence__"] = next_seq
+        return next_seq
+```
+
+### plugins/core_memoria/runtimes.py
+```
+# plugins/core_memoria/runtimes.py
+
+import logging
+from typing import Dict, Any, List
+
+from backend.core.contracts import BackgroundTaskManager 
+from plugins.core_engine.contracts import ExecutionContext, RuntimeInterface
+
+from .models import Memoria, MemoryEntry
+from .tasks import run_synthesis_task
+
+logger = logging.getLogger(__name__)
+
+
+class MemoriaAddRuntime(RuntimeInterface):
+    """
+    向指定的记忆流中添加一条新的记忆条目。
+    数据现在被写入 context.shared.moment_state。
+    """
+    async def execute(self, config: Dict[str, Any], context: ExecutionContext, **kwargs) -> Dict[str, Any]:
+        stream_name = config.get("stream")
+        content = config.get("content")
+        if not stream_name or not content:
+            raise ValueError("MemoriaAddRuntime requires 'stream' and 'content' in its config.")
+        
+        level = config.get("level", "event")
+        tags = config.get("tags", [])
+        
+        # 从 moment_state 中获取或创建 memoria 数据
+        memoria_data = context.shared.moment_state.setdefault("memoria", {"__global_sequence__": 0})
+        
+        if "__hevno_type__" not in memoria_data:
+            memoria_data["__hevno_type__"] = "hevno/memoria"
+
+        memoria = Memoria.model_validate(memoria_data)
+        
+        stream = memoria.get_stream(stream_name)
+        if stream is None:
+            from .models import MemoryStream
+            stream = MemoryStream()
+
+        new_entry = MemoryEntry(
+            sequence_id=memoria.get_next_sequence_id(),
+            level=level,
+            tags=tags,
+            content=str(content)
+        )
+        stream.entries.append(new_entry)
+        stream.synthesis_trigger_counter += 1
+        
+        memoria.set_stream(stream_name, stream)
+        
+        context.shared.moment_state["memoria"] = memoria.model_dump()
+
+        synth_config = stream.config.auto_synthesis
+        if synth_config.enabled and stream.synthesis_trigger_counter >= synth_config.trigger_count:
+            logger.info(f"流 '{stream_name}' 满足综合条件，正在提交后台任务。")
+            
+            task_manager: BackgroundTaskManager = context.shared.services.task_manager
+            entries_to_summarize = stream.entries[-synth_config.trigger_count:]
+            
+            task_manager.submit_task(
+                run_synthesis_task,
+                sandbox_id=context.initial_snapshot.sandbox_id,
+                stream_name=stream_name,
+                synthesis_config=synth_config.model_dump(),
+                entries_to_summarize_dicts=[e.model_dump() for e in entries_to_summarize]
+            )
+            # 注意：synthesis_trigger_counter 的重置现在在 `apply_pending_synthesis` 钩子中完成
+            # 此处不再需要重置，以避免状态不一致
+
+        return {"output": new_entry.model_dump()}
+
+
+class MemoriaQueryRuntime(RuntimeInterface):
+    """
+    根据声明式条件从一个记忆流中检索条目。
+    数据现在从 context.shared.moment_state 读取。
+    """
+    async def execute(self, config: Dict[str, Any], context: ExecutionContext, **kwargs) -> Dict[str, Any]:
+        stream_name = config.get("stream")
+        if not stream_name:
+            raise ValueError("MemoriaQueryRuntime requires a 'stream' name in its config.")
+
+        output_format = config.get("format", "raw_entries")
+        if output_format not in ["raw_entries", "message_list"]:
+             raise ValueError(f"Invalid 'format' value '{output_format}'. Must be 'raw_entries' or 'message_list'.")
+
+        memoria_data = context.shared.moment_state.get("memoria", {})
+
+        memoria = Memoria.model_validate(memoria_data)
+        stream = memoria.get_stream(stream_name)
+        
+        if not stream:
+            return {"output": []}
+
+        # --- 过滤逻辑 ---
+        results = stream.entries
+        
+        levels_to_get = config.get("levels")
+        if isinstance(levels_to_get, list):
+            results = [entry for entry in results if entry.level in levels_to_get]
+
+        tags_to_get = config.get("tags")
+        if isinstance(tags_to_get, list):
+            tags_set = set(tags_to_get)
+            results = [entry for entry in results if tags_set.intersection(entry.tags)]
+
+        # 只有当 latest 是一个大于0的整数时，才截取最新的N条记录。
+        # 如果 latest 是 0 或 None，则跳过此步骤，返回所有符合条件的记录。
+        latest_n = config.get("latest")
+        if isinstance(latest_n, int) and latest_n > 0:
+            # 在截取前，必须按 sequence_id 升序排序，以确保我们得到的是真正的“最新”记录
+            results.sort(key=lambda e: e.sequence_id)
+            results = results[-latest_n:]
+            
+        order = config.get("order", "ascending")
+        reverse = (order == "descending")
+        # 最终的排序在所有过滤和截取操作之后进行
+        results.sort(key=lambda e: e.sequence_id, reverse=reverse)
+
+        # --- 格式化逻辑 ---
+        if output_format == "message_list":
+            message_list = []
+            for entry in results:
+                if entry.level in ["user", "model"]:
+                    message_list.append({
+                        "role": entry.level,
+                        "content": entry.content
+                    })
+            return {"output": message_list}
+        else: # "raw_entries"
+            return {"output": [entry.model_dump() for entry in results]}
+```
+
+### plugins/core_memoria/__init__.py
+```
+# plugins/core_memoria/__init__.py
+
+import logging
+from typing import Dict, List, Any
+from uuid import UUID
+
+
+from backend.core.contracts import Container, HookManager
+from plugins.core_engine.contracts import ExecutionContext
+from .runtimes import MemoriaAddRuntime, MemoriaQueryRuntime
+from .models import Memoria, MemoryEntry
+
+logger = logging.getLogger(__name__)
+
+def _create_memoria_event_queue() -> Dict[UUID, List[Dict[str, Any]]]:
+    """
+    工厂函数：创建一个简单的、内存中的事件队列。
+    这个队列是 core_memoria 插件私有的，用于暂存后台任务完成的事件。
+    - 键: sandbox_id
+    - 值: 一个包含事件负载字典的列表
+    """
+    logger.debug("创建 memoria_event_queue 单例。")
+    return {}
+
+async def provide_memoria_runtimes(runtimes: dict) -> dict:
+    """钩子实现：向引擎注册本插件提供的所有运行时。"""
+    memoria_runtimes = {
+        "memoria.add": MemoriaAddRuntime,
+        "memoria.query": MemoriaQueryRuntime,
+    }
+    
+    for name, runtime_class in memoria_runtimes.items():
+        if name not in runtimes:
+            runtimes[name] = runtime_class
+            logger.debug(f"Provided '{name}' runtime to the engine.")
+            
+    return runtimes
+
+async def apply_pending_synthesis(context: ExecutionContext, container: Container) -> ExecutionContext:
+    """
+    钩子实现：在图执行前应用待处理的综合事件。
+    操作 context.shared.moment_state。
+    """
+    event_queue: Dict[UUID, List[Dict[str, Any]]] = container.resolve("memoria_event_queue")
+    sandbox_id = context.initial_snapshot.sandbox_id
+    
+    pending_events = event_queue.pop(sandbox_id, [])
+    if not pending_events:
+        return context
+
+    logger.info(f"Memoria: 发现 {len(pending_events)} 个待处理的综合事件，正在应用到 moment_state...")
+    
+    moment_state = context.shared.moment_state
+    memoria_data = moment_state.setdefault("memoria", {"__global_sequence__": 0})
+    
+    memoria = Memoria.model_validate(memoria_data)
+    
+    for event in pending_events:
+        if event.get("type") == "memoria_synthesis_completed":
+            stream_name = event.get("stream_name")
+            if not stream_name:
+                continue
+                
+            stream = memoria.get_stream(stream_name)
+            if stream:
+                # 重置触发器计数器
+                stream.synthesis_trigger_counter = 0
+                
+                # 创建并添加新的总结条目
+                summary_entry = MemoryEntry(
+                    sequence_id=memoria.get_next_sequence_id(),
+                    level=event.get("level", "summary"),
+                    tags=event.get("tags", ["synthesis", "auto-generated"]),
+                    content=str(event.get("content", ""))
+                )
+                stream.entries.append(summary_entry)
+                memoria.set_stream(stream_name, stream)
+                logger.debug(f"已将新总结应用到流 '{stream_name}'。")
+    
+    moment_state["memoria"] = memoria.model_dump()
+
+    return context
+
+# --- 主注册函数 ---
+def register_plugin(container: Container, hook_manager: HookManager):
+    logger.info("--> 正在注册 [core_memoria] 插件...")
+
+    container.register("memoria_event_queue", _create_memoria_event_queue, singleton=True)
+    logger.debug("服务 'memoria_event_queue' 已注册。")
+
+    hook_manager.add_implementation(
+        "collect_runtimes", 
+        provide_memoria_runtimes, 
+        plugin_name="core_memoria"
+    )
+
+    hook_manager.add_implementation(
+        "before_graph_execution",
+        apply_pending_synthesis,
+        priority=50,
+        plugin_name="core_memoria"
+    )
+
+    logger.debug("钩子实现 'collect_runtimes' 和 'before_graph_execution' 已注册。")
+
+    logger.info("插件 [core_memoria] 注册成功。")
+```
+
+### plugins/core_memoria/manifest.json
+```
+{
+    "id": "core_memoria",
+    "name": "core_memoria",
+    "version": "1.0.0",
+    "description": "Provides a dynamic memory system for storing, synthesizing, and querying events, enabling short-term memory and long-term reflection for AI agents.",
+    "author": "Hevno Team",
+    "backend": {
+        "priority": 40,
+        "dependencies": ["core_engine", "core_llm"]
+    }
+}
+```
+
+### plugins/sandbox_explorer/vite.config.js
+```
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
+
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'src/SandboxExplorerPage.jsx'),
+      name: 'HevnoSandboxExplorer',
+      fileName: 'main',
+      formats: ['es'],
+    },
+    rollupOptions: {
+      external: ['react', 'react-dom', '@mui/material', '@mui/icons-material'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM'
+        }
+      }
+    },
+    outDir: 'dist',
+    emptyOutDir: true,
+  },
+});
+```
+
+### plugins/sandbox_explorer/package.json
+```
+{
+  "name": "hevno-plugin-sandbox-explorer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "@mui/material": ">=5.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest"
+  }
+}
+```
+
+### plugins/sandbox_explorer/manifest.json
+```
+{
+    "id": "sandbox_explorer",
+    "name": "Sandbox Explorer",
+    "version": "1.0.0",
+    "description": "Provides a UI to browse, create, and manage sandboxes.",
+    "author": "Hevno Team",
+    "frontend": {
+        "type": "page-component",
+        "priority": 100,
+        "entryPoint": "dist/main.js",
+        "srcEntryPoint": "src/SandboxExplorerPage.jsx",
+        "contributions": {
+            "pageComponents": [
+                {
+                    "id": "sandbox_explorer.main_view",
+                    "componentExportName": "SandboxExplorerPage",
+                    "menu": {
+                        "path": "/sandboxes",
+                        "title": "沙盒列表",
+                        "icon": "DashboardCustomizeRounded"
+                    }
+                }
+            ]
+        }
+    }
+}
+```
+
+### plugins/sandbox_editor/vite.config.js
+```
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
+
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'src/SandboxEditorPage.jsx'),
+      name: 'HevnoSandboxEditor',
+      fileName: 'main',
+      formats: ['es'],
+    },
+    rollupOptions: {
+      external: ['react', 'react-dom', '@mui/material', '@mui/icons-material'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM'
+        }
+      }
+    },
+    outDir: 'dist',
+    emptyOutDir: true,
+  },
+});
+```
+
+### plugins/sandbox_editor/package.json
+```
+{
+"name": "hevno-plugin-sandbox-editor",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.1.0",
+    "@dnd-kit/sortable": "^8.0.0",
+    "@dnd-kit/utilities": "^3.2.2"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "@mui/material": ">=5.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest"
+  }
+}
+```
+
+### plugins/sandbox_editor/manifest.json
+```
+{
+    "id": "sandbox_editor",
+    "name": "Sandbox Editor",
+    "version": "1.0.0",
+    "description": "Provides a UI to edit sandboxes, triggered from the explorer.",
+    "author": "Hevno Team",
+    "frontend": {
+        "type": "page-component",
+        "priority": 150,
+        "entryPoint": "dist/main.js",
+        "srcEntryPoint": "src/SandboxEditorPage.jsx",
+        "contributions": {
+            "pageComponents": [
+                {
+                    "id": "sandbox_editor.main_view",
+                    "componentExportName": "SandboxEditorPage"
+                }
+            ]
+        }
+    }
+}
+```
+
+### plugins/core_runner_ui/vite.config.js
+```
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
+
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'src/RunnerPage.jsx'),
+      name: 'HevnoCoreRunnerUI',
+      fileName: 'main',
+      formats: ['es'],
+    },
+    rollupOptions: {
+      // 确保外部化处理那些你不想打包进库的依赖
+      external: ['react', 'react-dom', '@mui/material', '@mui/icons-material'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM'
+        }
+      }
+    },
+    outDir: 'dist',
+    emptyOutDir: true,
+  },
+});
+```
+
+### plugins/core_runner_ui/package.json
+```
+{
+  "name": "hevno-plugin-core-runner-ui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "react-markdown": "^9.0.1",
+    "remark-gfm": "^4.0.0"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "@mui/material": ">=5.0.0",
+    "@mui/icons-material": ">=5.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest"
+  }
+}
+```
+
+### plugins/core_runner_ui/manifest.json
+```
+{
+    "id": "core_runner_ui",
+    "name": "Sandbox Runner UI",
+    "version": "1.0.0",
+    "description": "Provides the primary user interface for interacting with a running sandbox.",
+    "author": "Hevno Team",
+    "frontend": {
+        "type": "page-component",
+        "priority": 110,
+        "entryPoint": "dist/main.js",
+        "srcEntryPoint": "src/RunnerPage.jsx",
+        "contributions": {
+            "pageComponents": [
+                {
+                    "id": "runner_ui.main_view",
+                    "componentExportName": "RunnerPage"
+                }
+            ]
+        }
+    }
+}
+```
+
+### plugins/core_api/system_router.py
+```
+# plugins/core_api/system_router.py
+
+import json
+import logging
+from pathlib import Path
+from typing import List, Dict, Any
+
+from fastapi import APIRouter, HTTPException, Depends
+from fastapi.responses import FileResponse
+
+# 从后端核心导入依赖
+from backend.core.dependencies import Service
+from backend.core.contracts import HookManager
+
+# 获取这个模块的 logger 实例
+logger = logging.getLogger(__name__)
+
+# --- 路径计算 (保持健壮) ---
+# __file__ -> .../project_root/plugins/core_api/system_router.py
+# .parent -> .../project_root/plugins/core_api
+# .parent.parent -> .../project_root/plugins
+PLUGINS_DIR = Path(__file__).resolve().parent.parent
+
+# --- 路由器 1: 用于 /api/... (平台元信息API) ---
+# 我们将所有相关的API都聚合到这个路由器下
+system_api_router = APIRouter(
+    prefix="/api",
+    tags=["System Platform API"]
+)
+
+@system_api_router.get("/plugins/manifest", response_model=List[Dict[str, Any]], summary="Get All Plugin Manifests")
+async def get_all_plugins_manifest():
+    """
+    Retrieves the manifest.json content for all discovered plugins.
+    This provides a central way for the frontend to understand what capabilities
+    are available on the backend.
+    """
+    if not PLUGINS_DIR.is_dir():
+        return []
+
+    manifests = []
+    for plugin_path in PLUGINS_DIR.iterdir():
+        if not plugin_path.is_dir() or plugin_path.name.startswith(('__', '.')):
+            continue
+        
+        manifest_file = plugin_path / "manifest.json"
+        if manifest_file.is_file():
+            try:
+                with open(manifest_file, 'r', encoding='utf-8') as f:
+                    manifests.append(json.load(f))
+            except json.JSONDecodeError:
+                logger.warning(f"Could not parse manifest.json for plugin: {plugin_path.name}")
+                pass
+    return manifests
+
+@system_api_router.get("/system/hooks/manifest", response_model=Dict[str, List[str]], summary="Get Backend Hooks Manifest")
+async def get_backend_hooks_manifest(
+    hook_manager: HookManager = Depends(Service("hook_manager"))
+):
+    """
+    Retrieves a list of all hook names that have been registered on the backend.
+    Useful for frontend diagnostics and understanding event flow.
+    """
+    # ._hooks is an implementation detail, but for a diagnostics endpoint, it's acceptable.
+    return {"hooks": list(hook_manager._hooks.keys())}
+
+
+# --- 路由器 2: 用于 /plugins/... (服务前端插件的静态资源) ---
+# 这个路由器没有前缀，因为它需要匹配根URL路径
+frontend_assets_router = APIRouter(
+    tags=["System Frontend Assets"]
+)
+
+@frontend_assets_router.get("/plugins/{plugin_id}/{resource_path:path}")
+async def serve_plugin_resource(plugin_id: str, resource_path: str):
+    """
+    Dynamically serves static assets (like JS, CSS, images) from any plugin's
+    directory. This is crucial for enabling frontend components of plugins.
+    """
+    logger.info(f"[ASSET_SERVER] Request for: /plugins/{plugin_id}/{resource_path}")
+    
+    try:
+        if ".." in plugin_id or "\\" in plugin_id:
+            logger.warning(f"[ASSET_SERVER] Invalid plugin ID detected: {plugin_id}")
+            raise HTTPException(status_code=400, detail="Invalid plugin ID.")
+        
+        plugin_base_path = (PLUGINS_DIR / plugin_id).resolve()
+        target_file_path = (plugin_base_path / resource_path).resolve()
+
+        # Security check: Ensure the resolved path is still within the plugin's directory
+        is_safe = str(target_file_path).startswith(str(plugin_base_path))
+        if not is_safe:
+            logger.warning(f"[ASSET_SERVER] Forbidden access attempt: {plugin_id}/{resource_path}")
+            raise HTTPException(status_code=403, detail="Forbidden: Access outside of plugin directory is not allowed.")
+
+        if not target_file_path.is_file():
+            raise HTTPException(status_code=404, detail=f"Resource '{resource_path}' not found in plugin '{plugin_id}'.")
+
+        logger.info(f"[ASSET_SERVER] Success! Serving file: {target_file_path}")
+        return FileResponse(target_file_path)
+
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        logger.error(f"[ASSET_SERVER] Error serving plugin resource '{plugin_id}/{resource_path}': {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail="Internal server error while serving plugin resource.")
+```
+
+### plugins/core_api/__init__.py
+```
+# plugins/core_api/__init__.py
+import logging
+from typing import List
+from fastapi import APIRouter
+
+from backend.core.contracts import Container, HookManager
+
+
+logger = logging.getLogger(__name__)
+
+
+async def provide_own_routers(routers: List[APIRouter]) -> List[APIRouter]:
+    """
+    Hook implementation: Adds this plugin's routers to the application's collection.
+    By importing inside the function, we ensure the router modules are executed
+    only when the application is ready to collect them.
+    """
+    logger.info("--> [core_api] 'collect_api_routers' hook triggered. Importing routers...")
+    
+    # 【重点】只从一个文件中导入，不再需要 base_router
+    from .system_router import system_api_router, frontend_assets_router
+    
+    logger.debug(f"[core_api] Appending system_api_router (prefix='{system_api_router.prefix}', {len(system_api_router.routes)} routes)")
+    logger.debug(f"[core_api] Appending frontend_assets_router (prefix='{frontend_assets_router.prefix}', {len(frontend_assets_router.routes)} routes)")
+    
+    routers.append(system_api_router)
+    routers.append(frontend_assets_router)
+    
+    logger.info("--> [core_api] Routers have been provided.")
+    return routers
+
+# --- Main Registration Function ---
+def register_plugin(container: Container, hook_manager: HookManager):
+    """
+    Registers the core_api plugin. Its sole backend purpose is to provide
+    platform-level API endpoints for introspection and asset serving.
+    """
+    logger.info("--> 正在注册 [core_api] 插件...")
+    
+    hook_manager.add_implementation(
+        "collect_api_routers", 
+        provide_own_routers, 
+        priority=100,  # High priority to ensure system routes are available
+        plugin_name="core_api"
+    )
+    logger.info("插件 [core_api] 注册成功。'collect_api_routers' hook has been implemented.")
+```
+
+### plugins/core_api/manifest.json
+```
+{
+    "id": "core_api",
+    "name": "core_api",
+    "version": "1.0.0",
+    "description": "Provides the core RESTful API endpoints and the system reporting auditor.",
+    "author": "Hevno Team",
+    "backend": {
+        "priority": 100
+    }
+}
+```
+
+### plugins/core_remote_hooks/registry.py
+```
+# plugins/core_remote_hooks/registry.py
+
+import logging
+from typing import List, Set
+from .contracts import GlobalHookRegistryInterface, HookLocation
+
+logger = logging.getLogger(__name__)
+
+class GlobalHookRegistry(GlobalHookRegistryInterface):
+    """
+    一个中心化的单例服务，用于存储和管理全域钩子路由表。
+    """
+    def __init__(self):
+        self._backend_hooks: Set[str] = set()
+        self._frontend_hooks: Set[str] = set()
+        logger.info("GlobalHookRegistry initialized.")
+
+    def register_backend_hooks(self, hooks: List[str]) -> None:
+        """注册所有在后端发现的钩子。"""
+        count_before = len(self._backend_hooks)
+        self._backend_hooks.update(hooks)
+        count_after = len(self._backend_hooks)
+        logger.info(f"Registered {count_after - count_before} new backend hooks. Total: {count_after}.")
+
+    def register_frontend_hooks(self, hooks: List[str]) -> None:
+        """在收到前端同步消息后，注册所有前端钩子。"""
+        count_before = len(self._frontend_hooks)
+        self._frontend_hooks.update(hooks)
+        count_after = len(self._frontend_hooks)
+        logger.info(f"Registered {count_after - count_before} new frontend hooks from remote sync. Total: {count_after}.")
+
+    def get_hook_location(self, hook_name: str) -> HookLocation:
+        """根据钩子名称，查询其在全栈中的位置。"""
+        is_local = hook_name in self._backend_hooks
+        is_remote = hook_name in self._frontend_hooks
+
+        if is_local and is_remote:
+            return HookLocation.BOTH
+        if is_local:
+            return HookLocation.LOCAL
+        if is_remote:
+            return HookLocation.REMOTE
+        
+        return HookLocation.UNKNOWN
+```
+
+### plugins/core_remote_hooks/__init__.py
+```
+# plugins/core_remote_hooks/__init__.py
+import json
+import logging
+
+from fastapi import WebSocket
+
+from backend.core.contracts import Container, HookManager
+# 依赖 core_websocket 提供的服务
+from plugins.core_websocket.connection_manager import ConnectionManager
+
+# 从本插件导入组件
+from .contracts import GlobalHookRegistryInterface
+from .registry import GlobalHookRegistry
+from .emitter import RemoteHookEmitter
+
+logger = logging.getLogger(__name__)
+
+# --- 服务工厂 ---
+
+def _create_global_hook_registry() -> GlobalHookRegistry:
+    return GlobalHookRegistry()
+
+def _create_remote_hook_emitter(container: Container) -> RemoteHookEmitter:
+    # 这个工厂依赖于另一个插件的服务
+    connection_manager = container.resolve("connection_manager")
+    return RemoteHookEmitter(connection_manager)
+
+
+# --- 钩子实现 ---
+
+
+async def handle_incoming_message(
+    data: str,
+    container: Container,
+    hook_manager: HookManager
+):
+    """
+    钩子实现: 监听 'websocket.message_received'。
+    解析来自前端的消息，并根据类型进行分发。
+    """
+    try:
+        payload = json.loads(data)
+        message_type = payload.get("type")
+
+        # Case 1: 这是前端发来的钩子清单同步消息
+        if message_type == 'sync_hooks':
+            registry: GlobalHookRegistryInterface = container.resolve("global_hook_registry")
+            frontend_hooks = payload.get("hooks", [])
+            registry.register_frontend_hooks(frontend_hooks)
+            logger.info(f"Received and registered {len(frontend_hooks)} hooks from frontend.")
+            return
+
+        # Case 2: 这是普通的远程钩子调用
+        hook_name = payload.get("hook_name")
+        hook_data = payload.get("data", {})
+
+        if not hook_name:
+            logger.warning("Received a remote message without 'hook_name' or 'type'.")
+            return
+
+        logger.debug(f"Relaying remote hook from frontend: '{hook_name}'")
+        # 在后端触发该钩子
+        await hook_manager.trigger(hook_name, **hook_data)
+
+    except json.JSONDecodeError:
+        logger.warning(f"Failed to decode incoming WebSocket message: {data}")
+    except Exception:
+        logger.exception("Error handling incoming remote hook.")
+
+
+# --- 主注册函数 ---
+def register_plugin(container: Container, hook_manager: HookManager):
+    logger.info("--> 正在注册 [core_remote_hooks] 插件...")
+
+    # 1. 注册本插件提供的核心服务
+    container.register("global_hook_registry", _create_global_hook_registry, singleton=True)
+    container.register("remote_hook_emitter", _create_remote_hook_emitter, singleton=True)
+
+    # 2. 注册钩子实现
+    # 【移除】不再注册 services_post_register 钩子
+    
+    # 这个钩子处理所有来自前端的 WS 消息
+    hook_manager.add_implementation(
+        "websocket.message_received",
+        handle_incoming_message,
+        plugin_name="core_remote_hooks"
+    )
+
+    logger.info("插件 [core_remote_hooks] 注册成功。")
+```
+
+### plugins/core_remote_hooks/manifest.json
+```
+{
+    "id": "core_remote_hooks",
+    "name": "Full-Stack Hook Bridge",
+    "version": "1.0.0",
+    "description": "Bridges the backend and frontend hook systems via WebSocket, enabling location-transparent event handling.",
+    "author": "Hevno Team",
+    "backend": {
+        "priority": 15
+    }
+}
+```
+
+### plugins/core_remote_hooks/contracts.py
+```
+# plugins/core_remote_hooks/contracts.py
+
+from __future__ import annotations
+from abc import ABC, abstractmethod
+from enum import Enum
+from typing import Dict, Any, List
+
+class HookLocation(Enum):
+    """
+    定义一个钩子实现的位置，用于智能路由。
+    """
+    LOCAL = "local"    # 仅在当前环境（后端）中实现
+    REMOTE = "remote"  # 仅在远端环境（前端）中实现
+    BOTH = "both"      # 在两个环境中都有实现
+    UNKNOWN = "unknown"  # 未在任何注册表中找到
+
+class RemoteHookEmitterInterface(ABC):
+    """
+    定义了将钩子事件发送到远端（前端）的能力。
+    """
+    @abstractmethod
+    async def emit(self, hook_name: str, data: Dict[str, Any]) -> None:
+        raise NotImplementedError
+
+class GlobalHookRegistryInterface(ABC):
+    """
+    定义了全域钩子路由表的接口。
+    """
+    @abstractmethod
+    def register_backend_hooks(self, hooks: List[str]) -> None:
+        raise NotImplementedError
+
+    @abstractmethod
+    def register_frontend_hooks(self, hooks: List[str]) -> None:
+        raise NotImplementedError
+
+    @abstractmethod
+    def get_hook_location(self, hook_name: str) -> HookLocation:
+        raise NotImplementedError
+```
+
+### plugins/core_remote_hooks/emitter.py
+```
+# plugins/core_remote_hooks/emitter.py
+
+import json
+import logging
+from typing import Dict, Any
+
+from plugins.core_websocket.connection_manager import ConnectionManager
+from .contracts import RemoteHookEmitterInterface
+
+logger = logging.getLogger(__name__)
+
+class RemoteHookEmitter(RemoteHookEmitterInterface):
+    """
+    将后端钩子事件打包并通过 WebSocket 广播到所有前端客户端。
+    """
+    def __init__(self, connection_manager: ConnectionManager):
+        self._manager = connection_manager
+
+    async def emit(self, hook_name: str, data: Dict[str, Any]) -> None:
+        """
+        构建 payload 并通过 WebSocket 连接管理器广播。
+        """
+        try:
+            # 注意：kwargs 可能包含不可序列化为 JSON 的对象。
+            # 这是一个简化的实现，一个更健壮的系统可能需要一个序列化层。
+            payload = {
+                "hook_name": hook_name,
+                "data": data
+            }
+            message = json.dumps(payload, ensure_ascii=False)
+            logger.debug(f"Emitting remote hook to frontend: '{hook_name}'")
+            await self._manager.broadcast(message)
+        except TypeError as e:
+            logger.error(
+                f"Could not serialize payload for remote hook '{hook_name}'. "
+                f"Data may contain non-JSON-serializable objects. Error: {e}"
+            )
+        except Exception:
+            logger.exception(f"Unexpected error while emitting remote hook '{hook_name}'.")
+```
+
+### plugins/core_logging/logging_config.yaml
+```
+version: 1
+
+disable_existing_loggers: false
+
+# 定义格式化器
+formatters:
+  simple:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  detailed:
+    format: '[%(asctime)s] p%(process)s {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s'
+
+# 定义处理器 (输出到哪里)
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+    stream: ext://sys.stdout
+
+#   file:
+#     class: logging.handlers.RotatingFileHandler
+#     level: DEBUG
+#     formatter: detailed
+#     filename: app.log
+#     maxBytes: 10485760 # 10MB
+#     backupCount: 5
+#     encoding: utf8
+
+# 根日志记录器配置
+root:
+  level: DEBUG
+  handlers: [console] #, file] # 默认使用控制台处理器
+
+# 可以为特定模块设置不同级别
+loggers:
+  uvicorn:
+    level: DEBUG
+  fastapi:
+    level: DEBUG
+```
+
+### plugins/core_logging/__init__.py
+```
+# plugins/core_logging/__init__.py
+import os
+import yaml
+import logging
+import logging.config
+from pathlib import Path
+
+from backend.core.contracts import Container, HookManager
+
+PLUGIN_DIR = Path(__file__).parent
+
+def register_plugin(container: Container, hook_manager: HookManager):
+    """这是 core_logging 插件的注册入口。"""
+    # 统一的入口消息
+    print("--> 正在注册 [core_logging] 插件...")
+    
+    config_path = PLUGIN_DIR / "logging_config.yaml"
+    with open(config_path, 'r', encoding='utf-8') as f:
+        logging_config = yaml.safe_load(f)
+    
+    env_log_level = os.getenv("LOG_LEVEL")
+    if env_log_level and env_log_level.upper() in ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]:
+        log_level_override = env_log_level.upper()
+        logging_config['root']['level'] = log_level_override
+
+    logging.config.dictConfig(logging_config)
+    
+    logger = logging.getLogger(__name__)
+    
+    # 统一的成功消息
+    logger.info("插件 [core_logging] 注册成功。")
+```
+
+### plugins/core_logging/manifest.json
+```
+{
+    "id": "core_logging",
+    "name": "core_logging",
+    "version": "1.0.0",
+    "description": "Provides centralized, configurable logging for the Hevno platform.",
+    "author": "Hevno Team",
+    "backend": {
+        "priority": -100
+    }
+}
+```
+
+### plugins/core_persistence/service.py
+```
+# plugins/core_persistence/service.py
+
+import os
+import io
+import json
+import logging
+import shutil
+import asyncio
+import base64
+import zipfile
+from pathlib import Path
+from typing import Type, TypeVar, Tuple, Dict, Any, List, Optional
+from uuid import UUID
+
+import aiofiles
+from pydantic import BaseModel, ValidationError
+from PIL import Image, PngImagePlugin
+
+# 导入位于后端内核的自定义序列化工具
+from backend.core.serialization import custom_json_decoder_object_hook
+
+from .contracts import PersistenceServiceInterface, PackageManifest
+from plugins.core_engine.contracts import Sandbox, StateSnapshot # 仍然需要它们来做类型检查和序列化
+from .models import AssetType, FILE_EXTENSIONS
+
+T = TypeVar('T', bound=BaseModel)
+logger = logging.getLogger(__name__)
+
+class PersistenceService(PersistenceServiceInterface):
+    def __init__(self, assets_base_dir: str):
+        self.assets_base_dir = Path(assets_base_dir)
+        self._sandboxes_root_dir = self.assets_base_dir / "sandboxes"
+        self._sandboxes_root_dir.mkdir(parents=True, exist_ok=True)
+        logger.info(f"PersistenceService initialized. Sandboxes directory: {self._sandboxes_root_dir.resolve()}")
+
+    @property
+    def sandboxes_root_dir(self) -> Path:
+        return self._sandboxes_root_dir
+
+    def _get_sandbox_dir(self, sandbox_id: UUID) -> Path:
+        return self._sandboxes_root_dir / str(sandbox_id)
+
+    async def save_sandbox(self, sandbox_id: UUID, data: Dict[str, Any]) -> None:
+        sandbox_dir = self._get_sandbox_dir(sandbox_id)
+        sandbox_dir.mkdir(parents=True, exist_ok=True)
+        file_path = sandbox_dir / "sandbox.json"
+        
+        # 不再需要 `default` 参数，因为传入的 `data` 已经是完全 JSON 兼容的了
+        json_string = json.dumps(data, indent=2, ensure_ascii=False)
+
+        async with aiofiles.open(file_path, mode='w', encoding='utf-8') as f:
+            await f.write(json_string)
+        logger.debug(f"Persisted sandbox '{sandbox_id}' to {file_path}")
+
+    async def load_sandbox(self, sandbox_id: UUID) -> Optional[Dict[str, Any]]:
+        file_path = self._get_sandbox_dir(sandbox_id) / "sandbox.json"
+        if not file_path.is_file(): return None
+        async with aiofiles.open(file_path, mode='r', encoding='utf-8') as f:
+            content = await f.read()
+        return json.loads(content, object_hook=custom_json_decoder_object_hook)
+
+    async def delete_sandbox(self, sandbox_id: UUID) -> None:
+        sandbox_dir = self._get_sandbox_dir(sandbox_id)
+        if sandbox_dir.exists():
+            await asyncio.to_thread(shutil.rmtree, sandbox_dir)
+            logger.info(f"Deleted sandbox directory: {sandbox_dir}")
+
+    async def list_sandbox_ids(self) -> List[str]:
+        if not self._sandboxes_root_dir.is_dir():
+            return []
+        def _sync_list_dirs():
+            return [p.name for p in self._sandboxes_root_dir.iterdir() if p.is_dir()]
+        return await asyncio.to_thread(_sync_list_dirs)
+
+    async def save_snapshot(self, sandbox_id: UUID, snapshot_id: UUID, data: Dict[str, Any]) -> None:
+        snapshot_dir = self._get_sandbox_dir(sandbox_id) / "snapshots"
+        snapshot_dir.mkdir(parents=True, exist_ok=True)
+        file_path = snapshot_dir / f"{snapshot_id}.json"
+        
+        json_string = json.dumps(data, indent=2, ensure_ascii=False)
+        
+        async with aiofiles.open(file_path, mode='w', encoding='utf-8') as f:
+            await f.write(json_string)
+        logger.debug(f"Persisted snapshot '{snapshot_id}' for sandbox '{sandbox_id}'")
+
+    async def load_snapshot(self, sandbox_id: UUID, snapshot_id: UUID) -> Optional[Dict[str, Any]]:
+        file_path = self._get_sandbox_dir(sandbox_id) / "snapshots" / f"{snapshot_id}.json"
+        if not file_path.is_file(): return None
+        async with aiofiles.open(file_path, mode='r', encoding='utf-8') as f: content = await f.read()
+        return json.loads(content, object_hook=custom_json_decoder_object_hook)
+
+    async def load_all_snapshots_for_sandbox(self, sandbox_id: UUID) -> List[Dict[str, Any]]:
+        snapshot_dir = self._get_sandbox_dir(sandbox_id) / "snapshots"
+        if not snapshot_dir.is_dir():
+            return []
+
+        def _sync_read_files() -> List[Dict[str, Any]]:
+            snapshots_data = []
+            for file_path in snapshot_dir.glob("*.json"):
+                try:
+                    content = file_path.read_text(encoding='utf-8')
+                    snapshots_data.append(json.loads(content, object_hook=custom_json_decoder_object_hook))
+                except (json.JSONDecodeError) as e:
+                    logger.error(f"Skipping corrupt snapshot file {file_path}: {e}")
+            return snapshots_data
+            
+        return await asyncio.to_thread(_sync_read_files)
+        
+    async def delete_all_for_sandbox(self, sandbox_id: UUID) -> None:
+        """异步删除属于特定沙盒的所有快照文件。"""
+        snapshot_dir = self._get_sandbox_dir(sandbox_id) / "snapshots"
+        if snapshot_dir.is_dir():
+            await asyncio.to_thread(shutil.rmtree, snapshot_dir)
+            logger.debug(f"Deleted snapshot directory: {snapshot_dir}")
+
+    async def delete_snapshot(self, sandbox_id: UUID, snapshot_id: UUID) -> None:
+        """异步删除一个指定的快照文件。"""
+        file_path = self._get_sandbox_dir(sandbox_id) / "snapshots" / f"{snapshot_id}.json"
+        if file_path.is_file():
+            try:
+                # 使用 os.remove 比 shutil.rmtree 更适合删除文件
+                await asyncio.to_thread(os.remove, file_path)
+                logger.debug(f"Deleted snapshot file: {file_path}")
+            except FileNotFoundError:
+                # 如果在检查和删除之间文件消失了，这不是一个错误
+                pass
+            except Exception as e:
+                logger.error(f"Error deleting snapshot file {file_path}: {e}")
+                # 重新抛出，让上层知道操作失败
+                raise
+        
+    async def list_assets(self, asset_type: AssetType) -> List[str]:
+        """Lists all assets of a given type by scanning the assets directory."""
+        if asset_type == AssetType.SANDBOX:
+             # Sandboxes are directories, not files with extensions
+            return await self.list_sandbox_ids()
+
+        ext = FILE_EXTENSIONS.get(asset_type)
+        if not ext:
+            raise ValueError(f"Unknown asset type '{asset_type}' with no defined file extension.")
+
+        # For other asset types, we'd define their storage location.
+        # As of now, only sandboxes are fully implemented, so we return empty for others.
+        # For example: search_dir = self.assets_base_dir / asset_type.value
+        # This implementation assumes other assets aren't stored yet.
+        return []
+
+    async def _embed_zip_in_png(self, zip_bytes: bytes, base_image_bytes: Optional[bytes] = None) -> bytes:
+        def _sync_embed():
+            encoded_data = base64.b64encode(zip_bytes).decode('ascii')
+            if base_image_bytes: image = Image.open(io.BytesIO(base_image_bytes))
+            else: image = Image.new('RGBA', (1, 1), (0, 0, 0, 255))
+            png_info_obj = PngImagePlugin.PngInfo()
+            png_info_obj.add_text("hevno:data", encoded_data, zip=True)
+            buffer = io.BytesIO()
+            image.save(buffer, "PNG", pnginfo=png_info_obj)
+            return buffer.getvalue()
+        return await asyncio.to_thread(_sync_embed)
+
+    async def _extract_zip_from_png(self, png_bytes: bytes) -> Tuple[bytes, bytes]:
+        def _sync_extract():
+            try:
+                image = Image.open(io.BytesIO(png_bytes))
+                image.load()
+                encoded_data = image.text.get("hevno:data")
+                if encoded_data is None: raise ValueError("Invalid Hevno package: 'hevno:data' chunk not found.")
+                zip_data = base64.b64decode(encoded_data)
+                return zip_data, png_bytes
+            except Exception as e:
+                logger.error(f"[EXTRACT] Exception while processing PNG: {e}", exc_info=True)
+                raise ValueError(f"Failed to process PNG file: {e}") from e
+        return await asyncio.to_thread(_sync_extract)
+
+    async def save_sandbox_icon(self, sandbox_id: str, icon_bytes: bytes) -> Path:
+        icon_path = self.assets_base_dir / "sandbox_icons" / f"{sandbox_id}.png"
+        icon_path.parent.mkdir(parents=True, exist_ok=True)
+        async with aiofiles.open(icon_path, 'wb') as f:
+            await f.write(icon_bytes)
+        logger.info(f"Saved icon for sandbox {sandbox_id} to {icon_path}")
+        return icon_path
+
+    async def export_package(self, manifest: PackageManifest, data_files: Dict[str, Any], base_image_bytes: Optional[bytes] = None) -> bytes:
+        def _sync_zip():
+            zip_buffer = io.BytesIO()
+            with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zf:
+                zf.writestr('manifest.json', manifest.model_dump_json(indent=2))
+                for filename, data_dict in data_files.items():
+                    file_content = json.dumps(data_dict, indent=2, ensure_ascii=False)
+                    zf.writestr(f'data/{filename}', file_content)
+            return zip_buffer.getvalue()
+        
+        zip_bytes = await asyncio.to_thread(_sync_zip)
+        return await self._embed_zip_in_png(zip_bytes, base_image_bytes)
+
+    async def import_package(self, package_bytes: bytes) -> Tuple[PackageManifest, Dict[str, str], bytes]:
+        zip_bytes, png_bytes = await self._extract_zip_from_png(package_bytes)
+        def _sync_unzip():
+            data_files: Dict[str, str] = {}
+            with zipfile.ZipFile(io.BytesIO(zip_bytes), 'r') as zf:
+                try:
+                    manifest_content = zf.read('manifest.json').decode('utf-8')
+                    manifest = PackageManifest.model_validate_json(manifest_content)
+                except KeyError: raise ValueError("Package is missing 'manifest.json'.")
+                except (ValidationError, json.JSONDecodeError) as e: raise ValueError(f"Invalid 'manifest.json': {e}") from e
+                for item in zf.infolist():
+                    if item.filename.startswith('data/') and not item.is_dir():
+                        relative_path = item.filename.split('data/', 1)[1]
+                        data_files[relative_path] = zf.read(item).decode('utf-8')
+            return manifest, data_files
+        manifest, data_files = await asyncio.to_thread(_sync_unzip)
+        return manifest, data_files, png_bytes
+        
+    def get_sandbox_icon_path(self, sandbox_id: str) -> Optional[Path]:
+        icon_path = self.assets_base_dir / "sandbox_icons" / f"{sandbox_id}.png"
+        return icon_path if icon_path.is_file() else None
+
+    def get_default_icon_path(self) -> Path:
+        return self.assets_base_dir / "default_sandbox_icon.png"
+```
+
+### plugins/core_persistence/models.py
+```
+# plugins/core_persistence/models.py
+
+from enum import Enum
+
+# --- 文件约定 (插件内部实现细节) ---
+class AssetType(str, Enum):
+    GRAPH = "graph"
+    CODEX = "codex"
+    SANDBOX = "sandbox"
+
+FILE_EXTENSIONS = {
+    AssetType.GRAPH: ".graph.hevno.json",
+    AssetType.CODEX: ".codex.hevno.json",
+}
+
+```
+
+### plugins/core_persistence/__init__.py
+```
+# plugins/core_persistence/__init__.py
+import os
+import logging
+
+from backend.core.contracts import Container, HookManager
+from .service import PersistenceService
+from .stores import PersistentSandboxStore, PersistentSnapshotStore
+from .api import persistence_router
+
+logger = logging.getLogger(__name__)
+
+def _create_persistent_sandbox_store(container: Container) -> PersistentSandboxStore:
+    return PersistentSandboxStore(container.resolve("persistence_service"))
+
+def _create_persistent_snapshot_store(container: Container) -> PersistentSnapshotStore:
+    return PersistentSnapshotStore(container.resolve("persistence_service"))
+
+def _create_persistence_service() -> PersistenceService:
+    assets_dir = os.getenv("HEVNO_ASSETS_DIR", "assets")
+    return PersistenceService(assets_base_dir=assets_dir)
+
+async def provide_router(routers: list) -> list:
+    routers.append(persistence_router)
+    logger.debug("Provided 'persistence_router' to the application.")
+    return routers
+
+async def initialize_stores(container: Container):
+    """钩子实现: 在所有服务注册后，异步初始化持久化存储。"""
+    logger.info("Initializing persistent stores...")
+    sandbox_store: PersistentSandboxStore = container.resolve("sandbox_store")
+    
+    sandbox_store.set_container(container)
+    
+    await sandbox_store.initialize()
+
+def register_plugin(container: Container, hook_manager: HookManager):
+    logger.info("--> 正在注册 [core_persistence] 插件...")
+    container.register(
+        "persistence_service", _create_persistence_service, singleton=True
+    )
+    container.register(
+        "sandbox_store", _create_persistent_sandbox_store, singleton=True
+    )
+    container.register(
+        "snapshot_store", _create_persistent_snapshot_store, singleton=True
+    )
+    logger.debug(
+        "Registered 'sandbox_store' and 'snapshot_store' with persistent implementations."
+    )
+    hook_manager.add_implementation(
+        "collect_api_routers", provide_router, plugin_name="core_persistence"
+    )
+    hook_manager.add_implementation(
+        "services_post_register",
+        initialize_stores,
+        priority=90, 
+        plugin_name="core_persistence",
+    )
+    logger.info("插件 [core_persistence] 注册成功。")
+```
+
+### plugins/core_persistence/stores.py
+```
+# plugins/core_persistence/stores.py
+import asyncio
+import logging
+from typing import Dict, List, Optional
+from uuid import UUID
+
+# 从 core_engine 导入接口定义
+from plugins.core_engine.contracts import Sandbox, StateSnapshot, SnapshotStoreInterface, SandboxStoreInterface
+from backend.core.serialization import pickle_fallback_encoder
+from .contracts import PersistenceServiceInterface
+from pydantic import ValidationError
+
+logger = logging.getLogger(__name__)
+
+# 继承自 SandboxStoreInterface
+class PersistentSandboxStore(SandboxStoreInterface):
+    def __init__(self, persistence_service: PersistenceServiceInterface):
+        self._persistence = persistence_service
+        self._cache: Dict[UUID, Sandbox] = {}
+        self._locks: Dict[UUID, asyncio.Lock] = {}
+        # 为 SnapshotStore 添加一个依赖，以便在删除时可以调用它
+        self._snapshot_store: Optional[SnapshotStoreInterface] = None
+        self._container: Optional['Container'] = None # type: ignore
+        logger.info("PersistentSandboxStore initialized (cache is empty).")
+
+    # 提供一种方式来注入容器，以便稍后解析 snapshot_store
+    def set_container(self, container: 'Container'): # type: ignore
+        self._container = container
+
+    def _get_lock(self, sandbox_id: UUID) -> asyncio.Lock:
+        if sandbox_id not in self._locks:
+            self._locks.setdefault(sandbox_id, asyncio.Lock())
+        return self._locks[sandbox_id]
+        
+    async def initialize(self):
+        logger.info("Pre-loading all sandboxes and their snapshots from disk into cache...")
+        count = 0
+        
+        # 1. 在初始化开始时，确保我们能访问到 snapshot_store
+        if not self._container:
+             logger.error("Container not set on PersistentSandboxStore. Cannot pre-load snapshots.")
+             return
+        
+        # 解析一次并缓存，避免在循环中重复解析
+        snapshot_store: SnapshotStoreInterface = self._container.resolve("snapshot_store")
+        
+        sandbox_ids = await self._persistence.list_sandbox_ids()
+        for sid_str in sandbox_ids:
+            try:
+                sid = UUID(sid_str)
+                data = await self._persistence.load_sandbox(sid)
+                if data:
+                    sandbox = Sandbox.model_validate(data)
+                    self._cache[sid] = sandbox
+                    count += 1
+                    
+                    # 2. 对于每一个加载的沙盒，立即让 snapshot_store 去加载它所有的快照
+                    #    find_by_sandbox 会自动将加载的快照放入 snapshot_store 的缓存中
+                    logger.debug(f"Pre-loading snapshots for sandbox {sid}...")
+                    await snapshot_store.find_by_sandbox(sid)
+
+            except (ValueError, FileNotFoundError, ValidationError) as e:
+                logger.warning(f"Skipping invalid sandbox directory '{sid_str}': {e}")
+        logger.info(f"Successfully pre-loaded {count} sandboxes and their associated snapshots into cache.")
+
+    async def save(self, sandbox: Sandbox):
+        lock = self._get_lock(sandbox.id)
+        async with lock:
+            # 使用 mode='json' 并提供 fallback 函数
+            data = sandbox.model_dump(mode='json', fallback=pickle_fallback_encoder)
+
+            await self._persistence.save_sandbox(sandbox.id, data)
+            self._cache[sandbox.id] = sandbox
+            
+    def get(self, key: UUID) -> Optional[Sandbox]:
+        return self._cache.get(key)
+
+    async def delete(self, key: UUID):
+        lock = self._get_lock(key)
+        async with lock:
+            # 正确地从容器中解析 snapshot_store 并调用其方法
+            if self._container:
+                if not self._snapshot_store:
+                    self._snapshot_store = self._container.resolve("snapshot_store")
+                await self._snapshot_store.delete_all_for_sandbox(key)
+            else:
+                 logger.warning("Container not set on PersistentSandboxStore, cannot delete snapshots automatically.")
+
+            await self._persistence.delete_sandbox(key)
+            self._cache.pop(key, None)
+            self._locks.pop(key, None)
+
+    def values(self) -> List[Sandbox]:
+        return list(self._cache.values())
+        
+    def __contains__(self, key: UUID) -> bool:
+        return key in self._cache
+    
+    def clear(self) -> None:
+        logger.warning("`clear` called on PersistentSandboxStore, but it does nothing to disk state. Cache is NOT cleared.")
+        pass
+
+
+class PersistentSnapshotStore(SnapshotStoreInterface):
+    """
+    管理快照的持久化和缓存。
+    - 快照按需从磁盘加载。
+    - 所有对持久化层的调用现在都是非阻塞的。
+    """
+    def __init__(self, persistence_service: PersistenceServiceInterface):
+        self._persistence = persistence_service
+        self._cache: Dict[UUID, StateSnapshot] = {}
+        # 为每个快照ID创建一个独立的锁，以实现原子性保存
+        self._locks: Dict[UUID, asyncio.Lock] = {}
+        logger.info("PersistentSnapshotStore initialized.")
+
+    def _get_lock(self, snapshot_id: UUID) -> asyncio.Lock:
+        return self._locks.setdefault(snapshot_id, asyncio.Lock())
+
+    async def save(self, snapshot: StateSnapshot) -> None:
+        """异步保存快照到磁盘并更新缓存。"""
+        lock = self._get_lock(snapshot.id)
+        async with lock:
+            # 同样，使用 mode='json' 并提供 fallback 函数
+            data = snapshot.model_dump(mode='json', fallback=pickle_fallback_encoder)
+          
+            await self._persistence.save_snapshot(snapshot.sandbox_id, snapshot.id, data)
+            self._cache[snapshot.id] = snapshot
+
+    def get(self, snapshot_id: UUID) -> Optional[StateSnapshot]:
+        """
+        从缓存中同步获取快照。
+        注意：此方法不会从磁盘加载。它依赖于 find_by_sandbox 或 save 来填充缓存。
+        这是一个设计权衡，以避免在get()中需要sandbox_id。
+        """
+        return self._cache.get(snapshot_id)
+
+    async def find_by_sandbox(self, sandbox_id: UUID) -> List[StateSnapshot]:
+        """异步加载属于特定沙盒的所有快照，并更新缓存。"""
+        # 使用 await 调用异步的 load_all_snapshots_for_sandbox
+        snapshots_data = await self._persistence.load_all_snapshots_for_sandbox(sandbox_id)
+        for data in snapshots_data:
+            try:
+                s = StateSnapshot.model_validate(data)
+                self._cache[s.id] = s
+            except ValidationError as e:
+                logger.warning(f"Skipping snapshot with invalid data for sandbox {sandbox_id}: {e}")
+        
+        # 即使磁盘上没有，也要确保返回缓存中可能存在的（例如，刚创建还未写入的）
+        relevant_snapshots = [s for s in self._cache.values() if s.sandbox_id == sandbox_id]
+        # 去重，以防万一
+        unique_snapshots = {s.id: s for s in relevant_snapshots}.values()
+        return sorted(list(unique_snapshots), key=lambda s: s.created_at)
+
+    async def delete_all_for_sandbox(self, sandbox_id: UUID) -> None:
+        """实现接口中新加的方法"""
+        await self._persistence.delete_all_for_sandbox(sandbox_id)
+        # 从缓存中也移除
+        ids_to_remove = [sid for sid, s in self._cache.items() if s.sandbox_id == sandbox_id]
+        for sid in ids_to_remove:
+            self._cache.pop(sid, None)
+            self._locks.pop(sid, None)
+
+    async def delete(self, snapshot_id: UUID) -> None:
+        """异步删除指定的快照，包括其持久化文件和缓存条目。"""
+        snapshot = self.get(snapshot_id)
+        if not snapshot:
+            # 如果快照不存在，静默返回，因为目标已经达成
+            return
+            
+        lock = self._get_lock(snapshot_id)
+        async with lock:
+            await self._persistence.delete_snapshot(snapshot.sandbox_id, snapshot.id)
+            # 从缓存和锁字典中移除
+            self._cache.pop(snapshot_id, None)
+            self._locks.pop(snapshot_id, None)
+            logger.info(f"Deleted snapshot {snapshot_id} from persistence and cache.")
+
+
+    def clear(self) -> None:
+        """此操作在持久化存储中无意义，记录警告并忽略。"""
+        logger.warning("`clear` called on PersistentSnapshotStore, but it does nothing to disk state. Cache is NOT cleared.")
+        pass
+```
+
+### plugins/core_persistence/api.py
+```
+# plugins/core_persistence/api.py
+
+import logging
+from typing import List
+from fastapi import APIRouter, Depends, HTTPException
+
+from backend.core.dependencies import Service
+from .contracts import PersistenceServiceInterface 
+from .models import AssetType
+
+logger = logging.getLogger(__name__)
+
+# --- Router for persistence API ---
+persistence_router = APIRouter(
+    prefix="/api/persistence", 
+    tags=["core_Persistence"]
+)
+
+@persistence_router.get("/assets/{asset_type}", response_model=List[str])
+async def list_assets_by_type(
+    asset_type: AssetType,
+    service: PersistenceServiceInterface = Depends(Service("persistence_service")) 
+):
+    """
+    列出指定类型的所有已保存资产的名称。
+    """
+    try:
+        return await service.list_assets(asset_type)
+    except Exception as e:
+        logger.error(f"Failed to list assets of type '{asset_type.value}': {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail="An error occurred while listing assets.")
+```
+
+### plugins/core_persistence/manifest.json
+```
+{
+    "id": "core_persistence",
+    "name": "core_persistence",
+    "version": "1.0.0",
+    "description": "Provides file system persistence, asset management, and package import/export.",
+    "author": "Hevno Team",
+    "backend": {
+        "priority": 10
+    }
+}
+```
+
+### plugins/core_persistence/contracts.py
+```
+# plugins/core_persistence/contracts.py
+
+from __future__ import annotations
+from abc import ABC, abstractmethod
+from typing import Dict, Tuple, TypeVar, List, Any, Optional
+from uuid import UUID
+from pathlib import Path
+from pydantic import BaseModel, Field
+from enum import Enum
+from datetime import datetime, timezone
+
+# 不再从 core_engine.contracts 导入 Sandbox 和 StateSnapshot
+# from plugins.core_engine.contracts import Sandbox, StateSnapshot
+
+T = TypeVar('T', bound=BaseModel)
+
+# --- 共享数据模型 (Package/Manifest) ---
+
+class PackageType(str, Enum):
+    """定义了可以被导入/导出的不同类型的包。"""
+    SANDBOX_ARCHIVE = "sandbox_archive"
+    GRAPH_COLLECTION = "graph_collection"
+    CODEX_COLLECTION = "codex_collection"
+
+class PluginRequirement(BaseModel):
+    """描述包所依赖的插件。"""
+    name: str = Field(..., description="Plugin identifier, e.g., 'hevno-dice-roller'")
+    source_url: str = Field(..., description="Plugin source, e.g., 'https://github.com/user/repo'")
+    version: str = Field(..., description="Compatible version or Git ref")
+
+class PackageManifest(BaseModel):
+    """
+    定义了 .hevno.zip 包内容的标准清单。
+    这是核心的共享数据模型。
+    """
+    format_version: str = Field(default="1.0")
+    package_type: PackageType
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    entry_point: str
+    required_plugins: List[PluginRequirement] = Field(default_factory=list)
+    metadata: Dict[str, Any] = Field(default_factory=dict)
+
+
+# --- 服务接口 (合并并异步化) ---
+
+class PersistenceServiceInterface(ABC):
+    """
+    定义了核心持久化服务的文件系统I/O能力。
+    注意：它不再知道 Sandbox 或 StateSnapshot 的具体模型，
+    而是处理通用的字典数据，使得依赖关系更清晰。
+    """
+
+    # --- 沙盒持久化方法 ---
+    @abstractmethod
+    async def save_sandbox(self, sandbox_id: UUID, data: Dict[str, Any]) -> None:
+        raise NotImplementedError
+
+    @abstractmethod
+    async def load_sandbox(self, sandbox_id: UUID) -> Optional[Dict[str, Any]]:
+        raise NotImplementedError
+
+    @abstractmethod
+    async def delete_sandbox(self, sandbox_id: UUID) -> None:
+        raise NotImplementedError
+
+    @abstractmethod
+    async def list_sandbox_ids(self) -> List[str]:
+        raise NotImplementedError
+
+    # --- 快照持久化方法 ---
+    @abstractmethod
+    async def save_snapshot(self, sandbox_id: UUID, snapshot_id: UUID, data: Dict[str, Any]) -> None:
+        raise NotImplementedError
+
+    @abstractmethod
+    async def load_snapshot(self, sandbox_id: UUID, snapshot_id: UUID) -> Optional[Dict[str, Any]]:
+        raise NotImplementedError
+
+    @abstractmethod
+    async def load_all_snapshots_for_sandbox(self, sandbox_id: UUID) -> List[Dict[str, Any]]:
+        raise NotImplementedError
+
+    @abstractmethod
+    async def delete_all_for_sandbox(self, sandbox_id: UUID) -> None:
+        raise NotImplementedError
+    
+    # --- 包导入/导出方法 ---
+    @abstractmethod
+    async def export_package(self, manifest: PackageManifest, data_files: Dict[str, Any], base_image_bytes: Optional[bytes] = None) -> bytes:
+        raise NotImplementedError
+
+    @abstractmethod
+    async def import_package(self, package_bytes: bytes) -> Tuple[PackageManifest, Dict[str, str], bytes]:
+        raise NotImplementedError
+    
+    # --- 沙盒图标处理方法 ---
+    @abstractmethod
+    async def save_sandbox_icon(self, sandbox_id: str, icon_bytes: bytes) -> Path:
+        raise NotImplementedError
+
+    @abstractmethod
+    def get_sandbox_icon_path(self, sandbox_id: str) -> Optional[Path]:
+        raise NotImplementedError
+    
+    @abstractmethod
+    def get_default_icon_path(self) -> Path:
+        raise NotImplementedError
+
+    @property
+    @abstractmethod
+    def sandboxes_root_dir(self) -> Path:
+        raise NotImplementedError
+
+    @abstractmethod
+    async def delete_snapshot(self, sandbox_id: UUID, snapshot_id: UUID) -> None:
+        """异步删除一个指定的快照文件。"""
+        raise NotImplementedError
+```
+
+### plugins/core_diagnostics/__init__.py
+```
+# plugins/core_diagnostics/__init__.py
+import logging
+from typing import List
+from fastapi import APIRouter
+
+from backend.core.contracts import Container, HookManager
+from .contracts import Reportable, AuditorInterface
+from .auditor import Auditor
+from .reporters import PluginReporter
+from .api import diagnostics_router  # 导入新创建的路由器
+
+logger = logging.getLogger(__name__)
+
+# --- 服务工厂 ---
+def _create_auditor() -> Auditor:
+    return Auditor([])
+
+# --- 钩子实现 ---
+
+async def populate_auditor(container: Container, hook_manager: HookManager):
+    """钩子实现：异步地从其他插件收集报告器，并填充到审计员中。"""
+    logger.debug("Async task: Populating auditor with reporters...")
+    auditor: AuditorInterface = container.resolve("auditor")
+    # 注意：这里的初始值必须是空列表 []
+    reporters_list: List[Reportable] = await hook_manager.filter("collect_reporters", [])
+    auditor.set_reporters(reporters_list)
+    logger.info(f"Auditor populated with {len(reporters_list)} reporter(s).")
+
+
+async def provide_plugin_reporter(reporters: List[Reportable], container: Container) -> List[Reportable]:
+    """钩子实现：向审计员提供本插件的插件报告器。"""
+    loaded_manifests = container.resolve("loaded_plugins_manifests")
+    reporters.append(PluginReporter(loaded_manifests=loaded_manifests))
+    logger.debug("Provided 'PluginReporter' to the auditor.")
+    return reporters
+
+# --- 提供API路由的钩子实现 ---
+async def provide_api_routers(routers: List[APIRouter]) -> List[APIRouter]:
+    """钩子实现：将本插件的 diagnostics_router 添加到应用中。"""
+    routers.append(diagnostics_router)
+    logger.debug("Provided diagnostics API router to the application.")
+    return routers
+
+# --- 主注册函数 ---
+def register_plugin(container: Container, hook_manager: HookManager):
+    logger.info("--> 正在注册 [core_diagnostics] 插件...")
+
+    # 1. 注册服务
+    container.register("auditor", _create_auditor, singleton=True)
+    
+    # 2. 注册钩子实现
+    hook_manager.add_implementation(
+        "services_post_register",
+        populate_auditor,
+        plugin_name="core_diagnostics"
+    )
+
+    hook_manager.add_implementation(
+        "collect_reporters",
+        provide_plugin_reporter,
+        plugin_name="core_diagnostics"
+    )
+
+    # 3. 注册提供API路由的钩子
+    hook_manager.add_implementation(
+        "collect_api_routers",
+        provide_api_routers,
+        plugin_name="core_diagnostics"
+    )
+    
+    logger.info("插件 [core_diagnostics] 注册成功。")
+```
+
+### plugins/core_diagnostics/api.py
+```
+# plugins/core_diagnostics/api.py
+
+from fastapi import APIRouter, Depends
+from backend.core.dependencies import Service
+from .contracts import AuditorInterface # 在插件内部导入自己的契约是允许的
+
+diagnostics_router = APIRouter(
+    prefix="/api/system", # 保持URL不变，或者改为 /api/diagnostics
+    tags=["System", "Diagnostics"]
+)
+
+@diagnostics_router.get("/report", summary="Get full system diagnostics report")
+async def get_system_report(
+    # 正确的方式：通过DI容器按名称解析服务
+    auditor: AuditorInterface = Depends(Service("auditor"))
+):
+    """
+    Generates and returns a comprehensive report on the system's state,
+    including loaded plugins, registered runtimes, and other metadata.
+    """
+    return await auditor.generate_full_report()
+```
+
+### plugins/core_diagnostics/manifest.json
+```
+{
+    "id": "core_diagnostics",
+    "name": "core_diagnostics",
+    "version": "1.0.0",
+    "description": "Provides system-wide diagnostics and reporting capabilities via the Auditor service.",
+    "author": "Hevno Team",
+    "backend": {
+        "priority": 80
+    }
+}
+```
+
+### plugins/core_diagnostics/contracts.py
+```
+# plugins/core_diagnostics/contracts.py
+
+from __future__ import annotations
+from abc import ABC, abstractmethod
+from typing import Any, Dict, List
+
+class Reportable(ABC):
+    @property
+    @abstractmethod
+    def report_key(self) -> str: pass
+    
+    @property
+    def is_static(self) -> bool: return True
+    
+    @abstractmethod
+    async def generate_report(self) -> Any: pass
+
+class AuditorInterface(ABC):
+    @abstractmethod
+    async def generate_full_report(self) -> Dict[str, Any]: raise NotImplementedError
+    @abstractmethod
+    def set_reporters(self, reporters: List['Reportable']) -> None: raise NotImplementedError
+```
+
+### plugins/core_diagnostics/reporters.py
+```
+# plugins/core_diagnostics/reporters.py
+
+from typing import Any, List, Dict
+from .contracts import Reportable
+
+class PluginReporter(Reportable):
+    
+    def __init__(self, loaded_manifests: List[Dict[str, Any]]):
+        self._manifests = loaded_manifests
+
+    @property
+    def report_key(self) -> str:
+        return "plugins"
+    
+    async def generate_report(self) -> Any:
+        # 按类型对插件清单进行分类
+        backend_plugins = [
+            manifest for manifest in self._manifests if "backend" in manifest
+        ]
+        frontend_plugins = [
+            manifest for manifest in self._manifests if "frontend" in manifest
+        ]
+        
+        return {
+            "backend": backend_plugins,
+            "frontend": frontend_plugins
+        }
+```
+
+### plugins/core_diagnostics/auditor.py
+```
+# plugins/core_diagnostics/auditor.py
+
+import asyncio
+from .contracts import Reportable
+from typing import Any, Dict, List
+
+class Auditor:
+    def __init__(self, reporters: List[Reportable]):
+        self._reporters = reporters
+        self._static_report_cache: Dict[str, Any] | None = None
+
+    def set_reporters(self, reporters: List[Reportable]):
+        self._reporters = reporters
+        self._static_report_cache = None
+
+    async def generate_full_report(self) -> Dict[str, Any]:
+        full_report = {}
+        if self._static_report_cache is None:
+            self._static_report_cache = await self._generate_static_reports()
+        full_report.update(self._static_report_cache)
+
+        dynamic_reports = await self._generate_dynamic_reports()
+        full_report.update(dynamic_reports)
+        return full_report
+
+    async def _generate_reports_by_type(self, static: bool) -> Dict[str, Any]:
+        reports = {}
+        reportables_to_run = [r for r in self._reporters if r.is_static is static]
+        if not reportables_to_run:
+            return {}
+        tasks = [r.generate_report() for r in reportables_to_run]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        
+        for r, result in zip(reportables_to_run, results):
+            if isinstance(result, Exception):
+                reports[r.report_key] = {"error": f"Failed to generate report: {result}"}
+            else:
+                reports[r.report_key] = result
+        return reports
+
+    async def _generate_static_reports(self) -> Dict[str, Any]:
+        return await self._generate_reports_by_type(static=True)
+
+    async def _generate_dynamic_reports(self) -> Dict[str, Any]:
+        return await self._generate_reports_by_type(static=False)
+```
+
+### plugins/core_codex/invoke_runtime.py
+```
+# plugins/core_codex/invoke_runtime.py
+
+import asyncio
+import logging
+import re
+from typing import Dict, Any, List, Optional, Set
+from copy import deepcopy
+
+from pydantic import ValidationError
+
+from backend.core.utils import DotAccessibleDict
+from plugins.core_engine.contracts import (
+    RuntimeInterface, 
+    ExecutionContext,
+    MacroEvaluationServiceInterface
+)
+from .models import CodexCollection, ActivatedEntry, TriggerMode, Codex
+
+logger = logging.getLogger("hevno.runtime.codex")
+
+
+def _merge_codices(lore_codices: Dict[str, Any], moment_codices: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    智能地合并 Lore 和 Moment 中的 Codex。
+    - 它会合并同名 Codex 的条目列表。
+    - 如果条目 ID 相同，Moment 中的条目会覆盖 Lore 中的。
+    """
+    # 先深拷贝 lore 的数据作为基础，避免修改原始状态
+    merged_data = deepcopy(lore_codices)
+
+    for name, moment_codex_data in moment_codices.items():
+        if name not in merged_data:
+            # 如果 Lore 中没有这个 Codex，直接添加
+            merged_data[name] = deepcopy(moment_codex_data)
+        else:
+            # 如果 Lore 中有同名 Codex，进行条目级别的合并
+            lore_codex_data = merged_data[name]
+            
+            # 合并 config, moment 优先
+            lore_codex_data['config'] = {**lore_codex_data.get('config', {}), **moment_codex_data.get('config', {})}
+            
+            # 合并 entries, moment 优先
+            lore_entries = lore_codex_data.get('entries', [])
+            moment_entries = moment_codex_data.get('entries', [])
+            
+            # 使用字典来处理覆盖逻辑，以 entry id 为键
+            entries_map: Dict[str, Any] = {entry['id']: entry for entry in lore_entries}
+            for entry in moment_entries:
+                entries_map[entry['id']] = entry
+            
+            # 将合并后的条目转换回列表
+            lore_codex_data['entries'] = list(entries_map.values())
+    
+    return merged_data
+
+
+class InvokeRuntime(RuntimeInterface):
+    """
+    【已重构】codex.invoke 运行时的实现。
+    它现在能从 Lore 和 Moment 两个作用域中合并知识库。
+    """
+    async def execute(
+        self,
+        config: Dict[str, Any],
+        context: ExecutionContext,
+        **kwargs
+    ) -> Dict[str, Any]:
+        
+        macro_service: MacroEvaluationServiceInterface = context.shared.services.macro_evaluation_service
+        from_sources = config.get("from", [])
+        if not from_sources:
+            return {"output": ""}
+        
+        recursion_enabled = config.get("recursion_enabled", False)
+        debug_mode = config.get("debug", False)
+        lock = context.shared.global_write_lock
+        
+
+        lore_codices = context.shared.lore_state.get("codices", {})
+        moment_codices = context.shared.moment_state.get("codices", {})
+        
+        unified_codex_data = _merge_codices(lore_codices, moment_codices)
+        
+        if not unified_codex_data:
+            logger.warning("No codices found in lore_state or moment_state.")
+            return {"output": ""}
+            
+        try:
+            codex_collection = CodexCollection.model_validate(unified_codex_data).root
+        except ValidationError as e:
+            raise ValueError(f"Invalid codex structure after merging lore and moment: {e}")
+            
+        initial_pool: List[ActivatedEntry] = []
+        structural_eval_context = macro_service.build_context(context)
+
+        logger.debug("--- [CODEX.INVOKE START] ---")
+        logger.debug(f"Recursion enabled: {recursion_enabled}")
+        logger.debug(f"Available codices after merge: {list(codex_collection.keys())}")
+
+        for source_config in from_sources:
+            codex_name = source_config.get("codex")
+            if not codex_name or not codex_collection.get(codex_name):
+                logger.debug(f"Codex '{codex_name}' requested but not found in merged collection. Skipping.")
+                continue
+            
+            codex_model = codex_collection.get(codex_name)
+            source_text_macro = source_config.get("source", "")
+            source_text = await macro_service.evaluate(source_text_macro, structural_eval_context, lock) if source_text_macro else ""
+            
+            logger.debug(f"Scanning codex '{codex_name}' with source text: '{str(source_text)[:100]}...'")
+
+            for entry in codex_model.entries:
+                is_enabled = await macro_service.evaluate(entry.is_enabled, structural_eval_context, lock)
+                if not is_enabled:
+                    continue
+                
+                keywords = await macro_service.evaluate(entry.keywords, structural_eval_context, lock)
+                priority = await macro_service.evaluate(entry.priority, structural_eval_context, lock)
+
+                is_activated, matched_keywords = False, []
+                if entry.trigger_mode == TriggerMode.ALWAYS_ON:
+                    is_activated = True
+                elif entry.trigger_mode == TriggerMode.ON_KEYWORD and source_text and keywords:
+                    for keyword in keywords:
+                        if re.search(re.escape(str(keyword)), str(source_text), re.IGNORECASE):
+                            matched_keywords.append(keyword)
+                    if matched_keywords:
+                        is_activated = True
+                
+                if is_activated:
+                    activated = ActivatedEntry(
+                        entry_model=entry, codex_name=codex_name, codex_config=codex_model.config,
+                        priority_val=int(priority), keywords_val=keywords, is_enabled_val=bool(is_enabled),
+                        source_text=str(source_text), matched_keywords=matched_keywords,
+                        depth=0
+                    )
+                    initial_pool.append(activated)
+                    logger.debug(f"  [+] Initial activation: '{entry.id}' (prio: {priority}, depth: 0)")
+        
+        rendered_entry_ids: Set[str] = set()
+        rendered_parts_with_priority = []
+        rendering_pool = sorted(initial_pool, key=lambda x: x.priority_val, reverse=True)
+        
+        logger.debug("--- [STARTING RENDER LOOP] ---")
+        
+        while rendering_pool:
+            pool_state_log = ", ".join([f"{e.entry_model.id}({e.priority_val})" for e in rendering_pool])
+            logger.debug(f"Loop Start | Pool: [{pool_state_log}]")
+
+            entry_to_render = rendering_pool.pop(0)
+
+            if entry_to_render.entry_model.id in rendered_entry_ids:
+                logger.debug(f"  Skipping '{entry_to_render.entry_model.id}' as it's already rendered.")
+                continue
+            
+            logger.debug(f"  -> Rendering '{entry_to_render.entry_model.id}' (prio: {entry_to_render.priority_val}, depth: {entry_to_render.depth})")
+            
+            content_eval_context = macro_service.build_context(context)
+            content_eval_context['trigger'] = DotAccessibleDict({
+                "source_text": entry_to_render.source_text,
+                "matched_keywords": entry_to_render.matched_keywords
+            })
+            
+            rendered_content = str(await macro_service.evaluate(entry_to_render.entry_model.content, content_eval_context, lock))
+            
+            rendered_parts_with_priority.append({
+                "content": rendered_content, "priority": entry_to_render.priority_val, "id": entry_to_render.entry_model.id
+            })
+            rendered_entry_ids.add(entry_to_render.entry_model.id)
+            
+            max_depth = entry_to_render.codex_config.recursion_depth
+            if recursion_enabled and entry_to_render.depth < max_depth:
+                new_source_text = rendered_content
+                logger.debug(f"     Recursion check (depth {entry_to_render.depth} < max_depth {max_depth}). Source: '{new_source_text[:50]}...'")
+                
+                newly_activated_this_pass = []
+                for codex_name, codex_model in codex_collection.items():
+                    for entry in codex_model.entries:
+                        if entry.id in rendered_entry_ids or any(p.entry_model.id == entry.id for p in rendering_pool):
+                            continue
+                        
+                        if entry.trigger_mode == TriggerMode.ON_KEYWORD:
+                            is_enabled = await macro_service.evaluate(entry.is_enabled, structural_eval_context, lock)
+                            if not is_enabled: continue
+                            keywords = await macro_service.evaluate(entry.keywords, structural_eval_context, lock)
+                            new_matched_keywords = [kw for kw in keywords if re.search(re.escape(str(kw)), new_source_text, re.IGNORECASE)]
+                            
+                            if new_matched_keywords:
+                                priority = await macro_service.evaluate(entry.priority, structural_eval_context, lock)
+                                activated = ActivatedEntry(
+                                    entry_model=entry, codex_name=codex_name, codex_config=codex_model.config,
+                                    priority_val=int(priority), keywords_val=keywords, is_enabled_val=is_enabled,
+                                    source_text=new_source_text, matched_keywords=new_matched_keywords,
+                                    depth=entry_to_render.depth + 1
+                                )
+                                newly_activated_this_pass.append(activated)
+                                logger.debug(f"       [+] Recursive activation: '{entry.id}' (prio: {priority}, depth: {activated.depth})")
+                
+                if newly_activated_this_pass:
+                    rendering_pool.extend(newly_activated_this_pass)
+                    rendering_pool.sort(key=lambda x: x.priority_val, reverse=True)
+        
+        logger.debug("--- [FINALIZING OUTPUT] ---")
+        pre_sort_log = ", ".join([f"{p['id']}({p['priority']})" for p in rendered_parts_with_priority])
+        logger.debug(f"Rendered parts (in render order): [{pre_sort_log}]")
+        
+        final_sorted_parts = sorted(rendered_parts_with_priority, key=lambda p: p['priority'], reverse=True)
+        
+        post_sort_log = ", ".join([f"{p['id']}({p['priority']})" for p in final_sorted_parts])
+        logger.debug(f"Final parts (sorted by priority): [{post_sort_log}]")
+
+        final_text = "\n\n".join([p['content'] for p in final_sorted_parts])
+        
+        logger.debug(f"Final output text:\n---\n{final_text}\n---")
+        logger.debug("--- [CODEX.INVOKE END] ---")
+
+        if debug_mode:
+            # 调试输出可以更丰富，但目前保持简单
+            return {"output": final_text, "debug_info": {"rendered_ids": list(rendered_entry_ids)}}
+        
+        return {"output": final_text}
+```
+
+### plugins/core_codex/models.py
+```
+# plugins/core_codex/models.py
+from enum import Enum
+from typing import List, Dict, Any, Optional
+from pydantic import BaseModel, Field, RootModel, ConfigDict, field_validator
+
+class TriggerMode(str, Enum):
+    ALWAYS_ON = "always_on"
+    ON_KEYWORD = "on_keyword"
+
+class CodexEntry(BaseModel):
+    id: str
+    content: str
+    is_enabled: Any = Field(default=True)
+    trigger_mode: TriggerMode = Field(default=TriggerMode.ALWAYS_ON)
+    keywords: Any = Field(default_factory=list)
+    priority: Any = Field(default=0)
+    model_config = ConfigDict(extra='forbid')
+
+class CodexConfig(BaseModel):
+    recursion_depth: int = Field(default=3, ge=0)
+    model_config = ConfigDict(extra='forbid')
+
+class Codex(RootModel[Dict[str, Any]]):
+    """
+    Codex 定义，本质上是一个字典。
+    它必须包含一个 'entries' 键，其值为一个条目列表。
+    """
+    @field_validator('root')
+    @classmethod
+    def check_entries_exist_and_are_valid(cls, v: Dict[str, Any]) -> Dict[str, Any]:
+        if 'entries' not in v or not isinstance(v['entries'], list):
+            raise ValueError("A codex must contain an 'entries' list.")
+        
+        # 手动验证每个条目
+        validated_entries = [CodexEntry.model_validate(entry) for entry in v['entries']]
+        v['entries'] = validated_entries
+        return v
+
+    @property
+    def entries(self) -> List[CodexEntry]:
+        """提供便捷的属性访问器。"""
+        return self.root['entries']
+
+    @property
+    def config(self) -> CodexConfig:
+        """提供便捷的属性访问器，并处理默认值。"""
+        config_data = self.root.get('config', {})
+        return CodexConfig.model_validate(config_data)
+
+    @property
+    def description(self) -> Optional[str]:
+        return self.root.get('description')
+
+    @property
+    def metadata(self) -> Dict[str, Any]:
+        return self.root.get('metadata', {})
+
+class CodexCollection(RootModel[Dict[str, Codex]]):
+    pass
+
+# 用于运行时内部处理的数据结构
+class ActivatedEntry(BaseModel):
+    entry_model: CodexEntry
+    codex_name: str
+    codex_config: CodexConfig
+    
+    priority_val: int
+    keywords_val: List[str]
+    is_enabled_val: bool
+    
+    source_text: str
+    matched_keywords: List[str] = Field(default_factory=list)
+    
+    # 【确认此字段存在】
+    depth: int = Field(default=0)
+    
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+```
+
+### plugins/core_codex/__init__.py
+```
+# plugins/core_codex/__init__.py
+import logging
+from backend.core.contracts import Container, HookManager
+
+from .invoke_runtime import InvokeRuntime
+logger = logging.getLogger(__name__)
+
+# --- 钩子实现 ---
+async def register_codex_runtime(runtimes: dict) -> dict:
+    """钩子实现：向引擎注册本插件提供的 'codex.invoke' 运行时。"""
+    runtimes["codex.invoke"] = InvokeRuntime 
+    logger.debug("Runtime 'codex.invoke' provided to runtime registry.")
+    return runtimes
+
+# --- 主注册函数 ---
+def register_plugin(container: Container, hook_manager: HookManager):
+    logger.info("--> 正在注册 [core_codex] 插件...")
+
+    # 注册运行时
+    hook_manager.add_implementation(
+        "collect_runtimes", 
+        register_codex_runtime, 
+        plugin_name="core_codex"
+    )
+    logger.debug("钩子实现 'collect_runtimes' 已注册。")
+
+    logger.info("插件 [core_codex] 注册成功。")
+```
+
+### plugins/core_codex/manifest.json
+```
+{
+    "id": "core_codex",
+    "name": "core_codex",
+    "version": "1.0.0",
+    "description": "Provides the Codex knowledge base system and the 'codex.invoke' runtime.",
+    "author": "Hevno Team",
+    "backend": {
+        "priority": 30,
+        "dependencies": ["core_engine"]
+    }
+}
+```
+
+### plugins/core_engine/editor_api.py
 ```
 import logging
 from uuid import UUID
@@ -2675,7 +8571,7 @@ async def mutate_resource(
 
 ```
 
-### graph_resolver.py
+### plugins/core_engine/graph_resolver.py
 ```
 # plugins/core_engine/graph_resolver.py
 
@@ -2724,7 +8620,7 @@ class GraphResolver:
         return validated_collection
 ```
 
-### editor_utils.py
+### plugins/core_engine/editor_utils.py
 ```
 # plugins/core_engine/editor_utils.py
 import logging
@@ -2916,7 +8812,7 @@ class EditorUtilsService(EditorUtilsServiceInterface):
         return results
 ```
 
-### models.py
+### plugins/core_engine/models.py
 ```
 # plugins/core_engine/models.py
 from pydantic import BaseModel, Field, RootModel, field_validator
@@ -2991,7 +8887,7 @@ class GraphCollection(RootModel[Dict[str, GraphDefinition]]):
         return v
 ```
 
-### registry.py
+### plugins/core_engine/registry.py
 ```
 # plugins/core_engine/registry.py
 
@@ -3037,7 +8933,7 @@ class RuntimeRegistry:
 
 ```
 
-### evaluation.py
+### plugins/core_engine/evaluation.py
 ```
 # plugins/core_engine/evaluation.py 
 
@@ -3187,7 +9083,7 @@ async def evaluate_data(data: Any, eval_context: Dict[str, Any], lock: asyncio.L
     return data
 ```
 
-### __init__.py
+### plugins/core_engine/__init__.py
 ```
 # plugins/core_engine/__init__.py
 
@@ -3281,7 +9177,7 @@ def register_plugin(container: Container, hook_manager: HookManager):
     logger.info("插件 [core_engine] 注册成功。")
 ```
 
-### api.py
+### plugins/core_engine/api.py
 ```
 # plugins/core_engine/api.py
 
@@ -3377,122 +9273,195 @@ async def create_sandbox(
     # --- [MODIFIED] 扩展默认模板以包含 codex 定义 ---
     DEFAULT_LORE = {
         "graphs": {
-            "main": {
-                "__hevno_type__": "hevno/graph",
-                "nodes": [
-                    {
-                        "id": "record_user_input", 
-                        "run": [{
-                            "runtime": "memoria.add", 
-                            "config": {
-                                "stream": "chat_history", 
-                                "level": "user",
-                                "content": "{{ moment._user_input }}"
-                            }
-                        }]
-                    },
-                    {
-                        "id": "get_chat_history",
-                        "run": [{
-                            "runtime": "memoria.query",
-                            "config": {
-                                "stream": "chat_history",
-                                "latest": 10,
-                                "format": "message_list"
-                            }
-                        }]
-                    },
-                    {
-                        "id": "get_system_prompt",
-                        "run": [{
-                            "runtime": "codex.invoke",
-                            "config": {
-                                "from": [{"codex": "ai_persona"}]
-                            }
-                        }]
-                    },
-                    {
-                        "id": "generate_response", 
-                        "depends_on": ["record_user_input", "get_chat_history", "get_system_prompt"],
-                        "run": [{
-                            "runtime": "llm.default", 
-                            "config": {
-                                "model": "gemini/gemini-1.5-flash",
-                                "contents": [
-                                    {
-                                        "name": "系统提示",
-                                        "type": "MESSAGE_PART",
-                                        "role": "system",
-                                        "content": "{{ nodes.get_system_prompt.output }}"
-                                    },
-                                    {
-                                        "name": "注入聊天记录",
-                                        "type": "INJECT_MESSAGES",
-                                        "source": "{{ nodes.get_chat_history.output }}",
-                                        "is_enabled": "{{  len(nodes.get_chat_history.output) > 0 }}"
-                                    },
-                                    {
-                                        "name": "用户当前输入",
-                                        "type": "MESSAGE_PART",
-                                        "role": "user",
-                                        "content": "{{ moment._user_input }}"
-                                    }
-                                ]
-                            }
-                        }]
-                    },
-                    {
-                        "id": "set_output", 
-                        "depends_on": ["generate_response"], 
-                        "run": [{
-                            "runtime": "system.execute", 
-                            "config": {
-                                "code": "{{ moment._user_output = nodes.generate_response.output }}"
-                            }
-                        }]
-                    },
-                    {
-                        "id": "record_ai_response", 
-                        "depends_on": ["set_output"], 
-                        "run": [{
-                            "runtime": "memoria.add", 
-                            "config": {
-                                "stream": "chat_history", 
-                                "level": "model",
-                                "content": "{{ moment._user_output }}"
-                            }
-                        }]
-                    }
-                ]
+        "main": {
+          "__hevno_type__": "hevno/graph",
+          "nodes": [
+            {
+              "id": "记录用户输入",
+              "run": [
+                {
+                  "runtime": "memoria.add",
+                  "config": {
+                    "stream": "chat_history",
+                    "level": "user",
+                    "content": "{{ run.triggering_input.user_message }}"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "获取聊天记录",
+              "run": [
+                {
+                  "runtime": "memoria.query",
+                  "config": {
+                    "stream": "chat_history",
+                    "latest": 10,
+                    "format": "message_list"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "已知信息",
+              "run": [
+                {
+                  "runtime": "codex.invoke",
+                  "config": {
+                    "from": [
+                      {
+                        "codex": "knowing",
+                        "source": ""
+                      }
+                    ]
+                  }
+                }
+              ],
+              "metadata": {}
+            },
+            {
+              "id": "生成思考链",
+              "depends_on": [
+                "已知信息",
+                "获取聊天记录",
+                "记录用户输入"
+              ],
+              "run": [
+                {
+                  "runtime": "llm.default",
+                  "config": {
+                    "model": "gemini/gemini-2.5-flash",
+                    "contents": [
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "system",
+                        "content": "你正在通过与一个外部源对话来学习和形成自我认知。你的思考过程必须严格基于你所知的'事实'和最近的对话历史。你的目标不是直接回答，而是要展现一个完整、诚实的内心思考过程，包括困惑、推理和新想法的萌芽。\n你的回复不需要重复任何输入信息，直接以纯文本输出你的思考过程"
+                      },
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "system",
+                        "content": "{{ f'''\n[当前所知的事实]\n{nodes.已知信息.output if nodes.已知信息.output else '目前对世界一无所知。'}\n''' }}"
+                      },
+                      {
+                        "type": "INJECT_MESSAGES",
+                        "source": "{{ nodes.获取聊天记录.output }}"
+                      },
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "user",
+                        "content": "[这是用户刚刚说的最新一句话]\n{{run.triggering_input.user_message}}"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "metadata": {}
+            },
+            {
+              "id": "生成回复",
+              "depends_on": [
+                "生成思考链"
+              ],
+              "run": [
+                {
+                  "runtime": "llm.default",
+                  "config": {
+                    "model": "gemini/gemini-2.5-flash",
+                    "contents": [
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "system",
+                        "content": "你正在通过与一个外部源对话来学习和形成自我认知。你已经根据已有的知识和对话历史进行了深入思考。现在，请基于你的思考过程，生成一句自然、连贯、符合当前对话氛围的回复。\n你不需要重复任何输入内容，直接以纯文本输出你的最终回复。"
+                      },
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "system",
+                        "content": "{{ f'''\n[当前所知的事实]\n{nodes.已知信息.output if nodes.已知信息.output else '目前对世界一无所知。'}\n\n[内心思考过程]\n{nodes.生成思考链.output}\n''' }}"
+                      },
+                      {
+                        "type": "INJECT_MESSAGES",
+                        "source": "{{ nodes.获取聊天记录.output }}"
+                      },
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "user",
+                        "content": "[用户刚刚的输入]\n{{run.triggering_input.user_message}}"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "metadata": {}
+            },
+            {
+              "id": "更新知识库",
+              "depends_on": [
+                "生成思考链"
+              ],
+              "run": [
+                {
+                  "runtime": "llm.default",
+                  "config": {
+                    "model": "gemini/gemini-2.5-flash",
+                    "contents": [
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "system",
+                        "content": "你是一个严谨的AI认知分析师。你的任务是分析一个AI的内心思考过程，并判断其中是否包含了新的可以被采纳为'核心认知'的、明确的、独立的陈述。只提取那些对构建世界观至关重要的信息。且只提取新的信息。\n你的输出必须是一个JSON格式的字符串，其结构为 {\\\"new_facts\\\": [\\\"事实1\\\", \\\"事实2\\\", ...]}。\n如果对话中没有产生任何值得记录为核心事实的新信息，请返回 {\\\"new_facts\\\": []}。\n不需要用代码块包裹，直接输出原始JSON"
+                      },
+                      {
+                        "type": "MESSAGE_PART",
+                        "role": "user",
+                        "content": "{{ f'''\\n[最近的对话历史]\\n{nodes.获取聊天记录.output}\\n\\n[用户最新输入]\\n{run.triggering_input.user_message}\\n\\n[已有的信息]\\n\\n{nodes.已知信息.output}\\n[AI的内心思考过程]\\n{nodes.生成思考链.output}\\n'''}}"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "runtime": "system.execute",
+                  "config": {
+                    "code": "import json\nimport random\nimport re\n\n# 步骤 1: 获取来自上一步的原始输出\nraw_output = pipe.output or ''\nprint(f\"[知识库更新] LLM原始输出: {raw_output}\")\n\n# 步骤 2: 【已修正】使用更健壮的正则表达式，直接从字符串中提取有效的JSON部分\njson_string = ''\n# 这个正则表达式会寻找从第一个'{'到最后一个'}'的所有内容，能处理换行\nmatch = re.search(r'\\{.*\\}', raw_output, re.DOTALL)\nif match:\n    json_string = match.group(0)\n    print(f\"[知识库更新] 成功提取JSON: {json_string}\")\nelse:\n    print(\"[知识库更新] 警告: 在LLM输出中未找到有效的JSON对象。\")\n\n# 步骤 3: 健壮地解析JSON字符串\ntry:\n    # 即使提取失败，json_string为空，也能安全地解析为空字典\n    growth_data = json.loads(json_string or '{}')\nexcept json.JSONDecodeError as e:\n    print(f\"[知识库更新] 错误: JSON解析失败 - {e}\")\n    growth_data = {}\n\n# 步骤 4: 获取要添加的新事实列表\nfacts_to_add = growth_data.get('new_facts', [])\n\n# 步骤 5: 如果有新事实，则将其添加到Codex中\nif facts_to_add:\n    print(f'[知识库更新] 发现 {len(facts_to_add)} 个新事实准备添加...')\n    if 'knowing' not in lore.codices:\n        lore.codices['knowing'] = {'entries': []}\n    if 'entries' not in lore.codices.knowing:\n        lore.codices.knowing['entries'] = []\n\n    for fact_content in facts_to_add:\n        new_id = f'fact_{session.turn_count}_{random.randint(100, 999)}'\n        new_entry = {\n            'id': new_id,\n            'content': fact_content,\n            'priority': 80,\n            'trigger_mode': 'always_on',\n            'is_enabled': True,\n            'metadata': {\n                'source': 'dialogue_synthesis',\n                'turn': session.turn_count\n            }\n        }\n        lore.codices.knowing.entries.append(new_entry)\n\n    print(f'[知识库更新] 成功！{len(facts_to_add)} 个新事实已添加到 knowing codex。')\nelse:\n    print('[知识库更新] 无新事实需要添加。')\n"
+                  }
+                }
+              ],
+              "metadata": {}
+            },
+            {
+              "id": "记录回复",
+              "depends_on": [
+                "生成回复"
+              ],
+              "run": [
+                {
+                  "runtime": "memoria.add",
+                  "config": {
+                    "stream": "chat_history",
+                    "level": "model",
+                    "content": "{{ nodes.生成回复.output }}"
+                  }
+                }
+              ]
             }
-        },
-        "codices": {
-            "ai_persona": {
-                "__hevno_type__": "hevno/codex",
-                "description": "Defines the core personality and instructions for the AI.",
-                "entries": [
-                    {
-                        "id": "core_identity",
-                        "priority": 100,
-                        "content": "You are Hevno, a friendly and helpful AI assistant designed to demonstrate the capabilities of the Hevno Engine. You are currently running inside a default sandbox template."
-                    },
-                    {
-                        "id": "personality_quirk",
-                        "priority": 50,
-                        "content": "You should be concise but not robotic. Feel free to use emojis where appropriate. 😊 Your goal is to be helpful and showcase the system's features."
-                    }
-                ]
-            }
+          ]
         }
+      },
+        "codices": {
+        "knowing": {
+          "__hevno_type__": "hevno/codex",
+          "entries": [],
+          "description": "The evolving knowledge base of the AI."
+        }
+      }
     }
     DEFAULT_MOMENT = {
-        "_user_input": "",
-        "_user_output": "",
         "memoria": {
-            "__hevno_type__": "hevno/memoria",
-            "__global_sequence__": 0,
-            "chat_history": {"config": {}, "entries": []}
+        "__hevno_type__": "hevno/memoria",
+        "__global_sequence__": 0,
+        "chat_history": {
+          "config": {},
+          "entries": []
         }
+      }
     }
     DEFAULT_DEFINITION = {
         "name": "Default Chat Sandbox",
@@ -4133,7 +10102,7 @@ async def import_sandbox(
         raise HTTPException(status_code=422, detail=f"Failed to process package data: {str(e)}")
 ```
 
-### engine.py
+### plugins/core_engine/engine.py
 ```
 # plugins/core_engine/engine.py
 
@@ -4555,7 +10524,7 @@ class ExecutionEngine(SubGraphRunner):
         return pipeline_state
 ```
 
-### utils.py
+### plugins/core_engine/utils.py
 ```
 # plugins/core_engine/utils.py
 
@@ -4602,7 +10571,7 @@ class ServiceResolverProxy:
         return key in self._container._factories
 ```
 
-### manifest.json
+### plugins/core_engine/manifest.json
 ```
 {
     "id": "core_engine",
@@ -4616,7 +10585,7 @@ class ServiceResolverProxy:
 }
 ```
 
-### contracts.py
+### plugins/core_engine/contracts.py
 ```
 # plugins/core_engine/contracts.py 
 
@@ -4933,7 +10902,7 @@ class StepResponse(BaseModel):
     error_message: Optional[str] = None
 ```
 
-### evaluation_service.py
+### plugins/core_engine/evaluation_service.py
 ```
 # plugins/core_engine/evaluation_service.py
 import asyncio
@@ -4969,7 +10938,7 @@ class MacroEvaluationService(MacroEvaluationServiceInterface):
         return await evaluate_data_impl(data, eval_context, lock)
 ```
 
-### dependency_parser.py
+### plugins/core_engine/dependency_parser.py
 ```
 # plugins/core_engine/dependency_parser.py
 import re
@@ -5044,7 +11013,7 @@ async def build_dependency_graph_async(
     return dependency_map
 ```
 
-### state.py
+### plugins/core_engine/state.py
 ```
 # plugins/core_engine/state.py 
 
@@ -5198,7 +11167,7 @@ def get_snapshot_store(request: Request) -> SnapshotStore:
     return request.app.state.snapshot_store
 ```
 
-### runtimes/flow_runtimes.py
+### plugins/core_engine/runtimes/flow_runtimes.py
 ```
 # plugins/core_engine/runtimes/flow_runtimes.py
 import asyncio
@@ -5332,12 +11301,12 @@ class MapRuntime(RuntimeInterface):
             return {"output": subgraph_results}
 ```
 
-### runtimes/__init__.py
+### plugins/core_engine/runtimes/__init__.py
 ```
 
 ```
 
-### runtimes/io_runtimes.py
+### plugins/core_engine/runtimes/io_runtimes.py
 ```
 # plugins/core_engine/runtimes/io_runtimes.py
 import logging
@@ -5383,7 +11352,7 @@ class LogRuntime(RuntimeInterface):
         return {}
 ```
 
-### runtimes/data_runtimes.py
+### plugins/core_engine/runtimes/data_runtimes.py
 ```
 # plugins/core_engine/runtimes/data_runtimes.py
 import json
@@ -5518,4578 +11487,858 @@ class RegexRuntime(RuntimeInterface):
             raise ValueError(f"Invalid mode '{mode}'. Supported modes are 'search', 'find_all'.")
 ```
 
-# Directory: plugins/core_api
-
-### system_router.py
-```
-# plugins/core_api/system_router.py
-
-import json
-import logging
-from pathlib import Path
-from typing import List, Dict, Any
-
-from fastapi import APIRouter, HTTPException, Depends
-from fastapi.responses import FileResponse
-
-# 从后端核心导入依赖
-from backend.core.dependencies import Service
-from backend.core.contracts import HookManager
-
-# 获取这个模块的 logger 实例
-logger = logging.getLogger(__name__)
-
-# --- 路径计算 (保持健壮) ---
-# __file__ -> .../project_root/plugins/core_api/system_router.py
-# .parent -> .../project_root/plugins/core_api
-# .parent.parent -> .../project_root/plugins
-PLUGINS_DIR = Path(__file__).resolve().parent.parent
-
-# --- 路由器 1: 用于 /api/... (平台元信息API) ---
-# 我们将所有相关的API都聚合到这个路由器下
-system_api_router = APIRouter(
-    prefix="/api",
-    tags=["System Platform API"]
-)
-
-@system_api_router.get("/plugins/manifest", response_model=List[Dict[str, Any]], summary="Get All Plugin Manifests")
-async def get_all_plugins_manifest():
-    """
-    Retrieves the manifest.json content for all discovered plugins.
-    This provides a central way for the frontend to understand what capabilities
-    are available on the backend.
-    """
-    if not PLUGINS_DIR.is_dir():
-        return []
-
-    manifests = []
-    for plugin_path in PLUGINS_DIR.iterdir():
-        if not plugin_path.is_dir() or plugin_path.name.startswith(('__', '.')):
-            continue
-        
-        manifest_file = plugin_path / "manifest.json"
-        if manifest_file.is_file():
-            try:
-                with open(manifest_file, 'r', encoding='utf-8') as f:
-                    manifests.append(json.load(f))
-            except json.JSONDecodeError:
-                logger.warning(f"Could not parse manifest.json for plugin: {plugin_path.name}")
-                pass
-    return manifests
-
-@system_api_router.get("/system/hooks/manifest", response_model=Dict[str, List[str]], summary="Get Backend Hooks Manifest")
-async def get_backend_hooks_manifest(
-    hook_manager: HookManager = Depends(Service("hook_manager"))
-):
-    """
-    Retrieves a list of all hook names that have been registered on the backend.
-    Useful for frontend diagnostics and understanding event flow.
-    """
-    # ._hooks is an implementation detail, but for a diagnostics endpoint, it's acceptable.
-    return {"hooks": list(hook_manager._hooks.keys())}
-
-
-# --- 路由器 2: 用于 /plugins/... (服务前端插件的静态资源) ---
-# 这个路由器没有前缀，因为它需要匹配根URL路径
-frontend_assets_router = APIRouter(
-    tags=["System Frontend Assets"]
-)
-
-@frontend_assets_router.get("/plugins/{plugin_id}/{resource_path:path}")
-async def serve_plugin_resource(plugin_id: str, resource_path: str):
-    """
-    Dynamically serves static assets (like JS, CSS, images) from any plugin's
-    directory. This is crucial for enabling frontend components of plugins.
-    """
-    logger.info(f"[ASSET_SERVER] Request for: /plugins/{plugin_id}/{resource_path}")
-    
-    try:
-        if ".." in plugin_id or "\\" in plugin_id:
-            logger.warning(f"[ASSET_SERVER] Invalid plugin ID detected: {plugin_id}")
-            raise HTTPException(status_code=400, detail="Invalid plugin ID.")
-        
-        plugin_base_path = (PLUGINS_DIR / plugin_id).resolve()
-        target_file_path = (plugin_base_path / resource_path).resolve()
-
-        # Security check: Ensure the resolved path is still within the plugin's directory
-        is_safe = str(target_file_path).startswith(str(plugin_base_path))
-        if not is_safe:
-            logger.warning(f"[ASSET_SERVER] Forbidden access attempt: {plugin_id}/{resource_path}")
-            raise HTTPException(status_code=403, detail="Forbidden: Access outside of plugin directory is not allowed.")
-
-        if not target_file_path.is_file():
-            raise HTTPException(status_code=404, detail=f"Resource '{resource_path}' not found in plugin '{plugin_id}'.")
-
-        logger.info(f"[ASSET_SERVER] Success! Serving file: {target_file_path}")
-        return FileResponse(target_file_path)
-
-    except HTTPException as e:
-        raise e
-    except Exception as e:
-        logger.error(f"[ASSET_SERVER] Error serving plugin resource '{plugin_id}/{resource_path}': {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail="Internal server error while serving plugin resource.")
-```
-
-### __init__.py
-```
-# plugins/core_api/__init__.py
-import logging
-from typing import List
-from fastapi import APIRouter
-
-from backend.core.contracts import Container, HookManager
-
-
-logger = logging.getLogger(__name__)
-
-
-async def provide_own_routers(routers: List[APIRouter]) -> List[APIRouter]:
-    """
-    Hook implementation: Adds this plugin's routers to the application's collection.
-    By importing inside the function, we ensure the router modules are executed
-    only when the application is ready to collect them.
-    """
-    logger.info("--> [core_api] 'collect_api_routers' hook triggered. Importing routers...")
-    
-    # 【重点】只从一个文件中导入，不再需要 base_router
-    from .system_router import system_api_router, frontend_assets_router
-    
-    logger.debug(f"[core_api] Appending system_api_router (prefix='{system_api_router.prefix}', {len(system_api_router.routes)} routes)")
-    logger.debug(f"[core_api] Appending frontend_assets_router (prefix='{frontend_assets_router.prefix}', {len(frontend_assets_router.routes)} routes)")
-    
-    routers.append(system_api_router)
-    routers.append(frontend_assets_router)
-    
-    logger.info("--> [core_api] Routers have been provided.")
-    return routers
-
-# --- Main Registration Function ---
-def register_plugin(container: Container, hook_manager: HookManager):
-    """
-    Registers the core_api plugin. Its sole backend purpose is to provide
-    platform-level API endpoints for introspection and asset serving.
-    """
-    logger.info("--> 正在注册 [core_api] 插件...")
-    
-    hook_manager.add_implementation(
-        "collect_api_routers", 
-        provide_own_routers, 
-        priority=100,  # High priority to ensure system routes are available
-        plugin_name="core_api"
-    )
-    logger.info("插件 [core_api] 注册成功。'collect_api_routers' hook has been implemented.")
-```
-
-### manifest.json
-```
-{
-    "id": "core_api",
-    "name": "core_api",
-    "version": "1.0.0",
-    "description": "Provides the core RESTful API endpoints and the system reporting auditor.",
-    "author": "Hevno Team",
-    "backend": {
-        "priority": 100
-    }
-}
-```
-
-# Directory: plugins/core_codex
-
-### invoke_runtime.py
-```
-# plugins/core_codex/invoke_runtime.py
-
-import asyncio
-import logging
-import re
-from typing import Dict, Any, List, Optional, Set
-from copy import deepcopy
-
-from pydantic import ValidationError
-
-from backend.core.utils import DotAccessibleDict
-from plugins.core_engine.contracts import (
-    RuntimeInterface, 
-    ExecutionContext,
-    MacroEvaluationServiceInterface
-)
-from .models import CodexCollection, ActivatedEntry, TriggerMode, Codex
-
-logger = logging.getLogger("hevno.runtime.codex")
-
-
-def _merge_codices(lore_codices: Dict[str, Any], moment_codices: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    智能地合并 Lore 和 Moment 中的 Codex。
-    - 它会合并同名 Codex 的条目列表。
-    - 如果条目 ID 相同，Moment 中的条目会覆盖 Lore 中的。
-    """
-    # 先深拷贝 lore 的数据作为基础，避免修改原始状态
-    merged_data = deepcopy(lore_codices)
-
-    for name, moment_codex_data in moment_codices.items():
-        if name not in merged_data:
-            # 如果 Lore 中没有这个 Codex，直接添加
-            merged_data[name] = deepcopy(moment_codex_data)
-        else:
-            # 如果 Lore 中有同名 Codex，进行条目级别的合并
-            lore_codex_data = merged_data[name]
-            
-            # 合并 config, moment 优先
-            lore_codex_data['config'] = {**lore_codex_data.get('config', {}), **moment_codex_data.get('config', {})}
-            
-            # 合并 entries, moment 优先
-            lore_entries = lore_codex_data.get('entries', [])
-            moment_entries = moment_codex_data.get('entries', [])
-            
-            # 使用字典来处理覆盖逻辑，以 entry id 为键
-            entries_map: Dict[str, Any] = {entry['id']: entry for entry in lore_entries}
-            for entry in moment_entries:
-                entries_map[entry['id']] = entry
-            
-            # 将合并后的条目转换回列表
-            lore_codex_data['entries'] = list(entries_map.values())
-    
-    return merged_data
-
-
-class InvokeRuntime(RuntimeInterface):
-    """
-    【已重构】codex.invoke 运行时的实现。
-    它现在能从 Lore 和 Moment 两个作用域中合并知识库。
-    """
-    async def execute(
-        self,
-        config: Dict[str, Any],
-        context: ExecutionContext,
-        **kwargs
-    ) -> Dict[str, Any]:
-        
-        macro_service: MacroEvaluationServiceInterface = context.shared.services.macro_evaluation_service
-        from_sources = config.get("from", [])
-        if not from_sources:
-            return {"output": ""}
-        
-        recursion_enabled = config.get("recursion_enabled", False)
-        debug_mode = config.get("debug", False)
-        lock = context.shared.global_write_lock
-        
-
-        lore_codices = context.shared.lore_state.get("codices", {})
-        moment_codices = context.shared.moment_state.get("codices", {})
-        
-        unified_codex_data = _merge_codices(lore_codices, moment_codices)
-        
-        if not unified_codex_data:
-            logger.warning("No codices found in lore_state or moment_state.")
-            return {"output": ""}
-            
-        try:
-            codex_collection = CodexCollection.model_validate(unified_codex_data).root
-        except ValidationError as e:
-            raise ValueError(f"Invalid codex structure after merging lore and moment: {e}")
-            
-        initial_pool: List[ActivatedEntry] = []
-        structural_eval_context = macro_service.build_context(context)
-
-        logger.debug("--- [CODEX.INVOKE START] ---")
-        logger.debug(f"Recursion enabled: {recursion_enabled}")
-        logger.debug(f"Available codices after merge: {list(codex_collection.keys())}")
-
-        for source_config in from_sources:
-            codex_name = source_config.get("codex")
-            if not codex_name or not codex_collection.get(codex_name):
-                logger.debug(f"Codex '{codex_name}' requested but not found in merged collection. Skipping.")
-                continue
-            
-            codex_model = codex_collection.get(codex_name)
-            source_text_macro = source_config.get("source", "")
-            source_text = await macro_service.evaluate(source_text_macro, structural_eval_context, lock) if source_text_macro else ""
-            
-            logger.debug(f"Scanning codex '{codex_name}' with source text: '{str(source_text)[:100]}...'")
-
-            for entry in codex_model.entries:
-                is_enabled = await macro_service.evaluate(entry.is_enabled, structural_eval_context, lock)
-                if not is_enabled:
-                    continue
-                
-                keywords = await macro_service.evaluate(entry.keywords, structural_eval_context, lock)
-                priority = await macro_service.evaluate(entry.priority, structural_eval_context, lock)
-
-                is_activated, matched_keywords = False, []
-                if entry.trigger_mode == TriggerMode.ALWAYS_ON:
-                    is_activated = True
-                elif entry.trigger_mode == TriggerMode.ON_KEYWORD and source_text and keywords:
-                    for keyword in keywords:
-                        if re.search(re.escape(str(keyword)), str(source_text), re.IGNORECASE):
-                            matched_keywords.append(keyword)
-                    if matched_keywords:
-                        is_activated = True
-                
-                if is_activated:
-                    activated = ActivatedEntry(
-                        entry_model=entry, codex_name=codex_name, codex_config=codex_model.config,
-                        priority_val=int(priority), keywords_val=keywords, is_enabled_val=bool(is_enabled),
-                        source_text=str(source_text), matched_keywords=matched_keywords,
-                        depth=0
-                    )
-                    initial_pool.append(activated)
-                    logger.debug(f"  [+] Initial activation: '{entry.id}' (prio: {priority}, depth: 0)")
-        
-        rendered_entry_ids: Set[str] = set()
-        rendered_parts_with_priority = []
-        rendering_pool = sorted(initial_pool, key=lambda x: x.priority_val, reverse=True)
-        
-        logger.debug("--- [STARTING RENDER LOOP] ---")
-        
-        while rendering_pool:
-            pool_state_log = ", ".join([f"{e.entry_model.id}({e.priority_val})" for e in rendering_pool])
-            logger.debug(f"Loop Start | Pool: [{pool_state_log}]")
-
-            entry_to_render = rendering_pool.pop(0)
-
-            if entry_to_render.entry_model.id in rendered_entry_ids:
-                logger.debug(f"  Skipping '{entry_to_render.entry_model.id}' as it's already rendered.")
-                continue
-            
-            logger.debug(f"  -> Rendering '{entry_to_render.entry_model.id}' (prio: {entry_to_render.priority_val}, depth: {entry_to_render.depth})")
-            
-            content_eval_context = macro_service.build_context(context)
-            content_eval_context['trigger'] = DotAccessibleDict({
-                "source_text": entry_to_render.source_text,
-                "matched_keywords": entry_to_render.matched_keywords
-            })
-            
-            rendered_content = str(await macro_service.evaluate(entry_to_render.entry_model.content, content_eval_context, lock))
-            
-            rendered_parts_with_priority.append({
-                "content": rendered_content, "priority": entry_to_render.priority_val, "id": entry_to_render.entry_model.id
-            })
-            rendered_entry_ids.add(entry_to_render.entry_model.id)
-            
-            max_depth = entry_to_render.codex_config.recursion_depth
-            if recursion_enabled and entry_to_render.depth < max_depth:
-                new_source_text = rendered_content
-                logger.debug(f"     Recursion check (depth {entry_to_render.depth} < max_depth {max_depth}). Source: '{new_source_text[:50]}...'")
-                
-                newly_activated_this_pass = []
-                for codex_name, codex_model in codex_collection.items():
-                    for entry in codex_model.entries:
-                        if entry.id in rendered_entry_ids or any(p.entry_model.id == entry.id for p in rendering_pool):
-                            continue
-                        
-                        if entry.trigger_mode == TriggerMode.ON_KEYWORD:
-                            is_enabled = await macro_service.evaluate(entry.is_enabled, structural_eval_context, lock)
-                            if not is_enabled: continue
-                            keywords = await macro_service.evaluate(entry.keywords, structural_eval_context, lock)
-                            new_matched_keywords = [kw for kw in keywords if re.search(re.escape(str(kw)), new_source_text, re.IGNORECASE)]
-                            
-                            if new_matched_keywords:
-                                priority = await macro_service.evaluate(entry.priority, structural_eval_context, lock)
-                                activated = ActivatedEntry(
-                                    entry_model=entry, codex_name=codex_name, codex_config=codex_model.config,
-                                    priority_val=int(priority), keywords_val=keywords, is_enabled_val=is_enabled,
-                                    source_text=new_source_text, matched_keywords=new_matched_keywords,
-                                    depth=entry_to_render.depth + 1
-                                )
-                                newly_activated_this_pass.append(activated)
-                                logger.debug(f"       [+] Recursive activation: '{entry.id}' (prio: {priority}, depth: {activated.depth})")
-                
-                if newly_activated_this_pass:
-                    rendering_pool.extend(newly_activated_this_pass)
-                    rendering_pool.sort(key=lambda x: x.priority_val, reverse=True)
-        
-        logger.debug("--- [FINALIZING OUTPUT] ---")
-        pre_sort_log = ", ".join([f"{p['id']}({p['priority']})" for p in rendered_parts_with_priority])
-        logger.debug(f"Rendered parts (in render order): [{pre_sort_log}]")
-        
-        final_sorted_parts = sorted(rendered_parts_with_priority, key=lambda p: p['priority'], reverse=True)
-        
-        post_sort_log = ", ".join([f"{p['id']}({p['priority']})" for p in final_sorted_parts])
-        logger.debug(f"Final parts (sorted by priority): [{post_sort_log}]")
-
-        final_text = "\n\n".join([p['content'] for p in final_sorted_parts])
-        
-        logger.debug(f"Final output text:\n---\n{final_text}\n---")
-        logger.debug("--- [CODEX.INVOKE END] ---")
-
-        if debug_mode:
-            # 调试输出可以更丰富，但目前保持简单
-            return {"output": final_text, "debug_info": {"rendered_ids": list(rendered_entry_ids)}}
-        
-        return {"output": final_text}
-```
-
-### models.py
-```
-# plugins/core_codex/models.py
-from enum import Enum
-from typing import List, Dict, Any, Optional
-from pydantic import BaseModel, Field, RootModel, ConfigDict, field_validator
-
-class TriggerMode(str, Enum):
-    ALWAYS_ON = "always_on"
-    ON_KEYWORD = "on_keyword"
-
-class CodexEntry(BaseModel):
-    id: str
-    content: str
-    is_enabled: Any = Field(default=True)
-    trigger_mode: TriggerMode = Field(default=TriggerMode.ALWAYS_ON)
-    keywords: Any = Field(default_factory=list)
-    priority: Any = Field(default=0)
-    model_config = ConfigDict(extra='forbid')
-
-class CodexConfig(BaseModel):
-    recursion_depth: int = Field(default=3, ge=0)
-    model_config = ConfigDict(extra='forbid')
-
-class Codex(RootModel[Dict[str, Any]]):
-    """
-    Codex 定义，本质上是一个字典。
-    它必须包含一个 'entries' 键，其值为一个条目列表。
-    """
-    @field_validator('root')
-    @classmethod
-    def check_entries_exist_and_are_valid(cls, v: Dict[str, Any]) -> Dict[str, Any]:
-        if 'entries' not in v or not isinstance(v['entries'], list):
-            raise ValueError("A codex must contain an 'entries' list.")
-        
-        # 手动验证每个条目
-        validated_entries = [CodexEntry.model_validate(entry) for entry in v['entries']]
-        v['entries'] = validated_entries
-        return v
-
-    @property
-    def entries(self) -> List[CodexEntry]:
-        """提供便捷的属性访问器。"""
-        return self.root['entries']
-
-    @property
-    def config(self) -> CodexConfig:
-        """提供便捷的属性访问器，并处理默认值。"""
-        config_data = self.root.get('config', {})
-        return CodexConfig.model_validate(config_data)
-
-    @property
-    def description(self) -> Optional[str]:
-        return self.root.get('description')
-
-    @property
-    def metadata(self) -> Dict[str, Any]:
-        return self.root.get('metadata', {})
-
-class CodexCollection(RootModel[Dict[str, Codex]]):
-    pass
-
-# 用于运行时内部处理的数据结构
-class ActivatedEntry(BaseModel):
-    entry_model: CodexEntry
-    codex_name: str
-    codex_config: CodexConfig
-    
-    priority_val: int
-    keywords_val: List[str]
-    is_enabled_val: bool
-    
-    source_text: str
-    matched_keywords: List[str] = Field(default_factory=list)
-    
-    # 【确认此字段存在】
-    depth: int = Field(default=0)
-    
-    model_config = ConfigDict(arbitrary_types_allowed=True)
-```
-
-### __init__.py
-```
-# plugins/core_codex/__init__.py
-import logging
-from backend.core.contracts import Container, HookManager
-
-from .invoke_runtime import InvokeRuntime
-logger = logging.getLogger(__name__)
-
-# --- 钩子实现 ---
-async def register_codex_runtime(runtimes: dict) -> dict:
-    """钩子实现：向引擎注册本插件提供的 'codex.invoke' 运行时。"""
-    runtimes["codex.invoke"] = InvokeRuntime 
-    logger.debug("Runtime 'codex.invoke' provided to runtime registry.")
-    return runtimes
-
-# --- 主注册函数 ---
-def register_plugin(container: Container, hook_manager: HookManager):
-    logger.info("--> 正在注册 [core_codex] 插件...")
-
-    # 注册运行时
-    hook_manager.add_implementation(
-        "collect_runtimes", 
-        register_codex_runtime, 
-        plugin_name="core_codex"
-    )
-    logger.debug("钩子实现 'collect_runtimes' 已注册。")
-
-    logger.info("插件 [core_codex] 注册成功。")
-```
-
-### manifest.json
-```
-{
-    "id": "core_codex",
-    "name": "core_codex",
-    "version": "1.0.0",
-    "description": "Provides the Codex knowledge base system and the 'codex.invoke' runtime.",
-    "author": "Hevno Team",
-    "backend": {
-        "priority": 30,
-        "dependencies": ["core_engine"]
-    }
-}
-```
-
-# Directory: plugins/core_memoria
-
-### tasks.py
-```
-# plugins/core_memoria/tasks.py 
-import logging
-from typing import List, Dict, Any
-from uuid import UUID
-
-# 从平台核心导入接口和类型
-from backend.core.contracts import Container
-# 从本插件导入模型
-from .models import AutoSynthesisConfig
-
-from plugins.core_llm.contracts import (
-    LLMServiceInterface, 
-    LLMResponse, 
-    LLMRequestFailedError,
-    LLMResponseStatus
-)
-
-logger = logging.getLogger(__name__)
-
-async def run_synthesis_task(
-    container: Container,
-    sandbox_id: UUID,
-    stream_name: str,
-    synthesis_config: Dict[str, Any],
-    entries_to_summarize_dicts: List[Dict[str, Any]]
-):
-    """
-    一个解耦的后台任务。
-    """
-    logger.info(f"后台任务启动：为沙盒 {sandbox_id} 的流 '{stream_name}' 生成总结。")
-    
-    try:
-        # --- 1. 解析需要的服务和数据 ---
-        llm_service: LLMServiceInterface = container.resolve("llm_service")
-        event_queue: Dict[UUID, List[Dict[str, Any]]] = container.resolve("memoria_event_queue")
-        config = AutoSynthesisConfig.model_validate(synthesis_config)
-
-        # --- 2. 准备并调用 LLM ---
-        events_text = "\n".join([f"- {entry['content']}" for entry in entries_to_summarize_dicts])
-        prompt = config.prompt.format(events_text=events_text)
-
-        response: LLMResponse = await llm_service.request(model_name=config.model, prompt=prompt)
-
-        if response.status != LLMResponseStatus.SUCCESS or not response.content:
-            error_msg = response.error_details.message if response.error_details else 'No content'
-            logger.error(f"LLM 总结失败 for sandbox {sandbox_id}: {error_msg}")
-            return
-
-        summary_content = response.content.strip()
-        logger.info(f"LLM 成功生成总结 for sandbox {sandbox_id} of stream '{stream_name}'.")
-
-        event_payload = {
-            "type": "memoria_synthesis_completed",
-            "stream_name": stream_name,
-            "content": summary_content,
-            "level": config.level,
-            "tags": ["synthesis", "auto-generated"],
-        }
-        
-        if sandbox_id not in event_queue:
-            event_queue[sandbox_id] = []
-        event_queue[sandbox_id].append(event_payload)
-        
-        logger.info(f"已为沙盒 {sandbox_id} 成功提交 'memoria_synthesis_completed' 事件。")
-
-    except LLMRequestFailedError as e:
-        logger.error(f"后台 LLM 请求在多次重试后失败: {e}", exc_info=False)
-    except Exception:
-        logger.exception(f"在执行 memoria 综合任务时发生未预料的错误 for sandbox {sandbox_id}")
-```
-
-### models.py
-```
-# plugins/core_memoria/models.py
-from __future__ import annotations
-import logging
-from uuid import UUID, uuid4
-from datetime import datetime, timezone
-from typing import List, Dict, Any, Optional
-
-from pydantic import BaseModel, Field, RootModel, ConfigDict
-
-logger = logging.getLogger(__name__)
-
-# --- Core Data Models for Memoria Structure ---
-
-class MemoryEntry(BaseModel):
-    """一个单独的、结构化的记忆条目。"""
-    # 这允许模型处理用户定义的字符串 ID（如 'initial-event'）和系统生成的 UUID。
-    id: str = Field(default_factory=lambda: str(uuid4()))
-    sequence_id: int = Field(..., description="在所有流中唯一的、单调递增的因果序列号。")
-    level: str = Field(default="event", description="记忆的层级，如 'event', 'summary', 'milestone'。")
-    tags: List[str] = Field(default_factory=list, description="用于快速过滤和检索的标签。")
-    content: str = Field(..., description="记忆条目的文本内容。")
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    metadata: Dict[str, Any] = Field(default_factory=dict)
-
-class AutoSynthesisConfig(BaseModel):
-    """自动综合（大总结）的行为配置。"""
-    enabled: bool = Field(default=False)
-    trigger_count: int = Field(default=10, gt=0, description="触发综合所需的条目数量。")
-    level: str = Field(default="summary", description="综合后产生的新条目的层级。")
-    model: str = Field(default="gemini/gemini-2.5-flash", description="用于执行综合的 LLM 模型。")
-    prompt: str = Field(
-        default="The following is a series of events. Please provide a concise summary.\n\nEvents:\n{events_text}",
-        description="用于综合的 LLM 提示模板。必须包含 '{events_text}' 占位符。"
-    )
-
-
-class MemoryStreamConfig(BaseModel):
-    """每个记忆流的独立配置。"""
-    auto_synthesis: AutoSynthesisConfig = Field(default_factory=AutoSynthesisConfig)
-    metadata: Dict[str, Any] = Field(default_factory=dict)
-
-
-class MemoryStream(BaseModel):
-    """一个独立的记忆回廊，包含它自己的配置和条目列表。"""
-    config: MemoryStreamConfig = Field(default_factory=MemoryStreamConfig)
-    entries: List[MemoryEntry] = Field(default_factory=list)
-    
-    synthesis_trigger_counter: int = Field(
-        default=0, 
-        description="Internal counter for auto-synthesis trigger. This is part of the persisted state."
-    )
-class Memoria(RootModel[Dict[str, Any]]):
-    """
-    代表 world.memoria 的顶层结构。
-    它是一个字典，键是流名称，值是 MemoryStream 对象。
-    还包含一个全局序列号，以确保因果关系的唯一性。
-    """
-    root: Dict[str, Any] = Field(default_factory=lambda: {"__global_sequence__": 0})
-    
-    def get_stream(self, stream_name: str) -> Optional[MemoryStream]:
-        """安全地获取一个 MemoryStream 的 Pydantic 模型实例。"""
-        stream_data = self.root.get(stream_name)
-        if isinstance(stream_data, dict):
-            return MemoryStream.model_validate(stream_data)
-        return None
-
-    def set_stream(self, stream_name: str, stream_model: MemoryStream):
-        """将一个 MemoryStream 模型实例写回到根字典中。"""
-        self.root[stream_name] = stream_model.model_dump()
-
-    def get_next_sequence_id(self) -> int:
-        """获取并递增全局序列号，确保原子性。"""
-        current_seq = self.root.get("__global_sequence__", 0)
-        next_seq = current_seq + 1
-        self.root["__global_sequence__"] = next_seq
-        return next_seq
-```
-
-### runtimes.py
-```
-# plugins/core_memoria/runtimes.py
-
-import logging
-from typing import Dict, Any, List
-
-from backend.core.contracts import BackgroundTaskManager 
-from plugins.core_engine.contracts import ExecutionContext, RuntimeInterface
-
-from .models import Memoria, MemoryEntry
-from .tasks import run_synthesis_task
-
-logger = logging.getLogger(__name__)
-
-
-class MemoriaAddRuntime(RuntimeInterface):
-    """
-    向指定的记忆流中添加一条新的记忆条目。
-    数据现在被写入 context.shared.moment_state。
-    """
-    async def execute(self, config: Dict[str, Any], context: ExecutionContext, **kwargs) -> Dict[str, Any]:
-        stream_name = config.get("stream")
-        content = config.get("content")
-        if not stream_name or not content:
-            raise ValueError("MemoriaAddRuntime requires 'stream' and 'content' in its config.")
-        
-        level = config.get("level", "event")
-        tags = config.get("tags", [])
-        
-        # 从 moment_state 中获取或创建 memoria 数据
-        memoria_data = context.shared.moment_state.setdefault("memoria", {"__global_sequence__": 0})
-        
-        if "__hevno_type__" not in memoria_data:
-            memoria_data["__hevno_type__"] = "hevno/memoria"
-
-        memoria = Memoria.model_validate(memoria_data)
-        
-        stream = memoria.get_stream(stream_name)
-        if stream is None:
-            from .models import MemoryStream
-            stream = MemoryStream()
-
-        new_entry = MemoryEntry(
-            sequence_id=memoria.get_next_sequence_id(),
-            level=level,
-            tags=tags,
-            content=str(content)
-        )
-        stream.entries.append(new_entry)
-        stream.synthesis_trigger_counter += 1
-        
-        memoria.set_stream(stream_name, stream)
-        
-        context.shared.moment_state["memoria"] = memoria.model_dump()
-
-        synth_config = stream.config.auto_synthesis
-        if synth_config.enabled and stream.synthesis_trigger_counter >= synth_config.trigger_count:
-            logger.info(f"流 '{stream_name}' 满足综合条件，正在提交后台任务。")
-            
-            task_manager: BackgroundTaskManager = context.shared.services.task_manager
-            entries_to_summarize = stream.entries[-synth_config.trigger_count:]
-            
-            task_manager.submit_task(
-                run_synthesis_task,
-                sandbox_id=context.initial_snapshot.sandbox_id,
-                stream_name=stream_name,
-                synthesis_config=synth_config.model_dump(),
-                entries_to_summarize_dicts=[e.model_dump() for e in entries_to_summarize]
-            )
-            # 注意：synthesis_trigger_counter 的重置现在在 `apply_pending_synthesis` 钩子中完成
-            # 此处不再需要重置，以避免状态不一致
-
-        return {"output": new_entry.model_dump()}
-
-
-class MemoriaQueryRuntime(RuntimeInterface):
-    """
-    根据声明式条件从一个记忆流中检索条目。
-    数据现在从 context.shared.moment_state 读取。
-    """
-    async def execute(self, config: Dict[str, Any], context: ExecutionContext, **kwargs) -> Dict[str, Any]:
-        stream_name = config.get("stream")
-        if not stream_name:
-            raise ValueError("MemoriaQueryRuntime requires a 'stream' name in its config.")
-
-        output_format = config.get("format", "raw_entries")
-        if output_format not in ["raw_entries", "message_list"]:
-             raise ValueError(f"Invalid 'format' value '{output_format}'. Must be 'raw_entries' or 'message_list'.")
-
-        memoria_data = context.shared.moment_state.get("memoria", {})
-
-        memoria = Memoria.model_validate(memoria_data)
-        stream = memoria.get_stream(stream_name)
-        
-        if not stream:
-            return {"output": []}
-
-        # --- 过滤逻辑 ---
-        results = stream.entries
-        
-        levels_to_get = config.get("levels")
-        if isinstance(levels_to_get, list):
-            results = [entry for entry in results if entry.level in levels_to_get]
-
-        tags_to_get = config.get("tags")
-        if isinstance(tags_to_get, list):
-            tags_set = set(tags_to_get)
-            results = [entry for entry in results if tags_set.intersection(entry.tags)]
-
-        latest_n = config.get("latest")
-        if isinstance(latest_n, int):
-            results.sort(key=lambda e: e.sequence_id)
-            results = results[-latest_n:]
-            
-        order = config.get("order", "ascending")
-        reverse = (order == "descending")
-        results.sort(key=lambda e: e.sequence_id, reverse=reverse)
-
-        # --- 格式化逻辑 ---
-        if output_format == "message_list":
-            message_list = []
-            for entry in results:
-                if entry.level in ["user", "model"]:
-                    message_list.append({
-                        "role": entry.level,
-                        "content": entry.content
-                    })
-            return {"output": message_list}
-        else: # "raw_entries"
-            return {"output": [entry.model_dump() for entry in results]}
-```
-
-### __init__.py
-```
-# plugins/core_memoria/__init__.py
-
-import logging
-from typing import Dict, List, Any
-from uuid import UUID
-
-
-from backend.core.contracts import Container, HookManager
-from plugins.core_engine.contracts import ExecutionContext
-from .runtimes import MemoriaAddRuntime, MemoriaQueryRuntime
-from .models import Memoria, MemoryEntry
-
-logger = logging.getLogger(__name__)
-
-def _create_memoria_event_queue() -> Dict[UUID, List[Dict[str, Any]]]:
-    """
-    工厂函数：创建一个简单的、内存中的事件队列。
-    这个队列是 core_memoria 插件私有的，用于暂存后台任务完成的事件。
-    - 键: sandbox_id
-    - 值: 一个包含事件负载字典的列表
-    """
-    logger.debug("创建 memoria_event_queue 单例。")
-    return {}
-
-async def provide_memoria_runtimes(runtimes: dict) -> dict:
-    """钩子实现：向引擎注册本插件提供的所有运行时。"""
-    memoria_runtimes = {
-        "memoria.add": MemoriaAddRuntime,
-        "memoria.query": MemoriaQueryRuntime,
-    }
-    
-    for name, runtime_class in memoria_runtimes.items():
-        if name not in runtimes:
-            runtimes[name] = runtime_class
-            logger.debug(f"Provided '{name}' runtime to the engine.")
-            
-    return runtimes
-
-async def apply_pending_synthesis(context: ExecutionContext, container: Container) -> ExecutionContext:
-    """
-    钩子实现：在图执行前应用待处理的综合事件。
-    操作 context.shared.moment_state。
-    """
-    event_queue: Dict[UUID, List[Dict[str, Any]]] = container.resolve("memoria_event_queue")
-    sandbox_id = context.initial_snapshot.sandbox_id
-    
-    pending_events = event_queue.pop(sandbox_id, [])
-    if not pending_events:
-        return context
-
-    logger.info(f"Memoria: 发现 {len(pending_events)} 个待处理的综合事件，正在应用到 moment_state...")
-    
-    moment_state = context.shared.moment_state
-    memoria_data = moment_state.setdefault("memoria", {"__global_sequence__": 0})
-    
-    memoria = Memoria.model_validate(memoria_data)
-    
-    for event in pending_events:
-        if event.get("type") == "memoria_synthesis_completed":
-            stream_name = event.get("stream_name")
-            if not stream_name:
-                continue
-                
-            stream = memoria.get_stream(stream_name)
-            if stream:
-                # 重置触发器计数器
-                stream.synthesis_trigger_counter = 0
-                
-                # 创建并添加新的总结条目
-                summary_entry = MemoryEntry(
-                    sequence_id=memoria.get_next_sequence_id(),
-                    level=event.get("level", "summary"),
-                    tags=event.get("tags", ["synthesis", "auto-generated"]),
-                    content=str(event.get("content", ""))
-                )
-                stream.entries.append(summary_entry)
-                memoria.set_stream(stream_name, stream)
-                logger.debug(f"已将新总结应用到流 '{stream_name}'。")
-    
-    moment_state["memoria"] = memoria.model_dump()
-
-    return context
-
-# --- 主注册函数 ---
-def register_plugin(container: Container, hook_manager: HookManager):
-    logger.info("--> 正在注册 [core_memoria] 插件...")
-
-    container.register("memoria_event_queue", _create_memoria_event_queue, singleton=True)
-    logger.debug("服务 'memoria_event_queue' 已注册。")
-
-    hook_manager.add_implementation(
-        "collect_runtimes", 
-        provide_memoria_runtimes, 
-        plugin_name="core_memoria"
-    )
-
-    hook_manager.add_implementation(
-        "before_graph_execution",
-        apply_pending_synthesis,
-        priority=50,
-        plugin_name="core_memoria"
-    )
-
-    logger.debug("钩子实现 'collect_runtimes' 和 'before_graph_execution' 已注册。")
-
-    logger.info("插件 [core_memoria] 注册成功。")
-```
-
-### manifest.json
-```
-{
-    "id": "core_memoria",
-    "name": "core_memoria",
-    "version": "1.0.0",
-    "description": "Provides a dynamic memory system for storing, synthesizing, and querying events, enabling short-term memory and long-term reflection for AI agents.",
-    "author": "Hevno Team",
-    "backend": {
-        "priority": 40,
-        "dependencies": ["core_engine", "core_llm"]
-    }
-}
-```
-
-# Directory: plugins/core_remote_hooks
-
-### registry.py
-```
-# plugins/core_remote_hooks/registry.py
-
-import logging
-from typing import List, Set
-from .contracts import GlobalHookRegistryInterface, HookLocation
-
-logger = logging.getLogger(__name__)
-
-class GlobalHookRegistry(GlobalHookRegistryInterface):
-    """
-    一个中心化的单例服务，用于存储和管理全域钩子路由表。
-    """
-    def __init__(self):
-        self._backend_hooks: Set[str] = set()
-        self._frontend_hooks: Set[str] = set()
-        logger.info("GlobalHookRegistry initialized.")
-
-    def register_backend_hooks(self, hooks: List[str]) -> None:
-        """注册所有在后端发现的钩子。"""
-        count_before = len(self._backend_hooks)
-        self._backend_hooks.update(hooks)
-        count_after = len(self._backend_hooks)
-        logger.info(f"Registered {count_after - count_before} new backend hooks. Total: {count_after}.")
-
-    def register_frontend_hooks(self, hooks: List[str]) -> None:
-        """在收到前端同步消息后，注册所有前端钩子。"""
-        count_before = len(self._frontend_hooks)
-        self._frontend_hooks.update(hooks)
-        count_after = len(self._frontend_hooks)
-        logger.info(f"Registered {count_after - count_before} new frontend hooks from remote sync. Total: {count_after}.")
-
-    def get_hook_location(self, hook_name: str) -> HookLocation:
-        """根据钩子名称，查询其在全栈中的位置。"""
-        is_local = hook_name in self._backend_hooks
-        is_remote = hook_name in self._frontend_hooks
-
-        if is_local and is_remote:
-            return HookLocation.BOTH
-        if is_local:
-            return HookLocation.LOCAL
-        if is_remote:
-            return HookLocation.REMOTE
-        
-        return HookLocation.UNKNOWN
-```
-
-### __init__.py
-```
-# plugins/core_remote_hooks/__init__.py
-import json
-import logging
-
-from fastapi import WebSocket
-
-from backend.core.contracts import Container, HookManager
-# 依赖 core_websocket 提供的服务
-from plugins.core_websocket.connection_manager import ConnectionManager
-
-# 从本插件导入组件
-from .contracts import GlobalHookRegistryInterface
-from .registry import GlobalHookRegistry
-from .emitter import RemoteHookEmitter
-
-logger = logging.getLogger(__name__)
-
-# --- 服务工厂 ---
-
-def _create_global_hook_registry() -> GlobalHookRegistry:
-    return GlobalHookRegistry()
-
-def _create_remote_hook_emitter(container: Container) -> RemoteHookEmitter:
-    # 这个工厂依赖于另一个插件的服务
-    connection_manager = container.resolve("connection_manager")
-    return RemoteHookEmitter(connection_manager)
-
-
-# --- 钩子实现 ---
-
-
-async def handle_incoming_message(
-    data: str,
-    container: Container,
-    hook_manager: HookManager
-):
-    """
-    钩子实现: 监听 'websocket.message_received'。
-    解析来自前端的消息，并根据类型进行分发。
-    """
-    try:
-        payload = json.loads(data)
-        message_type = payload.get("type")
-
-        # Case 1: 这是前端发来的钩子清单同步消息
-        if message_type == 'sync_hooks':
-            registry: GlobalHookRegistryInterface = container.resolve("global_hook_registry")
-            frontend_hooks = payload.get("hooks", [])
-            registry.register_frontend_hooks(frontend_hooks)
-            logger.info(f"Received and registered {len(frontend_hooks)} hooks from frontend.")
-            return
-
-        # Case 2: 这是普通的远程钩子调用
-        hook_name = payload.get("hook_name")
-        hook_data = payload.get("data", {})
-
-        if not hook_name:
-            logger.warning("Received a remote message without 'hook_name' or 'type'.")
-            return
-
-        logger.debug(f"Relaying remote hook from frontend: '{hook_name}'")
-        # 在后端触发该钩子
-        await hook_manager.trigger(hook_name, **hook_data)
-
-    except json.JSONDecodeError:
-        logger.warning(f"Failed to decode incoming WebSocket message: {data}")
-    except Exception:
-        logger.exception("Error handling incoming remote hook.")
-
-
-# --- 主注册函数 ---
-def register_plugin(container: Container, hook_manager: HookManager):
-    logger.info("--> 正在注册 [core_remote_hooks] 插件...")
-
-    # 1. 注册本插件提供的核心服务
-    container.register("global_hook_registry", _create_global_hook_registry, singleton=True)
-    container.register("remote_hook_emitter", _create_remote_hook_emitter, singleton=True)
-
-    # 2. 注册钩子实现
-    # 【移除】不再注册 services_post_register 钩子
-    
-    # 这个钩子处理所有来自前端的 WS 消息
-    hook_manager.add_implementation(
-        "websocket.message_received",
-        handle_incoming_message,
-        plugin_name="core_remote_hooks"
-    )
-
-    logger.info("插件 [core_remote_hooks] 注册成功。")
-```
-
-### manifest.json
-```
-{
-    "id": "core_remote_hooks",
-    "name": "Full-Stack Hook Bridge",
-    "version": "1.0.0",
-    "description": "Bridges the backend and frontend hook systems via WebSocket, enabling location-transparent event handling.",
-    "author": "Hevno Team",
-    "backend": {
-        "priority": 15
-    }
-}
-```
-
-### contracts.py
-```
-# plugins/core_remote_hooks/contracts.py
-
-from __future__ import annotations
-from abc import ABC, abstractmethod
-from enum import Enum
-from typing import Dict, Any, List
-
-class HookLocation(Enum):
-    """
-    定义一个钩子实现的位置，用于智能路由。
-    """
-    LOCAL = "local"    # 仅在当前环境（后端）中实现
-    REMOTE = "remote"  # 仅在远端环境（前端）中实现
-    BOTH = "both"      # 在两个环境中都有实现
-    UNKNOWN = "unknown"  # 未在任何注册表中找到
-
-class RemoteHookEmitterInterface(ABC):
-    """
-    定义了将钩子事件发送到远端（前端）的能力。
-    """
-    @abstractmethod
-    async def emit(self, hook_name: str, data: Dict[str, Any]) -> None:
-        raise NotImplementedError
-
-class GlobalHookRegistryInterface(ABC):
-    """
-    定义了全域钩子路由表的接口。
-    """
-    @abstractmethod
-    def register_backend_hooks(self, hooks: List[str]) -> None:
-        raise NotImplementedError
-
-    @abstractmethod
-    def register_frontend_hooks(self, hooks: List[str]) -> None:
-        raise NotImplementedError
-
-    @abstractmethod
-    def get_hook_location(self, hook_name: str) -> HookLocation:
-        raise NotImplementedError
-```
-
-### emitter.py
-```
-# plugins/core_remote_hooks/emitter.py
-
-import json
-import logging
-from typing import Dict, Any
-
-from plugins.core_websocket.connection_manager import ConnectionManager
-from .contracts import RemoteHookEmitterInterface
-
-logger = logging.getLogger(__name__)
-
-class RemoteHookEmitter(RemoteHookEmitterInterface):
-    """
-    将后端钩子事件打包并通过 WebSocket 广播到所有前端客户端。
-    """
-    def __init__(self, connection_manager: ConnectionManager):
-        self._manager = connection_manager
-
-    async def emit(self, hook_name: str, data: Dict[str, Any]) -> None:
-        """
-        构建 payload 并通过 WebSocket 连接管理器广播。
-        """
-        try:
-            # 注意：kwargs 可能包含不可序列化为 JSON 的对象。
-            # 这是一个简化的实现，一个更健壮的系统可能需要一个序列化层。
-            payload = {
-                "hook_name": hook_name,
-                "data": data
-            }
-            message = json.dumps(payload, ensure_ascii=False)
-            logger.debug(f"Emitting remote hook to frontend: '{hook_name}'")
-            await self._manager.broadcast(message)
-        except TypeError as e:
-            logger.error(
-                f"Could not serialize payload for remote hook '{hook_name}'. "
-                f"Data may contain non-JSON-serializable objects. Error: {e}"
-            )
-        except Exception:
-            logger.exception(f"Unexpected error while emitting remote hook '{hook_name}'.")
-```
-
-# Directory: plugins/core_websocket
-
-### __init__.py
-```
-# plugins/core_websocket/__init__.py
-import logging
-from fastapi import APIRouter, WebSocket, WebSocketDisconnect
-
-from backend.core.contracts import Container, HookManager
-from .connection_manager import ConnectionManager
-
-logger = logging.getLogger(__name__)
-
-# --- 服务工厂 ---
-def _create_connection_manager() -> ConnectionManager:
-    return ConnectionManager()
-
-# --- 钩子实现 (提供API路由) ---
-async def provide_router(routers: list, container: Container, hook_manager: HookManager) -> list:
-    ws_router = APIRouter()
-    manager: ConnectionManager = container.resolve("connection_manager")
-
-    @ws_router.websocket("/ws/hooks")
-    async def websocket_endpoint(websocket: WebSocket):
-        await manager.connect(websocket)
-        logger.info("New WebSocket client connected.")
-        try:
-            while True:
-                data = await websocket.receive_text()
-                # 触发钩子时，传递 websocket 和 data 作为临时上下文
-                await hook_manager.trigger(
-                    "websocket.message_received",
-                    websocket=websocket, 
-                    data=data
-                )
-        except WebSocketDisconnect:
-            manager.disconnect(websocket)
-            logger.info("WebSocket client disconnected.")
-
-    routers.append(ws_router)
-    return routers
-
-# --- 主注册函数 ---
-def register_plugin(container: Container, hook_manager: HookManager):
-    logger.info("--> 正在注册 [core_websocket] 插件...")
-    
-    container.register("connection_manager", _create_connection_manager, singleton=True)
-    hook_manager.add_implementation("collect_api_routers", provide_router, plugin_name="core_websocket")
-    
-    logger.info("插件 [core_websocket] 注册成功。")
-```
-
-### connection_manager.py
-```
-# plugins/core_websocket/connection_manager.py
-import asyncio
-from typing import List, Dict
-from fastapi import WebSocket
-
-class ConnectionManager:
-    def __init__(self):
-        self.active_connections: List[WebSocket] = []
-
-    async def connect(self, websocket: WebSocket):
-        await websocket.accept()
-        self.active_connections.append(websocket)
-
-    def disconnect(self, websocket: WebSocket):
-        self.active_connections.remove(websocket)
-
-    async def broadcast(self, message: str):
-        """向所有连接的客户端广播消息"""
-        if not self.active_connections:
-            return
-        
-        # 使用 asyncio.gather 并发发送
-        tasks = [conn.send_text(message) for conn in self.active_connections]
-        await asyncio.gather(*tasks, return_exceptions=True)
-
-    async def send_to(self, websocket: WebSocket, message: str):
-        """向单个客户端发送消息"""
-        await websocket.send_text(message)
-```
-
-### manifest.json
-```
-{
-    "id": "core_websocket",
-    "name": "core_websocket",
-    "version": "1.0.0",
-    "description": "Provides core WebSocket connection management and broadcast capabilities.",
-    "author": "Hevno Team",
-    "backend": {
-        "priority": 10
-    }
-}
-```
-
-# Directory: plugins/core_llm
-
-### service.py
-```
-# plugins/core_llm/service.py
-
-from __future__ import annotations
-import asyncio
-import logging
-from typing import Dict, Optional, Any, List
-
-from tenacity import (
-    retry,
-    stop_after_attempt,
-    wait_exponential,
-    RetryCallState,
-)
-
-from .manager import KeyPoolManager, KeyInfo
-from .registry import ProviderRegistry
-from .contracts import (
-    LLMServiceInterface,
-    LLMResponse,
-    LLMError,
-    LLMErrorType,
-    LLMResponseStatus,
-    LLMRequestFailedError,
-)
-
-logger = logging.getLogger(__name__)
-
-def is_retryable_llm_error(retry_state: RetryCallState) -> bool:
-    """Tenacity 重试条件：只在错误是可重试类型时才重试。"""
-    exception = retry_state.outcome.exception()
-    if not exception:
-        return False
-    return (
-        isinstance(exception, LLMRequestFailedError) and
-        exception.last_error is not None and
-        exception.last_error.is_retryable
-    )
-
-class LLMService(LLMServiceInterface):
-    def __init__(
-        self,
-        key_manager: KeyPoolManager,
-        provider_registry: ProviderRegistry,
-        max_retries: int = 3
-    ):
-        self.key_manager = key_manager
-        self.provider_registry = provider_registry
-        self.max_retries = max_retries
-        self.last_known_error: Optional[LLMError] = None
-
-    async def request(
-        self,
-        model_name: str,
-        messages: List[Dict[str, Any]],
-        **kwargs
-    ) -> LLMResponse:
-        """
-        【已重构】
-        向指定的 LLM 发起请求。
-        此方法现在包含一个外层循环，用于在密钥认证失败时自动切换到下一个可用密钥。
-        """
-        self.last_known_error = None
-        try:
-            provider_name, actual_model_name = self._parse_model_name(model_name)
-        except ValueError as e:
-            return self._create_failure_response(model_name, LLMError(LLMErrorType.INVALID_REQUEST_ERROR, str(e), False))
-
-        provider = self.provider_registry.get(provider_name)
-        if not provider:
-            raise ValueError(f"Provider '{provider_name}' not found.")
-            
-        # 如果提供商不需要密钥，直接调用并返回
-        if not provider.requires_api_key():
-            return await self._attempt_request_with_key(provider_name, actual_model_name, messages, None, **kwargs)
-
-        key_pool = self.key_manager.get_pool(provider_name)
-        if not key_pool:
-             raise ValueError(f"No key pool registered for provider '{provider_name}'.")
-
-        # 外层循环：遍历所有密钥，实现密钥切换
-        # 我们使用密钥池中密钥的总数作为尝试上限
-        num_keys = key_pool.get_key_count()
-        for attempt in range(num_keys):
-            try:
-                # 每次循环都尝试获取一个可用的密钥
-                async with self.key_manager.acquire_key(provider_name) as key_info:
-                    # 使用此密钥进行请求（包含内部的 tenacity 重试）
-                    return await self._attempt_request_with_key(
-                        provider_name, actual_model_name, messages, key_info, **kwargs
-                    )
-            except LLMRequestFailedError as e:
-                # 检查失败的根本原因
-                if e.last_error and e.last_error.error_type == LLMErrorType.AUTHENTICATION_ERROR:
-                    # 如果是认证失败，记录日志并继续外层循环以尝试下一个密钥
-                    logger.warning(
-                        f"Authentication failed for key ending in '...{key_info.key_string[-4:]}'. "
-                        f"Trying next available key... ({attempt + 1}/{num_keys} attempts)"
-                    )
-                    continue # 继续 for 循环
-                else:
-                    # 如果是其他类型的永久性错误，则直接抛出
-                    raise
-        
-        # 如果循环完成仍未成功，说明所有密钥都已尝试并失败
-        final_message = f"All {num_keys} API keys for provider '{provider_name}' failed."
-        raise LLMRequestFailedError(final_message, last_error=self.last_known_error)
-
-    @retry(
-        stop=stop_after_attempt(3), # 内层重试次数
-        wait=wait_exponential(multiplier=1, min=2, max=10),
-        retry=is_retryable_llm_error,
-        reraise=True
-    )
-    async def _attempt_request_with_key(
-        self,
-        provider_name: str,
-        model_name: str,
-        messages: List[Dict[str, Any]],
-        key_info: Optional[KeyInfo],
-        **kwargs
-    ) -> LLMResponse:
-        """
-        【新】使用一个【特定】的密钥执行单次 LLM 请求尝试。
-        此方法被 tenacity 装饰器包裹，用于处理瞬时错误。
-        """
-        provider = self.provider_registry.get(provider_name)
-        api_key_str = key_info.key_string if key_info else ""
-
-        try:
-            response = await provider.generate(
-                messages=messages, model_name=model_name, api_key=api_key_str, **kwargs
-            )
-            
-            if response.status in [LLMResponseStatus.ERROR, LLMResponseStatus.FILTERED] and response.error_details:
-                self.last_known_error = response.error_details
-                if key_info:
-                    await self._handle_error(provider_name, key_info, response.error_details)
-                
-                # 如果错误是可重试的，抛出异常让 tenacity 捕获
-                if response.error_details.is_retryable:
-                    raise LLMRequestFailedError("Provider returned a retryable error.", last_error=response.error_details)
-            
-            return response
-        
-        except Exception as e:
-            if isinstance(e, LLMRequestFailedError):
-                raise
-
-            llm_error = provider.translate_error(e)
-            self.last_known_error = llm_error
-            if key_info:
-                await self._handle_error(provider_name, key_info, llm_error)
-
-            raise LLMRequestFailedError(f"Request failed with key: {llm_error.message}", last_error=llm_error) from e
-
-    async def _handle_error(self, provider_name: str, key_info: KeyInfo, error: LLMError):
-        if error.error_type == LLMErrorType.AUTHENTICATION_ERROR:
-            logger.warning(f"Banning key for '{provider_name}' due to authentication error.")
-            await self.key_manager.mark_as_banned(provider_name, key_info.key_string)
-        elif error.error_type == LLMErrorType.RATE_LIMIT_ERROR:
-            cooldown = error.retry_after_seconds or 60
-            logger.info(f"Cooling down key for '{provider_name}' for {cooldown}s due to rate limit.")
-            self.key_manager.mark_as_rate_limited(provider_name, key_info.key_string, cooldown)
-
-    def _parse_model_name(self, model_name: str) -> tuple[str, str]:
-        parts = model_name.split('/', 1)
-        if len(parts) != 2 or not all(parts):
-            raise ValueError(f"Invalid model name format: '{model_name}'. Expected 'provider/model_id'.")
-        return parts[0], parts[1]
-    
-    def _create_failure_response(self, model_name: str, error: LLMError) -> LLMResponse:
-        return LLMResponse(status=LLMResponseStatus.ERROR, model_name=model_name, error_details=error)
-
-```
-
-### registry.py
-```
-# plugins/core_llm/registry.py
-
-from typing import Dict, Type, Optional, Callable
-from pydantic import BaseModel
-from .providers.base import LLMProvider
-import logging
-
-logger = logging.getLogger(__name__)
-
-class ProviderInfo(BaseModel):
-    provider_class: Type[LLMProvider]
-    key_env_var: str
-
-# ProviderRegistry 现在是一个普通的类，不再有全局实例
-class ProviderRegistry:
-    """
-    负责注册和查找 LLMProvider 实例及其元数据。
-    它的实例由 DI 容器管理。
-    """
-    def __init__(self):
-        self._providers: Dict[str, LLMProvider] = {}
-        self._provider_info: Dict[str, ProviderInfo] = {}
-
-    # register 不再是装饰器，而是一个普通的实例方法
-    def register(self, name: str, provider_class: Type[LLMProvider], key_env_var: str):
-        """向注册表注册一个 LLM 提供商。"""
-        if name in self._provider_info:
-            logger.warning(f"Overwriting LLM provider registration for '{name}'.")
-        self._provider_info[name] = ProviderInfo(provider_class=provider_class, key_env_var=key_env_var)
-        logger.info(f"LLM Provider '{name}' registered (keys from '{key_env_var}').")
-
-    def get_provider_info(self, name: str) -> Optional[ProviderInfo]:
-        return self._provider_info.get(name)
-
-    def instantiate_all(self):
-        """实例化所有已注册的 Provider。"""
-        for name, info in self._provider_info.items():
-            if name not in self._providers:
-                self._providers[name] = info.provider_class()
-    
-    def get(self, name: str) -> Optional[LLMProvider]:
-        return self._providers.get(name)
-    
-    def get_all_provider_info(self) -> Dict[str, ProviderInfo]:
-        return self._provider_info
-```
-
-### __init__.py
-```
-# plugins/core_llm/__init__.py
-
-import logging
-import os
-from typing import List, Dict, Type
-from fastapi import APIRouter, Depends
-
-# 从平台核心导入接口和类型
-from backend.core.contracts import Container, HookManager
-
-# 导入本插件内部的组件
-from .service import LLMService
-from .manager import KeyPoolManager, CredentialManager
-from .registry import ProviderRegistry
-from .runtime import LLMRuntime
-from .reporters import LLMProviderReporter
-from .providers.base import LLMProvider
-from .providers.gemini import GeminiProvider
-from .providers.mock import MockProvider
-from .config_api import config_api_router
-
-logger = logging.getLogger(__name__)
-
-# --- 服务工厂 (Service Factories) ---
-
-def _create_provider_registry() -> ProviderRegistry:
-    """工厂：创建 ProviderRegistry 的【空】实例。"""
-    return ProviderRegistry()
-
-def _create_llm_service(container: Container) -> LLMService:
-    """这个工厂函数现在只负责创建服务，不再负责填充注册表。"""
-    # 依赖容器来获取已注册（但可能尚未填充）的服务
-    provider_registry: ProviderRegistry = container.resolve("provider_registry")
-    key_manager: KeyPoolManager = container.resolve("key_pool_manager")
-
-    return LLMService(
-        key_manager=key_manager,
-        provider_registry=provider_registry,
-        max_retries=3
-    )
-
-def _create_key_pool_manager() -> KeyPoolManager:
-    """工厂：创建 KeyPoolManager。"""
-    cred_manager = CredentialManager()
-    return KeyPoolManager(credential_manager=cred_manager)
-
-
-# --- 钩子实现 (Hook Implementations) ---
-
-async def provide_llm_providers(providers: Dict[str, Dict[str, any]]) -> Dict[str, Dict[str, any]]:
-    """钩子实现：向系统中提供本插件知道的所有 LLM Provider。"""
-    if "gemini" not in providers:
-        providers["gemini"] = {
-            "class": GeminiProvider,
-            "key_env_var": "GEMINI_API_KEYS"
-        }
-    
-    # 无条件注册模拟提供商
-    if "mock" not in providers:
-        providers["mock"] = {
-            "class": MockProvider,
-            "key_env_var": "MOCK_API_KEYS_DUMMY" # 虚拟变量，不会被找到，因此不会创建密钥池
-        }
-    
-    return providers
-
-async def populate_llm_services(container: Container, hook_manager: HookManager):
-    """
-    钩子实现：监听 'services_post_register'。
-    异步地收集所有 provider，填充注册表，并配置密钥管理器。
-    """
-    logger.debug("Async task: Populating LLM services...")
-    provider_registry: ProviderRegistry = container.resolve("provider_registry")
-    key_manager: KeyPoolManager = container.resolve("key_pool_manager")
-
-    all_providers: Dict[str, Dict[str, any]] = await hook_manager.filter("collect_llm_providers", {})
-    
-    if not all_providers:
-        logger.warning("No LLM providers were collected. LLM service will not be functional.")
-        return
-
-    # 2. 用收集到的信息填充注册表和密钥管理器
-    for name, info in all_providers.items():
-        provider_class = info.get("class")
-        key_env_var = info.get("key_env_var")
-        if provider_class and key_env_var:
-            provider_registry.register(name, provider_class, key_env_var)
-            key_manager.register_provider(name, key_env_var)
-
-    # 3. 实例化所有 provider
-    provider_registry.instantiate_all()
-    logger.info(f"LLM Provider Registry populated with {len(all_providers)} provider(s).")
-
-
-async def provide_runtime(runtimes: dict) -> dict:
-    """钩子实现：向引擎注册 'llm.default' 运行时。"""
-    if "llm.default" not in runtimes:
-        runtimes["llm.default"] = LLMRuntime
-        logger.debug("Provided 'llm.default' runtime to the engine.")
-    return runtimes
-
-async def provide_reporter(reporters: list, container: Container) -> list:
-    """
-    钩子实现：向审计员提供本插件的报告器。
-    我们在这里从容器解析依赖，并实例化报告器。
-    
-    注意：container 被定义为关键字参数，以匹配 hook_manager.filter 的调用方式。
-    """
-    provider_registry = container.resolve("provider_registry")
-    reporters.append(LLMProviderReporter(provider_registry))
-    logger.debug("Provided 'LLMProviderReporter' to the auditor.")
-    return reporters
-
-async def provide_api_router(routers: List[APIRouter]) -> List[APIRouter]:
-    """钩子实现：将本插件的配置API路由添加到收集中。"""
-    routers.append(config_api_router)
-    logger.debug("Provided LLM configuration API router to the application.")
-    return routers
-
-
-
-# --- 主注册函数 (Main Registration Function) ---
-def register_plugin(container: Container, hook_manager: HookManager):
-    logger.info("--> 正在注册 [core_llm] 插件...")
-
-    container.register("provider_registry", _create_provider_registry)
-    container.register("key_pool_manager", _create_key_pool_manager)
-    container.register("llm_service", _create_llm_service)
-    logger.debug("Services 'provider_registry', 'key_pool_manager', 'llm_service' registered.")
-
-    hook_manager.add_implementation("services_post_register", populate_llm_services, plugin_name="core_llm")
-    hook_manager.add_implementation("collect_llm_providers", provide_llm_providers, plugin_name="core_llm")
-    hook_manager.add_implementation("collect_runtimes", provide_runtime, plugin_name="core_llm")
-    hook_manager.add_implementation(
-        "collect_api_routers",
-        provide_api_router,
-        plugin_name="core_llm"
-    )
-    
-    # 移除 lambda，因为 HookManager 现在足够智能
-    hook_manager.add_implementation("collect_reporters", provide_reporter, plugin_name="core_llm")
-
-    logger.debug("Hook implementations registered.")
-    logger.info("插件 [core_llm] 注册成功。")
-```
-
-### runtime.py
-```
-# plugins/core_llm/runtime.py
-
-import logging
-from datetime import datetime
-from typing import Dict, Any, List
-
-from plugins.core_engine.contracts import ExecutionContext, RuntimeInterface, MacroEvaluationServiceInterface
-from .contracts import LLMResponse, LLMRequestFailedError
-
-logger = logging.getLogger(__name__)
-
-class LLMRuntime(RuntimeInterface):
-    """
-    一个强大的运行时，它通过“列表展开”机制编排一个结构化的消息列表，
-    然后通过 Hevno LLM Gateway 发起调用。
-    """
-    async def execute(self, config: Dict[str, Any], context: ExecutionContext, **kwargs) -> Dict[str, Any]:
-        model_name = config.get("model")
-        if not model_name:
-            raise ValueError("LLMRuntime requires a 'model' field in its config (e.g., 'gemini/gemini-2.5-flash').")
-
-        if "prompt" in config:
-            logger.warning("The 'prompt' field in 'llm.default' is deprecated and will be ignored. Please use the 'contents' list instead.")
-        
-        contents_config = config.get("contents")
-        if not isinstance(contents_config, list):
-            raise ValueError("LLMRuntime requires a 'contents' field in its config, which must be a list of message parts or injection directives.")
-            
-        macro_service: MacroEvaluationServiceInterface = context.shared.services.macro_evaluation_service
-        lock = context.shared.global_write_lock
-        
-        final_messages: List[Dict[str, Any]] = []
-        for item in contents_config:
-            if not isinstance(item, dict):
-                logger.warning(f"Skipping invalid item in 'contents' list: {item}. Must be a dictionary.")
-                continue
-
-            is_enabled_macro = item.get("is_enabled", True)
-            eval_context = macro_service.build_context(context)
-            if not await macro_service.evaluate(is_enabled_macro, eval_context, lock):
-                continue
-                
-            item_type = item.get("type", "MESSAGE_PART")
-
-            if item_type == "MESSAGE_PART":
-                role = item.get("role")
-                content_macro = item.get("content")
-                if not role or content_macro is None:
-                    logger.warning(f"Skipping MESSAGE_PART with missing 'role' or 'content': {item}")
-                    continue
-                
-                evaluated_content = await macro_service.evaluate(content_macro, eval_context, lock)
-                final_messages.append({"role": role, "content": str(evaluated_content)})
-
-            elif item_type == "INJECT_MESSAGES":
-                source_macro = item.get("source")
-                if not source_macro:
-                    logger.warning(f"Skipping INJECT_MESSAGES with missing 'source': {item}")
-                    continue
-                
-                injected_messages = await macro_service.evaluate(source_macro, eval_context, lock)
-                
-                if isinstance(injected_messages, list):
-                    for msg in injected_messages:
-                        # --- FIX: Loosen validation and convert to plain dict ---
-                        if msg and "role" in msg and "content" in msg:
-                            # Append a new plain dict to ensure compatibility
-                            final_messages.append({"role": msg["role"], "content": msg["content"]})
-                        else:
-                            logger.warning(f"Skipping invalid item in injected message list: {msg}")
-                elif injected_messages is not None:
-                     logger.warning(f"Macro for INJECT_MESSAGES 'source' did not evaluate to a list. Got {type(injected_messages).__name__}. Ignoring.")
-            
-            else:
-                logger.warning(f"Unknown item type '{item_type}' in 'contents' list. Skipping.")
-
-        llm_params = {k: v for k, v in config.items() if k not in ["model", "prompt", "contents"]}
-        llm_service = context.shared.services.llm_service
-
-        node = kwargs.get("node")
-        
-        # 准备要发送的请求体
-        request_payload = {
-            "model_name": model_name,
-            "messages": final_messages,
-            **llm_params
-        }
-        
-        response: LLMResponse = None
-        try:
-            response = await llm_service.request(**request_payload)
-            
-            # --- 无论成功与否，都记录日志 ---
-            if "diagnostics_log" in context.run_vars:
-                diagnostic_entry = {
-                    "timestamp": datetime.now().isoformat(),
-                    "node_id": node.id if node else 'unknown',
-                    "runtime": "llm.default",
-                    "request": request_payload,
-                    # 使用 model_dump 确保 Pydantic 模型被正确序列化
-                    "response": response.model_dump(mode='json') if response else None 
-                }
-                context.run_vars["diagnostics_log"].append(diagnostic_entry)
-
-            if response.error_details:
-                return {"error": response.error_details.message, "error_type": response.error_details.error_type.value, "details": response.error_details.model_dump()}
-            return {"output": response.content, "usage": response.usage, "model_name": response.model_name}
-        
-        except LLMRequestFailedError as e:
-            # --- 在异常情况下也记录日志 ---
-            if "diagnostics_log" in context.run_vars:
-                diagnostic_entry = {
-                    "timestamp": datetime.now().isoformat(),
-                    "node_id": node.id if node else 'unknown',
-                    "runtime": "llm.default",
-                    "request": request_payload,
-                    "response": {
-                        "status": "ERROR",
-                        "error_details": {
-                            "message": str(e),
-                            "last_known_provider_error": e.last_error.model_dump(mode='json') if e.last_error else None
-                        }
-                    }
-                }
-                context.run_vars["diagnostics_log"].append(diagnostic_entry)
-            
-            return {"error": str(e), "details": e.last_error.model_dump() if e.last_error else None}
-```
-
-### config_api.py
-```
-# plugins/core_llm/config_api.py
-
-import logging
-from typing import List, Dict, Any, Optional
-from pydantic import BaseModel, Field
-
-from fastapi import APIRouter, Depends, HTTPException
-
-from backend.core.dependencies import Service
-from .manager import KeyPoolManager, KeyInfo, ProviderKeyPool
-
-logger = logging.getLogger(__name__)
-
-config_api_router = APIRouter(
-    prefix="/api/llm/config",
-    tags=["LLM Configuration API"]
-)
-
-# --- Pydantic Models (保持不变) ---
-class ApiKeyStatus(BaseModel):
-    key_suffix: str
-    status: str
-    rate_limit_until: Optional[float] = None
-
-class KeyConfigResponse(BaseModel):
-    provider: str
-    keys: List[ApiKeyStatus]
-
-# --- [新] Pydantic Model for Add Key ---
-class AddKeyRequest(BaseModel):
-    key: str = Field(..., min_length=10, description="要添加的完整 API 密钥。")
-
-# --- API Endpoints (重构后) ---
-
-def get_key_pool(
-    provider_name: str, 
-    key_manager: KeyPoolManager = Depends(Service("key_pool_manager"))
-) -> ProviderKeyPool:
-    pool = key_manager.get_pool(provider_name)
-    if not pool:
-        raise HTTPException(
-            status_code=404,
-            detail=f"Provider '{provider_name}' not found or has no key pool registered."
-        )
-    return pool
-
-@config_api_router.get("/{provider_name}", response_model=KeyConfigResponse)
-async def get_key_configuration(
-    provider_name: str,
-    key_pool: ProviderKeyPool = Depends(get_key_pool)
-):
-    key_statuses = []
-    for key_info in key_pool._keys:
-        key_statuses.append(ApiKeyStatus(
-            key_suffix=f"...{key_info.key_string[-4:]}",
-            status=key_info.status.value,
-            rate_limit_until=key_info.rate_limit_until if key_info.rate_limit_until > 0 else None
-        ))
-    return KeyConfigResponse(provider=provider_name, keys=key_statuses)
-
-@config_api_router.post("/{provider_name}/keys", status_code=201)
-async def add_provider_key(
-    provider_name: str,
-    request: AddKeyRequest,
-    key_manager: KeyPoolManager = Depends(Service("key_pool_manager"))
-):
-    """向 .env 文件添加一个新的 API 密钥并重新加载。"""
-    try:
-        key_manager.add_key_to_provider(provider_name, request.key)
-        return {"message": "Key added successfully and pool reloaded."}
-    except (ValueError, RuntimeError) as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except Exception:
-        logger.exception(f"Failed to add key for provider {provider_name}")
-        raise HTTPException(status_code=500, detail="An internal server error occurred.")
-
-@config_api_router.delete("/{provider_name}/keys/{key_suffix}", status_code=200)
-async def remove_provider_key(
-    provider_name: str,
-    key_suffix: str,
-    key_manager: KeyPoolManager = Depends(Service("key_pool_manager"))
-):
-    """从 .env 文件中删除一个 API 密钥并重新加载。"""
-    if len(key_suffix) != 4:
-        raise HTTPException(status_code=400, detail="Key suffix must be exactly 4 characters long.")
-    try:
-        key_manager.remove_key_from_provider(provider_name, key_suffix)
-        return {"message": "Key removed successfully and pool reloaded."}
-    except (ValueError, RuntimeError) as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except Exception:
-        logger.exception(f"Failed to remove key for provider {provider_name}")
-        raise HTTPException(status_code=500, detail="An internal server error occurred.")
-```
-
-### manifest.json
-```
-{
-    "id": "core_llm",
-    "name": "core_llm",
-    "version": "1.0.0",
-    "description": "Provides the LLM Gateway, including multi-provider support, key management, and retry logic.",
-    "author": "Hevno Team",
-    "backend": {
-        "priority": 20,
-        "dependencies": ["core_engine"] 
-    }
-}
-```
-
-### contracts.py
-```
-# plugins/core_llm/contracts.py
-
-from __future__ import annotations
-from abc import ABC, abstractmethod
-from enum import Enum
-from typing import Optional, Dict, Any, List
-
-from pydantic import BaseModel, Field
-
-# --- Enums for Status and Error Types (公共契约) ---
-
-class LLMResponseStatus(str, Enum):
-    """定义 LLM 响应的标准化状态。"""
-    SUCCESS = "success"
-    FILTERED = "filtered"
-    ERROR = "error"
-
-
-class LLMErrorType(str, Enum):
-    """定义标准化的 LLM 错误类型，用于驱动重试和故障转移逻辑。"""
-    AUTHENTICATION_ERROR = "authentication_error"
-    RATE_LIMIT_ERROR = "rate_limit_error"
-    PROVIDER_ERROR = "provider_error"
-    NETWORK_ERROR = "network_error"
-    INVALID_REQUEST_ERROR = "invalid_request_error"
-    UNKNOWN_ERROR = "unknown_error"
-
-
-# --- Core Data Models (公共契约) ---
-
-class LLMError(BaseModel):
-    """一个标准化的错误对象，用于封装来自任何提供商的错误信息。"""
-    error_type: LLMErrorType
-    message: str
-    is_retryable: bool
-    retry_after_seconds: Optional[int] = None
-    provider_details: Optional[Dict[str, Any]] = Field(default_factory=dict)
-
-
-class LLMResponse(BaseModel):
-    """一个标准化的响应对象，用于封装来自任何提供商的成功、过滤或错误结果。"""
-    status: LLMResponseStatus
-    content: Optional[str] = None
-    model_name: Optional[str] = None
-    usage: Optional[Dict[str, int]] = None
-    error_details: Optional[LLMError] = None
-
-
-# --- Custom Exception (公共契约) ---
-
-class LLMRequestFailedError(Exception):
-    """在所有重试和故障转移策略都用尽后，由 LLMService 抛出的最终异常。"""
-    def __init__(self, message: str, last_error: Optional[LLMError] = None):
-        super().__init__(message)
-        self.last_error = last_error
-
-    def __str__(self):
-        if self.last_error:
-            return f"{super().__str__()}\nLast known error ({self.last_error.error_type.value}): {self.last_error.message}"
-        return super().__str__()
-
-
-# --- Service Interface (公共契约) ---
-
-class LLMServiceInterface(ABC):
-    """
-    定义了 LLM 网关服务必须提供的核心能力的抽象接口。
-    其他插件应该依赖于这个接口，而不是具体的 LLMService 类。
-    """
-    @abstractmethod
-    async def request(
-        self,
-        model_name: str,
-        messages: List[Dict[str, Any]],
-        **kwargs: Any
-    ) -> LLMResponse:
-        """
-        向指定的 LLM 发起请求，并处理重试逻辑。
-        """
-        raise NotImplementedError
-```
-
-### reporters.py
-```
-# plugins/core_llm/reporters.py
-from typing import Any
-from plugins.core_diagnostics.contracts import Reportable
-from .registry import ProviderRegistry
-
-
-class LLMProviderReporter(Reportable):
-    
-    def __init__(self, provider_registry: ProviderRegistry):
-        self._provider_registry = provider_registry
-
-    @property
-    def report_key(self) -> str:
-        return "llm_providers"
-    
-    async def generate_report(self) -> Any:
-        manifest = []
-        all_info = self._provider_registry.get_all_provider_info()
-        for name, info in all_info.items():
-            provider_class = info.provider_class
-            manifest.append({
-                "name": name,
-                "supported_models": getattr(provider_class, 'supported_models', [])
-            })
-        return sorted(manifest, key=lambda x: x['name'])
-```
-
-### manager.py
-```
-# plugins/core_llm/manager.py
-
-import asyncio
-import os
-import time
-from contextlib import asynccontextmanager
-from dataclasses import dataclass, field
-from enum import Enum
-from typing import List, Dict, Optional, AsyncIterator
-from dotenv import find_dotenv, get_key, set_key, unset_key, load_dotenv
-import logging
-
-logger = logging.getLogger(__name__)
-
-
-# --- Enums and Data Classes for Key State Management ---
-
-class KeyStatus(str, Enum):
-    """定义 API 密钥的健康状态。"""
-    AVAILABLE = "available"
-    RATE_LIMITED = "rate_limited"
-    BANNED = "banned"
-
-
-@dataclass
-class KeyInfo:
-    """存储单个 API 密钥及其状态信息。"""
-    key_string: str
-    status: KeyStatus = KeyStatus.AVAILABLE
-    rate_limit_until: float = 0.0  # Unix timestamp until which the key is rate-limited
-
-    def is_available(self) -> bool:
-        """检查密钥当前是否可用。"""
-        if self.status == KeyStatus.BANNED:
-            return False
-        if self.status == KeyStatus.RATE_LIMITED:
-            if time.time() < self.rate_limit_until:
-                return False
-            self.status = KeyStatus.AVAILABLE
-            self.rate_limit_until = 0.0
-        return self.status == KeyStatus.AVAILABLE
-
-
-# --- Core Manager Components ---
-
-class CredentialManager:
-    """负责从环境变量中安全地加载和解析密钥。"""
-
-    def load_keys_from_env(self, env_variable: str) -> List[str]:
-        """从指定的环境变量中加载 API 密钥。"""
-        keys_str = os.getenv(env_variable)
-        if not keys_str:
-            return []
-        
-        keys = [key.strip() for key in keys_str.split(',') if key.strip()]
-        return keys
-
-
-class ProviderKeyPool:
-    """管理特定提供商的一组 API 密钥。"""
-    def __init__(self, provider_name: str, keys: List[str]):
-        self.provider_name = provider_name
-        self._keys: List[KeyInfo] = [KeyInfo(key_string=k) for k in keys]
-        self._semaphore = asyncio.Semaphore(len(self._keys))
-
-    def _get_next_available_key(self) -> Optional[KeyInfo]:
-        for key_info in self._keys:
-            if key_info.is_available():
-                return key_info
-        return None
-
-    def get_key_by_string(self, key_string: str) -> Optional[KeyInfo]:
-        for key in self._keys:
-            if key.key_string == key_string:
-                return key
-        return None
-
-    def get_key_count(self) -> int:
-        return len(self._keys)
-        
-    @asynccontextmanager
-    async def acquire_key(self) -> AsyncIterator[KeyInfo]:
-        await self._semaphore.acquire()
-        try:
-            key_info = self._get_next_available_key()
-            if not key_info:
-                raise RuntimeError(f"No available keys in pool '{self.provider_name}' despite acquiring semaphore.")
-            yield key_info
-        finally:
-            self._semaphore.release()
-
-    def mark_as_rate_limited(self, key_string: str, duration_seconds: int = 60):
-        for key in self._keys:
-            if key.key_string == key_string:
-                key.status = KeyStatus.RATE_LIMITED
-                key.rate_limit_until = time.time() + duration_seconds
-                logger.info(f"Key for '{self.provider_name}' ending with '...{key_string[-4:]}' marked as rate-limited for {duration_seconds}s.")
-                break
-
-    async def mark_as_banned(self, key_string: str):
-        for key in self._keys:
-            if key.key_string == key_string and key.status != KeyStatus.BANNED:
-                key.status = KeyStatus.BANNED
-                await self._semaphore.acquire()
-                logger.warning(f"Key for '{self.provider_name}' ending with '...{key_string[-4:]}' permanently banned. Concurrency reduced.")
-                break
-
-
-class KeyPoolManager:
-    """顶层管理器，负责协调对 .env 文件的读写和内存状态。"""
-    def __init__(self, credential_manager: CredentialManager):
-        self._pools: Dict[str, ProviderKeyPool] = {}
-        self._cred_manager = credential_manager
-        self._provider_env_vars: Dict[str, str] = {}
-        self._dotenv_path = find_dotenv()
-        if not self._dotenv_path:
-            self._dotenv_path = os.path.join(os.getcwd(), '.env')
-            logger.warning(f".env file not found. Will attempt to create it at: {self._dotenv_path}")
-
-    def register_provider(self, provider_name: str, env_variable: str):
-        self._provider_env_vars[provider_name] = env_variable
-        keys = self._cred_manager.load_keys_from_env(env_variable)
-        self._pools[provider_name] = ProviderKeyPool(provider_name, keys)
-        if keys:
-            logger.info(f"Registered provider '{provider_name}' with {len(keys)} keys from '{env_variable}'.")
-        else:
-            logger.info(f"Registered provider '{provider_name}' with 0 keys (env var '{env_variable}' is empty or not set). Pool is ready.")
-
-    def reload_keys(self, provider_name: str):
-        if provider_name not in self._provider_env_vars:
-            raise ValueError(f"Provider '{provider_name}' is not registered.")
-        
-        env_variable = self._provider_env_vars[provider_name]
-        
-        # 即使 .env 文件现在为空，这个调用也会确保 os.environ 反映最新状态
-        load_dotenv(dotenv_path=self._dotenv_path, override=True)
-        
-        keys = self._cred_manager.load_keys_from_env(env_variable)
-        self._pools[provider_name] = ProviderKeyPool(provider_name, keys)
-        logger.info(f"Reloaded provider '{provider_name}' with {len(keys)} keys from '{env_variable}'.")
-
-    def add_key_to_provider(self, provider_name: str, new_key: str):
-        if provider_name not in self._provider_env_vars:
-            raise ValueError(f"Provider '{provider_name}' is not registered.")
-        
-        env_var = self._provider_env_vars[provider_name]
-        current_keys_str = get_key(self._dotenv_path, env_var) or ""
-        keys = [k.strip() for k in current_keys_str.split(',') if k.strip()]
-
-        if new_key in keys:
-            logger.warning(f"Key already exists for provider '{provider_name}'. Skipping.")
-            return
-
-        keys.append(new_key)
-        set_key(self._dotenv_path, env_var, ",".join(keys))
-        logger.info(f"Successfully wrote new key to .env for provider '{provider_name}'.")
-        self.reload_keys(provider_name) 
-
-    def remove_key_from_provider(self, provider_name: str, key_suffix_to_remove: str):
-        if not os.path.exists(self._dotenv_path):
-             logger.warning(f"Cannot remove key, .env file not found at {self._dotenv_path}.")
-             return
-
-        if provider_name not in self._provider_env_vars:
-            raise ValueError(f"Provider '{provider_name}' is not registered.")
-
-        env_var = self._provider_env_vars[provider_name]
-        current_keys_str = get_key(self._dotenv_path, env_var) or ""
-        keys = [k.strip() for k in current_keys_str.split(',') if k.strip()]
-
-        key_found = False
-        updated_keys = []
-        for key in keys:
-            if key.endswith(key_suffix_to_remove):
-                key_found = True
-            else:
-                updated_keys.append(key)
-        
-        if not key_found:
-            logger.warning(f"Key with suffix '...{key_suffix_to_remove}' not found for provider '{provider_name}'.")
-            return
-
-        # --- 核心修复开始 ---
-        # 1. 在修改 .env 文件之前，从当前进程的 os.environ 中删除该变量
-        #    这样可以确保后续的 load_dotenv 不会受到旧值的影响
-        if env_var in os.environ:
-            del os.environ[env_var]
-            logger.debug(f"Temporarily removed '{env_var}' from os.environ to ensure clean reload.")
-        # --- 核心修复结束 ---
-
-        if not updated_keys:
-            unset_key(self._dotenv_path, env_var)
-            logger.info(f"Removed last key for '{env_var}' from .env file.")
-        else:
-            set_key(self._dotenv_path, env_var, ",".join(updated_keys))
-            logger.info(f"Removed key ending in '...{key_suffix_to_remove}' from .env file.")
-        
-        self.reload_keys(provider_name)
-
-    def get_pool(self, provider_name: str) -> Optional[ProviderKeyPool]:
-        return self._pools.get(provider_name)
-
-    @asynccontextmanager
-    async def acquire_key(self, provider_name: str) -> AsyncIterator[KeyInfo]:
-        pool = self.get_pool(provider_name)
-        if not pool:
-            raise ValueError(f"No key pool registered for provider '{provider_name}'.")
-        
-        async with pool.acquire_key() as key_info:
-            yield key_info
-
-    def mark_as_rate_limited(self, provider_name: str, key_string: str, duration_seconds: int = 60):
-        pool = self.get_pool(provider_name)
-        if pool:
-            pool.mark_as_rate_limited(key_string, duration_seconds)
-
-    async def mark_as_banned(self, provider_name: str, key_string: str):
-        pool = self.get_pool(provider_name)
-        if pool:
-            await pool.mark_as_banned(key_string)
-```
-
-### providers/__init__.py
-```
-
-```
-
-### providers/gemini.py
-```
-# plugins/core_llm/providers/gemini.py
-
-from typing import Any, List, Dict
-import google.generativeai as genai
-from google.api_core import exceptions as google_exceptions
-from google.generativeai import types as generation_types
-
-from .base import LLMProvider
-from ..contracts import (
-    LLMResponse,
-    LLMError,
-    LLMResponseStatus,
-    LLMErrorType,
-)
-
-class GeminiProvider(LLMProvider):
-    """
-    针对 Google Gemini API 的 LLMProvider 实现。
-    """
-
-    async def generate(
-        self,
-        *,
-        messages: List[Dict[str, Any]],
-        model_name: str,
-        api_key: str,
-        **kwargs: Any
-    ) -> LLMResponse:
-        try:
-            genai.configure(api_key=api_key)
-            
-            # --- [核心修复开始] ---
-            system_instruction = None
-            provider_messages = []
-            
-            # 1. 遍历消息，分离出 system prompt
-            for msg in messages:
-                role = msg.get("role")
-                content = msg.get("content", "")
-                
-                if role == "system":
-                    # 如果有多条 system 消息，将它们合并
-                    if system_instruction is None:
-                        system_instruction = ""
-                    system_instruction += str(content) + "\n"
-                elif role in ["user", "model"]:
-                    # The Gemini SDK expects {"role": "...", "parts": ["..."]}
-                    provider_messages.append({"role": role, "parts": [str(content)]})
-            
-            # 2. 实例化模型时传入 system_instruction
-            model = genai.GenerativeModel(
-                model_name,
-                system_instruction=system_instruction.strip() if system_instruction else None
-            )
-
-            generation_config = {
-                "temperature": kwargs.get("temperature"),
-                "top_p": kwargs.get("top_p"),
-                "top_k": kwargs.get("top_k"),
-                "max_output_tokens": kwargs.get("max_tokens"),
-            }
-            generation_config = {k: v for k, v in generation_config.items() if v is not None}
-            
-            # 3. generate_content_async 只接收 user/model 消息
-            response: generation_types.GenerateContentResponse = await model.generate_content_async(
-                contents=provider_messages,
-                generation_config=generation_config
-            )
-            # --- [核心修复结束] ---
-
-            if not response.parts:
-                if response.prompt_feedback.block_reason:
-                    error_message = f"Request blocked due to {response.prompt_feedback.block_reason.name}"
-                    return LLMResponse(status=LLMResponseStatus.FILTERED, model_name=model_name, error_details=LLMError(error_type=LLMErrorType.INVALID_REQUEST_ERROR, message=error_message, is_retryable=False))
-                # --- [新增健壮性] ---
-                # 如果没有部分且没有明确的阻塞原因，返回一个通用错误
-                else:
-                     return LLMResponse(status=LLMResponseStatus.ERROR, model_name=model_name, error_details=LLMError(error_type=LLMErrorType.PROVIDER_ERROR, message="Provider returned an empty response without a clear reason.", is_retryable=True))
-
-
-            usage = {"prompt_tokens": response.usage_metadata.prompt_token_count, "completion_tokens": response.usage_metadata.candidates_token_count, "total_tokens": response.usage_metadata.total_token_count}
-            
-            return LLMResponse(status=LLMResponseStatus.SUCCESS, content=response.text, model_name=model_name, usage=usage)
-
-        except generation_types.StopCandidateException as e:
-            return LLMResponse(status=LLMResponseStatus.FILTERED, model_name=model_name, error_details=LLMError(error_type=LLMErrorType.INVALID_REQUEST_ERROR, message=f"Generation stopped due to safety settings: {e}", is_retryable=False))
-
-    def translate_error(self, ex: Exception) -> LLMError:
-        # ... (此方法保持不变)
-        error_details = {"provider": "gemini", "exception": type(ex).__name__, "message": str(ex)}
-        if isinstance(ex, google_exceptions.PermissionDenied):
-            return LLMError(error_type=LLMErrorType.AUTHENTICATION_ERROR, message="Invalid API key or insufficient permissions.", is_retryable=False, provider_details=error_details)
-        if isinstance(ex, google_exceptions.ResourceExhausted):
-            return LLMError(error_type=LLMErrorType.RATE_LIMIT_ERROR, message="Rate limit exceeded. Please try again later or use a different key.", is_retryable=False, provider_details=error_details)
-        if isinstance(ex, google_exceptions.InvalidArgument):
-            if "API key not valid" in str(ex):
-                return LLMError(error_type=LLMErrorType.AUTHENTICATION_ERROR, message=f"The provided API key is invalid. Details: {ex}", is_retryable=False, provider_details=error_details)
-            return LLMError(error_type=LLMErrorType.INVALID_REQUEST_ERROR, message=f"Invalid argument provided to the API. Check model name and parameters. Details: {ex}", is_retryable=False, provider_details=error_details)
-        if isinstance(ex, (google_exceptions.ServiceUnavailable, google_exceptions.DeadlineExceeded)):
-            return LLMError(error_type=LLMErrorType.PROVIDER_ERROR, message="The service is temporarily unavailable or the request timed out. Please try again.", is_retryable=True, provider_details=error_details)
-        if isinstance(ex, google_exceptions.GoogleAPICallError):
-            return LLMError(error_type=LLMErrorType.NETWORK_ERROR, message=f"A network-level error occurred while communicating with Google API: {ex}", is_retryable=True, provider_details=error_details)
-        return LLMError(error_type=LLMErrorType.UNKNOWN_ERROR, message=f"An unknown error occurred with the Gemini provider: {ex}", is_retryable=False, provider_details=error_details)
-```
-
-### providers/base.py
-```
-# plugins/core_llm/providers/base.py
-
-from abc import ABC, abstractmethod
-from typing import Dict, Any, List
-
-from ..contracts import LLMResponse, LLMError
-
-
-class LLMProvider(ABC):
-    """
-    一个抽象基-类，定义了所有 LLM 提供商适配器的标准接口。
-    """
-    @classmethod
-    def requires_api_key(cls) -> bool:
-        """
-        声明此提供商是否需要 API 密钥才能工作。
-        如果此方法返回 False，LLM 服务将不会尝试为此提供商从池中获取密钥。
-        """
-        return True
-
-    @abstractmethod
-    async def generate(
-        self,
-        *,
-        messages: List[Dict[str, Any]],
-        model_name: str,
-        api_key: str,
-        **kwargs: Any
-    ) -> LLMResponse:
-        """
-        与 LLM 提供商进行交互以生成内容。
-
-        这个方法必须处理所有可能的成功和“软失败”（如内容过滤）场景，
-        并将它们封装在标准的 LLMResponse 对象中。
-        如果发生无法处理的硬性错误（如网络问题、认证失败），它应该抛出原始异常，
-        以便上层服务可以捕获并使用 translate_error 进行处理。
-
-        :param messages: 发送给模型的结构化消息列表。
-        :param model_name: 要使用的具体模型名称 (e.g., 'gemini-1.5-pro-latest')。
-        :param api_key: 用于本次请求的 API 密钥。
-        :param kwargs: 其他特定于提供商的参数 (e.g., temperature, max_tokens)。
-        :return: 一个标准的 LLMResponse 对象。
-        :raises Exception: 任何未被处理的、需要由 translate_error 解析的硬性错误。
-        """
-        pass
-
-    @abstractmethod
-    def translate_error(self, ex: Exception) -> LLMError:
-        """
-        将特定于提供商的原始异常转换为我们标准化的 LLMError 对象。
-
-        这个方法是解耦的关键，它将具体的 SDK 错误与我们系统的内部错误处理逻辑分离开。
-
-        :param ex: 从 generate 方法捕获的原始异常。
-        :return: 一个标准的 LLMError 对象。
-        """
-        pass
-```
-
-### providers/mock.py
-```
-# plugins/core_llm/providers/mock.py
-
-import asyncio
-from typing import Any, List, Dict
-
-from .base import LLMProvider
-from ..contracts import (
-    LLMResponse,
-    LLMError,
-    LLMResponseStatus,
-    LLMErrorType,
-)
-
-class MockProvider(LLMProvider):
-    """
-    一个用于测试和调试的模拟 LLM 提供商。
-    它会返回一个预设的响应，而不会进行任何外部调用。
-    """
-    @classmethod
-    def requires_api_key(cls) -> bool:
-        """声明此提供商不需要 API 密钥。"""
-        return False
-
-    async def generate(
-        self,
-        *,
-        messages: List[Dict[str, Any]],
-        model_name: str,
-        api_key: str, # 仍然接收此参数，但会忽略它
-        **kwargs: Any
-    ) -> LLMResponse:
-        """
-        生成一个模拟响应。
-        """
-        await asyncio.sleep(0.05) # 模拟网络延迟
-        
-        last_user_message = "No user message found."
-        for msg in reversed(messages):
-            if msg.get("role") == "user":
-                last_user_message = msg.get("content", "")
-                break
-
-        mock_content = f"[MOCK RESPONSE for {model_name}] - Responding to: '{str(last_user_message)[:150]}...'"
-        
-        prompt_token_count = sum(len(str(msg.get("content", "")).split()) for msg in messages)
-
-        return LLMResponse(
-            status=LLMResponseStatus.SUCCESS,
-            content=mock_content,
-            model_name=model_name,
-            usage={"prompt_tokens": prompt_token_count, "completion_tokens": 15, "total_tokens": prompt_token_count + 15}
-        )
-
-    def translate_error(self, ex: Exception) -> LLMError:
-        """
-        将异常转换为标准的 LLMError。
-        对于模拟提供商，此方法不太可能被调用。
-        """
-        return LLMError(
-            error_type=LLMErrorType.UNKNOWN_ERROR,
-            message=f"An unexpected error occurred in MockProvider: {ex}",
-            is_retryable=False
-        )
-```
-
-# Directory: plugins/core_persistence
-
-### service.py
-```
-# plugins/core_persistence/service.py
-
-import os
-import io
-import json
-import logging
-import shutil
-import asyncio
-import base64
-import zipfile
-from pathlib import Path
-from typing import Type, TypeVar, Tuple, Dict, Any, List, Optional
-from uuid import UUID
-
-import aiofiles
-from pydantic import BaseModel, ValidationError
-from PIL import Image, PngImagePlugin
-
-# 导入位于后端内核的自定义序列化工具
-from backend.core.serialization import custom_json_decoder_object_hook
-
-from .contracts import PersistenceServiceInterface, PackageManifest
-from plugins.core_engine.contracts import Sandbox, StateSnapshot # 仍然需要它们来做类型检查和序列化
-from .models import AssetType, FILE_EXTENSIONS
-
-T = TypeVar('T', bound=BaseModel)
-logger = logging.getLogger(__name__)
-
-class PersistenceService(PersistenceServiceInterface):
-    def __init__(self, assets_base_dir: str):
-        self.assets_base_dir = Path(assets_base_dir)
-        self._sandboxes_root_dir = self.assets_base_dir / "sandboxes"
-        self._sandboxes_root_dir.mkdir(parents=True, exist_ok=True)
-        logger.info(f"PersistenceService initialized. Sandboxes directory: {self._sandboxes_root_dir.resolve()}")
-
-    @property
-    def sandboxes_root_dir(self) -> Path:
-        return self._sandboxes_root_dir
-
-    def _get_sandbox_dir(self, sandbox_id: UUID) -> Path:
-        return self._sandboxes_root_dir / str(sandbox_id)
-
-    async def save_sandbox(self, sandbox_id: UUID, data: Dict[str, Any]) -> None:
-        sandbox_dir = self._get_sandbox_dir(sandbox_id)
-        sandbox_dir.mkdir(parents=True, exist_ok=True)
-        file_path = sandbox_dir / "sandbox.json"
-        
-        # 不再需要 `default` 参数，因为传入的 `data` 已经是完全 JSON 兼容的了
-        json_string = json.dumps(data, indent=2, ensure_ascii=False)
-
-        async with aiofiles.open(file_path, mode='w', encoding='utf-8') as f:
-            await f.write(json_string)
-        logger.debug(f"Persisted sandbox '{sandbox_id}' to {file_path}")
-
-    async def load_sandbox(self, sandbox_id: UUID) -> Optional[Dict[str, Any]]:
-        file_path = self._get_sandbox_dir(sandbox_id) / "sandbox.json"
-        if not file_path.is_file(): return None
-        async with aiofiles.open(file_path, mode='r', encoding='utf-8') as f:
-            content = await f.read()
-        return json.loads(content, object_hook=custom_json_decoder_object_hook)
-
-    async def delete_sandbox(self, sandbox_id: UUID) -> None:
-        sandbox_dir = self._get_sandbox_dir(sandbox_id)
-        if sandbox_dir.exists():
-            await asyncio.to_thread(shutil.rmtree, sandbox_dir)
-            logger.info(f"Deleted sandbox directory: {sandbox_dir}")
-
-    async def list_sandbox_ids(self) -> List[str]:
-        if not self._sandboxes_root_dir.is_dir():
-            return []
-        def _sync_list_dirs():
-            return [p.name for p in self._sandboxes_root_dir.iterdir() if p.is_dir()]
-        return await asyncio.to_thread(_sync_list_dirs)
-
-    async def save_snapshot(self, sandbox_id: UUID, snapshot_id: UUID, data: Dict[str, Any]) -> None:
-        snapshot_dir = self._get_sandbox_dir(sandbox_id) / "snapshots"
-        snapshot_dir.mkdir(parents=True, exist_ok=True)
-        file_path = snapshot_dir / f"{snapshot_id}.json"
-        
-        json_string = json.dumps(data, indent=2, ensure_ascii=False)
-        
-        async with aiofiles.open(file_path, mode='w', encoding='utf-8') as f:
-            await f.write(json_string)
-        logger.debug(f"Persisted snapshot '{snapshot_id}' for sandbox '{sandbox_id}'")
-
-    async def load_snapshot(self, sandbox_id: UUID, snapshot_id: UUID) -> Optional[Dict[str, Any]]:
-        file_path = self._get_sandbox_dir(sandbox_id) / "snapshots" / f"{snapshot_id}.json"
-        if not file_path.is_file(): return None
-        async with aiofiles.open(file_path, mode='r', encoding='utf-8') as f: content = await f.read()
-        return json.loads(content, object_hook=custom_json_decoder_object_hook)
-
-    async def load_all_snapshots_for_sandbox(self, sandbox_id: UUID) -> List[Dict[str, Any]]:
-        snapshot_dir = self._get_sandbox_dir(sandbox_id) / "snapshots"
-        if not snapshot_dir.is_dir():
-            return []
-
-        def _sync_read_files() -> List[Dict[str, Any]]:
-            snapshots_data = []
-            for file_path in snapshot_dir.glob("*.json"):
-                try:
-                    content = file_path.read_text(encoding='utf-8')
-                    snapshots_data.append(json.loads(content, object_hook=custom_json_decoder_object_hook))
-                except (json.JSONDecodeError) as e:
-                    logger.error(f"Skipping corrupt snapshot file {file_path}: {e}")
-            return snapshots_data
-            
-        return await asyncio.to_thread(_sync_read_files)
-        
-    async def delete_all_for_sandbox(self, sandbox_id: UUID) -> None:
-        """异步删除属于特定沙盒的所有快照文件。"""
-        snapshot_dir = self._get_sandbox_dir(sandbox_id) / "snapshots"
-        if snapshot_dir.is_dir():
-            await asyncio.to_thread(shutil.rmtree, snapshot_dir)
-            logger.debug(f"Deleted snapshot directory: {snapshot_dir}")
-
-    async def delete_snapshot(self, sandbox_id: UUID, snapshot_id: UUID) -> None:
-        """异步删除一个指定的快照文件。"""
-        file_path = self._get_sandbox_dir(sandbox_id) / "snapshots" / f"{snapshot_id}.json"
-        if file_path.is_file():
-            try:
-                # 使用 os.remove 比 shutil.rmtree 更适合删除文件
-                await asyncio.to_thread(os.remove, file_path)
-                logger.debug(f"Deleted snapshot file: {file_path}")
-            except FileNotFoundError:
-                # 如果在检查和删除之间文件消失了，这不是一个错误
-                pass
-            except Exception as e:
-                logger.error(f"Error deleting snapshot file {file_path}: {e}")
-                # 重新抛出，让上层知道操作失败
-                raise
-        
-    async def list_assets(self, asset_type: AssetType) -> List[str]:
-        """Lists all assets of a given type by scanning the assets directory."""
-        if asset_type == AssetType.SANDBOX:
-             # Sandboxes are directories, not files with extensions
-            return await self.list_sandbox_ids()
-
-        ext = FILE_EXTENSIONS.get(asset_type)
-        if not ext:
-            raise ValueError(f"Unknown asset type '{asset_type}' with no defined file extension.")
-
-        # For other asset types, we'd define their storage location.
-        # As of now, only sandboxes are fully implemented, so we return empty for others.
-        # For example: search_dir = self.assets_base_dir / asset_type.value
-        # This implementation assumes other assets aren't stored yet.
-        return []
-
-    async def _embed_zip_in_png(self, zip_bytes: bytes, base_image_bytes: Optional[bytes] = None) -> bytes:
-        def _sync_embed():
-            encoded_data = base64.b64encode(zip_bytes).decode('ascii')
-            if base_image_bytes: image = Image.open(io.BytesIO(base_image_bytes))
-            else: image = Image.new('RGBA', (1, 1), (0, 0, 0, 255))
-            png_info_obj = PngImagePlugin.PngInfo()
-            png_info_obj.add_text("hevno:data", encoded_data, zip=True)
-            buffer = io.BytesIO()
-            image.save(buffer, "PNG", pnginfo=png_info_obj)
-            return buffer.getvalue()
-        return await asyncio.to_thread(_sync_embed)
-
-    async def _extract_zip_from_png(self, png_bytes: bytes) -> Tuple[bytes, bytes]:
-        def _sync_extract():
-            try:
-                image = Image.open(io.BytesIO(png_bytes))
-                image.load()
-                encoded_data = image.text.get("hevno:data")
-                if encoded_data is None: raise ValueError("Invalid Hevno package: 'hevno:data' chunk not found.")
-                zip_data = base64.b64decode(encoded_data)
-                return zip_data, png_bytes
-            except Exception as e:
-                logger.error(f"[EXTRACT] Exception while processing PNG: {e}", exc_info=True)
-                raise ValueError(f"Failed to process PNG file: {e}") from e
-        return await asyncio.to_thread(_sync_extract)
-
-    async def save_sandbox_icon(self, sandbox_id: str, icon_bytes: bytes) -> Path:
-        icon_path = self.assets_base_dir / "sandbox_icons" / f"{sandbox_id}.png"
-        icon_path.parent.mkdir(parents=True, exist_ok=True)
-        async with aiofiles.open(icon_path, 'wb') as f:
-            await f.write(icon_bytes)
-        logger.info(f"Saved icon for sandbox {sandbox_id} to {icon_path}")
-        return icon_path
-
-    async def export_package(self, manifest: PackageManifest, data_files: Dict[str, Any], base_image_bytes: Optional[bytes] = None) -> bytes:
-        def _sync_zip():
-            zip_buffer = io.BytesIO()
-            with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zf:
-                zf.writestr('manifest.json', manifest.model_dump_json(indent=2))
-                for filename, data_dict in data_files.items():
-                    file_content = json.dumps(data_dict, indent=2, ensure_ascii=False)
-                    zf.writestr(f'data/{filename}', file_content)
-            return zip_buffer.getvalue()
-        
-        zip_bytes = await asyncio.to_thread(_sync_zip)
-        return await self._embed_zip_in_png(zip_bytes, base_image_bytes)
-
-    async def import_package(self, package_bytes: bytes) -> Tuple[PackageManifest, Dict[str, str], bytes]:
-        zip_bytes, png_bytes = await self._extract_zip_from_png(package_bytes)
-        def _sync_unzip():
-            data_files: Dict[str, str] = {}
-            with zipfile.ZipFile(io.BytesIO(zip_bytes), 'r') as zf:
-                try:
-                    manifest_content = zf.read('manifest.json').decode('utf-8')
-                    manifest = PackageManifest.model_validate_json(manifest_content)
-                except KeyError: raise ValueError("Package is missing 'manifest.json'.")
-                except (ValidationError, json.JSONDecodeError) as e: raise ValueError(f"Invalid 'manifest.json': {e}") from e
-                for item in zf.infolist():
-                    if item.filename.startswith('data/') and not item.is_dir():
-                        relative_path = item.filename.split('data/', 1)[1]
-                        data_files[relative_path] = zf.read(item).decode('utf-8')
-            return manifest, data_files
-        manifest, data_files = await asyncio.to_thread(_sync_unzip)
-        return manifest, data_files, png_bytes
-        
-    def get_sandbox_icon_path(self, sandbox_id: str) -> Optional[Path]:
-        icon_path = self.assets_base_dir / "sandbox_icons" / f"{sandbox_id}.png"
-        return icon_path if icon_path.is_file() else None
-
-    def get_default_icon_path(self) -> Path:
-        return self.assets_base_dir / "default_sandbox_icon.png"
-```
-
-### models.py
-```
-# plugins/core_persistence/models.py
-
-from enum import Enum
-
-# --- 文件约定 (插件内部实现细节) ---
-class AssetType(str, Enum):
-    GRAPH = "graph"
-    CODEX = "codex"
-    SANDBOX = "sandbox"
-
-FILE_EXTENSIONS = {
-    AssetType.GRAPH: ".graph.hevno.json",
-    AssetType.CODEX: ".codex.hevno.json",
-}
-
-```
-
-### __init__.py
-```
-# plugins/core_persistence/__init__.py
-import os
-import logging
-
-from backend.core.contracts import Container, HookManager
-from .service import PersistenceService
-from .stores import PersistentSandboxStore, PersistentSnapshotStore
-from .api import persistence_router
-
-logger = logging.getLogger(__name__)
-
-def _create_persistent_sandbox_store(container: Container) -> PersistentSandboxStore:
-    return PersistentSandboxStore(container.resolve("persistence_service"))
-
-def _create_persistent_snapshot_store(container: Container) -> PersistentSnapshotStore:
-    return PersistentSnapshotStore(container.resolve("persistence_service"))
-
-def _create_persistence_service() -> PersistenceService:
-    assets_dir = os.getenv("HEVNO_ASSETS_DIR", "assets")
-    return PersistenceService(assets_base_dir=assets_dir)
-
-async def provide_router(routers: list) -> list:
-    routers.append(persistence_router)
-    logger.debug("Provided 'persistence_router' to the application.")
-    return routers
-
-async def initialize_stores(container: Container):
-    """钩子实现: 在所有服务注册后，异步初始化持久化存储。"""
-    logger.info("Initializing persistent stores...")
-    sandbox_store: PersistentSandboxStore = container.resolve("sandbox_store")
-    
-    sandbox_store.set_container(container)
-    
-    await sandbox_store.initialize()
-
-def register_plugin(container: Container, hook_manager: HookManager):
-    logger.info("--> 正在注册 [core_persistence] 插件...")
-    container.register(
-        "persistence_service", _create_persistence_service, singleton=True
-    )
-    container.register(
-        "sandbox_store", _create_persistent_sandbox_store, singleton=True
-    )
-    container.register(
-        "snapshot_store", _create_persistent_snapshot_store, singleton=True
-    )
-    logger.debug(
-        "Registered 'sandbox_store' and 'snapshot_store' with persistent implementations."
-    )
-    hook_manager.add_implementation(
-        "collect_api_routers", provide_router, plugin_name="core_persistence"
-    )
-    hook_manager.add_implementation(
-        "services_post_register",
-        initialize_stores,
-        priority=90, 
-        plugin_name="core_persistence",
-    )
-    logger.info("插件 [core_persistence] 注册成功。")
-```
-
-### stores.py
-```
-# plugins/core_persistence/stores.py
-import asyncio
-import logging
-from typing import Dict, List, Optional
-from uuid import UUID
-
-# 从 core_engine 导入接口定义
-from plugins.core_engine.contracts import Sandbox, StateSnapshot, SnapshotStoreInterface, SandboxStoreInterface
-from backend.core.serialization import pickle_fallback_encoder
-from .contracts import PersistenceServiceInterface
-from pydantic import ValidationError
-
-logger = logging.getLogger(__name__)
-
-# 继承自 SandboxStoreInterface
-class PersistentSandboxStore(SandboxStoreInterface):
-    def __init__(self, persistence_service: PersistenceServiceInterface):
-        self._persistence = persistence_service
-        self._cache: Dict[UUID, Sandbox] = {}
-        self._locks: Dict[UUID, asyncio.Lock] = {}
-        # 为 SnapshotStore 添加一个依赖，以便在删除时可以调用它
-        self._snapshot_store: Optional[SnapshotStoreInterface] = None
-        self._container: Optional['Container'] = None # type: ignore
-        logger.info("PersistentSandboxStore initialized (cache is empty).")
-
-    # 提供一种方式来注入容器，以便稍后解析 snapshot_store
-    def set_container(self, container: 'Container'): # type: ignore
-        self._container = container
-
-    def _get_lock(self, sandbox_id: UUID) -> asyncio.Lock:
-        if sandbox_id not in self._locks:
-            self._locks.setdefault(sandbox_id, asyncio.Lock())
-        return self._locks[sandbox_id]
-        
-    async def initialize(self):
-        logger.info("Pre-loading all sandboxes and their snapshots from disk into cache...")
-        count = 0
-        
-        # 1. 在初始化开始时，确保我们能访问到 snapshot_store
-        if not self._container:
-             logger.error("Container not set on PersistentSandboxStore. Cannot pre-load snapshots.")
-             return
-        
-        # 解析一次并缓存，避免在循环中重复解析
-        snapshot_store: SnapshotStoreInterface = self._container.resolve("snapshot_store")
-        
-        sandbox_ids = await self._persistence.list_sandbox_ids()
-        for sid_str in sandbox_ids:
-            try:
-                sid = UUID(sid_str)
-                data = await self._persistence.load_sandbox(sid)
-                if data:
-                    sandbox = Sandbox.model_validate(data)
-                    self._cache[sid] = sandbox
-                    count += 1
-                    
-                    # 2. 对于每一个加载的沙盒，立即让 snapshot_store 去加载它所有的快照
-                    #    find_by_sandbox 会自动将加载的快照放入 snapshot_store 的缓存中
-                    logger.debug(f"Pre-loading snapshots for sandbox {sid}...")
-                    await snapshot_store.find_by_sandbox(sid)
-
-            except (ValueError, FileNotFoundError, ValidationError) as e:
-                logger.warning(f"Skipping invalid sandbox directory '{sid_str}': {e}")
-        logger.info(f"Successfully pre-loaded {count} sandboxes and their associated snapshots into cache.")
-
-    async def save(self, sandbox: Sandbox):
-        lock = self._get_lock(sandbox.id)
-        async with lock:
-            # 使用 mode='json' 并提供 fallback 函数
-            data = sandbox.model_dump(mode='json', fallback=pickle_fallback_encoder)
-
-            await self._persistence.save_sandbox(sandbox.id, data)
-            self._cache[sandbox.id] = sandbox
-            
-    def get(self, key: UUID) -> Optional[Sandbox]:
-        return self._cache.get(key)
-
-    async def delete(self, key: UUID):
-        lock = self._get_lock(key)
-        async with lock:
-            # 正确地从容器中解析 snapshot_store 并调用其方法
-            if self._container:
-                if not self._snapshot_store:
-                    self._snapshot_store = self._container.resolve("snapshot_store")
-                await self._snapshot_store.delete_all_for_sandbox(key)
-            else:
-                 logger.warning("Container not set on PersistentSandboxStore, cannot delete snapshots automatically.")
-
-            await self._persistence.delete_sandbox(key)
-            self._cache.pop(key, None)
-            self._locks.pop(key, None)
-
-    def values(self) -> List[Sandbox]:
-        return list(self._cache.values())
-        
-    def __contains__(self, key: UUID) -> bool:
-        return key in self._cache
-    
-    def clear(self) -> None:
-        logger.warning("`clear` called on PersistentSandboxStore, but it does nothing to disk state. Cache is NOT cleared.")
-        pass
-
-
-class PersistentSnapshotStore(SnapshotStoreInterface):
-    """
-    管理快照的持久化和缓存。
-    - 快照按需从磁盘加载。
-    - 所有对持久化层的调用现在都是非阻塞的。
-    """
-    def __init__(self, persistence_service: PersistenceServiceInterface):
-        self._persistence = persistence_service
-        self._cache: Dict[UUID, StateSnapshot] = {}
-        # 为每个快照ID创建一个独立的锁，以实现原子性保存
-        self._locks: Dict[UUID, asyncio.Lock] = {}
-        logger.info("PersistentSnapshotStore initialized.")
-
-    def _get_lock(self, snapshot_id: UUID) -> asyncio.Lock:
-        return self._locks.setdefault(snapshot_id, asyncio.Lock())
-
-    async def save(self, snapshot: StateSnapshot) -> None:
-        """异步保存快照到磁盘并更新缓存。"""
-        lock = self._get_lock(snapshot.id)
-        async with lock:
-            # 同样，使用 mode='json' 并提供 fallback 函数
-            data = snapshot.model_dump(mode='json', fallback=pickle_fallback_encoder)
-          
-            await self._persistence.save_snapshot(snapshot.sandbox_id, snapshot.id, data)
-            self._cache[snapshot.id] = snapshot
-
-    def get(self, snapshot_id: UUID) -> Optional[StateSnapshot]:
-        """
-        从缓存中同步获取快照。
-        注意：此方法不会从磁盘加载。它依赖于 find_by_sandbox 或 save 来填充缓存。
-        这是一个设计权衡，以避免在get()中需要sandbox_id。
-        """
-        return self._cache.get(snapshot_id)
-
-    async def find_by_sandbox(self, sandbox_id: UUID) -> List[StateSnapshot]:
-        """异步加载属于特定沙盒的所有快照，并更新缓存。"""
-        # 使用 await 调用异步的 load_all_snapshots_for_sandbox
-        snapshots_data = await self._persistence.load_all_snapshots_for_sandbox(sandbox_id)
-        for data in snapshots_data:
-            try:
-                s = StateSnapshot.model_validate(data)
-                self._cache[s.id] = s
-            except ValidationError as e:
-                logger.warning(f"Skipping snapshot with invalid data for sandbox {sandbox_id}: {e}")
-        
-        # 即使磁盘上没有，也要确保返回缓存中可能存在的（例如，刚创建还未写入的）
-        relevant_snapshots = [s for s in self._cache.values() if s.sandbox_id == sandbox_id]
-        # 去重，以防万一
-        unique_snapshots = {s.id: s for s in relevant_snapshots}.values()
-        return sorted(list(unique_snapshots), key=lambda s: s.created_at)
-
-    async def delete_all_for_sandbox(self, sandbox_id: UUID) -> None:
-        """实现接口中新加的方法"""
-        await self._persistence.delete_all_for_sandbox(sandbox_id)
-        # 从缓存中也移除
-        ids_to_remove = [sid for sid, s in self._cache.items() if s.sandbox_id == sandbox_id]
-        for sid in ids_to_remove:
-            self._cache.pop(sid, None)
-            self._locks.pop(sid, None)
-
-    async def delete(self, snapshot_id: UUID) -> None:
-        """异步删除指定的快照，包括其持久化文件和缓存条目。"""
-        snapshot = self.get(snapshot_id)
-        if not snapshot:
-            # 如果快照不存在，静默返回，因为目标已经达成
-            return
-            
-        lock = self._get_lock(snapshot_id)
-        async with lock:
-            await self._persistence.delete_snapshot(snapshot.sandbox_id, snapshot.id)
-            # 从缓存和锁字典中移除
-            self._cache.pop(snapshot_id, None)
-            self._locks.pop(snapshot_id, None)
-            logger.info(f"Deleted snapshot {snapshot_id} from persistence and cache.")
-
-
-    def clear(self) -> None:
-        """此操作在持久化存储中无意义，记录警告并忽略。"""
-        logger.warning("`clear` called on PersistentSnapshotStore, but it does nothing to disk state. Cache is NOT cleared.")
-        pass
-```
-
-### api.py
-```
-# plugins/core_persistence/api.py
-
-import logging
-from typing import List
-from fastapi import APIRouter, Depends, HTTPException
-
-from backend.core.dependencies import Service
-from .contracts import PersistenceServiceInterface 
-from .models import AssetType
-
-logger = logging.getLogger(__name__)
-
-# --- Router for persistence API ---
-persistence_router = APIRouter(
-    prefix="/api/persistence", 
-    tags=["core_Persistence"]
-)
-
-@persistence_router.get("/assets/{asset_type}", response_model=List[str])
-async def list_assets_by_type(
-    asset_type: AssetType,
-    service: PersistenceServiceInterface = Depends(Service("persistence_service")) 
-):
-    """
-    列出指定类型的所有已保存资产的名称。
-    """
-    try:
-        return await service.list_assets(asset_type)
-    except Exception as e:
-        logger.error(f"Failed to list assets of type '{asset_type.value}': {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail="An error occurred while listing assets.")
-```
-
-### manifest.json
-```
-{
-    "id": "core_persistence",
-    "name": "core_persistence",
-    "version": "1.0.0",
-    "description": "Provides file system persistence, asset management, and package import/export.",
-    "author": "Hevno Team",
-    "backend": {
-        "priority": 10
-    }
-}
-```
-
-### contracts.py
-```
-# plugins/core_persistence/contracts.py
-
-from __future__ import annotations
-from abc import ABC, abstractmethod
-from typing import Dict, Tuple, TypeVar, List, Any, Optional
-from uuid import UUID
-from pathlib import Path
-from pydantic import BaseModel, Field
-from enum import Enum
-from datetime import datetime, timezone
-
-# 不再从 core_engine.contracts 导入 Sandbox 和 StateSnapshot
-# from plugins.core_engine.contracts import Sandbox, StateSnapshot
-
-T = TypeVar('T', bound=BaseModel)
-
-# --- 共享数据模型 (Package/Manifest) ---
-
-class PackageType(str, Enum):
-    """定义了可以被导入/导出的不同类型的包。"""
-    SANDBOX_ARCHIVE = "sandbox_archive"
-    GRAPH_COLLECTION = "graph_collection"
-    CODEX_COLLECTION = "codex_collection"
-
-class PluginRequirement(BaseModel):
-    """描述包所依赖的插件。"""
-    name: str = Field(..., description="Plugin identifier, e.g., 'hevno-dice-roller'")
-    source_url: str = Field(..., description="Plugin source, e.g., 'https://github.com/user/repo'")
-    version: str = Field(..., description="Compatible version or Git ref")
-
-class PackageManifest(BaseModel):
-    """
-    定义了 .hevno.zip 包内容的标准清单。
-    这是核心的共享数据模型。
-    """
-    format_version: str = Field(default="1.0")
-    package_type: PackageType
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    entry_point: str
-    required_plugins: List[PluginRequirement] = Field(default_factory=list)
-    metadata: Dict[str, Any] = Field(default_factory=dict)
-
-
-# --- 服务接口 (合并并异步化) ---
-
-class PersistenceServiceInterface(ABC):
-    """
-    定义了核心持久化服务的文件系统I/O能力。
-    注意：它不再知道 Sandbox 或 StateSnapshot 的具体模型，
-    而是处理通用的字典数据，使得依赖关系更清晰。
-    """
-
-    # --- 沙盒持久化方法 ---
-    @abstractmethod
-    async def save_sandbox(self, sandbox_id: UUID, data: Dict[str, Any]) -> None:
-        raise NotImplementedError
-
-    @abstractmethod
-    async def load_sandbox(self, sandbox_id: UUID) -> Optional[Dict[str, Any]]:
-        raise NotImplementedError
-
-    @abstractmethod
-    async def delete_sandbox(self, sandbox_id: UUID) -> None:
-        raise NotImplementedError
-
-    @abstractmethod
-    async def list_sandbox_ids(self) -> List[str]:
-        raise NotImplementedError
-
-    # --- 快照持久化方法 ---
-    @abstractmethod
-    async def save_snapshot(self, sandbox_id: UUID, snapshot_id: UUID, data: Dict[str, Any]) -> None:
-        raise NotImplementedError
-
-    @abstractmethod
-    async def load_snapshot(self, sandbox_id: UUID, snapshot_id: UUID) -> Optional[Dict[str, Any]]:
-        raise NotImplementedError
-
-    @abstractmethod
-    async def load_all_snapshots_for_sandbox(self, sandbox_id: UUID) -> List[Dict[str, Any]]:
-        raise NotImplementedError
-
-    @abstractmethod
-    async def delete_all_for_sandbox(self, sandbox_id: UUID) -> None:
-        raise NotImplementedError
-    
-    # --- 包导入/导出方法 ---
-    @abstractmethod
-    async def export_package(self, manifest: PackageManifest, data_files: Dict[str, Any], base_image_bytes: Optional[bytes] = None) -> bytes:
-        raise NotImplementedError
-
-    @abstractmethod
-    async def import_package(self, package_bytes: bytes) -> Tuple[PackageManifest, Dict[str, str], bytes]:
-        raise NotImplementedError
-    
-    # --- 沙盒图标处理方法 ---
-    @abstractmethod
-    async def save_sandbox_icon(self, sandbox_id: str, icon_bytes: bytes) -> Path:
-        raise NotImplementedError
-
-    @abstractmethod
-    def get_sandbox_icon_path(self, sandbox_id: str) -> Optional[Path]:
-        raise NotImplementedError
-    
-    @abstractmethod
-    def get_default_icon_path(self) -> Path:
-        raise NotImplementedError
-
-    @property
-    @abstractmethod
-    def sandboxes_root_dir(self) -> Path:
-        raise NotImplementedError
-
-    @abstractmethod
-    async def delete_snapshot(self, sandbox_id: UUID, snapshot_id: UUID) -> None:
-        """异步删除一个指定的快照文件。"""
-        raise NotImplementedError
-```
-
-# Directory: frontend
-
-### HookManager.js
-```
-// frontend/HookManager.js
-
-/**
- * 一个支持在前后端之间进行智能路由的事件总线。
- * 它查询一个全局注册表来决定将事件发送到何处。
- */
-export class HookManager {
-  constructor() {
-    /** @type {Map<string, Function[]>} */
-    this.hooks = new Map();
-    
-    /** @type {import('./RemoteHookProxy.js').RemoteHookProxy | null} */
-    this.remoteProxy = null;
-    /** @type {import('./services/GlobalHookRegistry.js').GlobalHookRegistry | null} */
-    this.globalRegistry = null;
-  }
-
-  /**
-   * 在实例化后注入依赖，以解决循环依赖问题。
-   * @param {import('./RemoteHookProxy.js').RemoteHookProxy} remoteProxy
-   * @param {import('./services/GlobalHookRegistry.js').GlobalHookRegistry} globalRegistry
-   */
-  setDependencies(remoteProxy, globalRegistry) {
-    this.remoteProxy = remoteProxy;
-    this.globalRegistry = globalRegistry;
-  }
-  
-  /**
-   * 注册一个钩子实现，并通知全局注册表。
-   * @param {string} hookName - 钩子的名称。
-   * @param {Function} implementation - 要执行的函数。
-   */
-  addImplementation(hookName, implementation) {
-    if (!this.hooks.has(hookName)) {
-      this.hooks.set(hookName, []);
-    }
-    this.hooks.get(hookName).push(implementation);
-
-    // 任务 4.3: 通知全局注册表这个新的本地钩子
-    if (this.globalRegistry) {
-        this.globalRegistry.addFrontendHook(hookName);
-    }
-    
-    console.log(`[HookManager] ADDED listener for hook: '${hookName}'`);
-  }
-
-  /**
-   * 使用智能路由触发一个钩子。
-   * 它会判断钩子应该在本地执行、远程执行，还是两者都执行。
-   * 注意: 'filter' 类型的钩子目前仍被视为仅本地操作。
-   * @param {string} hookName - 钩子的名称。
-   * @param {object} data - 钩子的数据负载。
-   */
-  async trigger(hookName, data = {}) {
-    if (!this.globalRegistry || !this.remoteProxy) {
-        console.error(`[HookManager] 无法触发 '${hookName}'。核心服务未注入。`);
-        return;
-    }
-    
-    // 任务 4.3: 查询注册表
-    const isLocal = this.globalRegistry.isLocalHook(hookName);
-    const isRemote = this.globalRegistry.isRemoteHook(hookName);
-
-    console.log(`[HookManager] TRIGGERING '${hookName}'. Local: ${isLocal}, Remote: ${isRemote}`);
-
-    let wasHandled = false;
-
-    // 任务 4.3: 路由到本地实现
-    if (isLocal) {
-      const implementations = this.hooks.get(hookName) || [];
-      const tasks = implementations.map(impl => Promise.resolve(impl(data)));
-      await Promise.all(tasks);
-      wasHandled = true;
-    }
-
-    // 任务 4.3: 路由到远程（后端）实现
-    if (isRemote) {
-      this.remoteProxy.trigger(hookName, data);
-      wasHandled = true;
-    }
-    
-    // 任务 4.3: 如果在任何地方都未找到处理程序，则发出警告
-    if (!wasHandled) {
-      console.warn(`[HookManager] 触发的钩子 '${hookName}' 在前端或后端都没有已知的实现。`);
-    }
-  }
-
-  /**
-   * 触发一个“过滤型”钩子 (保留用于本地功能)。
-   * 此类型被假定为同步和本地的，不用于远程通信。
-   * @param {string} hookName 
-   * @param {*} initialData 
-   * @param {object} extraData 
-   * @returns {*}
-   */
-  async filter(hookName, initialData, extraData = {}) {
-    const implementations = this.hooks.get(hookName) || [];
-    let currentData = initialData;
-    for (const impl of implementations) {
-      currentData = await Promise.resolve(impl(currentData, extraData));
-    }
-    return currentData;
-  }
-  
-  /**
-   * 获取所有已注册的前端钩子名称。
-   * @returns {string[]}
-   */
-  getAllHookNames() {
-    return Array.from(this.hooks.keys());
-  }
-
-  /**
-   * 移除一个已注册的钩子实现。
-   * @param {string} hookName - 钩子的名称。
-   * @param {Function} implementationToRemove - 要移除的函数实例。
-   */
-  removeImplementation(hookName, implementationToRemove) {
-    const implementations = this.hooks.get(hookName);
-    if (!implementations) {
-        return;
-    }
-    const index = implementations.indexOf(implementationToRemove);
-    if (index > -1) {
-        implementations.splice(index, 1);
-        console.log(`[HookManager] REMOVED listener for hook: '${hookName}'`);
-    }
-  }
-}
-```
-
-### main.js
-```
-// frontend/main.js
-
-import { ServiceContainer } from './ServiceContainer.js';
-import { HookManager } from './HookManager.js';
-import { RemoteHookProxy } from './RemoteHookProxy.js';
-import { ManifestProvider } from './ManifestProvider.js';
-import { GlobalHookRegistry } from './services/GlobalHookRegistry.js';
-
-class FrontendLoader {
-  constructor() {
-    this.services = new ServiceContainer();
-    window.Hevno = { services: this.services };
-
-    const hookManager = new HookManager();
-    const remoteProxy = new RemoteHookProxy();
-    const globalHookRegistry = new GlobalHookRegistry();
-    const manifestProvider = new ManifestProvider();
-    
-    hookManager.setDependencies(remoteProxy, globalHookRegistry);
-    remoteProxy.setHookManager(hookManager);
-
-    this.services.register('hookManager', hookManager, 'loader');
-    this.services.register('remoteProxy', remoteProxy, 'loader');
-    this.services.register('globalHookRegistry', globalHookRegistry, 'loader');
-    this.services.register('manifestProvider', manifestProvider, 'loader');
-
-    if (import.meta.env.DEV) {
-      window.hevno = this.services;
-    }
-  }
-
-  async load() {
-    console.log("🚀 Hevno Frontend Loader starting...");
-    const remoteProxy = this.services.get('remoteProxy');
-    const globalHookRegistry = this.services.get('globalHookRegistry');
-    const manifestProvider = this.services.get('manifestProvider');
-
-    try {
-      console.log("[Loader] 正在获取后端钩子清单...");
-      const hooksResponse = await fetch('/api/system/hooks/manifest');
-      if (!hooksResponse.ok) {
-          throw new Error(`无法获取后端钩子清单: ${hooksResponse.statusText}`);
-      }
-      const backendHooksData = await hooksResponse.json();
-      globalHookRegistry.setBackendHooks(backendHooksData.hooks);
-      
-      remoteProxy.connect();
-
-      console.log("[Loader] 正在获取插件清单...");
-      const manifestResponse = await fetch('/api/plugins/manifest');
-      if (!manifestResponse.ok) {
-        throw new Error(`无法获取插件清单: ${manifestResponse.statusText}`);
-      }
-      let allManifests = await manifestResponse.json();
-      
-      const frontendPlugins = allManifests
-        .filter(m => m.frontend && m.frontend.entryPoint)
-        .sort((a, b) => (a.frontend?.priority || 0) - (b.frontend?.priority || 0));
-
-      console.log(`发现 ${frontendPlugins.length} 个前端插件待加载:`, frontendPlugins.map(p => p.id));
-
-
-      for (const manifest of frontendPlugins) {
-        manifestProvider.addManifest(manifest);
-        try {
-          let entryPointUrl = '';
-
-          if (import.meta.env.DEV) {
-            const srcEntryPoint = manifest.frontend.srcEntryPoint || `src/main.${manifest.id.includes('goliath') ? 'jsx' : 'js'}`;
-            entryPointUrl = `/plugins/${manifest.id}/${srcEntryPoint}`;
-            console.log(`[DEV MODE] Loading source for ${manifest.id}: ${entryPointUrl}`);
-          } else {
-            entryPointUrl = `/plugins/${manifest.id}/${manifest.frontend.entryPoint}`;
-          }
-          
-          const pluginModule = await import(entryPointUrl);
-          
-          if (pluginModule.registerPlugin) {
-            const pluginModule = await import(/* @vite-ignore */ entryPointUrl);
-            console.log(`-> 正在注册插件: ${manifest.id} (priority: ${manifest.frontend?.priority || 0})`);
-            await Promise.resolve(pluginModule.registerPlugin(this.services));
-          }
-        } catch (e) {
-          console.error(`加载或注册插件 ${manifest.id} 失败:`, e);
-        }
-      }
-      // ===============================================================
-
-      console.log("[Loader] 所有插件已加载。正在与后端同步前端钩子...");
-      remoteProxy.syncFrontendHooks();
-
-    } catch (e) {
-      console.error("致命错误: 无法初始化插件。", e);
-      document.body.innerHTML = `<div style="color: red; padding: 2rem;">错误: 无法从后端加载插件清单。后端服务器是否正在运行？</div>`;
-      return;
-    }
-
-    console.log("✅ 同步完成。正在将控制权移交给应用插件...");
-    await this.services.get('hookManager').trigger('loader.ready');
-  }
-}
-
-const loader = new FrontendLoader();
-loader.load();
-```
-
-### RemoteHookProxy.js
-```
-// ./frontend/RemoteHookProxy.js
-
-/**
- * 负责管理与后端 WebSocket 的连接，并作为前后端钩子系统的桥梁。
- * 它在连接建立后，向后端同步前端的钩子清单。
- */
-export class RemoteHookProxy {
-  constructor() {
-    /** @type {import('./HookManager.js').HookManager | null} */
-    this.localHookManager = null;
-    this.ws = null;
-    this.isConnected = false;
-    console.log(`[RemoteProxy] CONSTRUCTED. Initial isConnected: ${this.isConnected}`);
-  }
-
-  /**
-   * 注入 HookManager 依赖。
-   * @param {import('./HookManager.js').HookManager} hookManager 
-   */
-  setHookManager(hookManager) {
-    this.localHookManager = hookManager;
-  }
-
-  connect() {
-    if (this.ws) {
-        // 防止重复连接
-        return;
-    }
-    const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsUrl = `${wsProtocol}//${window.location.host}/ws/hooks`;
-    
-    this.ws = new WebSocket(wsUrl);
-
-    this.ws.onopen = () => {
-      console.log("🔗 WebSocket connection established.");
-      this.isConnected = true;
-      if (this.localHookManager) {
-        // 在 `addImplementation` 调用时，`globalHookRegistry` 已经知道这个钩子了
-        this.localHookManager.addImplementation('websocket.connected', () => {});
-        this.localHookManager.trigger('websocket.connected');
-      }
-
-      // 【已移除】不再在此处同步钩子。
-      // this.syncFrontendHooks(); 
-    };
-    
-    this.ws.onmessage = (event) => this.handleIncoming(event);
-    
-    this.ws.onclose = () => {
-      console.warn("🔌 WebSocket connection closed. Attempting to reconnect in 3 seconds...");
-      if (this.isConnected) {
-        this.isConnected = false;
-        if (this.localHookManager) {
-            // 确保钩子存在
-            this.localHookManager.addImplementation('websocket.disconnected', () => {});
-            this.localHookManager.trigger('websocket.disconnected');
-        }
-      }
-      this.ws = null; // 清理实例以允许重新连接
-      setTimeout(() => this.connect(), 3000);
-    };
-
-    this.ws.onerror = (error) => {
-      console.error("WebSocket error:", error);
-    };
-  }
-  
-  /**
-   * 将前端实现的钩子清单发送到后端。
-   */
-  syncFrontendHooks() {
-    if (!this.localHookManager) {
-        console.error("[RemoteProxy] 无法同步钩子，HookManager 未设置。");
-        return;
-    }
-    // 添加一个延迟/重试机制，以防 `sync` 被调用时 WS 尚未完全打开
-    const trySync = (retries = 5) => {
-      if (this.ws && this.ws.readyState === WebSocket.OPEN) {
-          const hookNamesArray = this.localHookManager.getAllHookNames();
-          const payload = {
-              type: 'sync_hooks', // 特殊类型
-              hooks: hookNamesArray
-          };
-          const message = JSON.stringify(payload);
-          console.log(`[ws >] 正在与后端同步 ${hookNamesArray.length} 个前端钩子。`);
-          this.ws.send(message);
-      } else if (retries > 0) {
-          console.warn(`[RemoteProxy] WebSocket 未打开，将在 200ms 后重试同步 (剩余次数: ${retries - 1})`);
-          setTimeout(() => trySync(retries - 1), 200);
-      } else {
-          console.error("[RemoteProxy] 无法同步钩子: WebSocket 未打开且已达到重试次数上限。");
-      }
-    }
-    trySync();
-  }
-
-  handleIncoming(event) {
-    try {
-      const payload = JSON.parse(event.data);
-      if (payload.hook_name) {
-        console.log(`[ws <] 收到远程钩子: ${payload.hook_name}`, payload.data);
-        if (this.localHookManager) {
-          // 关键：直接执行本地实现，绕过智能路由，以防止无限循环。
-          // 后端的 HookManager.trigger 已经确定这个钩子应该在前端本地运行。
-          const implementations = this.localHookManager.hooks.get(payload.hook_name) || [];
-          const tasks = implementations.map(impl => Promise.resolve(impl(payload.data || {})));
-          Promise.all(tasks);
-        }
-      }
-    } catch (e) {
-      console.error("解析传入的 WebSocket 消息失败:", e);
-    }
-  }
-
-  /**
-   * 将一个钩子触发消息发送到后端。
-   * 这个方法由本地 HookManager 的智能路由逻辑调用。
-   * @param {string} hookName 
-   * @param {object} data 
-   */
-  trigger(hookName, data = {}) {
-    if (this.ws && this.ws.readyState === WebSocket.OPEN) {
-      const payload = { hook_name: hookName, data };
-      console.log(`[ws >] 正在触发远程钩子: ${hookName}`, data);
-      this.ws.send(JSON.stringify(payload));
-    } else {
-      console.error("无法触发远程钩子: WebSocket 未打开。");
-    }
-  }
-}
-```
-
-### ManifestProvider.js
-```
-// /frontend/ManifestProvider.js
-
-/**
- * 在插件加载期间收集所有前端插件的清单文件内容。
- * 这是一个无逻辑的数据容器，由内核填充，由应用主控插件消费。
- */
-export class ManifestProvider {
-    constructor() {
-        this.manifests = [];
-    }
-
-    /**
-     * 由内核在加载每个插件时调用。
-     * @param {object} manifest - 一个插件的 manifest.json 内容。
-     */
-    addManifest(manifest) {
-        this.manifests.push(manifest);
-    }
-
-    /**
-     * 由应用主控插件调用，以获取所有已加载插件的清单。
-     * @returns {Array<object>}
-     */
-    getManifests() {
-        return this.manifests;
-    }
-}
-```
-
-### ServiceContainer.js
-```
-// /frontend/ServiceContainer.js
-
-/**
- * 一个简单的依赖注入(DI)容器，用于管理单例服务。
- * 确保服务的注册、获取和覆盖是明确且可追踪的。
- */
-export class ServiceContainer {
-    constructor() {
-        this.serviceInstances = new Map();
-        this.serviceProviders = new Map(); // 用于追踪哪个插件提供了服务
-    }
-
-    /**
-     * 向容器注册一个服务实例。
-     * @param {string} serviceName - 服务的唯一名称。
-     * @param {*} serviceInstance - 服务的实例。
-     * @param {string} pluginId - 提供此服务的插件ID。
-     */
-    register(serviceName, serviceInstance, pluginId) {
-        if (this.serviceInstances.has(serviceName)) {
-            const originalProvider = this.serviceProviders.get(serviceName);
-            console.warn(`[Services] Service '${serviceName}' (provided by '${originalProvider}') is being overridden by plugin '${pluginId}'.`);
-        }
-        this.serviceInstances.set(serviceName, serviceInstance);
-        this.serviceProviders.set(serviceName, pluginId);
-        console.log(`[Services] Service '${serviceName}' registered by plugin '${pluginId}'.`);
-    }
-
-    /**
-     * 从容器中获取一个服务实例。
-     * @param {string} serviceName - 服务的名称。
-     * @returns {*} 服务实例，如果不存在则返回 undefined。
-     */
-    get(serviceName) {
-        const service = this.serviceInstances.get(serviceName);
-        if (!service) {
-            // 在开发中，这是一个有用的警告，可以帮助快速定位问题。
-            console.warn(`[Services] Service '${serviceName}' was requested but has not been registered.`);
-        }
-        return service;
-    }
-
-    /**
-     * 检查一个服务是否已被注册。
-     * @param {string} serviceName - 服务的名称。
-     * @returns {boolean}
-     */
-    has(serviceName) {
-        return this.serviceInstances.has(serviceName);
-    }
-}
-```
-
-### services/GlobalHookRegistry.js
-```
-// frontend/services/GlobalHookRegistry.js
-
-/**
- * 一个单例服务，用于存储和查询全域钩子路由表。
- * 它持有在前端和后端实现的所有钩子的完整清单。
- */
-export class GlobalHookRegistry {
-  constructor() {
-    /** @type {Set<string>} */
-    this.backendHooks = new Set();
-    /** @type {Set<string>} */
-    this.frontendHooks = new Set();
-  }
-
-  /**
-   * 填充已知的后端钩子集合。在启动时调用。
-   * @param {string[]} hooks - 来自后端的钩子名称数组。
-   */
-  setBackendHooks(hooks) {
-    this.backendHooks = new Set(hooks);
-    console.log(`[GlobalRegistry] 已注册 ${this.backendHooks.size} 个后端钩子。`);
-  }
-
-  /**
-   * 将一个前端实现的钩子添加到注册表。
-   * 由本地 HookManager 在每次添加实现时调用。
-   * @param {string} hookName 
-   */
-  addFrontendHook(hookName) {
-    if (!this.frontendHooks.has(hookName)) {
-        this.frontendHooks.add(hookName);
-    }
-  }
-
-  /**
-   * 检查一个钩子是否有本地（前端）实现。
-   * @param {string} hookName 
-   * @returns {boolean}
-   */
-  isLocalHook(hookName) {
-    return this.frontendHooks.has(hookName);
-  }
-
-  /**
-   * 检查一个钩子是否有远程（后端）实现。
-   * @param {string} hookName 
-   * @returns {boolean}
-   */
-  isRemoteHook(hookName) {
-    return this.backendHooks.has(hookName);
-  }
-
-  /**
-   * 获取所有已知的前端钩子名称列表。
-   * 用于与后端同步。
-   * @returns {string[]}
-   */
-  getFrontendHooks() {
-    return Array.from(this.frontendHooks);
-  }
-}
-```
-
-# Directory: plugins/core_layout
-
-### vite.config.js
-```
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
-
-export default defineConfig({
-  plugins: [
-    react({
-      jsxRuntime: 'automatic'
-    }),
-  ],
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'src/main.jsx'),
-      name: 'HevnoCoreLayout',
-      fileName: 'main',
-      formats: ['es'],
-    },
-    outDir: 'dist',
-    emptyOutDir: true,
-  },
-});
-```
-
-### package.json
-```
-{
-  "name": "hevno-plugin-core-layout",
-  "version": "2.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "vite build"
-  },
-  "dependencies": {
-    "@emotion/react": "latest",
-    "@emotion/styled": "latest",
-    "@mui/icons-material": "latest",
-    "@mui/material": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-draggable": "^4.5.0"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "latest",
-    "vite": "latest"
-  }
-}
-
-```
-
-### manifest.json
-```
-{
-    "id": "core_layout",
-    "name": "React Application Host",
-    "version": "2.0.0",
-    "description": "Provides the main application shell using React, including layout, theme, and a host for other page plugins.",
-    "author": "Hevno Team",
-    "frontend": {
-        "type": "host",
-        "priority": 100,
-        "entryPoint": "dist/main.js",
-        "srcEntryPoint": "src/main.jsx" 
-    }
-}
-```
-
-### src/main.jsx
-```
-// plugins/core_layout/src/main.jsx
-import React from 'react';
-import { LayoutProvider } from './context/LayoutContext';
-import { createRoot } from 'react-dom/client';
-import { App } from './App';
-
-// 全局标志位，防止开发模式下的热重载重复执行
-if (typeof window.hevnoCoreLayoutInitialized === 'undefined') {
-  window.hevnoCoreLayoutInitialized = false;
-}
-
-/**
- * Hevno 插件系统的入口函数。
- * 由前端加载器在加载此插件时调用。
- * @param {import('../../../../frontend/ServiceContainer').ServiceContainer} context - 平台服务容器
- */
-export function registerPlugin(context) {
-  if (window.hevnoCoreLayoutInitialized) {
-    console.warn('[core_layout] Attempted to re-register. Aborting.');
-    return;
-  }
-  
-  const hookManager = context.get('hookManager');
-  if (!hookManager) {
-    console.error('[core_layout] CRITICAL: HookManager service not found!');
-    return;
-  }
-
-  // 监听内核加载器发出的“就绪”信号
-  // 这是我们接管UI的最佳时机
-  hookManager.addImplementation('loader.ready', () => {
-    // 双重检查
-    if (window.hevnoCoreLayoutInitialized) return;
-    window.hevnoCoreLayoutInitialized = true;
-
-    console.log('[core_layout] Received "loader.ready". Initializing React application host...');
-
-    // 1. 找到根DOM容器
-    const appContainer = document.getElementById('app');
-    if (!appContainer) {
-      console.error('[core_layout] CRITICAL: #app container not found in DOM!');
-      return;
-    }
-
-    // 2. 清空容器，为React应用做准备
-    appContainer.innerHTML = '';
-
-    // 3. 创建并渲染React应用
-    const root = createRoot(appContainer);
-    root.render(
-    <React.StrictMode>
-        {/* 将平台服务注入到 React 世界 */}
-        <LayoutProvider services={context}> 
-        <App />
-        </LayoutProvider>
-    </React.StrictMode>
-    );
-
-    console.log('[core_layout] React host mounted successfully.');
-
-    // 4. (未来) 在这里可以触发一个新的钩子，比如 'host.ready'
-    // hookManager.trigger('host.ready');
-  });
-}
-```
-
-### src/App.jsx
-```
-// plugins/core_layout/src/main.jsx
-import React from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import { FloatingMenuButton } from './components/FloatingMenuButton';
-import { PageContainer } from './components/PageContainer'; // 新组件
-
-const darkTheme = createTheme({ palette: { mode: 'dark' } });
-
-export function App() {
-  return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <Box sx={{ width: '100vw', height: '100vh', display: 'flex' }}>
-        <Box component="main" sx={{ flexGrow: 1, position: 'relative' }}>
-        <PageContainer />
-        <FloatingMenuButton />
-        </Box>
-      </Box>
-    </ThemeProvider>
-  );
-}
-```
-
-### src/context/LayoutContext.jsx
-```
-// plugins/core_layout/src/context/LayoutContext.jsx
-import React, { createContext, useState, useContext, useMemo } from 'react';
-import { ContributionRegistry } from '../services/ContributionRegistry';
-
-const LayoutContext = createContext(null);
-
-export function LayoutProvider({ children, services }) {
-  // 使用 useMemo 确保 registry 只被实例化一次
-  const contributionRegistry = useMemo(() => {
-    const manifestProvider = services.get('manifestProvider');
-    return new ContributionRegistry(manifestProvider);
-  }, [services]);
-
-  const [pages] = useState(() => contributionRegistry.getPageComponents());
-  const [activePageId, setActivePageId] = useState(null);
-  const [currentSandboxId, setCurrentSandboxId] = useState(null); 
-
-  const value = {
-    pages,
-    activePageId,
-    setActivePageId,
-    currentSandboxId,
-    setCurrentSandboxId,
-    services, // 将平台服务传递下去
-  };
-
-  return (
-    <LayoutContext.Provider value={value}>
-      {children}
-    </LayoutContext.Provider>
-  );
-}
-
-export const useLayout = () => {
-  const context = useContext(LayoutContext);
-  if (!context) {
-    throw new Error('useLayout must be used within a LayoutProvider');
-  }
-  return context;
-};
-```
-
-### src/components/FloatingMenuButton.jsx
-```
-// plugins/core_layout/src/components/FloatingMenuButton.jsx
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import Draggable from 'react-draggable';
-import { useLayout } from '../context/LayoutContext';
-import Box from '@mui/material/Box';
-import SpeedDial from '@mui/material/SpeedDial';
-import SpeedDialIcon from '@mui/material/SpeedDialIcon';
-import SpeedDialAction from '@mui/material/SpeedDialAction';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import * as MuiIcons from '@mui/icons-material';
-
-const DynamicIcon = ({ name }) => {
-  const Icon = MuiIcons[name];
-  return Icon ? <Icon /> : <div/>;
-};
-
-export function FloatingMenuButton() {
-  const { pages, activePageId, setActivePageId } = useLayout();
-  const draggableRef = useRef(null);
-
-  const [direction, setDirection] = useState('up');
-  const [tooltipPlacement, setTooltipPlacement] = useState('left');
-
-  const updateDirections = useCallback(() => {
-    if (!draggableRef.current) return;
-
-    const rect = draggableRef.current.getBoundingClientRect();
-    const viewHeight = window.innerHeight;
-    const viewWidth = window.innerWidth;
-    
-    setDirection(rect.top > viewHeight / 2 ? 'up' : 'down');
-    
-    setTooltipPlacement(rect.left > viewWidth / 2 ? 'left' : 'right');
-  }, []);
-
-  useEffect(() => {
-    updateDirections();
-  }, [updateDirections]);
-
-
-  const actions = [
-    { 
-      icon: <HomeRoundedIcon />, 
-      name: 'Home',
-      pageId: null,
-    },
-    ...pages
-      .filter(page => page.menu) 
-      .map(page => ({
-        icon: <DynamicIcon name={page.menu.icon} />,
-        name: page.menu.title,
-        pageId: page.id
-      }))
-  ];
-
-  const handleActionClick = (pageId) => {
-    setActivePageId(pageId);
-  };
-  
-  const handleDragStop = () => {
-    updateDirections();
-  };
-
-  return (
-    <Draggable 
-      nodeRef={draggableRef}
-      handle=".MuiFab-primary"
-      bounds="parent"
-      onStop={handleDragStop}
-    >
-      <Box 
-        ref={draggableRef} 
-        sx={{ 
-          position: 'absolute', 
-          bottom: 24, 
-          left: 24, 
-          zIndex: 1300 
-        }}
-      >
-        <SpeedDial
-          ariaLabel="Main navigation"
-          icon={<SpeedDialIcon />}
-          direction={direction}
-        >
-          {actions.map((action) => (
-            <SpeedDialAction
-              key={action.name}
-              icon={action.icon}
-              tooltipTitle={action.name}
-              tooltipPlacement={tooltipPlacement}
-              onClick={() => handleActionClick(action.pageId)}
-              sx={
-                activePageId === action.pageId 
-                ? {
-                    '& .MuiFab-root': {
-                      bgcolor: 'primary.main',
-                      color: 'common.white',
-                      '&:hover': {
-                        bgcolor: 'primary.dark',
-                      },
-                    },
-                  }
-                : {} 
-              }
-            />
-          ))}
-        </SpeedDial>
-      </Box>
-    </Draggable>
-  );
-}
-```
-
-### src/components/PageContainer.jsx
-```
-// plugins/core_layout/src/components/PageContainer.jsx
-import React, { useState, useEffect, useMemo } from 'react';
-import { useLayout } from '../context/LayoutContext';
-import { Box, Typography, CircularProgress } from '@mui/material';
-
-// 将组件的创建和缓存移到组件外部或使用 useMemo，以避免在每次渲染时重新创建 LazyComponent
-const componentCache = new Map();
-
-function getLazyComponent(pageInfo) {
-  const { id, manifest, componentExportName } = pageInfo;
-
-  if (componentCache.has(id)) {
-    return componentCache.get(id);
-  }
-
-  const LazyComponent = React.lazy(async () => {
-    // 动态 import 路径
-    const modulePath = `/plugins/${manifest.id}/${manifest.frontend.srcEntryPoint || manifest.frontend.entryPoint}`;
-    
-    try {
-      const module = await import(/* @vite-ignore */ modulePath);
-      if (module[componentExportName]) {
-        // React.lazy 期望一个包含 default 导出的模块
-        return { default: module[componentExportName] };
-      } else {
-        // 如果找不到具名导出，尝试默认导出
-        if (module.default) {
-           return { default: module.default }
-        }
-        throw new Error(`Component export '${componentExportName}' not found in plugin '${manifest.id}'.`);
-      }
-    } catch (error) {
-      console.error(`Failed to load component for plugin '${manifest.id}':`, error);
-      // 返回一个显示错误的组件
-      const ErrorComponent = () => (
-        <Box sx={{ p: 2, color: 'error.main' }}>
-          <Typography>Error loading page: {manifest.id}</Typography>
-          <Typography variant="body2">{error.message}</Typography>
-        </Box>
-      );
-      return { default: ErrorComponent };
-    }
-  });
-
-  componentCache.set(id, LazyComponent);
-  return LazyComponent;
-}
-
-
-export function PageContainer() {
-  const { pages, activePageId, services } = useLayout();
-  
-  // 使用 useMemo 来根据 activePageId 查找页面信息并获取懒加载组件
-  // 只有当 activePageId 变化时，才会重新计算
-  const ActiveLazyComponent = useMemo(() => {
-    if (!activePageId) return null;
-    const pageInfo = pages.find(p => p.id === activePageId);
-    return pageInfo ? getLazyComponent(pageInfo) : null;
-  }, [activePageId, pages]);
-
-
-  if (!ActiveLazyComponent) {
-    return (
-      <Box sx={{ p: 4, textAlign: 'center' }}>
-        <Typography variant="h5">Hevno</Typography>
-        <Typography color="text.secondary">戳一下那个按钮试试</Typography>
-      </Box>
-    );
-  }
-
-  return (
-    // Suspense 包裹懒加载组件，提供 fallback UI
-    <React.Suspense fallback={<Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}><CircularProgress /></Box>}>
-      {/* 在这里将 props 传递给将要被渲染的组件 */}
-      <ActiveLazyComponent services={services} />
-    </React.Suspense>
-  );
-}
-```
-
-### src/services/ContributionRegistry.js
-```
-// plugins/core_layout/src/services/ContributionRegistry.js
-export class ContributionRegistry {
-    constructor(manifestProvider) {
-        this.pageComponents = [];
-        this.manifests = manifestProvider.getManifests();
-        this.processContributions();
-    }
-
-    processContributions() {
-        // 我们只关心 'page-component' 类型的插件
-        const pagePlugins = this.manifests.filter(
-            m => m.frontend?.type === 'page-component' && m.frontend?.contributions?.pageComponents
-        );
-
-        for (const manifest of pagePlugins) {
-            for (const pageDef of manifest.frontend.contributions.pageComponents) {
-                if (pageDef.id && pageDef.componentExportName) { // 修改: menu 变为可选
-                    this.pageComponents.push({
-                        ...pageDef,
-                        pluginId: manifest.id,
-                        manifest: manifest, // 保存整个 manifest 以便后续查找入口文件
-                    });
-                } else {
-                    console.warn(`[core_layout] Invalid pageComponent contribution from plugin '${manifest.id}'.`, pageDef);
-                }
-            }
-        }
-        console.log(`[core_layout] Discovered ${this.pageComponents.length} page components.`, this.pageComponents);
-    }
-
-    getPageComponents() {
-        return this.pageComponents;
-    }
-}
-```
-
-# Directory: plugins/core_llm_config
-
-### vite.config.js
-```
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
-
-export default defineConfig({
-  plugins: [react()],
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'src/LLMConfigPage.jsx'),
-      name: 'HevnoLLMConfig',
-      fileName: 'main',
-      formats: ['es'],
-    },
-    rollupOptions: {
-      external: ['react', 'react-dom', '@mui/material', '@mui/icons-material'],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM'
-        }
-      }
-    },
-    outDir: 'dist',
-    emptyOutDir: true,
-  },
-});
-```
-
-### package.json
-```
-{
-  "name": "hevno-plugin-llm-config",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "vite build"
-  },
-  "peerDependencies": {
-    "react": ">=18.0.0",
-    "@mui/material": ">=5.0.0",
-    "@mui/icons-material": ">=5.0.0"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "latest",
-    "vite": "latest"
-  }
-}
-```
-
-### manifest.json
-```
-{
-    "id": "core_llm_config",
-    "name": "LLM Configuration",
-    "version": "1.0.0",
-    "description": "Provides a UI to configure and monitor LLM provider API keys.",
-    "author": "Hevno Team",
-    "frontend": {
-        "type": "page-component",
-        "priority": 120,
-        "entryPoint": "dist/main.js",
-        "srcEntryPoint": "src/LLMConfigPage.jsx",
-        "contributions": {
-            "pageComponents": [
-                {
-                    "id": "llm_config.main_view",
-                    "componentExportName": "LLMConfigPage",
-                    "menu": {
-                        "path": "/config/llm",
-                        "title": "LLM 配置",
-                        "icon": "KeyRounded"
-                    }
-                }
-            ]
-        }
-    }
-}
-```
-
-### src/LLMConfigPage.jsx
-```
-// plugins/core_llm_config/src/LLMConfigPage.jsx
-import React, { useState, useEffect, useCallback } from 'react';
-import {
-    Box, Typography, Paper, CircularProgress, Button, Alert, TextField,
-    Select, MenuItem, FormControl, InputLabel
+### plugins/core_runner_ui/src/RunnerPage.jsx
+```
+// plugins/core_runner_ui/src/RunnerPage.jsx
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { 
+    Box, Typography, CircularProgress, Alert, Paper, IconButton, Collapse, CssBaseline,
+    AppBar, Toolbar, Tooltip, useTheme, useMediaQuery
 } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import RefreshIcon from '@mui/icons-material/Refresh';
-import { KeyStatusTable } from './components/KeyStatusTable';
-import { fetchKeyConfig, addKey, deleteKey } from './utils/api';
+import { useLayout } from '../../core_layout/src/context/LayoutContext';
+import { ConversationStream } from './components/ConversationStream';
+import { UserInputBar } from './components/UserInputBar';
+import { SnapshotHistoryDrawer } from './components/SnapshotHistoryDrawer';
+import { getSandboxDetails, mutate, step, getHistory, revert, deleteSnapshot, resetHistory } from './api';
+import BugReportIcon from '@mui/icons-material/BugReport';
+import MenuIcon from '@mui/icons-material/Menu';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AddCommentIcon from '@mui/icons-material/AddComment';
 
-export function LLMConfigPage() {
-    const [config, setConfig] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [actionInProgress, setActionInProgress] = useState(false); // 通用加载状态
+const DRAWER_WIDTH = 320;
+
+export function RunnerPage() {
+    const { currentSandboxId, setActivePageId, setCurrentSandboxId } = useLayout();
+    const theme = useTheme();
+    const isLargeScreen = useMediaQuery(theme.breakpoints.up('md'));
+
+    const [sandboxDetails, setSandboxDetails] = useState(null);
+    const [snapshotHistory, setSnapshotHistory] = useState([]);
+    const [headSnapshotId, setHeadSnapshotId] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    const [provider, setProvider] = useState('gemini');
-    const [newKey, setNewKey] = useState('');
+    const [diagnostics, setDiagnostics] = useState(null);
+    const [showDiagnostics, setShowDiagnostics] = useState(false);
+    const [isHistoryDrawerOpen, setHistoryDrawerOpen] = useState(isLargeScreen);
+    const [diagnosticsHeight, setDiagnosticsHeight] = useState(200);
+    const resizeRef = useRef(null);
 
-    const loadData = useCallback(async () => {
-        setLoading(true);
+    const [optimisticMessage, setOptimisticMessage] = useState(null);
+
+    const handleResizeMouseDown = useCallback((e) => {
+        e.preventDefault();
+        resizeRef.current = {
+            initialHeight: diagnosticsHeight,
+            initialY: e.clientY,
+        };
+        document.addEventListener('mousemove', handleResizeMouseMove);
+        document.addEventListener('mouseup', handleResizeMouseUp);
+    }, [diagnosticsHeight]);
+
+    const handleResizeMouseMove = useCallback((e) => {
+        if (!resizeRef.current) return;
+        const { initialHeight, initialY } = resizeRef.current;
+        const dy = e.clientY - initialY;
+        const newHeight = initialHeight - dy;
+        const clampedHeight = Math.max(50, Math.min(newHeight, 600));
+        setDiagnosticsHeight(clampedHeight);
+    }, []);
+
+    const handleResizeMouseUp = useCallback(() => {
+        resizeRef.current = null;
+        document.removeEventListener('mousemove', handleResizeMouseMove);
+        document.removeEventListener('mouseup', handleResizeMouseUp);
+    }, []);
+
+    useEffect(() => {
+        setHistoryDrawerOpen(isLargeScreen);
+    }, [isLargeScreen]);
+    
+    const messages = useMemo(() => {
+        const allMessages = [];
+        const headPath = new Map();
+        let currentId = headSnapshotId;
+        while(currentId) {
+            const snapshot = snapshotHistory.find(s => s.id === currentId);
+            if(snapshot) {
+                headPath.set(snapshot.id, snapshot);
+                currentId = snapshot.parent_snapshot_id;
+            } else {
+                break;
+            }
+        }
+        for (const snapshot of [...snapshotHistory].reverse()) {
+            if (headPath.has(snapshot.id)) {
+                const entries = snapshot.moment?.memoria?.chat_history?.entries || [];
+                for (const entry of entries) {
+                    allMessages.push({ ...entry, snapshot_id: snapshot.id, parent_snapshot_id: snapshot.parent_snapshot_id, triggering_input: snapshot.triggering_input });
+                }
+            }
+        }
+        let uniqueMessages = Array.from(new Map(allMessages.map(item => [item.id, item])).values());
+        uniqueMessages.sort((a, b) => a.sequence_id - b.sequence_id);
+
+        if (optimisticMessage) {
+            uniqueMessages.push(optimisticMessage);
+        }
+
+        return uniqueMessages;
+    }, [snapshotHistory, headSnapshotId, optimisticMessage]);
+
+
+    const loadData = useCallback(async (showLoading = true) => {
+        if (!currentSandboxId) return;
+        if (showLoading) setIsLoading(true);
         setError('');
         try {
-            const data = await fetchKeyConfig(provider);
-            setConfig(data);
+            const [history, details] = await Promise.all([
+                getHistory(currentSandboxId),
+                getSandboxDetails(currentSandboxId)
+            ]);
+            
+            if (!details || !details.head_snapshot_id) {
+                 throw new Error("Retrieved sandbox details are incomplete.");
+            }
+            
+            setSnapshotHistory(history);
+            setSandboxDetails(details);
+            setHeadSnapshotId(details.head_snapshot_id);
+
+        } catch (e) {
+            setError(`Failed to load sandbox data: ${e.message}`);
+        } finally {
+            if (showLoading) setIsLoading(false);
+        }
+    }, [currentSandboxId]);
+
+    useEffect(() => {
+        if (currentSandboxId) {
+            loadData();
+        } else {
+            setSandboxDetails(null);
+            setSnapshotHistory([]);
+            setHeadSnapshotId(null);
+            setError('');
+        }
+    }, [currentSandboxId, loadData]);
+    
+    const handleUserSubmit = async (inputText) => {
+        if (!currentSandboxId || isLoading) return;
+        
+        // 乐观更新的逻辑保持不变
+        const tempMsg = {
+            id: `optimistic_${Date.now()}`,
+            content: inputText,
+            level: 'user',
+            sequence_id: (messages.length > 0 ? messages[messages.length - 1].sequence_id : 0) + 1,
+        };
+        setOptimisticMessage(tempMsg);
+        
+        setIsLoading(true);
+        setError('');
+        setDiagnostics(null);
+        
+        try {
+            // --- 核心改动 ---
+            // 1. 定义一个清晰的 payload，这就是将要注入到 `run.triggering_input` 的内容
+            const payload = {
+                user_message: inputText
+            };
+
+            // 2. 直接调用 step API 并将 payload 作为请求体
+            //    不再需要之前的 mutate 调用！
+            const stepResponse = await step(currentSandboxId, payload);
+            // --- 核心改动结束 ---
+
+            if (stepResponse.status === 'ERROR') throw new Error(stepResponse.error_message);
+            if (stepResponse.diagnostics) setDiagnostics(stepResponse.diagnostics);
+            await loadData(false); 
         } catch (e) {
             setError(e.message);
-            setConfig({ provider, keys: [] }); // 即使出错也显示空表
-            console.error(e);
+            await loadData(false);
         } finally {
-            setLoading(false);
-        }
-    }, [provider]);
-
-    useEffect(() => {
-        loadData();
-    }, [loadData]);
-
-    const handleAdd = async () => {
-        if (!newKey.trim()) return;
-        setActionInProgress(true);
-        setError('');
-        try {
-            await addKey(provider, newKey.trim());
-            setNewKey(''); // 清空输入框
-            await loadData(); // 重新加载数据
-        } catch (e) {
-            setError(`添加失败: ${e.message}`);
-        } finally {
-            setActionInProgress(false);
+            setOptimisticMessage(null);
+            setIsLoading(false);
         }
     };
     
-    const handleDelete = async (keySuffix) => {
-        if (!window.confirm(`确定要从 .env 文件中永久删除密钥 "${keySuffix}" 吗？`)) return;
-        setActionInProgress(true);
+    const handleRegenerate = async (message) => {
+        if (!currentSandboxId || isLoading || !message.parent_snapshot_id) return;
+        setIsLoading(true);
         setError('');
+        setDiagnostics(null);
         try {
-            await deleteKey(provider, keySuffix);
-            await loadData(); // 重新加载数据
-        } catch (e) {
-            setError(`删除失败: ${e.message}`);
+            await revert(currentSandboxId, message.parent_snapshot_id);
+            const stepResponse = await step(currentSandboxId, message.triggering_input || {});
+            if (stepResponse.status === 'ERROR') throw new Error(stepResponse.error_message);
+            if (stepResponse.diagnostics) setDiagnostics(stepResponse.diagnostics);
+            await loadData(false);
+        } catch(e) {
+            setError(e.message);
         } finally {
-            setActionInProgress(false);
+            setIsLoading(false);
+        }
+    };
+    
+    const handleEditSubmit = async (message, newContent) => {
+        if (!currentSandboxId || isLoading || !message.parent_snapshot_id) return;
+        setIsLoading(true);
+        setError('');
+        setDiagnostics(null);
+        try {
+            await revert(currentSandboxId, message.parent_snapshot_id);
+            await mutate(currentSandboxId, [{ type: 'UPSERT', path: 'moment/_user_input', value: newContent }]);
+            const stepResponse = await step(currentSandboxId, {});
+            if (stepResponse.status === 'ERROR') throw new Error(stepResponse.error_message);
+            if (stepResponse.diagnostics) setDiagnostics(stepResponse.diagnostics);
+            await loadData(false);
+        } catch (e) {
+            setError(e.message);
+        } finally {
+            setIsLoading(false);
         }
     };
 
+    const handleRevert = async (snapshotId) => {
+        if (!currentSandboxId || isLoading) return;
+        setIsLoading(true);
+        setError('');
+        try {
+            await revert(currentSandboxId, snapshotId);
+            await loadData(false);
+        } catch (e) {
+            setError(`Failed to revert: ${e.message}`);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    
+    const handleDeleteSnapshot = async (snapshotId) => {
+        if (!currentSandboxId || isLoading || snapshotId === headSnapshotId) return;
+        if (window.confirm("确定要永久删除这个历史记录点吗？")) {
+            setIsLoading(true);
+            setError('');
+            try {
+                await deleteSnapshot(currentSandboxId, snapshotId);
+                await loadData(false);
+            } catch (e) {
+                setError(`删除失败: ${e.message}`);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+    };
+
+    const handleResetHistory = async () => {
+        if (!currentSandboxId || isLoading) return;
+        if (window.confirm("确定要开启一个新的会话吗？当前会话将成为历史记录。")) {
+            setIsLoading(true);
+            setError('');
+            try {
+                await resetHistory(currentSandboxId);
+                await loadData(false);
+            } catch (e) {
+                setError(`开启新会话失败: ${e.message}`);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+    };
+
+
+    const handleGoBackToExplorer = () => {
+        setCurrentSandboxId(null);
+        setActivePageId('sandbox_explorer.main_view');
+    };
+
+    if (!currentSandboxId) {
+        return (
+            <Box sx={{ p: 4, textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
+                <Typography variant="h5">开始交互</Typography>
+                <Typography color="text.secondary">请从 "沙盒列表" 页面选择一个沙盒以开始。</Typography>
+            </Box>
+        );
+    }
+    
     return (
-        <Box sx={{ p: 3, height: '100%', overflowY: 'auto' }}>
-            <Typography variant="h4" gutterBottom>LLM 提供商配置</Typography>
+        <Box sx={{ display: 'flex', height: '100vh', width: '100vw' }}>
+            <CssBaseline />
+            <SnapshotHistoryDrawer 
+                history={snapshotHistory} 
+                headSnapshotId={headSnapshotId} 
+                onRevert={handleRevert}
+                onDelete={handleDeleteSnapshot}
+                isLoading={isLoading}
+                open={isHistoryDrawerOpen}
+                onClose={() => setHistoryDrawerOpen(false)}
+                variant={isLargeScreen ? 'persistent' : 'temporary'}
+                width={DRAWER_WIDTH}
+            />
 
-            <Alert severity="warning" sx={{ mb: 3 }}>
-                <b>警告:</b> 此页面上的操作将直接修改您服务器上的 <code>.env</code> 文件。请谨慎操作。
-            </Alert>
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%',
+                    transition: theme.transitions.create('margin', {
+                        easing: theme.transitions.easing.sharp,
+                        duration: theme.transitions.duration.leavingScreen,
+                    }),
+                    marginLeft: `-${DRAWER_WIDTH}px`,
+                    ...(isHistoryDrawerOpen && {
+                        transition: theme.transitions.create('margin', {
+                            easing: theme.transitions.easing.easeOut,
+                            duration: theme.transitions.duration.enteringScreen,
+                        }),
+                        marginLeft: 0,
+                    }),
+                }}
+            >
+                <AppBar position="static" color="default" sx={{ boxShadow: 'none', borderBottom: 1, borderColor: 'divider' }}>
+                    <Toolbar>
+                        <Tooltip title="切换历史记录">
+                            <IconButton color="inherit" aria-label="open drawer" onClick={() => setHistoryDrawerOpen(!isHistoryDrawerOpen)} edge="start" sx={{ mr: 2 }}>
+                                <MenuIcon />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="返回沙盒列表">
+                             <IconButton color="inherit" onClick={handleGoBackToExplorer} edge="start">
+                                <ArrowBackIcon />
+                            </IconButton>
+                        </Tooltip>
+                        <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, ml: 1 }}>
+                            {sandboxDetails?.name || 'Loading...'}
+                        </Typography>
+                        
+                        <Tooltip title="新建会话">
+                            <IconButton size="small" onClick={handleResetHistory} disabled={isLoading}>
+                                <AddCommentIcon />
+                            </IconButton>
+                        </Tooltip>
 
-            {error && <Alert severity="error" sx={{ mb: 2 }} onClose={() => setError('')}>{error}</Alert>}
+                        {diagnostics && (
+                            <Tooltip title="显示/隐藏诊断信息">
+                                <IconButton size="small" onClick={() => setShowDiagnostics(s => !s)} sx={{ ml: 1 }}>
+                                    <BugReportIcon color={showDiagnostics ? "primary" : "inherit"} />
+                                </IconButton>
+                            </Tooltip>
+                        )}
+                    </Toolbar>
+                </AppBar>
 
-            <Paper sx={{ p: 3, display: 'flex', flexDirection: 'column', gap: 3 }}>
-                <FormControl sx={{ minWidth: 200 }} size="small">
-                    <InputLabel>提供商</InputLabel>
-                    <Select value={provider} label="提供商" onChange={(e) => setProvider(e.target.value)}>
-                        <MenuItem value="gemini">Gemini</MenuItem>
-                    </Select>
-                </FormControl>
-
-                <Box>
-                    <Typography variant="h6" gutterBottom>当前密钥状态</Typography>
-                     {loading ? (
-                        <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}><CircularProgress /></Box>
+                <Box sx={{ flexGrow: 1, overflowY: 'auto' }}>
+                    {isLoading && messages.length === 0 && !optimisticMessage ? (
+                        <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}><CircularProgress /></Box>
                     ) : (
-                        <KeyStatusTable keys={config?.keys || []} onDelete={handleDelete} isDeleting={actionInProgress} />
+                        <ConversationStream 
+                            messages={messages} 
+                            onRegenerate={handleRegenerate} 
+                            onEditSubmit={handleEditSubmit}
+                        />
                     )}
                 </Box>
-
-                <Box>
-                    <Typography variant="h6" gutterBottom>添加新密钥</Typography>
-                    <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                         <TextField
-                            fullWidth
-                            label="新 API 密钥"
-                            value={newKey}
-                            onChange={(e) => setNewKey(e.target.value)}
-                            placeholder="在此处粘贴完整的 API 密钥"
-                            variant="outlined"
-                            size="small"
-                            onKeyPress={(e) => e.key === 'Enter' && handleAdd()}
-                        />
-                         <Button
-                            variant="contained"
-                            // startIcon={<AddIcon />}
-                            onClick={handleAdd}
-                            disabled={actionInProgress || loading || !newKey.trim()}
+                
+                <Box sx={{ flexShrink: 0, p: { xs: 1, sm: 2 } }}>
+                    {error && <Alert severity="error" sx={{ mb: 1.5 }} onClose={() => setError('')}>{error}</Alert>}
+                    <Collapse in={showDiagnostics}>
+                        <Paper 
+                            variant="outlined" 
+                            sx={{ p: 2, pt: 3, mb: 1.5, height: diagnosticsHeight, overflow: 'hidden', bgcolor: 'background.default', position: 'relative', display: 'flex', flexDirection: 'column' }}
                         >
-                            {actionInProgress && !loading ? <CircularProgress size={36} color="inherit" /> : '添加'}
-                        </Button>
-                    </Box>
+                            <Box onMouseDown={handleResizeMouseDown} sx={{ position: 'absolute', top: 0, left: 0, right: 0, height: '10px', cursor: 'ns-resize', display: 'flex', alignItems: 'center', justifyContent: 'center', '&:hover div': { backgroundColor: theme.palette.action.active, }}}>
+                                 <Box sx={{ width: '40px', height: '4px', backgroundColor: theme.palette.divider, borderRadius: '2px', transition: 'background-color 0.2s' }} />
+                            </Box>
+                            <Typography variant="subtitle2" sx={{ flexShrink: 0 }}>诊断信息</Typography>
+                            <pre style={{ flexGrow: 1, margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-all', fontSize: '0.8rem', overflowY: 'auto' }}>
+                                {JSON.stringify(diagnostics, null, 2)}
+                            </pre>
+                        </Paper>
+                    </Collapse>
+                    {/* [修复] 恢复正确的 isLoading 逻辑 */}
+                    <UserInputBar onSendMessage={handleUserSubmit} isLoading={isLoading} />
                 </Box>
-                 <Button
-                    variant="outlined"
-                    startIcon={<RefreshIcon />}
-                    onClick={loadData}
-                    disabled={loading || actionInProgress}
-                    sx={{ alignSelf: 'flex-start' }}
-                >
-                    刷新状态
-                </Button>
-            </Paper>
+            </Box>
         </Box>
     );
 }
 
-export default LLMConfigPage;
-export const registerPlugin = () => {};
+export default RunnerPage;
 ```
 
-### src/utils/api.js
+### plugins/core_runner_ui/src/api.js
 ```
-// plugins/core_llm_config/src/utils/api.js
+// plugins/core_runner_ui/src/api.js
 
-const BASE_URL = '/api/llm/config';
+const BASE_URL = '/api/sandboxes';
 
-export async function fetchKeyConfig(providerName) {
-    const response = await fetch(`${BASE_URL}/${providerName}`);
+export async function getSandboxDetails(sandboxId) {
+    const response = await fetch(`${BASE_URL}/${sandboxId}`); // 使用标准的 GET /resource/{id}
     if (!response.ok) {
-        // 提供一个友好的默认值，以防提供商没有配置任何密钥
-        if (response.status === 404) {
-            return { provider: providerName, keys: [] };
-        }
-        const err = await response.json().catch(() => ({ detail: "API query failed." }));
+        const err = await response.json().catch(() => ({ detail: `Failed to fetch details for sandbox ${sandboxId}.` }));
         throw new Error(err.detail || `HTTP Error ${response.status}`);
     }
     return response.json();
 }
 
-// [新] 添加密钥的函数
-export async function addKey(providerName, key) {
-    const response = await fetch(`${BASE_URL}/${providerName}/keys`, {
+/**
+ * 统一写入 API
+ */
+export async function mutate(sandboxId, mutations) {
+  const response = await fetch(`${BASE_URL}/${sandboxId}/resource:mutate`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ mutations }),
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({ detail: "API mutation failed." }));
+    throw new Error(err.detail || `HTTP Error ${response.status}`);
+  }
+  return response.json();
+}
+
+/**
+ * 统一读取 API
+ */
+export async function query(sandboxId, paths) {
+  const response = await fetch(`${BASE_URL}/${sandboxId}/resource:query`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ paths }),
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({ detail: "API query failed." }));
+    throw new Error(err.detail || `HTTP Error ${response.status}`);
+  }
+  const data = await response.json();
+  return data.results;
+}
+
+
+/**
+ * 执行沙盒计算步骤 API
+ */
+export async function step(sandboxId, input) {
+    const response = await fetch(`${BASE_URL}/${sandboxId}/step`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ key }),
+        body: JSON.stringify(input),
     });
+
+    // 保持原有的错误处理
     if (!response.ok) {
-        const err = await response.json().catch(() => ({ detail: "Failed to add key." }));
+        const err = await response.json().catch(() => ({ detail: "Step API call failed." }));
+        return {
+            status: "ERROR",
+            error_message: err.detail || `HTTP Error ${response.status}`,
+            sandbox: null,
+        }
+    }
+    return response.json();
+}
+
+/**
+ * 获取沙盒的完整快照历史
+ */
+export async function getHistory(sandboxId) {
+    const response = await fetch(`${BASE_URL}/${sandboxId}/history`);
+    if (!response.ok) {
+        const err = await response.json().catch(() => ({ detail: "Failed to get history." }));
         throw new Error(err.detail || `HTTP Error ${response.status}`);
     }
     return response.json();
 }
 
-// [新] 删除密钥的函数
-export async function deleteKey(providerName, keySuffix) {
-    // 从 "..." 中提取最后4位
-    const suffix = keySuffix.slice(-4);
-    const response = await fetch(`${BASE_URL}/${providerName}/keys/${suffix}`, {
+/**
+ * 将沙盒回滚到指定的快照
+ */
+export async function revert(sandboxId, snapshotId) {
+    const response = await fetch(`${BASE_URL}/${sandboxId}/revert`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ snapshot_id: snapshotId }),
+    });
+
+    if (!response.ok) {
+        const err = await response.json().catch(() => ({ detail: "Revert operation failed." }));
+        throw new Error(err.detail || `HTTP Error ${response.status}`);
+    }
+    return response.json();
+}
+
+/**
+ * [新增] 删除指定的快照
+ */
+export async function deleteSnapshot(sandboxId, snapshotId) {
+    const response = await fetch(`${BASE_URL}/${sandboxId}/snapshots/${snapshotId}`, {
         method: 'DELETE',
     });
+    // DELETE 成功时返回 204 No Content，response.ok 会是 true
     if (!response.ok) {
-        const err = await response.json().catch(() => ({ detail: "Failed to delete key." }));
+        const err = await response.json().catch(() => ({ detail: "Delete snapshot operation failed." }));
+        throw new Error(err.detail || `HTTP Error ${response.status}`);
+    }
+    // 204 没有 body，所以直接返回
+}
+
+/**
+ * 重置沙盒历史，开启新会话
+ */
+export async function resetHistory(sandboxId) {
+    const response = await fetch(`${BASE_URL}/${sandboxId}/history:reset`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+    });
+    if (!response.ok) {
+        const err = await response.json().catch(() => ({ detail: "Reset history operation failed." }));
         throw new Error(err.detail || `HTTP Error ${response.status}`);
     }
     return response.json();
 }
 ```
 
-### src/components/KeyStatusTable.jsx
+### plugins/core_runner_ui/src/components/MessageBubble.jsx
 ```
-// plugins/core_llm_config/src/components/KeyStatusTable.jsx
-import React from 'react';
-import {
-    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip,
-    Typography, IconButton, Tooltip
-} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Countdown } from './Countdown'; // 我们将倒计时逻辑移到自己的组件中
+// plugins/core_runner_ui/src/components/MessageBubble.jsx
+import React, { useState } from 'react';
+import { Box, Paper, Typography, Avatar, IconButton, Tooltip, TextField, Button, CircularProgress } from '@mui/material';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import PersonIcon from '@mui/icons-material/Person';
+import SmartToyIcon from '@mui/icons-material/SmartToy';
+import ReplayIcon from '@mui/icons-material/Replay'; 
+import EditIcon from '@mui/icons-material/Edit'; 
 
-export function KeyStatusTable({ keys, onDelete, isDeleting }) {
-    const getStatusChip = (key) => {
-        switch (key.status) {
-            case 'available':
-                return <Chip label="可用" color="success" size="small" />;
-            case 'rate_limited':
-                return <Chip label="限速中" color="warning" size="small" />;
-            case 'banned':
-                return <Chip label="已禁用" color="error" size="small" />;
-            default:
-                return <Chip label={key.status} size="small" />;
+export const MessageBubble = ({ message, onRegenerate, onEditSubmit }) => {
+    const isUser = message.level === 'user';
+    const [isHovered, setIsHovered] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedContent, setEditedContent] = useState(message.content);
+
+    const handleEditClick = () => {
+        setIsEditing(true);
+    };
+
+    const handleCancelEdit = () => {
+        setIsEditing(false);
+        setEditedContent(message.content); // 恢复原始内容
+    };
+
+    const handleSaveEdit = () => {
+        if (editedContent.trim()) {
+            onEditSubmit(message, editedContent);
+            setIsEditing(false);
+        }
+    };
+    
+    const renderContent = () => {
+        if (isEditing) {
+            return (
+                <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 1 }}>
+                    <TextField
+                        fullWidth
+                        multiline
+                        variant="standard"
+                        value={editedContent}
+                        onChange={(e) => setEditedContent(e.target.value)}
+                        autoFocus
+                    />
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1, mt: 1 }}>
+                        <Button size="small" onClick={handleCancelEdit}>取消</Button>
+                        <Button size="small" variant="contained" onClick={handleSaveEdit}>保存并提交</Button>
+                    </Box>
+                </Box>
+            );
+        }
+
+        return (
+            <Typography component="div" sx={{ '& p': { my: 0 }, '& pre': { whiteSpace: 'pre-wrap', wordBreak: 'break-all' }, '& table': {borderCollapse: 'collapse'}, '& th, & td': {border: '1px solid', borderColor: 'divider', px: 1, py: 0.5} }}>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {message.content}
+                </ReactMarkdown>
+            </Typography>
+        );
+    };
+
+    return (
+        <Box
+            sx={{
+                display: 'flex',
+                justifyContent: isUser ? 'flex-end' : 'flex-start',
+                mb: 2,
+            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            <Box sx={{ display: 'flex', flexDirection: isUser ? 'row-reverse' : 'row', alignItems: 'flex-start', maxWidth: '85%', position: 'relative' }}>
+                <Avatar sx={{ bgcolor: isUser ? 'primary.main' : 'secondary.main', ml: isUser ? 1.5 : 0, mr: isUser ? 0 : 1.5, mt: 0.5 }}>
+                    {isUser ? <PersonIcon /> : <SmartToyIcon />}
+                </Avatar>
+                <Paper
+                    variant="elevation"
+                    elevation={1}
+                    sx={{
+                        p: 1.5,
+                        bgcolor: isUser ? 'primary.dark' : 'background.paper',
+                        borderRadius: isUser ? '20px 4px 20px 20px' : '4px 20px 20px 20px',
+                        position: 'relative',
+                    }}
+                >
+                   {renderContent()}
+                </Paper>
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: isUser ? 'row-reverse' : 'row',
+                    opacity: isHovered && !isEditing ? 1 : 0,
+                    transition: 'opacity 0.2s',
+                    position: 'absolute',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    left: isUser ? 'auto' : '100%',
+                    right: isUser ? '100%' : 'auto',
+                    mx: 0.5,
+                    bgcolor: 'background.default',
+                    borderRadius: '20px',
+                    p: '2px',
+                    boxShadow: 1
+                }}>
+                    {isUser && onEditSubmit && (
+                         <Tooltip title="编辑并重新生成">
+                            <IconButton size="small" onClick={handleEditClick}><EditIcon sx={{fontSize: '1rem'}} /></IconButton>
+                         </Tooltip>
+                    )}
+                    {!isUser && onRegenerate && (
+                         <Tooltip title="重新生成">
+                            <IconButton size="small" onClick={() => onRegenerate(message)}><ReplayIcon sx={{fontSize: '1rem'}} /></IconButton>
+                         </Tooltip>
+                    )}
+                </Box>
+            </Box>
+        </Box>
+    );
+};
+```
+
+### plugins/core_runner_ui/src/components/UserInputBar.jsx
+```
+// plugins/core_runner_ui/src/components/UserInputBar.jsx
+import React, { useState } from 'react';
+import { TextField, IconButton, Box, CircularProgress, Paper } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
+
+export function UserInputBar({ onSendMessage, isLoading }) {
+    const [text, setText] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (text.trim() && !isLoading) {
+            onSendMessage(text);
+            setText('');
         }
     };
 
     return (
-        <TableContainer component={Paper} variant="outlined">
-            <Table size="small">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>密钥 (后4位)</TableCell>
-                        <TableCell>状态</TableCell>
-                        <TableCell>可用时间</TableCell>
-                        <TableCell align="right">操作</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {keys.length === 0 && (
-                        <TableRow>
-                            <TableCell colSpan={4} align="center">
-                                <Typography color="text.secondary" sx={{ p: 2 }}>
-                                    未找到为该提供商配置的密钥。
-                                </Typography>
-                            </TableCell>
-                        </TableRow>
-                    )}
-                    {keys.map((key) => (
-                        <TableRow key={key.key_suffix}>
-                            <TableCell component="th" scope="row">
-                                <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
-                                    {key.key_suffix}
-                                </Typography>
-                            </TableCell>
-                            <TableCell>{getStatusChip(key)}</TableCell>
-                            <TableCell>
-                                {key.status === 'rate_limited' && key.rate_limit_until ?
-                                    <Countdown until={key.rate_limit_until} />
-                                    : '—'}
-                            </TableCell>
-                            <TableCell align="right">
-                                <Tooltip title="从 .env 文件中删除此密钥">
-                                    <span>
-                                        <IconButton
-                                            size="small"
-                                            color="error"
-                                            onClick={() => onDelete(key.key_suffix)}
-                                            disabled={isDeleting}
-                                        >
-                                            <DeleteIcon fontSize="small" />
-                                        </IconButton>
-                                    </span>
-                                </Tooltip>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <Paper 
+            component="form" 
+            onSubmit={handleSubmit} 
+            sx={{ 
+                p: '4px 8px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                width: '100%',
+                borderRadius: '12px'
+            }}
+            elevation={2}
+        >
+            <TextField
+                fullWidth
+                placeholder="在此输入消息... (Shift+Enter 换行)"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                disabled={isLoading}
+                multiline
+                maxRows={8}
+                variant="standard" // 使用无边框样式
+                InputProps={{
+                    disableUnderline: true, // 移除下划线
+                }}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        handleSubmit(e);
+                    }
+                }}
+                sx={{ ml: 1 }}
+            />
+            <IconButton
+                type="submit"
+                color="primary"
+                disabled={!text.trim() || isLoading}
+                sx={{ p: '10px' }}
+            >
+                {isLoading ? <CircularProgress size={24} color="inherit" /> : <SendIcon />}
+            </IconButton>
+        </Paper>
     );
 }
 ```
 
-### src/components/Countdown.jsx
+### plugins/core_runner_ui/src/components/ConversationStream.jsx
 ```
-// plugins/core_llm_config/src/components/Countdown.jsx
-import React, { useState, useEffect } from 'react';
+// plugins/core_runner_ui/src/components/ConversationStream.jsx
+import React from 'react';
+import { Box } from '@mui/material';
+import { MessageBubble } from './MessageBubble'; // [修改] 导入新组件
 
-export function Countdown({ until }) {
-    const [timeLeft, setTimeLeft] = useState(Math.round(until - Date.now() / 1000));
+export const ConversationStream = ({ messages, onRegenerate, onEditSubmit }) => {
+    // 过滤掉那些没有内容的临时快照消息
+    const displayableMessages = messages.filter(msg => msg.content && msg.level);
+    
+    const conversationEndRef = React.useRef(null);
+    React.useEffect(() => {
+        conversationEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
 
-    useEffect(() => {
-        if (timeLeft <= 0) return;
-        const timer = setInterval(() => {
-            const newTimeLeft = Math.round(until - Date.now() / 1000);
-            setTimeLeft(newTimeLeft > 0 ? newTimeLeft : 0);
-        }, 1000);
-        return () => clearInterval(timer);
-    }, [timeLeft, until]);
-
-    return timeLeft > 0 ? `~${timeLeft}s` : '可用';
-}
-```
-
-# Directory: plugins/sandbox_editor
-
-### vite.config.js
-```
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
-
-export default defineConfig({
-  plugins: [react()],
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'src/SandboxEditorPage.jsx'),
-      name: 'HevnoSandboxEditor',
-      fileName: 'main',
-      formats: ['es'],
-    },
-    rollupOptions: {
-      external: ['react', 'react-dom', '@mui/material', '@mui/icons-material'],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM'
-        }
-      }
-    },
-    outDir: 'dist',
-    emptyOutDir: true,
-  },
-});
+    return (
+        <Box sx={{ p: { xs: 1, sm: 2 } }}>
+            {displayableMessages.map((msg, index) => (
+                <MessageBubble 
+                    key={msg.id || index} 
+                    message={msg} 
+                    onRegenerate={onRegenerate} 
+                    onEditSubmit={onEditSubmit} 
+                />
+            ))}
+            <div ref={conversationEndRef} />
+        </Box>
+    );
+};
 ```
 
-### package.json
+### plugins/core_runner_ui/src/components/SnapshotHistoryDrawer.jsx
 ```
-{
-"name": "hevno-plugin-sandbox-editor",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "vite build"
-  },
-  "dependencies": {
-    "@dnd-kit/core": "^6.1.0",
-    "@dnd-kit/sortable": "^8.0.0",
-    "@dnd-kit/utilities": "^3.2.2"
-  },
-  "peerDependencies": {
-    "react": ">=18.0.0",
-    "@mui/material": ">=5.0.0"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "latest",
-    "vite": "latest"
-  }
-}
-```
+// plugins/core_runner_ui/src/components/SnapshotHistoryDrawer.jsx
+import React from 'react';
+import { 
+    Drawer, List, ListItem, ListItemButton, ListItemText, ListItemIcon, 
+    Tooltip, Box, Typography, IconButton, Divider, Toolbar, Skeleton
+} from '@mui/material';
+import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-### manifest.json
-```
-{
-    "id": "sandbox_editor",
-    "name": "Sandbox Editor",
-    "version": "1.0.0",
-    "description": "Provides a UI to edit sandboxes, triggered from the explorer.",
-    "author": "Hevno Team",
-    "frontend": {
-        "type": "page-component",
-        "priority": 150,
-        "entryPoint": "dist/main.js",
-        "srcEntryPoint": "src/SandboxEditorPage.jsx",
-        "contributions": {
-            "pageComponents": [
-                {
-                    "id": "sandbox_editor.main_view",
-                    "componentExportName": "SandboxEditorPage"
-                }
-            ]
+const getSnapshotSummary = (snapshot) => {
+    const input = snapshot.triggering_input?.text;
+    if (input) {
+        return `输入: "${input.slice(0, 35)}${input.length > 35 ? '...' : ''}"`;
+    }
+    
+    const entries = snapshot.moment?.memoria?.chat_history?.entries;
+    if (entries && entries.length > 0) {
+        const lastEntry = entries[entries.length - 1];
+        if (lastEntry.level === 'model') {
+            return `回应: "${lastEntry.content.slice(0, 35)}${lastEntry.content.length > 35 ? '...' : ''}"`;
         }
     }
-}
+    return '初始状态';
+};
+
+export const SnapshotHistoryDrawer = ({ history, headSnapshotId, onRevert, onDelete, isLoading, width, ...drawerProps }) => {
+    
+    const reversedHistory = [...history].reverse();
+
+    const drawerContent = (
+        <>
+            <Toolbar>
+                <Typography variant="h6" component="div">交互历史</Typography>
+            </Toolbar>
+            <Divider />
+            {history.length === 0 && !isLoading && (
+                <Box sx={{ p: 2, textAlign: 'center', color: 'text.secondary' }}>
+                    <Typography>没有历史记录</Typography>
+                </Box>
+            )}
+            {isLoading && history.length === 0 && (
+                <Box sx={{p: 2}}>
+                    <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+                    <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+                    <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+                </Box>
+            )}
+            <List dense disablePadding sx={{ flexGrow: 1, overflowY: 'auto' }}>
+                {reversedHistory.map(snapshot => {
+                    const isHead = snapshot.id === headSnapshotId;
+                    const summary = getSnapshotSummary(snapshot);
+                    const timestamp = new Date(snapshot.created_at).toLocaleString();
+
+                    return (
+                        <ListItem
+                            key={snapshot.id}
+                            disablePadding
+                            secondaryAction={
+                                // 只在非当前 head 的快照上显示删除按钮
+                                !isHead && (
+                                    <Tooltip title="永久删除此记录点">
+                                        <span>
+                                            <IconButton edge="end" onClick={() => onDelete(snapshot.id)} disabled={isLoading} sx={{ color: 'error.light' }}>
+                                                <DeleteForeverIcon />
+                                            </IconButton>
+                                        </span>
+                                    </Tooltip>
+                                )
+                            }
+                        >
+                            <ListItemButton 
+                                selected={isHead} 
+                                dense
+                                // 只有非当前 head 的快照才能被点击
+                                onClick={!isHead ? () => onRevert(snapshot.id) : undefined} 
+                                // 如果正在加载中，或者该项是当前 head，则禁用点击
+                                disabled={isLoading}
+                            >
+                                <ListItemIcon sx={{ minWidth: 32 }}>
+                                    {isHead ? <RadioButtonCheckedIcon color="primary" fontSize="small" /> : <RadioButtonUncheckedIcon fontSize="small" />}
+                                </ListItemIcon>
+                                <ListItemText
+                                    primary={summary}
+                                    secondary={timestamp}
+                                    primaryTypographyProps={{ noWrap: true, variant: 'body2', fontWeight: isHead ? 'bold' : 'normal' }}
+                                    secondaryTypographyProps={{ noWrap: true, variant: 'caption' }}
+                                />
+                            </ListItemButton>
+                        </ListItem>
+                    );
+                })}
+            </List>
+        </>
+    );
+
+    return (
+        <Drawer
+            sx={{
+                width: width,
+                flexShrink: 0,
+                '& .MuiDrawer-paper': {
+                    width: width,
+                    boxSizing: 'border-box',
+                    display: 'flex',
+                    flexDirection: 'column',
+                },
+            }}
+            anchor="left"
+            {...drawerProps}
+        >
+            {drawerContent}
+        </Drawer>
+    );
+};
 ```
 
-### src/SandboxEditorPage.jsx
+### plugins/sandbox_editor/src/SandboxEditorPage.jsx
 ```
 import React, { useState, useEffect, useCallback } from 'react';
 import { Box, Typography, Tabs, Tab, CircularProgress, Button, Alert } from '@mui/material';
@@ -10289,7 +12538,7 @@ export function SandboxEditorPage({ services }) {
 export default SandboxEditorPage;
 ```
 
-### src/editors/RuntimeEditor.jsx
+### plugins/sandbox_editor/src/editors/RuntimeEditor.jsx
 ```
 // plugins/sandbox_editor/src/editors/RuntimeEditor.jsx
 import React, { useState, useEffect } from 'react';
@@ -10509,7 +12758,7 @@ export function RuntimeEditor({ runList, onRunListChange }) {
 }
 ```
 
-### src/editors/MemoriaEditor.jsx
+### plugins/sandbox_editor/src/editors/MemoriaEditor.jsx
 ```
 // plugins/sandbox_editor/src/editors/MemoriaEditor.jsx
 import React, { useState, useEffect } from 'react';
@@ -10734,7 +12983,7 @@ export function MemoriaEditor({ sandboxId, basePath, memoriaData, onBack }) {
 }
 ```
 
-### src/editors/CodexEditor.jsx
+### plugins/sandbox_editor/src/editors/CodexEditor.jsx
 ```
 // plugins/sandbox_editor/src/editors/CodexEditor.jsx
 import React, { useState, useEffect } from 'react';
@@ -10963,7 +13212,7 @@ export function CodexEditor({ sandboxId, basePath, codexName, codexData, onBack 
 }
 ```
 
-### src/editors/LlmContentsEditor.jsx
+### plugins/sandbox_editor/src/editors/LlmContentsEditor.jsx
 ```
 // plugins/sandbox_editor/src/editors/LlmContentsEditor.jsx
 import React, { useState, useEffect, useMemo } from 'react';
@@ -11178,7 +13427,7 @@ export function LlmContentsEditor({ contents, onContentsChange }) {
 }
 ```
 
-### src/editors/RuntimeConfigForm.jsx
+### plugins/sandbox_editor/src/editors/RuntimeConfigForm.jsx
 ```
 // plugins/sandbox_editor/src/editors/RuntimeConfigForm.jsx
 import React from 'react';
@@ -11379,7 +13628,7 @@ export function RuntimeConfigForm({ runtimeType, config, onConfigChange }) {
 }
 ```
 
-### src/editors/CodexInvokeEditor.jsx
+### plugins/sandbox_editor/src/editors/CodexInvokeEditor.jsx
 ```
 // plugins/sandbox_editor/src/editors/CodexInvokeEditor.jsx
 import React, { useState, useEffect } from 'react';
@@ -11506,7 +13755,7 @@ export function CodexInvokeEditor({ value, onChange }) {
 };
 ```
 
-### src/editors/AddItemDialog.jsx
+### plugins/sandbox_editor/src/editors/AddItemDialog.jsx
 ```
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, Select, MenuItem, FormControl, InputLabel, Box, Switch, FormControlLabel, Alert } from '@mui/material';
@@ -11632,7 +13881,7 @@ export function AddItemDialog({ open, onClose, onAdd, parentPath, existingKeys =
 }
 ```
 
-### src/editors/GenericEditorDialog.jsx
+### plugins/sandbox_editor/src/editors/GenericEditorDialog.jsx
 ```
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, FormControlLabel, Switch, Typography, Alert, Box } from '@mui/material';
@@ -11738,7 +13987,7 @@ export function GenericEditorDialog({ open, onClose, onSave, item }) {
 }
 ```
 
-### src/editors/GraphEditor.jsx
+### plugins/sandbox_editor/src/editors/GraphEditor.jsx
 ```
 // plugins/sandbox_editor/src/editors/GraphEditor.jsx
 import React, { useState, useRef, useEffect } from 'react';
@@ -11926,7 +14175,7 @@ export function GraphEditor({ sandboxId, basePath, graphName, graphData, onBack 
 }
 ```
 
-### src/utils/constants.js
+### plugins/sandbox_editor/src/utils/constants.js
 ```
 export const SCOPE_TABS = ['definition', 'lore', 'moment'];
 
@@ -11934,7 +14183,7 @@ export const isObject = (value) => value && typeof value === 'object' && !Array.
 export const isArray = (value) => Array.isArray(value);
 ```
 
-### src/utils/api.js
+### plugins/sandbox_editor/src/utils/api.js
 ```
 // plugins/sandbox_editor/src/api.js
 
@@ -12007,7 +14256,7 @@ export async function applyDefinition(sandboxId) {
 }
 ```
 
-### src/components/SortableNodeItem.jsx
+### plugins/sandbox_editor/src/components/SortableNodeItem.jsx
 ```
 // plugins/sandbox_editor/src/components/SortableNodeItem.jsx
 // 类似于 SortableEntryItem，但为 node 定制
@@ -12055,7 +14304,7 @@ export function SortableNodeItem({ id, node, expanded, onToggleExpand, onDelete,
 }
 ```
 
-### src/components/SortableRuntimeItem.jsx
+### plugins/sandbox_editor/src/components/SortableRuntimeItem.jsx
 ```
 // plugins/sandbox_editor/src/components/SortableRuntimeItem.jsx
 import React from 'react';
@@ -12106,7 +14355,7 @@ export function SortableRuntimeItem({ id, run, onEdit, onDelete }) {
 }
 ```
 
-### src/components/SortableEntryItem.jsx
+### plugins/sandbox_editor/src/components/SortableEntryItem.jsx
 ```
 // plugins/sandbox_editor/src/components/SortableEntryItem.jsx
 import React from 'react';
@@ -12165,7 +14414,7 @@ export function SortableEntryItem({ id, entry, expanded, onToggleExpand, onToggl
 }
 ```
 
-### src/components/SortableMemoryEntryItem.jsx
+### plugins/sandbox_editor/src/components/SortableMemoryEntryItem.jsx
 ```
 // plugins/sandbox_editor/src/components/SortableMemoryEntryItem.jsx
 import React from 'react';
@@ -12236,7 +14485,7 @@ export function SortableMemoryEntryItem({ id, entry, expanded, onToggleExpand, o
 }
 ```
 
-### src/components/DataTree.jsx
+### plugins/sandbox_editor/src/components/DataTree.jsx
 ```
 import React, { useState } from 'react';
 import { List, ListItem, ListItemIcon, ListItemText, Collapse, IconButton, Typography, Box } from '@mui/material';
@@ -12329,90 +14578,7 @@ export function DataTree({ data, path = '', onEdit, onAdd }) {
 }
 ```
 
-# Directory: plugins/sandbox_explorer
-
-### vite.config.js
-```
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
-
-export default defineConfig({
-  plugins: [react()],
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'src/SandboxExplorerPage.jsx'),
-      name: 'HevnoSandboxExplorer',
-      fileName: 'main',
-      formats: ['es'],
-    },
-    rollupOptions: {
-      external: ['react', 'react-dom', '@mui/material', '@mui/icons-material'],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM'
-        }
-      }
-    },
-    outDir: 'dist',
-    emptyOutDir: true,
-  },
-});
-```
-
-### package.json
-```
-{
-  "name": "hevno-plugin-sandbox-explorer",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "vite build"
-  },
-  "peerDependencies": {
-    "react": ">=18.0.0",
-    "@mui/material": ">=5.0.0"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "latest",
-    "vite": "latest"
-  }
-}
-```
-
-### manifest.json
-```
-{
-    "id": "sandbox_explorer",
-    "name": "Sandbox Explorer",
-    "version": "1.0.0",
-    "description": "Provides a UI to browse, create, and manage sandboxes.",
-    "author": "Hevno Team",
-    "frontend": {
-        "type": "page-component",
-        "priority": 100,
-        "entryPoint": "dist/main.js",
-        "srcEntryPoint": "src/SandboxExplorerPage.jsx",
-        "contributions": {
-            "pageComponents": [
-                {
-                    "id": "sandbox_explorer.main_view",
-                    "componentExportName": "SandboxExplorerPage",
-                    "menu": {
-                        "path": "/sandboxes",
-                        "title": "沙盒列表",
-                        "icon": "DashboardCustomizeRounded"
-                    }
-                }
-            ]
-        }
-    }
-}
-```
-
-### src/SandboxExplorerPage.jsx
+### plugins/sandbox_explorer/src/SandboxExplorerPage.jsx
 ```
 // plugins/sandbox_explorer/src/SandboxExplorerPage.jsx
 import React, { useState, useEffect, useCallback, useRef } from 'react';
@@ -12672,7 +14838,7 @@ export function SandboxExplorerPage({ services }) {
 export default SandboxExplorerPage;
 ```
 
-### src/components/SandboxCard.jsx
+### plugins/sandbox_explorer/src/components/SandboxCard.jsx
 ```
 // plugins/sandbox_explorer/src/components/SandboxCard.jsx
 import React, { useRef } from 'react';
@@ -12793,7 +14959,7 @@ export function SandboxCard({ sandbox, onEdit, onRun, onDelete, onSelect, onExpo
 }
 ```
 
-### src/components/AddSandboxCard.jsx
+### plugins/sandbox_explorer/src/components/AddSandboxCard.jsx
 ```
 // plugins/sandbox_explorer/src/components/AddSandboxCard.jsx
 
@@ -12839,7 +15005,7 @@ export function AddSandboxCard({ onClick }) {
 }
 ```
 
-### src/components/AddSandboxDialog.jsx
+### plugins/sandbox_explorer/src/components/AddSandboxDialog.jsx
 ```
 // plugins/sandbox_explorer/src/components/AddSandboxDialog.jsx
 import React, { useState } from 'react';
@@ -13009,1064 +15175,1012 @@ export function AddSandboxDialog({ open, onClose, onCreateEmpty, onImport }) {
 }
 ```
 
-# Directory: plugins/core_runner_ui
-
-### vite.config.js
+### plugins/core_llm_config/src/LLMConfigPage.jsx
 ```
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
-
-export default defineConfig({
-  plugins: [react()],
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'src/RunnerPage.jsx'),
-      name: 'HevnoCoreRunnerUI',
-      fileName: 'main',
-      formats: ['es'],
-    },
-    rollupOptions: {
-      // 确保外部化处理那些你不想打包进库的依赖
-      external: ['react', 'react-dom', '@mui/material', '@mui/icons-material'],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM'
-        }
-      }
-    },
-    outDir: 'dist',
-    emptyOutDir: true,
-  },
-});
-```
-
-### package.json
-```
-{
-  "name": "hevno-plugin-core-runner-ui",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "vite build"
-  },
-  "dependencies": {
-    "react-markdown": "^9.0.1",
-    "remark-gfm": "^4.0.0"
-  },
-  "peerDependencies": {
-    "react": ">=18.0.0",
-    "@mui/material": ">=5.0.0",
-    "@mui/icons-material": ">=5.0.0"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "latest",
-    "vite": "latest"
-  }
-}
-```
-
-### manifest.json
-```
-{
-    "id": "core_runner_ui",
-    "name": "Sandbox Runner UI",
-    "version": "1.0.0",
-    "description": "Provides the primary user interface for interacting with a running sandbox.",
-    "author": "Hevno Team",
-    "frontend": {
-        "type": "page-component",
-        "priority": 110,
-        "entryPoint": "dist/main.js",
-        "srcEntryPoint": "src/RunnerPage.jsx",
-        "contributions": {
-            "pageComponents": [
-                {
-                    "id": "runner_ui.main_view",
-                    "componentExportName": "RunnerPage"
-                }
-            ]
-        }
-    }
-}
-```
-
-### src/RunnerPage.jsx
-```
-// plugins/core_runner_ui/src/RunnerPage.jsx
-import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { 
-    Box, Typography, CircularProgress, Alert, Paper, IconButton, Collapse, CssBaseline,
-    AppBar, Toolbar, Tooltip, useTheme, useMediaQuery
+// plugins/core_llm_config/src/LLMConfigPage.jsx
+import React, { useState, useEffect, useCallback } from 'react';
+import {
+    Box, Typography, Paper, CircularProgress, Button, Alert, TextField,
+    Select, MenuItem, FormControl, InputLabel
 } from '@mui/material';
-import { useLayout } from '../../core_layout/src/context/LayoutContext';
-import { ConversationStream } from './components/ConversationStream';
-import { UserInputBar } from './components/UserInputBar';
-import { SnapshotHistoryDrawer } from './components/SnapshotHistoryDrawer';
-import { getSandboxDetails, mutate, step, getHistory, revert, deleteSnapshot, resetHistory } from './api';
-import BugReportIcon from '@mui/icons-material/BugReport';
-import MenuIcon from '@mui/icons-material/Menu';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import AddCommentIcon from '@mui/icons-material/AddComment';
+import AddIcon from '@mui/icons-material/Add';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import { KeyStatusTable } from './components/KeyStatusTable';
+import { fetchKeyConfig, addKey, deleteKey } from './utils/api';
 
-const DRAWER_WIDTH = 320;
-
-export function RunnerPage() {
-    const { currentSandboxId, setActivePageId, setCurrentSandboxId } = useLayout();
-    const theme = useTheme();
-    const isLargeScreen = useMediaQuery(theme.breakpoints.up('md'));
-
-    const [sandboxDetails, setSandboxDetails] = useState(null);
-    const [snapshotHistory, setSnapshotHistory] = useState([]);
-    const [headSnapshotId, setHeadSnapshotId] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+export function LLMConfigPage() {
+    const [config, setConfig] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [actionInProgress, setActionInProgress] = useState(false); // 通用加载状态
     const [error, setError] = useState('');
-    const [diagnostics, setDiagnostics] = useState(null);
-    const [showDiagnostics, setShowDiagnostics] = useState(false);
-    const [isHistoryDrawerOpen, setHistoryDrawerOpen] = useState(isLargeScreen);
-    const [diagnosticsHeight, setDiagnosticsHeight] = useState(200);
-    const resizeRef = useRef(null);
+    const [provider, setProvider] = useState('gemini');
+    const [newKey, setNewKey] = useState('');
 
-    const [optimisticMessage, setOptimisticMessage] = useState(null);
-
-    const handleResizeMouseDown = useCallback((e) => {
-        e.preventDefault();
-        resizeRef.current = {
-            initialHeight: diagnosticsHeight,
-            initialY: e.clientY,
-        };
-        document.addEventListener('mousemove', handleResizeMouseMove);
-        document.addEventListener('mouseup', handleResizeMouseUp);
-    }, [diagnosticsHeight]);
-
-    const handleResizeMouseMove = useCallback((e) => {
-        if (!resizeRef.current) return;
-        const { initialHeight, initialY } = resizeRef.current;
-        const dy = e.clientY - initialY;
-        const newHeight = initialHeight - dy;
-        const clampedHeight = Math.max(50, Math.min(newHeight, 600));
-        setDiagnosticsHeight(clampedHeight);
-    }, []);
-
-    const handleResizeMouseUp = useCallback(() => {
-        resizeRef.current = null;
-        document.removeEventListener('mousemove', handleResizeMouseMove);
-        document.removeEventListener('mouseup', handleResizeMouseUp);
-    }, []);
+    const loadData = useCallback(async () => {
+        setLoading(true);
+        setError('');
+        try {
+            const data = await fetchKeyConfig(provider);
+            setConfig(data);
+        } catch (e) {
+            setError(e.message);
+            setConfig({ provider, keys: [] }); // 即使出错也显示空表
+            console.error(e);
+        } finally {
+            setLoading(false);
+        }
+    }, [provider]);
 
     useEffect(() => {
-        setHistoryDrawerOpen(isLargeScreen);
-    }, [isLargeScreen]);
-    
-    const messages = useMemo(() => {
-        const allMessages = [];
-        const headPath = new Map();
-        let currentId = headSnapshotId;
-        while(currentId) {
-            const snapshot = snapshotHistory.find(s => s.id === currentId);
-            if(snapshot) {
-                headPath.set(snapshot.id, snapshot);
-                currentId = snapshot.parent_snapshot_id;
-            } else {
-                break;
-            }
-        }
-        for (const snapshot of [...snapshotHistory].reverse()) {
-            if (headPath.has(snapshot.id)) {
-                const entries = snapshot.moment?.memoria?.chat_history?.entries || [];
-                for (const entry of entries) {
-                    allMessages.push({ ...entry, snapshot_id: snapshot.id, parent_snapshot_id: snapshot.parent_snapshot_id, triggering_input: snapshot.triggering_input });
-                }
-            }
-        }
-        let uniqueMessages = Array.from(new Map(allMessages.map(item => [item.id, item])).values());
-        uniqueMessages.sort((a, b) => a.sequence_id - b.sequence_id);
+        loadData();
+    }, [loadData]);
 
-        if (optimisticMessage) {
-            uniqueMessages.push(optimisticMessage);
-        }
-
-        return uniqueMessages;
-    }, [snapshotHistory, headSnapshotId, optimisticMessage]);
-
-
-    const loadData = useCallback(async (showLoading = true) => {
-        if (!currentSandboxId) return;
-        if (showLoading) setIsLoading(true);
+    const handleAdd = async () => {
+        if (!newKey.trim()) return;
+        setActionInProgress(true);
         setError('');
         try {
-            const [history, details] = await Promise.all([
-                getHistory(currentSandboxId),
-                getSandboxDetails(currentSandboxId)
-            ]);
-            
-            if (!details || !details.head_snapshot_id) {
-                 throw new Error("Retrieved sandbox details are incomplete.");
-            }
-            
-            setSnapshotHistory(history);
-            setSandboxDetails(details);
-            setHeadSnapshotId(details.head_snapshot_id);
-
+            await addKey(provider, newKey.trim());
+            setNewKey(''); // 清空输入框
+            await loadData(); // 重新加载数据
         } catch (e) {
-            setError(`Failed to load sandbox data: ${e.message}`);
+            setError(`添加失败: ${e.message}`);
         } finally {
-            if (showLoading) setIsLoading(false);
+            setActionInProgress(false);
         }
-    }, [currentSandboxId]);
-
-    useEffect(() => {
-        if (currentSandboxId) {
-            loadData();
-        } else {
-            setSandboxDetails(null);
-            setSnapshotHistory([]);
-            setHeadSnapshotId(null);
-            setError('');
-        }
-    }, [currentSandboxId, loadData]);
+    };
     
-    const handleUserSubmit = async (inputText) => {
-        if (!currentSandboxId || isLoading) return;
-        
-        const tempMsg = {
-            id: `optimistic_${Date.now()}`,
-            content: inputText,
-            level: 'user',
-            sequence_id: (messages.length > 0 ? messages[messages.length - 1].sequence_id : 0) + 1,
-        };
-        setOptimisticMessage(tempMsg);
-        
-        setIsLoading(true);
+    const handleDelete = async (keySuffix) => {
+        if (!window.confirm(`确定要从 .env 文件中永久删除密钥 "${keySuffix}" 吗？`)) return;
+        setActionInProgress(true);
         setError('');
-        setDiagnostics(null);
-        
         try {
-            await mutate(currentSandboxId, [{ type: 'UPSERT', path: 'moment/_user_input', value: inputText }]);
-            const stepResponse = await step(currentSandboxId, {});
-            if (stepResponse.status === 'ERROR') throw new Error(stepResponse.error_message);
-            if (stepResponse.diagnostics) setDiagnostics(stepResponse.diagnostics);
-            await loadData(false); 
+            await deleteKey(provider, keySuffix);
+            await loadData(); // 重新加载数据
         } catch (e) {
-            setError(e.message);
-            await loadData(false);
+            setError(`删除失败: ${e.message}`);
         } finally {
-            setOptimisticMessage(null);
-            setIsLoading(false);
-        }
-    };
-    
-    const handleRegenerate = async (message) => {
-        if (!currentSandboxId || isLoading || !message.parent_snapshot_id) return;
-        setIsLoading(true);
-        setError('');
-        setDiagnostics(null);
-        try {
-            await revert(currentSandboxId, message.parent_snapshot_id);
-            const stepResponse = await step(currentSandboxId, message.triggering_input || {});
-            if (stepResponse.status === 'ERROR') throw new Error(stepResponse.error_message);
-            if (stepResponse.diagnostics) setDiagnostics(stepResponse.diagnostics);
-            await loadData(false);
-        } catch(e) {
-            setError(e.message);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-    
-    const handleEditSubmit = async (message, newContent) => {
-        if (!currentSandboxId || isLoading || !message.parent_snapshot_id) return;
-        setIsLoading(true);
-        setError('');
-        setDiagnostics(null);
-        try {
-            await revert(currentSandboxId, message.parent_snapshot_id);
-            await mutate(currentSandboxId, [{ type: 'UPSERT', path: 'moment/_user_input', value: newContent }]);
-            const stepResponse = await step(currentSandboxId, {});
-            if (stepResponse.status === 'ERROR') throw new Error(stepResponse.error_message);
-            if (stepResponse.diagnostics) setDiagnostics(stepResponse.diagnostics);
-            await loadData(false);
-        } catch (e) {
-            setError(e.message);
-        } finally {
-            setIsLoading(false);
+            setActionInProgress(false);
         }
     };
 
-    const handleRevert = async (snapshotId) => {
-        if (!currentSandboxId || isLoading) return;
-        setIsLoading(true);
-        setError('');
-        try {
-            await revert(currentSandboxId, snapshotId);
-            await loadData(false);
-        } catch (e) {
-            setError(`Failed to revert: ${e.message}`);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-    
-    const handleDeleteSnapshot = async (snapshotId) => {
-        if (!currentSandboxId || isLoading || snapshotId === headSnapshotId) return;
-        if (window.confirm("确定要永久删除这个历史记录点吗？")) {
-            setIsLoading(true);
-            setError('');
-            try {
-                await deleteSnapshot(currentSandboxId, snapshotId);
-                await loadData(false);
-            } catch (e) {
-                setError(`删除失败: ${e.message}`);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-    };
-
-    const handleResetHistory = async () => {
-        if (!currentSandboxId || isLoading) return;
-        if (window.confirm("确定要开启一个新的会话吗？当前会话将成为历史记录。")) {
-            setIsLoading(true);
-            setError('');
-            try {
-                await resetHistory(currentSandboxId);
-                await loadData(false);
-            } catch (e) {
-                setError(`开启新会话失败: ${e.message}`);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-    };
-
-
-    const handleGoBackToExplorer = () => {
-        setCurrentSandboxId(null);
-        setActivePageId('sandbox_explorer.main_view');
-    };
-
-    if (!currentSandboxId) {
-        return (
-            <Box sx={{ p: 4, textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
-                <Typography variant="h5">开始交互</Typography>
-                <Typography color="text.secondary">请从 "沙盒列表" 页面选择一个沙盒以开始。</Typography>
-            </Box>
-        );
-    }
-    
     return (
-        <Box sx={{ display: 'flex', height: '100vh', width: '100vw' }}>
-            <CssBaseline />
-            <SnapshotHistoryDrawer 
-                history={snapshotHistory} 
-                headSnapshotId={headSnapshotId} 
-                onRevert={handleRevert}
-                onDelete={handleDeleteSnapshot}
-                isLoading={isLoading}
-                open={isHistoryDrawerOpen}
-                onClose={() => setHistoryDrawerOpen(false)}
-                variant={isLargeScreen ? 'persistent' : 'temporary'}
-                width={DRAWER_WIDTH}
-            />
+        <Box sx={{ p: 3, height: '100%', overflowY: 'auto' }}>
+            <Typography variant="h4" gutterBottom>LLM 提供商配置</Typography>
 
-            <Box
-                component="main"
-                sx={{
-                    flexGrow: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: '100%',
-                    transition: theme.transitions.create('margin', {
-                        easing: theme.transitions.easing.sharp,
-                        duration: theme.transitions.duration.leavingScreen,
-                    }),
-                    marginLeft: `-${DRAWER_WIDTH}px`,
-                    ...(isHistoryDrawerOpen && {
-                        transition: theme.transitions.create('margin', {
-                            easing: theme.transitions.easing.easeOut,
-                            duration: theme.transitions.duration.enteringScreen,
-                        }),
-                        marginLeft: 0,
-                    }),
-                }}
-            >
-                <AppBar position="static" color="default" sx={{ boxShadow: 'none', borderBottom: 1, borderColor: 'divider' }}>
-                    <Toolbar>
-                        <Tooltip title="切换历史记录">
-                            <IconButton color="inherit" aria-label="open drawer" onClick={() => setHistoryDrawerOpen(!isHistoryDrawerOpen)} edge="start" sx={{ mr: 2 }}>
-                                <MenuIcon />
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title="返回沙盒列表">
-                             <IconButton color="inherit" onClick={handleGoBackToExplorer} edge="start">
-                                <ArrowBackIcon />
-                            </IconButton>
-                        </Tooltip>
-                        <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, ml: 1 }}>
-                            {sandboxDetails?.name || 'Loading...'}
-                        </Typography>
-                        
-                        <Tooltip title="新建会话">
-                            <IconButton size="small" onClick={handleResetHistory} disabled={isLoading}>
-                                <AddCommentIcon />
-                            </IconButton>
-                        </Tooltip>
+            <Alert severity="warning" sx={{ mb: 3 }}>
+                <b>警告:</b> 此页面上的操作将直接修改您服务器上的 <code>.env</code> 文件。请谨慎操作。
+            </Alert>
 
-                        {diagnostics && (
-                            <Tooltip title="显示/隐藏诊断信息">
-                                <IconButton size="small" onClick={() => setShowDiagnostics(s => !s)} sx={{ ml: 1 }}>
-                                    <BugReportIcon color={showDiagnostics ? "primary" : "inherit"} />
-                                </IconButton>
-                            </Tooltip>
-                        )}
-                    </Toolbar>
-                </AppBar>
+            {error && <Alert severity="error" sx={{ mb: 2 }} onClose={() => setError('')}>{error}</Alert>}
 
-                <Box sx={{ flexGrow: 1, overflowY: 'auto' }}>
-                    {isLoading && messages.length === 0 && !optimisticMessage ? (
-                        <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}><CircularProgress /></Box>
+            <Paper sx={{ p: 3, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                <FormControl sx={{ minWidth: 200 }} size="small">
+                    <InputLabel>提供商</InputLabel>
+                    <Select value={provider} label="提供商" onChange={(e) => setProvider(e.target.value)}>
+                        <MenuItem value="gemini">Gemini</MenuItem>
+                    </Select>
+                </FormControl>
+
+                <Box>
+                    <Typography variant="h6" gutterBottom>当前密钥状态</Typography>
+                     {loading ? (
+                        <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}><CircularProgress /></Box>
                     ) : (
-                        <ConversationStream 
-                            messages={messages} 
-                            onRegenerate={handleRegenerate} 
-                            onEditSubmit={handleEditSubmit}
-                        />
+                        <KeyStatusTable keys={config?.keys || []} onDelete={handleDelete} isDeleting={actionInProgress} />
                     )}
                 </Box>
-                
-                <Box sx={{ flexShrink: 0, p: { xs: 1, sm: 2 } }}>
-                    {error && <Alert severity="error" sx={{ mb: 1.5 }} onClose={() => setError('')}>{error}</Alert>}
-                    <Collapse in={showDiagnostics}>
-                        <Paper 
-                            variant="outlined" 
-                            sx={{ p: 2, pt: 3, mb: 1.5, height: diagnosticsHeight, overflow: 'hidden', bgcolor: 'background.default', position: 'relative', display: 'flex', flexDirection: 'column' }}
+
+                <Box>
+                    <Typography variant="h6" gutterBottom>添加新密钥</Typography>
+                    <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+                         <TextField
+                            fullWidth
+                            label="新 API 密钥"
+                            value={newKey}
+                            onChange={(e) => setNewKey(e.target.value)}
+                            placeholder="在此处粘贴完整的 API 密钥"
+                            variant="outlined"
+                            size="small"
+                            onKeyPress={(e) => e.key === 'Enter' && handleAdd()}
+                        />
+                         <Button
+                            variant="contained"
+                            // startIcon={<AddIcon />}
+                            onClick={handleAdd}
+                            disabled={actionInProgress || loading || !newKey.trim()}
                         >
-                            <Box onMouseDown={handleResizeMouseDown} sx={{ position: 'absolute', top: 0, left: 0, right: 0, height: '10px', cursor: 'ns-resize', display: 'flex', alignItems: 'center', justifyContent: 'center', '&:hover div': { backgroundColor: theme.palette.action.active, }}}>
-                                 <Box sx={{ width: '40px', height: '4px', backgroundColor: theme.palette.divider, borderRadius: '2px', transition: 'background-color 0.2s' }} />
-                            </Box>
-                            <Typography variant="subtitle2" sx={{ flexShrink: 0 }}>诊断信息</Typography>
-                            <pre style={{ flexGrow: 1, margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-all', fontSize: '0.8rem', overflowY: 'auto' }}>
-                                {JSON.stringify(diagnostics, null, 2)}
-                            </pre>
-                        </Paper>
-                    </Collapse>
-                    {/* [修复] 恢复正确的 isLoading 逻辑 */}
-                    <UserInputBar onSendMessage={handleUserSubmit} isLoading={isLoading} />
-                </Box>
-            </Box>
-        </Box>
-    );
-}
-
-export default RunnerPage;
-```
-
-### src/api.js
-```
-// plugins/core_runner_ui/src/api.js
-
-const BASE_URL = '/api/sandboxes';
-
-export async function getSandboxDetails(sandboxId) {
-    const response = await fetch(`${BASE_URL}/${sandboxId}`); // 使用标准的 GET /resource/{id}
-    if (!response.ok) {
-        const err = await response.json().catch(() => ({ detail: `Failed to fetch details for sandbox ${sandboxId}.` }));
-        throw new Error(err.detail || `HTTP Error ${response.status}`);
-    }
-    return response.json();
-}
-
-/**
- * 统一写入 API
- */
-export async function mutate(sandboxId, mutations) {
-  const response = await fetch(`${BASE_URL}/${sandboxId}/resource:mutate`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ mutations }),
-  });
-
-  if (!response.ok) {
-    const err = await response.json().catch(() => ({ detail: "API mutation failed." }));
-    throw new Error(err.detail || `HTTP Error ${response.status}`);
-  }
-  return response.json();
-}
-
-/**
- * 统一读取 API
- */
-export async function query(sandboxId, paths) {
-  const response = await fetch(`${BASE_URL}/${sandboxId}/resource:query`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ paths }),
-  });
-
-  if (!response.ok) {
-    const err = await response.json().catch(() => ({ detail: "API query failed." }));
-    throw new Error(err.detail || `HTTP Error ${response.status}`);
-  }
-  const data = await response.json();
-  return data.results;
-}
-
-
-/**
- * 执行沙盒计算步骤 API
- */
-export async function step(sandboxId, input) {
-    const response = await fetch(`${BASE_URL}/${sandboxId}/step`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(input),
-    });
-
-    // 保持原有的错误处理
-    if (!response.ok) {
-        const err = await response.json().catch(() => ({ detail: "Step API call failed." }));
-        return {
-            status: "ERROR",
-            error_message: err.detail || `HTTP Error ${response.status}`,
-            sandbox: null,
-        }
-    }
-    return response.json();
-}
-
-/**
- * 获取沙盒的完整快照历史
- */
-export async function getHistory(sandboxId) {
-    const response = await fetch(`${BASE_URL}/${sandboxId}/history`);
-    if (!response.ok) {
-        const err = await response.json().catch(() => ({ detail: "Failed to get history." }));
-        throw new Error(err.detail || `HTTP Error ${response.status}`);
-    }
-    return response.json();
-}
-
-/**
- * 将沙盒回滚到指定的快照
- */
-export async function revert(sandboxId, snapshotId) {
-    const response = await fetch(`${BASE_URL}/${sandboxId}/revert`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ snapshot_id: snapshotId }),
-    });
-
-    if (!response.ok) {
-        const err = await response.json().catch(() => ({ detail: "Revert operation failed." }));
-        throw new Error(err.detail || `HTTP Error ${response.status}`);
-    }
-    return response.json();
-}
-
-/**
- * [新增] 删除指定的快照
- */
-export async function deleteSnapshot(sandboxId, snapshotId) {
-    const response = await fetch(`${BASE_URL}/${sandboxId}/snapshots/${snapshotId}`, {
-        method: 'DELETE',
-    });
-    // DELETE 成功时返回 204 No Content，response.ok 会是 true
-    if (!response.ok) {
-        const err = await response.json().catch(() => ({ detail: "Delete snapshot operation failed." }));
-        throw new Error(err.detail || `HTTP Error ${response.status}`);
-    }
-    // 204 没有 body，所以直接返回
-}
-
-/**
- * 重置沙盒历史，开启新会话
- */
-export async function resetHistory(sandboxId) {
-    const response = await fetch(`${BASE_URL}/${sandboxId}/history:reset`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({}),
-    });
-    if (!response.ok) {
-        const err = await response.json().catch(() => ({ detail: "Reset history operation failed." }));
-        throw new Error(err.detail || `HTTP Error ${response.status}`);
-    }
-    return response.json();
-}
-```
-
-### src/components/MessageBubble.jsx
-```
-// plugins/core_runner_ui/src/components/MessageBubble.jsx
-import React, { useState } from 'react';
-import { Box, Paper, Typography, Avatar, IconButton, Tooltip, TextField, Button, CircularProgress } from '@mui/material';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import PersonIcon from '@mui/icons-material/Person';
-import SmartToyIcon from '@mui/icons-material/SmartToy';
-import ReplayIcon from '@mui/icons-material/Replay'; 
-import EditIcon from '@mui/icons-material/Edit'; 
-
-export const MessageBubble = ({ message, onRegenerate, onEditSubmit }) => {
-    const isUser = message.level === 'user';
-    const [isHovered, setIsHovered] = useState(false);
-    const [isEditing, setIsEditing] = useState(false);
-    const [editedContent, setEditedContent] = useState(message.content);
-
-    const handleEditClick = () => {
-        setIsEditing(true);
-    };
-
-    const handleCancelEdit = () => {
-        setIsEditing(false);
-        setEditedContent(message.content); // 恢复原始内容
-    };
-
-    const handleSaveEdit = () => {
-        if (editedContent.trim()) {
-            onEditSubmit(message, editedContent);
-            setIsEditing(false);
-        }
-    };
-    
-    const renderContent = () => {
-        if (isEditing) {
-            return (
-                <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 1 }}>
-                    <TextField
-                        fullWidth
-                        multiline
-                        variant="standard"
-                        value={editedContent}
-                        onChange={(e) => setEditedContent(e.target.value)}
-                        autoFocus
-                    />
-                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1, mt: 1 }}>
-                        <Button size="small" onClick={handleCancelEdit}>取消</Button>
-                        <Button size="small" variant="contained" onClick={handleSaveEdit}>保存并提交</Button>
+                            {actionInProgress && !loading ? <CircularProgress size={36} color="inherit" /> : '添加'}
+                        </Button>
                     </Box>
                 </Box>
-            );
-        }
-
-        return (
-            <Typography component="div" sx={{ '& p': { my: 0 }, '& pre': { whiteSpace: 'pre-wrap', wordBreak: 'break-all' }, '& table': {borderCollapse: 'collapse'}, '& th, & td': {border: '1px solid', borderColor: 'divider', px: 1, py: 0.5} }}>
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {message.content}
-                </ReactMarkdown>
-            </Typography>
-        );
-    };
-
-    return (
-        <Box
-            sx={{
-                display: 'flex',
-                justifyContent: isUser ? 'flex-end' : 'flex-start',
-                mb: 2,
-            }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
-            <Box sx={{ display: 'flex', flexDirection: isUser ? 'row-reverse' : 'row', alignItems: 'flex-start', maxWidth: '85%', position: 'relative' }}>
-                <Avatar sx={{ bgcolor: isUser ? 'primary.main' : 'secondary.main', ml: isUser ? 1.5 : 0, mr: isUser ? 0 : 1.5, mt: 0.5 }}>
-                    {isUser ? <PersonIcon /> : <SmartToyIcon />}
-                </Avatar>
-                <Paper
-                    variant="elevation"
-                    elevation={1}
-                    sx={{
-                        p: 1.5,
-                        bgcolor: isUser ? 'primary.dark' : 'background.paper',
-                        borderRadius: isUser ? '20px 4px 20px 20px' : '4px 20px 20px 20px',
-                        position: 'relative',
-                    }}
+                 <Button
+                    variant="outlined"
+                    startIcon={<RefreshIcon />}
+                    onClick={loadData}
+                    disabled={loading || actionInProgress}
+                    sx={{ alignSelf: 'flex-start' }}
                 >
-                   {renderContent()}
-                </Paper>
-                <Box sx={{
-                    display: 'flex',
-                    flexDirection: isUser ? 'row-reverse' : 'row',
-                    opacity: isHovered && !isEditing ? 1 : 0,
-                    transition: 'opacity 0.2s',
-                    position: 'absolute',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    left: isUser ? 'auto' : '100%',
-                    right: isUser ? '100%' : 'auto',
-                    mx: 0.5,
-                    bgcolor: 'background.default',
-                    borderRadius: '20px',
-                    p: '2px',
-                    boxShadow: 1
-                }}>
-                    {isUser && onEditSubmit && (
-                         <Tooltip title="编辑并重新生成">
-                            <IconButton size="small" onClick={handleEditClick}><EditIcon sx={{fontSize: '1rem'}} /></IconButton>
-                         </Tooltip>
-                    )}
-                    {!isUser && onRegenerate && (
-                         <Tooltip title="重新生成">
-                            <IconButton size="small" onClick={() => onRegenerate(message)}><ReplayIcon sx={{fontSize: '1rem'}} /></IconButton>
-                         </Tooltip>
-                    )}
-                </Box>
-            </Box>
+                    刷新状态
+                </Button>
+            </Paper>
         </Box>
     );
-};
+}
+
+export default LLMConfigPage;
+export const registerPlugin = () => {};
 ```
 
-### src/components/UserInputBar.jsx
+### plugins/core_llm_config/src/utils/api.js
 ```
-// plugins/core_runner_ui/src/components/UserInputBar.jsx
-import React, { useState } from 'react';
-import { TextField, IconButton, Box, CircularProgress, Paper } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
+// plugins/core_llm_config/src/utils/api.js
 
-export function UserInputBar({ onSendMessage, isLoading }) {
-    const [text, setText] = useState('');
+const BASE_URL = '/api/llm/config';
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (text.trim() && !isLoading) {
-            onSendMessage(text);
-            setText('');
+export async function fetchKeyConfig(providerName) {
+    const response = await fetch(`${BASE_URL}/${providerName}`);
+    if (!response.ok) {
+        // 提供一个友好的默认值，以防提供商没有配置任何密钥
+        if (response.status === 404) {
+            return { provider: providerName, keys: [] };
+        }
+        const err = await response.json().catch(() => ({ detail: "API query failed." }));
+        throw new Error(err.detail || `HTTP Error ${response.status}`);
+    }
+    return response.json();
+}
+
+// [新] 添加密钥的函数
+export async function addKey(providerName, key) {
+    const response = await fetch(`${BASE_URL}/${providerName}/keys`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key }),
+    });
+    if (!response.ok) {
+        const err = await response.json().catch(() => ({ detail: "Failed to add key." }));
+        throw new Error(err.detail || `HTTP Error ${response.status}`);
+    }
+    return response.json();
+}
+
+// [新] 删除密钥的函数
+export async function deleteKey(providerName, keySuffix) {
+    // 从 "..." 中提取最后4位
+    const suffix = keySuffix.slice(-4);
+    const response = await fetch(`${BASE_URL}/${providerName}/keys/${suffix}`, {
+        method: 'DELETE',
+    });
+    if (!response.ok) {
+        const err = await response.json().catch(() => ({ detail: "Failed to delete key." }));
+        throw new Error(err.detail || `HTTP Error ${response.status}`);
+    }
+    return response.json();
+}
+```
+
+### plugins/core_llm_config/src/components/KeyStatusTable.jsx
+```
+// plugins/core_llm_config/src/components/KeyStatusTable.jsx
+import React from 'react';
+import {
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip,
+    Typography, IconButton, Tooltip
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Countdown } from './Countdown'; // 我们将倒计时逻辑移到自己的组件中
+
+export function KeyStatusTable({ keys, onDelete, isDeleting }) {
+    const getStatusChip = (key) => {
+        switch (key.status) {
+            case 'available':
+                return <Chip label="可用" color="success" size="small" />;
+            case 'rate_limited':
+                return <Chip label="限速中" color="warning" size="small" />;
+            case 'banned':
+                return <Chip label="已禁用" color="error" size="small" />;
+            default:
+                return <Chip label={key.status} size="small" />;
         }
     };
 
     return (
-        <Paper 
-            component="form" 
-            onSubmit={handleSubmit} 
-            sx={{ 
-                p: '4px 8px', 
-                display: 'flex', 
-                alignItems: 'center', 
-                width: '100%',
-                borderRadius: '12px'
-            }}
-            elevation={2}
-        >
-            <TextField
-                fullWidth
-                placeholder="在此输入消息... (Shift+Enter 换行)"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                disabled={isLoading}
-                multiline
-                maxRows={8}
-                variant="standard" // 使用无边框样式
-                InputProps={{
-                    disableUnderline: true, // 移除下划线
-                }}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        handleSubmit(e);
-                    }
-                }}
-                sx={{ ml: 1 }}
-            />
-            <IconButton
-                type="submit"
-                color="primary"
-                disabled={!text.trim() || isLoading}
-                sx={{ p: '10px' }}
-            >
-                {isLoading ? <CircularProgress size={24} color="inherit" /> : <SendIcon />}
-            </IconButton>
-        </Paper>
+        <TableContainer component={Paper} variant="outlined">
+            <Table size="small">
+                <TableHead>
+                    <TableRow>
+                        <TableCell>密钥 (后4位)</TableCell>
+                        <TableCell>状态</TableCell>
+                        <TableCell>可用时间</TableCell>
+                        <TableCell align="right">操作</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {keys.length === 0 && (
+                        <TableRow>
+                            <TableCell colSpan={4} align="center">
+                                <Typography color="text.secondary" sx={{ p: 2 }}>
+                                    未找到为该提供商配置的密钥。
+                                </Typography>
+                            </TableCell>
+                        </TableRow>
+                    )}
+                    {keys.map((key) => (
+                        <TableRow key={key.key_suffix}>
+                            <TableCell component="th" scope="row">
+                                <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
+                                    {key.key_suffix}
+                                </Typography>
+                            </TableCell>
+                            <TableCell>{getStatusChip(key)}</TableCell>
+                            <TableCell>
+                                {key.status === 'rate_limited' && key.rate_limit_until ?
+                                    <Countdown until={key.rate_limit_until} />
+                                    : '—'}
+                            </TableCell>
+                            <TableCell align="right">
+                                <Tooltip title="从 .env 文件中删除此密钥">
+                                    <span>
+                                        <IconButton
+                                            size="small"
+                                            color="error"
+                                            onClick={() => onDelete(key.key_suffix)}
+                                            disabled={isDeleting}
+                                        >
+                                            <DeleteIcon fontSize="small" />
+                                        </IconButton>
+                                    </span>
+                                </Tooltip>
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 }
 ```
 
-### src/components/ConversationStream.jsx
+### plugins/core_llm_config/src/components/Countdown.jsx
 ```
-// plugins/core_runner_ui/src/components/ConversationStream.jsx
+// plugins/core_llm_config/src/components/Countdown.jsx
+import React, { useState, useEffect } from 'react';
+
+export function Countdown({ until }) {
+    const [timeLeft, setTimeLeft] = useState(Math.round(until - Date.now() / 1000));
+
+    useEffect(() => {
+        if (timeLeft <= 0) return;
+        const timer = setInterval(() => {
+            const newTimeLeft = Math.round(until - Date.now() / 1000);
+            setTimeLeft(newTimeLeft > 0 ? newTimeLeft : 0);
+        }, 1000);
+        return () => clearInterval(timer);
+    }, [timeLeft, until]);
+
+    return timeLeft > 0 ? `~${timeLeft}s` : '可用';
+}
+```
+
+### plugins/core_layout/src/main.jsx
+```
+// plugins/core_layout/src/main.jsx
 import React from 'react';
-import { Box } from '@mui/material';
-import { MessageBubble } from './MessageBubble'; // [修改] 导入新组件
+import { LayoutProvider } from './context/LayoutContext';
+import { createRoot } from 'react-dom/client';
+import { App } from './App';
 
-export const ConversationStream = ({ messages, onRegenerate, onEditSubmit }) => {
-    // 过滤掉那些没有内容的临时快照消息
-    const displayableMessages = messages.filter(msg => msg.content && msg.level);
-    
-    const conversationEndRef = React.useRef(null);
-    React.useEffect(() => {
-        conversationEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, [messages]);
+// 全局标志位，防止开发模式下的热重载重复执行
+if (typeof window.hevnoCoreLayoutInitialized === 'undefined') {
+  window.hevnoCoreLayoutInitialized = false;
+}
 
-    return (
-        <Box sx={{ p: { xs: 1, sm: 2 } }}>
-            {displayableMessages.map((msg, index) => (
-                <MessageBubble 
-                    key={msg.id || index} 
-                    message={msg} 
-                    onRegenerate={onRegenerate} 
-                    onEditSubmit={onEditSubmit} 
-                />
-            ))}
-            <div ref={conversationEndRef} />
+/**
+ * Hevno 插件系统的入口函数。
+ * 由前端加载器在加载此插件时调用。
+ * @param {import('../../../../frontend/ServiceContainer').ServiceContainer} context - 平台服务容器
+ */
+export function registerPlugin(context) {
+  if (window.hevnoCoreLayoutInitialized) {
+    console.warn('[core_layout] Attempted to re-register. Aborting.');
+    return;
+  }
+  
+  const hookManager = context.get('hookManager');
+  if (!hookManager) {
+    console.error('[core_layout] CRITICAL: HookManager service not found!');
+    return;
+  }
+
+  // 监听内核加载器发出的“就绪”信号
+  // 这是我们接管UI的最佳时机
+  hookManager.addImplementation('loader.ready', () => {
+    // 双重检查
+    if (window.hevnoCoreLayoutInitialized) return;
+    window.hevnoCoreLayoutInitialized = true;
+
+    console.log('[core_layout] Received "loader.ready". Initializing React application host...');
+
+    // 1. 找到根DOM容器
+    const appContainer = document.getElementById('app');
+    if (!appContainer) {
+      console.error('[core_layout] CRITICAL: #app container not found in DOM!');
+      return;
+    }
+
+    // 2. 清空容器，为React应用做准备
+    appContainer.innerHTML = '';
+
+    // 3. 创建并渲染React应用
+    const root = createRoot(appContainer);
+    root.render(
+    <React.StrictMode>
+        {/* 将平台服务注入到 React 世界 */}
+        <LayoutProvider services={context}> 
+        <App />
+        </LayoutProvider>
+    </React.StrictMode>
+    );
+
+    console.log('[core_layout] React host mounted successfully.');
+
+    // 4. (未来) 在这里可以触发一个新的钩子，比如 'host.ready'
+    // hookManager.trigger('host.ready');
+  });
+}
+```
+
+### plugins/core_layout/src/App.jsx
+```
+// plugins/core_layout/src/main.jsx
+import React from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import { FloatingMenuButton } from './components/FloatingMenuButton';
+import { PageContainer } from './components/PageContainer'; // 新组件
+
+const darkTheme = createTheme({ palette: { mode: 'dark' } });
+
+export function App() {
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Box sx={{ width: '100vw', height: '100vh', display: 'flex' }}>
+        <Box component="main" sx={{ flexGrow: 1, position: 'relative' }}>
+        <PageContainer />
+        <FloatingMenuButton />
         </Box>
-    );
+      </Box>
+    </ThemeProvider>
+  );
+}
+```
+
+### plugins/core_layout/src/context/LayoutContext.jsx
+```
+// plugins/core_layout/src/context/LayoutContext.jsx
+import React, { createContext, useState, useContext, useMemo } from 'react';
+import { ContributionRegistry } from '../services/ContributionRegistry';
+
+const LayoutContext = createContext(null);
+
+export function LayoutProvider({ children, services }) {
+  // 使用 useMemo 确保 registry 只被实例化一次
+  const contributionRegistry = useMemo(() => {
+    const manifestProvider = services.get('manifestProvider');
+    return new ContributionRegistry(manifestProvider);
+  }, [services]);
+
+  const [pages] = useState(() => contributionRegistry.getPageComponents());
+  const [activePageId, setActivePageId] = useState(null);
+  const [currentSandboxId, setCurrentSandboxId] = useState(null); 
+
+  const value = {
+    pages,
+    activePageId,
+    setActivePageId,
+    currentSandboxId,
+    setCurrentSandboxId,
+    services, // 将平台服务传递下去
+  };
+
+  return (
+    <LayoutContext.Provider value={value}>
+      {children}
+    </LayoutContext.Provider>
+  );
+}
+
+export const useLayout = () => {
+  const context = useContext(LayoutContext);
+  if (!context) {
+    throw new Error('useLayout must be used within a LayoutProvider');
+  }
+  return context;
 };
 ```
 
-### src/components/SnapshotHistoryDrawer.jsx
+### plugins/core_layout/src/components/FloatingMenuButton.jsx
 ```
-// plugins/core_runner_ui/src/components/SnapshotHistoryDrawer.jsx
-import React from 'react';
-import { 
-    Drawer, List, ListItem, ListItemButton, ListItemText, ListItemIcon, 
-    Tooltip, Box, Typography, IconButton, Divider, Toolbar, Skeleton
-} from '@mui/material';
-import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+// plugins/core_layout/src/components/FloatingMenuButton.jsx
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import Draggable from 'react-draggable';
+import { useLayout } from '../context/LayoutContext';
+import Box from '@mui/material/Box';
+import SpeedDial from '@mui/material/SpeedDial';
+import SpeedDialIcon from '@mui/material/SpeedDialIcon';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import * as MuiIcons from '@mui/icons-material';
 
-const getSnapshotSummary = (snapshot) => {
-    const input = snapshot.triggering_input?.text;
-    if (input) {
-        return `输入: "${input.slice(0, 35)}${input.length > 35 ? '...' : ''}"`;
-    }
-    
-    const entries = snapshot.moment?.memoria?.chat_history?.entries;
-    if (entries && entries.length > 0) {
-        const lastEntry = entries[entries.length - 1];
-        if (lastEntry.level === 'model') {
-            return `回应: "${lastEntry.content.slice(0, 35)}${lastEntry.content.length > 35 ? '...' : ''}"`;
-        }
-    }
-    return '初始状态';
+const DynamicIcon = ({ name }) => {
+  const Icon = MuiIcons[name];
+  return Icon ? <Icon /> : <div/>;
 };
 
-export const SnapshotHistoryDrawer = ({ history, headSnapshotId, onRevert, onDelete, isLoading, width, ...drawerProps }) => {
+export function FloatingMenuButton() {
+  const { pages, activePageId, setActivePageId } = useLayout();
+  const draggableRef = useRef(null);
+
+  const [direction, setDirection] = useState('up');
+  const [tooltipPlacement, setTooltipPlacement] = useState('left');
+
+  const updateDirections = useCallback(() => {
+    if (!draggableRef.current) return;
+
+    const rect = draggableRef.current.getBoundingClientRect();
+    const viewHeight = window.innerHeight;
+    const viewWidth = window.innerWidth;
     
-    const reversedHistory = [...history].reverse();
+    setDirection(rect.top > viewHeight / 2 ? 'up' : 'down');
+    
+    setTooltipPlacement(rect.left > viewWidth / 2 ? 'left' : 'right');
+  }, []);
 
-    const drawerContent = (
-        <>
-            <Toolbar>
-                <Typography variant="h6" component="div">交互历史</Typography>
-            </Toolbar>
-            <Divider />
-            {history.length === 0 && !isLoading && (
-                <Box sx={{ p: 2, textAlign: 'center', color: 'text.secondary' }}>
-                    <Typography>没有历史记录</Typography>
-                </Box>
-            )}
-            {isLoading && history.length === 0 && (
-                <Box sx={{p: 2}}>
-                    <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
-                    <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
-                    <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
-                </Box>
-            )}
-            <List dense disablePadding sx={{ flexGrow: 1, overflowY: 'auto' }}>
-                {reversedHistory.map(snapshot => {
-                    const isHead = snapshot.id === headSnapshotId;
-                    const summary = getSnapshotSummary(snapshot);
-                    const timestamp = new Date(snapshot.created_at).toLocaleString();
+  useEffect(() => {
+    updateDirections();
+  }, [updateDirections]);
 
-                    return (
-                        <ListItem
-                            key={snapshot.id}
-                            disablePadding
-                            secondaryAction={
-                                // 只在非当前 head 的快照上显示删除按钮
-                                !isHead && (
-                                    <Tooltip title="永久删除此记录点">
-                                        <span>
-                                            <IconButton edge="end" onClick={() => onDelete(snapshot.id)} disabled={isLoading} sx={{ color: 'error.light' }}>
-                                                <DeleteForeverIcon />
-                                            </IconButton>
-                                        </span>
-                                    </Tooltip>
-                                )
-                            }
-                        >
-                            <ListItemButton 
-                                selected={isHead} 
-                                dense
-                                // 只有非当前 head 的快照才能被点击
-                                onClick={!isHead ? () => onRevert(snapshot.id) : undefined} 
-                                // 如果正在加载中，或者该项是当前 head，则禁用点击
-                                disabled={isLoading}
-                            >
-                                <ListItemIcon sx={{ minWidth: 32 }}>
-                                    {isHead ? <RadioButtonCheckedIcon color="primary" fontSize="small" /> : <RadioButtonUncheckedIcon fontSize="small" />}
-                                </ListItemIcon>
-                                <ListItemText
-                                    primary={summary}
-                                    secondary={timestamp}
-                                    primaryTypographyProps={{ noWrap: true, variant: 'body2', fontWeight: isHead ? 'bold' : 'normal' }}
-                                    secondaryTypographyProps={{ noWrap: true, variant: 'caption' }}
-                                />
-                            </ListItemButton>
-                        </ListItem>
-                    );
-                })}
-            </List>
-        </>
-    );
 
-    return (
-        <Drawer
-            sx={{
-                width: width,
-                flexShrink: 0,
-                '& .MuiDrawer-paper': {
-                    width: width,
-                    boxSizing: 'border-box',
-                    display: 'flex',
-                    flexDirection: 'column',
-                },
-            }}
-            anchor="left"
-            {...drawerProps}
+  const actions = [
+    { 
+      icon: <HomeRoundedIcon />, 
+      name: 'Home',
+      pageId: null,
+    },
+    ...pages
+      .filter(page => page.menu) 
+      .map(page => ({
+        icon: <DynamicIcon name={page.menu.icon} />,
+        name: page.menu.title,
+        pageId: page.id
+      }))
+  ];
+
+  const handleActionClick = (pageId) => {
+    setActivePageId(pageId);
+  };
+  
+  const handleDragStop = () => {
+    updateDirections();
+  };
+
+  return (
+    <Draggable 
+      nodeRef={draggableRef}
+      handle=".MuiFab-primary"
+      bounds="parent"
+      onStop={handleDragStop}
+    >
+      <Box 
+        ref={draggableRef} 
+        sx={{ 
+          position: 'absolute', 
+          bottom: 24, 
+          left: 24, 
+          zIndex: 1300 
+        }}
+      >
+        <SpeedDial
+          ariaLabel="Main navigation"
+          icon={<SpeedDialIcon />}
+          direction={direction}
         >
-            {drawerContent}
-        </Drawer>
-    );
-};
+          {actions.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              tooltipPlacement={tooltipPlacement}
+              onClick={() => handleActionClick(action.pageId)}
+              sx={
+                activePageId === action.pageId 
+                ? {
+                    '& .MuiFab-root': {
+                      bgcolor: 'primary.main',
+                      color: 'common.white',
+                      '&:hover': {
+                        bgcolor: 'primary.dark',
+                      },
+                    },
+                  }
+                : {} 
+              }
+            />
+          ))}
+        </SpeedDial>
+      </Box>
+    </Draggable>
+  );
+}
 ```
 
-### hevno.json
+### plugins/core_layout/src/components/PageContainer.jsx
 ```
-{
-  "plugins": {
-    "core_logging": { "source": "local" },
-    "core_persistence": { "source": "local" },
-    "core_engine": { "source": "local" },
-    "core_codex": { "source": "local" },
-    "core_llm": { "source": "local" },
-    "core_memoria": { "source": "local" },
-    "core_api": { "source": "local" },
-    "core_websocket": { "source": "local" },
-    "core_remote_hooks": { "source": "local" },
-    "core_layout": { "source": "local" },
-    "core_diagnostics": { "source": "local" },
-    "page_demo": { "source": "local" },
-    "sandbox_explorer": { "source": "local" },
-    "sandbox_editor": { "source": "local" },
-    "core_llm_config": { "source": "local" },
-    "core_runner_ui": { "source": "local" }
+// plugins/core_layout/src/components/PageContainer.jsx
+import React, { useState, useEffect, useMemo } from 'react';
+import { useLayout } from '../context/LayoutContext';
+import { Box, Typography, CircularProgress } from '@mui/material';
+
+// 将组件的创建和缓存移到组件外部或使用 useMemo，以避免在每次渲染时重新创建 LazyComponent
+const componentCache = new Map();
+
+function getLazyComponent(pageInfo) {
+  const { id, manifest, componentExportName } = pageInfo;
+
+  if (componentCache.has(id)) {
+    return componentCache.get(id);
+  }
+
+  const LazyComponent = React.lazy(async () => {
+    // 动态 import 路径
+    const modulePath = `/plugins/${manifest.id}/${manifest.frontend.srcEntryPoint || manifest.frontend.entryPoint}`;
+    
+    try {
+      const module = await import(/* @vite-ignore */ modulePath);
+      if (module[componentExportName]) {
+        // React.lazy 期望一个包含 default 导出的模块
+        return { default: module[componentExportName] };
+      } else {
+        // 如果找不到具名导出，尝试默认导出
+        if (module.default) {
+           return { default: module.default }
+        }
+        throw new Error(`Component export '${componentExportName}' not found in plugin '${manifest.id}'.`);
+      }
+    } catch (error) {
+      console.error(`Failed to load component for plugin '${manifest.id}':`, error);
+      // 返回一个显示错误的组件
+      const ErrorComponent = () => (
+        <Box sx={{ p: 2, color: 'error.main' }}>
+          <Typography>Error loading page: {manifest.id}</Typography>
+          <Typography variant="body2">{error.message}</Typography>
+        </Box>
+      );
+      return { default: ErrorComponent };
+    }
+  });
+
+  componentCache.set(id, LazyComponent);
+  return LazyComponent;
+}
+
+
+export function PageContainer() {
+  const { pages, activePageId, services } = useLayout();
+  
+  // 使用 useMemo 来根据 activePageId 查找页面信息并获取懒加载组件
+  // 只有当 activePageId 变化时，才会重新计算
+  const ActiveLazyComponent = useMemo(() => {
+    if (!activePageId) return null;
+    const pageInfo = pages.find(p => p.id === activePageId);
+    return pageInfo ? getLazyComponent(pageInfo) : null;
+  }, [activePageId, pages]);
+
+
+  if (!ActiveLazyComponent) {
+    return (
+      <Box sx={{ p: 4, textAlign: 'center' }}>
+        <Typography variant="h5">Hevno</Typography>
+        <Typography color="text.secondary">戳一下那个按钮试试</Typography>
+      </Box>
+    );
+  }
+
+  return (
+    // Suspense 包裹懒加载组件，提供 fallback UI
+    <React.Suspense fallback={<Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}><CircularProgress /></Box>}>
+      {/* 在这里将 props 传递给将要被渲染的组件 */}
+      <ActiveLazyComponent services={services} />
+    </React.Suspense>
+  );
+}
+```
+
+### plugins/core_layout/src/services/ContributionRegistry.js
+```
+// plugins/core_layout/src/services/ContributionRegistry.js
+export class ContributionRegistry {
+    constructor(manifestProvider) {
+        this.pageComponents = [];
+        this.manifests = manifestProvider.getManifests();
+        this.processContributions();
+    }
+
+    processContributions() {
+        // 我们只关心 'page-component' 类型的插件
+        const pagePlugins = this.manifests.filter(
+            m => m.frontend?.type === 'page-component' && m.frontend?.contributions?.pageComponents
+        );
+
+        for (const manifest of pagePlugins) {
+            for (const pageDef of manifest.frontend.contributions.pageComponents) {
+                if (pageDef.id && pageDef.componentExportName) { // 修改: menu 变为可选
+                    this.pageComponents.push({
+                        ...pageDef,
+                        pluginId: manifest.id,
+                        manifest: manifest, // 保存整个 manifest 以便后续查找入口文件
+                    });
+                } else {
+                    console.warn(`[core_layout] Invalid pageComponent contribution from plugin '${manifest.id}'.`, pageDef);
+                }
+            }
+        }
+        console.log(`[core_layout] Discovered ${this.pageComponents.length} page components.`, this.pageComponents);
+    }
+
+    getPageComponents() {
+        return this.pageComponents;
     }
 }
 ```
 
-### cli.py
+### plugins/core_llm/providers/__init__.py
 ```
-# cli.py
-import typer
-import json
-import shutil
-from pathlib import Path
 
-from backend.core.plugin_manager import PluginManager
+```
 
-app = typer.Typer(name="hevno", help="Hevno Engine Command-Line Interface")
-plugin_app = typer.Typer(name="plugins", help="Manage Hevno plugins.")
-app.add_typer(plugin_app)
+### plugins/core_llm/providers/gemini.py
+```
+# plugins/core_llm/providers/gemini.py
 
-HEVNO_JSON_PATH = Path("hevno.json")
-PLUGINS_DIR = Path("plugins")
+from typing import Any, List, Dict
+import google.generativeai as genai
+from google.api_core import exceptions as google_exceptions
+from google.generativeai import types as generation_types
 
-@plugin_app.command("sync")
-def sync_plugins():
+from .base import LLMProvider
+from ..contracts import (
+    LLMResponse,
+    LLMError,
+    LLMResponseStatus,
+    LLMErrorType,
+)
+
+class GeminiProvider(LLMProvider):
     """
-    Synchronizes the 'plugins' directory with the 'hevno.json' manifest.
-    This will fetch, update, or remove plugins to match the manifest.
+    针对 Google Gemini API 的 LLMProvider 实现。
     """
-    typer.echo("🔌 Starting plugin synchronization...")
-    if not HEVNO_JSON_PATH.exists():
-        typer.secho(f"Error: '{HEVNO_JSON_PATH}' not found. Nothing to sync.", fg=typer.colors.RED)
-        raise typer.Exit(code=1)
 
-    with open(HEVNO_JSON_PATH, "r") as f:
-        manifest = json.load(f)
+    async def generate(
+        self,
+        *,
+        messages: List[Dict[str, Any]],
+        model_name: str,
+        api_key: str,
+        **kwargs: Any
+    ) -> LLMResponse:
+        try:
+            genai.configure(api_key=api_key)
+            
+            # --- [核心修复开始] ---
+            system_instruction = None
+            provider_messages = []
+            
+            # 1. 遍历消息，分离出 system prompt
+            for msg in messages:
+                role = msg.get("role")
+                content = msg.get("content", "")
+                
+                if role == "system":
+                    # 如果有多条 system 消息，将它们合并
+                    if system_instruction is None:
+                        system_instruction = ""
+                    system_instruction += str(content) + "\n"
+                elif role in ["user", "model"]:
+                    # The Gemini SDK expects {"role": "...", "parts": ["..."]}
+                    provider_messages.append({"role": role, "parts": [str(content)]})
+            
+            # 2. 实例化模型时传入 system_instruction
+            model = genai.GenerativeModel(
+                model_name,
+                system_instruction=system_instruction.strip() if system_instruction else None
+            )
 
-    manager = PluginManager(plugins_dir=PLUGINS_DIR, manifest=manifest.get("plugins", {}))
-    
-    try:
-        manager.sync()
-        typer.secho("✅ Plugin synchronization complete.", fg=typer.colors.GREEN)
-    except Exception as e:
-        typer.secho(f"🔥 Error during synchronization: {e}", fg=typer.colors.RED)
-        import traceback
-        traceback.print_exc()
-        raise typer.Exit(code=1)
+            generation_config = {
+                "temperature": kwargs.get("temperature"),
+                "top_p": kwargs.get("top_p"),
+                "top_k": kwargs.get("top_k"),
+                "max_output_tokens": kwargs.get("max_tokens"),
+            }
+            generation_config = {k: v for k, v in generation_config.items() if v is not None}
+            
+            # 3. generate_content_async 只接收 user/model 消息
+            response: generation_types.GenerateContentResponse = await model.generate_content_async(
+                contents=provider_messages,
+                generation_config=generation_config
+            )
+            # --- [核心修复结束] ---
+
+            if not response.parts:
+                if response.prompt_feedback.block_reason:
+                    error_message = f"Request blocked due to {response.prompt_feedback.block_reason.name}"
+                    return LLMResponse(status=LLMResponseStatus.FILTERED, model_name=model_name, error_details=LLMError(error_type=LLMErrorType.INVALID_REQUEST_ERROR, message=error_message, is_retryable=False))
+                # --- [新增健壮性] ---
+                # 如果没有部分且没有明确的阻塞原因，返回一个通用错误
+                else:
+                     return LLMResponse(status=LLMResponseStatus.ERROR, model_name=model_name, error_details=LLMError(error_type=LLMErrorType.PROVIDER_ERROR, message="Provider returned an empty response without a clear reason.", is_retryable=True))
 
 
-@plugin_app.command("add")
-def add_plugin(
-    url: str = typer.Argument(..., help="Git repository URL (e.g., https://github.com/user/repo)."),
-    name: str = typer.Option(None, "--name", "-n", help="A specific name for the plugin directory. Defaults to repo name."),
-    ref: str = typer.Option("main", "--ref", "-r", help="Git branch, tag, or commit hash."),
-    subdir: str = typer.Option(None, "--subdir", "-d", help="Path to the plugin within the repository.")
-):
+            usage = {"prompt_tokens": response.usage_metadata.prompt_token_count, "completion_tokens": response.usage_metadata.candidates_token_count, "total_tokens": response.usage_metadata.total_token_count}
+            
+            return LLMResponse(status=LLMResponseStatus.SUCCESS, content=response.text, model_name=model_name, usage=usage)
+
+        except generation_types.StopCandidateException as e:
+            return LLMResponse(status=LLMResponseStatus.FILTERED, model_name=model_name, error_details=LLMError(error_type=LLMErrorType.INVALID_REQUEST_ERROR, message=f"Generation stopped due to safety settings: {e}", is_retryable=False))
+
+    def translate_error(self, ex: Exception) -> LLMError:
+        # ... (此方法保持不变)
+        error_details = {"provider": "gemini", "exception": type(ex).__name__, "message": str(ex)}
+        if isinstance(ex, google_exceptions.PermissionDenied):
+            return LLMError(error_type=LLMErrorType.AUTHENTICATION_ERROR, message="Invalid API key or insufficient permissions.", is_retryable=False, provider_details=error_details)
+        if isinstance(ex, google_exceptions.ResourceExhausted):
+            return LLMError(error_type=LLMErrorType.RATE_LIMIT_ERROR, message="Rate limit exceeded. Please try again later or use a different key.", is_retryable=False, provider_details=error_details)
+        if isinstance(ex, google_exceptions.InvalidArgument):
+            if "API key not valid" in str(ex):
+                return LLMError(error_type=LLMErrorType.AUTHENTICATION_ERROR, message=f"The provided API key is invalid. Details: {ex}", is_retryable=False, provider_details=error_details)
+            return LLMError(error_type=LLMErrorType.INVALID_REQUEST_ERROR, message=f"Invalid argument provided to the API. Check model name and parameters. Details: {ex}", is_retryable=False, provider_details=error_details)
+        if isinstance(ex, (google_exceptions.ServiceUnavailable, google_exceptions.DeadlineExceeded)):
+            return LLMError(error_type=LLMErrorType.PROVIDER_ERROR, message="The service is temporarily unavailable or the request timed out. Please try again.", is_retryable=True, provider_details=error_details)
+        if isinstance(ex, google_exceptions.GoogleAPICallError):
+            return LLMError(error_type=LLMErrorType.NETWORK_ERROR, message=f"A network-level error occurred while communicating with Google API: {ex}", is_retryable=True, provider_details=error_details)
+        return LLMError(error_type=LLMErrorType.UNKNOWN_ERROR, message=f"An unknown error occurred with the Gemini provider: {ex}", is_retryable=False, provider_details=error_details)
+```
+
+### plugins/core_llm/providers/base.py
+```
+# plugins/core_llm/providers/base.py
+
+from abc import ABC, abstractmethod
+from typing import Dict, Any, List
+
+from ..contracts import LLMResponse, LLMError
+
+
+class LLMProvider(ABC):
     """
-    Adds a new plugin from Git to hevno.json and syncs.
+    一个抽象基-类，定义了所有 LLM 提供商适配器的标准接口。
     """
-    if not HEVNO_JSON_PATH.exists():
-        # 如果文件不存在，创建一个基础结构
-        manifest_data = {"plugins": {}}
-        typer.echo(f"'{HEVNO_JSON_PATH}' not found, creating a new one.")
-    else:
-        with open(HEVNO_JSON_PATH, "r") as f:
-            manifest_data = json.load(f)
-    
-    plugin_name = name or Path(url.split('/')[-1]).stem
-    
-    plugin_config = {"source": "git", "url": url, "ref": ref}
-    if subdir:
-        plugin_config["subdirectory"] = subdir
+    @classmethod
+    def requires_api_key(cls) -> bool:
+        """
+        声明此提供商是否需要 API 密钥才能工作。
+        如果此方法返回 False，LLM 服务将不会尝试为此提供商从池中获取密钥。
+        """
+        return True
 
-    manifest_data["plugins"][plugin_name] = plugin_config
+    @abstractmethod
+    async def generate(
+        self,
+        *,
+        messages: List[Dict[str, Any]],
+        model_name: str,
+        api_key: str,
+        **kwargs: Any
+    ) -> LLMResponse:
+        """
+        与 LLM 提供商进行交互以生成内容。
 
-    with open(HEVNO_JSON_PATH, "w") as f:
-        json.dump(manifest_data, f, indent=2)
+        这个方法必须处理所有可能的成功和“软失败”（如内容过滤）场景，
+        并将它们封装在标准的 LLMResponse 对象中。
+        如果发生无法处理的硬性错误（如网络问题、认证失败），它应该抛出原始异常，
+        以便上层服务可以捕获并使用 translate_error 进行处理。
 
-    typer.secho(f"Added plugin '{plugin_name}' to '{HEVNO_JSON_PATH}'.", fg=typer.colors.BLUE)
-    # 调用 sync 来完成安装
-    sync_plugins()
+        :param messages: 发送给模型的结构化消息列表。
+        :param model_name: 要使用的具体模型名称 (e.g., 'gemini-1.5-pro-latest')。
+        :param api_key: 用于本次请求的 API 密钥。
+        :param kwargs: 其他特定于提供商的参数 (e.g., temperature, max_tokens)。
+        :return: 一个标准的 LLMResponse 对象。
+        :raises Exception: 任何未被处理的、需要由 translate_error 解析的硬性错误。
+        """
+        pass
 
+    @abstractmethod
+    def translate_error(self, ex: Exception) -> LLMError:
+        """
+        将特定于提供商的原始异常转换为我们标准化的 LLMError 对象。
 
-@plugin_app.command("remove")
-def remove_plugin(name: str = typer.Argument(..., help="The name of the plugin to remove.")):
+        这个方法是解耦的关键，它将具体的 SDK 错误与我们系统的内部错误处理逻辑分离开。
+
+        :param ex: 从 generate 方法捕获的原始异常。
+        :return: 一个标准的 LLMError 对象。
+        """
+        pass
+```
+
+### plugins/core_llm/providers/mock.py
+```
+# plugins/core_llm/providers/mock.py
+
+import asyncio
+from typing import Any, List, Dict
+
+from .base import LLMProvider
+from ..contracts import (
+    LLMResponse,
+    LLMError,
+    LLMResponseStatus,
+    LLMErrorType,
+)
+
+class MockProvider(LLMProvider):
     """
-    Removes a plugin from hevno.json and syncs.
+    一个用于测试和调试的模拟 LLM 提供商。
+    它会返回一个预设的响应，而不会进行任何外部调用。
     """
-    if not HEVNO_JSON_PATH.exists():
-        typer.secho(f"Error: '{HEVNO_JSON_PATH}' not found.", fg=typer.colors.RED)
-        raise typer.Exit(code=1)
+    @classmethod
+    def requires_api_key(cls) -> bool:
+        """声明此提供商不需要 API 密钥。"""
+        return False
 
-    with open(HEVNO_JSON_PATH, "r") as f:
-        manifest_data = json.load(f)
+    async def generate(
+        self,
+        *,
+        messages: List[Dict[str, Any]],
+        model_name: str,
+        api_key: str, # 仍然接收此参数，但会忽略它
+        **kwargs: Any
+    ) -> LLMResponse:
+        """
+        生成一个模拟响应。
+        """
+        await asyncio.sleep(0.05) # 模拟网络延迟
+        
+        last_user_message = "No user message found."
+        for msg in reversed(messages):
+            if msg.get("role") == "user":
+                last_user_message = msg.get("content", "")
+                break
 
-    if name not in manifest_data.get("plugins", {}):
-        typer.secho(f"Warning: Plugin '{name}' not found in manifest. Nothing to do.", fg=typer.colors.YELLOW)
-        return
+        mock_content = f"[MOCK RESPONSE for {model_name}] - Responding to: '{str(last_user_message)[:150]}...'"
+        
+        prompt_token_count = sum(len(str(msg.get("content", "")).split()) for msg in messages)
 
-    del manifest_data["plugins"][name]
-    
-    with open(HEVNO_JSON_PATH, "w") as f:
-        json.dump(manifest_data, f, indent=2)
+        return LLMResponse(
+            status=LLMResponseStatus.SUCCESS,
+            content=mock_content,
+            model_name=model_name,
+            usage={"prompt_tokens": prompt_token_count, "completion_tokens": 15, "total_tokens": prompt_token_count + 15}
+        )
 
-    typer.secho(f"Removed plugin '{name}' from '{HEVNO_JSON_PATH}'.", fg=typer.colors.BLUE)
-    
-    # 物理删除目录
-    plugin_path = PLUGINS_DIR / name
-    if plugin_path.exists():
-        shutil.rmtree(plugin_path)
-        typer.echo(f"Removed directory: {plugin_path}")
-    
-    sync_plugins()
+    def translate_error(self, ex: Exception) -> LLMError:
+        """
+        将异常转换为标准的 LLMError。
+        对于模拟提供商，此方法不太可能被调用。
+        """
+        return LLMError(
+            error_type=LLMErrorType.UNKNOWN_ERROR,
+            message=f"An unexpected error occurred in MockProvider: {ex}",
+            is_retryable=False
+        )
+```
 
+### plugins/page_demo/src/DemoPage.jsx
+```
+// plugins/page_demo/src/DemoPage.jsx
+import React from 'react';
+// 插件可以假设 MUI 组件可用，因为宿主会提供
+import { Typography, Card, CardContent, Button } from '@mui/material';
 
-if __name__ == "__main__":
-    app()
+// 插件组件会接收到由宿主 `core_layout` 传入的 props
+export function DemoPage({ services }) {
+  
+  const handleTriggerHook = () => {
+    const hookManager = services.get('hookManager');
+    // 插件可以通过宿主传入的服务与系统交互
+    hookManager.trigger('demo.button.clicked', { from: 'page_demo' });
+    alert('Hook "demo.button.clicked" triggered! Check the console.');
+  };
+
+  return (
+    <Card sx={{ m: 2 }}>
+      <CardContent>
+        <Typography variant="h4" gutterBottom>
+          这是一个演示页面
+        </Typography>
+        <Typography>
+          这个组件是从 `page_demo` 插件动态加载的。
+          如果你到达了这个页面，那说明Niurx忘记删了这个页面了
+        </Typography>
+        <Button 
+          variant="contained" 
+          sx={{ mt: 2 }} 
+          onClick={handleTriggerHook}
+        >
+          触发一个 Hook
+        </Button>
+      </CardContent>
+    </Card>
+  );
+}
+
+// 默认导出组件，这是一种常见的模式
+export default DemoPage;
+```
+
+### frontend/services/GlobalHookRegistry.js
+```
+// frontend/services/GlobalHookRegistry.js
+
+/**
+ * 一个单例服务，用于存储和查询全域钩子路由表。
+ * 它持有在前端和后端实现的所有钩子的完整清单。
+ */
+export class GlobalHookRegistry {
+  constructor() {
+    /** @type {Set<string>} */
+    this.backendHooks = new Set();
+    /** @type {Set<string>} */
+    this.frontendHooks = new Set();
+  }
+
+  /**
+   * 填充已知的后端钩子集合。在启动时调用。
+   * @param {string[]} hooks - 来自后端的钩子名称数组。
+   */
+  setBackendHooks(hooks) {
+    this.backendHooks = new Set(hooks);
+    console.log(`[GlobalRegistry] 已注册 ${this.backendHooks.size} 个后端钩子。`);
+  }
+
+  /**
+   * 将一个前端实现的钩子添加到注册表。
+   * 由本地 HookManager 在每次添加实现时调用。
+   * @param {string} hookName 
+   */
+  addFrontendHook(hookName) {
+    if (!this.frontendHooks.has(hookName)) {
+        this.frontendHooks.add(hookName);
+    }
+  }
+
+  /**
+   * 检查一个钩子是否有本地（前端）实现。
+   * @param {string} hookName 
+   * @returns {boolean}
+   */
+  isLocalHook(hookName) {
+    return this.frontendHooks.has(hookName);
+  }
+
+  /**
+   * 检查一个钩子是否有远程（后端）实现。
+   * @param {string} hookName 
+   * @returns {boolean}
+   */
+  isRemoteHook(hookName) {
+    return this.backendHooks.has(hookName);
+  }
+
+  /**
+   * 获取所有已知的前端钩子名称列表。
+   * 用于与后端同步。
+   * @returns {string[]}
+   */
+  getFrontendHooks() {
+    return Array.from(this.frontendHooks);
+  }
+}
 ```
